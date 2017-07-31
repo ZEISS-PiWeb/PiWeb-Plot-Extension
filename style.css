@@ -1,0 +1,75 @@
+html {
+    display: table;
+    margin: auto;
+    background-color: #fdfdfd;
+}
+
+body {
+    display: table-cell;
+    width: 800px;
+    align-content: center;
+    border-left: 2px solid #f0f0f0;
+    border-right: 2px solid #f0f0f0;
+    background-color: white;
+    padding-left: 64px;
+    padding-right: 64px;
+}
+h1, h2, h3, h4, h5, h6{
+    margin: 24px 0 16px;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 1.6em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    padding-bottom: 0.3em;
+}
+
+h2 {
+    font-weight: 800;
+    font-size: 1.4em;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.36);   
+   padding-bottom: 0.2em;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 1.3em;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+   padding-bottom: 0.1em; 
+}
+
+h4 {
+    font-weight: 500;
+    font-size: 1.2em;    
+}
+
+h5 {
+   font-weight: 500;
+    font-size: 1.2em;    
+}
+
+h6 {
+    font-weight: 500;
+    font-size: 1.2em;    
+}
+
+pre.hljs code > div {
+   
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+table, p, pre.hljs, blockquote{
+   margin-left: 24px;
+}
+
+.smallImage {
+    width:auto; 
+    height:48px; 
+    float:left;
+    margin-left:20px;
+    margin-right:20px
+}
