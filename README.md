@@ -445,7 +445,7 @@ Draws a rectangle with of width `w` and height `h` at Point `x;y` and fills it w
 
 **drawEllipse `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawEllipse.svg">
+<img style="float: right;margin-left:20px" src="gfx/drawEllipse.png">
 
 ```TypeScript
 function drawEllipse(center: Point, radiusX: number, radiusY: number): void;
