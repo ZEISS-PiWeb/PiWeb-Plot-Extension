@@ -1,6 +1,6 @@
 # PiWeb Custom Plot
 
-![alt text](gfx/logo.png "logo")
+![alt text](gfx/Logo.png "logo")
 
 # Overview
 
