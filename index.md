@@ -1,23 +1,25 @@
+<!DOCTYPE html>
 <html>
 <head>   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.4.1/dist/bootstrap-toc.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="css/bootstrap-toc.min.css">
+    <link rel="stylesheet" href="css/github.css">
+    <link rel="stylesheet" href="css/style.css">   
 </head>
 
-<body data-spy="scroll" data-target="#toc">
-
-<div class="col-md-3">
+<body class="markdown-body" data-spy="scroll" data-target="#toc">
+<div class="col-sm-3">
     <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
 </div>
-<div class="col-md-6 content">
+<div class="col-sm-6 content">
 
 # PiWeb Custom Plot
 
-<img style="display: block; margin: auto;" src="gfx/Logo.png" >
+<img style="display:block;margin:auto;" src="gfx/Logo.png" >
+
 <div style="display:none">
 <!-- TOC -->
 
@@ -126,7 +128,7 @@
     - [Catalogs](#catalogs)
         - [Catalog](#catalog)
         - [CatalogEntry](#catalogentry)
-    - [Inspection Plan Interface](#inspection-plan-interface)
+    - [Inspection Plan](#inspection-plan)
         - [InspectionPlanItemType](#inspectionplanitemtype)
         - [InspectionPlanPath](#inspectionplanpath)
         - [InspectionPlanItem](#inspectionplanitem)
@@ -159,9 +161,9 @@ In order to create your first own custom plot, you should be familiar with __Jav
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
-  * The `Extensions` folder in the PiWeb installation directory
-  * In the program data directory `%PROGRAMDATA%\Zeiss\PiWeb\Extensions`
-  * In the common application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
+* The `Extensions` folder in the PiWeb installation directory
+* In the program data directory `%PROGRAMDATA%\Zeiss\PiWeb\Extensions`
+* In the common application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
 
 In case the `Extensions` folder doesn't exist, you must create it first. Now create your own project folder in the extensions folder and name it `MyExtension`.
 Now, create the following files and folders in your project folder:
@@ -218,9 +220,9 @@ import drawing = piweb.drawing;
 host.on("render", renderPlot);
 
 function renderPlot(drawingContext: drawing.DrawingContext) {
-  const size = host.getSize();
-  drawingContext.setBrush( drawing.Brushes.OrangeRed);
-  drawingContext.drawRectangle(0, 0, size.width, size.height);
+const size = host.getSize();
+drawingContext.setBrush( drawing.Brushes.OrangeRed);
+drawingContext.drawRectangle(0, 0, size.width, size.height);
 }
 ```
 
@@ -757,7 +759,7 @@ Returns the value of the property with the name `id` as a number.
 ```TypeScript
 function getDoubleProperty(id : string) : number
 ```
- 
+
 Returns the value of the property with the name `id` as a number. 
 
 **getBooleanProperty `boolean`**
@@ -765,7 +767,7 @@ Returns the value of the property with the name `id` as a number.
 ```TypeScript
 function getBooleanProperty(id : string) : boolean
 ```
- 
+
 Returns the value of the property with the name `id` as a boolean. 
 
 **getEnumProperty `string`**
@@ -773,7 +775,7 @@ Returns the value of the property with the name `id` as a boolean.
 ```TypeScript
 function getEnumProperty(id : string) : string
 ```
- 
+
 Returns the key of the selected option of the property with the name `id` as a string. Please read the chapter '[propertygrid options](#package-structure-extensions-propertygrid-entries-options)' for further information.
 
 **getColorProperty `ColorDescription`**
@@ -781,7 +783,7 @@ Returns the key of the selected option of the property with the name `id` as a s
 ```TypeScript
 function getColorProperty(id : string) : ColorDescription
 ```
- 
+
 Returns the value of the property with the name `id` as a `ColorDescription`. The result can be used as parameter for the `create` method of the [`Color`](#color) class.
 
 **getBrushProperty `BrushDescription`**
@@ -789,7 +791,7 @@ Returns the value of the property with the name `id` as a `ColorDescription`. Th
 ```TypeScript
 function getBrushProperty(id : string) : BrushDescription
 ```
- 
+
 Returns the value of the property with the name `id` as a `BrushDescription`. The result can be used as parameter for the `create` method of the [`Brush`](#brush) class.
 
 **getPenProperty `PenDescription`**
@@ -797,7 +799,7 @@ Returns the value of the property with the name `id` as a `BrushDescription`. Th
 ```TypeScript
 function getPenProperty(id : string) : PenDescription
 ```
- 
+
 Returns the value of the property with the name `id` as a `PenDescription`. The result can be used as parameter for the `create` method of the [`Pen`](#pen) class.
 
 **getFontProperty `FontDescription`**
@@ -805,7 +807,7 @@ Returns the value of the property with the name `id` as a `PenDescription`. The 
 ```TypeScript
 function getFontProperty(id : string) : FontDescription
 ```
- 
+
 Returns the value of the property with the name `id` as a `FontDescription`. The result can be used as parameter for the `create` method of the [`Font`](#font) class.
 
 <a id="markdown-localization-1" name="localization-1"></a>
@@ -943,7 +945,7 @@ Converts the specified string to its `Date` equivalent by using culture specific
 
 <a id="markdown-drawing" name="drawing"></a>
 ## Drawing  
- 
+
 To access the drawing classes, import the `piweb` interface into your script. All necessary classes for drawing are encapsulated in the `piweb.drawing` module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
 
 ```TypeScript
@@ -956,7 +958,7 @@ function render(context: piweb.drawing.DrawingContext) {
     ...
 }
 ```
- 
+
 Be aware that all coordinates and values are interpreted as **millimeters**. PiWeb draws with a resolution of **96 DPI**, so one millimeter is equal to `96 / 25.4 ~ 3.58` pixels, or one pixel is equal to `25.4 / 96 ~ 0.2646` millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.
 "
 <a id="markdown-interfaces" name="interfaces"></a>
@@ -2361,7 +2363,7 @@ Used to condense or expand the font horizontally.
 | **`Expanded`**|**125%** of the default widht/height ratio|
 | **`ExtraExpanded`**|**150%** of the default widht/height ratio|
 | **`UltraExpanded`**|**200%** of the default widht/height ratio|
-  
+
 <a id="markdown-data-provider" name="data-provider"></a>
 ## Data Provider
 
@@ -2597,8 +2599,8 @@ class CatalogEntry extends AttributeItem
 
 A 16 bit integer that identifies the catalog entry. When accessing an attribute with the datatype `Catalog`, a 16 bit integer is returned that refers to this key.
 
-<a id="markdown-inspection-plan-interface" name="inspection-plan-interface"></a>
-### Inspection Plan Interface
+<a id="markdown-inspection-plan" name="inspection-plan"></a>
+### Inspection Plan
 
 **getInspectionPlan [`Map<string, InspectionPlanItem>`](#inspectionplanitem)**
 
@@ -2833,7 +2835,7 @@ import * as piweb from 'piweb'
 piweb.tooltips.provider.onCreateTooltips = createTooltipShapes;
 
 function createTooltipShapes(): piweb.tooltips.TooltipShapeCollection {
-	return new piweb.tooltips.TooltipShapeCollection([
+    return new piweb.tooltips.TooltipShapeCollection([
         ...
     ]);
 }
@@ -2959,13 +2961,14 @@ function debug(
 ```
 
 Generates a log message with the `debug` log level.
+    
 </div>
-</div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.4.1/dist/bootstrap-toc.min.js"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-toc.min.js"></script>
+
 </body>
 </html>
- 

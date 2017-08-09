@@ -60,14 +60,14 @@ h6 {
     font-size: 1.2em;    
 }
 
-:not(pre):not(.hljs) > code { 
+.markdown-body :not(pre):not(.hljs) > code { 
     font-family: Consolas,"Courier New",monospace;    
     background: none;
     margin: 0px;
     padding: 0px;
 }
 
-pre.hljs code > div {
+.markdown-body pre code > div {
    
     padding-left: 8px;
     padding-top: 4px;
@@ -75,16 +75,16 @@ pre.hljs code > div {
     padding-bottom: 4px;
 }
 
-table, p, pre.hljs, blockquote{
+.markdown-body table, p, pre, blockquote{
    margin-left: 24px;
    margin-top: 16px;
 }
 
-img {    
+.markdown-body img {    
     margin-left:24px;
     margin-right:16px;
 }
-.framed{
+.markdown-body .framed {
     background-color: #f8f8f8;
 	border: 1px solid #cccccc;
     border-radius: 3px;
@@ -92,7 +92,7 @@ img {
     margin-right:16px;
     padding: 4px;
 }
-.smallImage {   
+.markdown-body .smallImage {   
     
     width:auto; 
     height:48px; 
@@ -100,7 +100,7 @@ img {
     
 }
 
-.mediumimage {   
+.markdown-body .mediumimage {   
     
     width:auto; 
     height:64px; 
@@ -110,14 +110,6 @@ img {
 nav[data-toggle='toc'] {
   margin-left: 24px;
   margin-top: 24px;
-}
-
-nav[data-toggle='toc'] .nav>li>a{
-    font-size: 1.2em;
-}
-
-nav[data-toggle='toc'] .nav .nav>li>a{
-    font-size: 1.1em;
 }
 
 .content {
