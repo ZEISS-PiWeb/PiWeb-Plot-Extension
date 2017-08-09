@@ -1332,14 +1332,14 @@ Determines how overlapping geometries are filled.
 
 **`evenOdd` (default)**
 
-<img class="framed smallImage" src="gfx/evenOdd.png">
+<img class="framed smallImage" height="48" src="gfx/evenOdd.png">
 
 Fills the area that is overlapped by an odd number of geometries.
 <br><br><br>
 
 **`nonZero`**
 
-<img class=" framed smallImage" src="gfx/nonZero.png">
+<img class=" framed smallImage" height="48" src="gfx/nonZero.png">
 
 Fills the area that is overlapped by at least one geometry. 
 <br><br><br>
@@ -1355,28 +1355,28 @@ Determines how two geometries are combined.
 
 **`union` (default)** 
 
-<img class="smallImage framed" src="gfx/union.png">
+<img class="smallImage framed" height="48" src="gfx/union.png">
 
 The resulting geometry is the area that is overlapped by the first or second geometry or both.
 <br><br><br>
 
 **`intersect`**
 
-<img class="smallImage framed" src="gfx/intersect.png">
+<img class="smallImage framed" height="48" src="gfx/intersect.png">
 
 The resulting geometry is the area that is overlapped by both geometries.
 <br><br><br>
 
 **`xor`**
 
-<img class="smallImage framed" src="gfx/xor.png">
+<img class="smallImage framed" height="48" src="gfx/xor.png">
 
 The resulting geometry is the area that is overlapped by the first or second geometry, but not both.
 <br><br><br>
 
 **`exclude`**
 
-<img class="smallImage framed" src="gfx/exclude.png">
+<img class="smallImage framed" height="48" src="gfx/exclude.png">
 
 The second geometry is subtracted from the first. 
 <br><br><br>
