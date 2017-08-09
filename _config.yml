@@ -4,7 +4,7 @@ defaults:
       path: "" # an empty string here means all files in the project
     values:
       layout: "frame"
-
+source: ['_includes']
 include: ['_pages']
 relative_permalinks: false
 baseurl: "/PiWeb-Customplot"
