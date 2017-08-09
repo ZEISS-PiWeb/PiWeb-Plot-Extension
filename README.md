@@ -1,6 +1,6 @@
 # PiWeb Custom Plot
 
-<img style="display: block; margin: auto;" src="gfx/logo.png" >
+<img style="display: block; margin: auto;" src="gfx/Logo.png" >
 
 
 - [Quickstart](#quickstart)
@@ -1158,7 +1158,7 @@ class TranslationTransform extends Transform
 
 Moves an object in horizontal and vertical direction.
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/translateTransform.svg">
+<img class="framed" style="width:auto; height:128px;" src="gfx/translateTransform.png">
 
 **x `number`**
 
@@ -1177,7 +1177,7 @@ class RotationTransform extends Transform
 
 Rotates an object around a specific point.
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/rotateTransform.svg">
+<img class="framed" style="width:auto; height:128px;" src="gfx/rotateTransform.png">
 
 **angle `number`**
 
@@ -1196,7 +1196,7 @@ class ScalingTransform extends Transform
 
 Scales an object in horizontal and vertical direction
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.svg">
+<img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.png">
 
 **scaleX `number`**
 
@@ -1219,7 +1219,7 @@ class ShearTransform extends Transform
 
 Describes a transformation that can be used to create the illusion of perspective. 
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/skewTransform.svg">
+<img class="framed" style="width:auto; height:128px;" src="gfx/skewTransform.png">
 
 **angleX `number`**
 
@@ -1332,14 +1332,14 @@ Determines how overlapping geometries are filled.
 
 **`evenOdd` (default)**
 
-<img class="framed smallImage" src="gfx/evenOdd.svg">
+<img class="framed smallImage" src="gfx/evenOdd.png">
 
 Fills the area that is overlapped by an odd number of geometries.
 <br><br><br>
 
 **`nonZero`**
 
-<img class=" framed smallImage" src="gfx/nonZero.svg">
+<img class=" framed smallImage" src="gfx/nonZero.png">
 
 Fills the area that is overlapped by at least one geometry. 
 <br><br><br>
@@ -1355,28 +1355,28 @@ Determines how two geometries are combined.
 
 **`union` (default)** 
 
-<img class="smallImage framed" src="gfx/union.svg">
+<img class="smallImage framed" src="gfx/union.png">
 
 The resulting geometry is the area that is overlapped by the first or second geometry or both.
 <br><br><br>
 
 **`intersect`**
 
-<img class="smallImage framed" src="gfx/intersect.svg">
+<img class="smallImage framed" src="gfx/intersect.png">
 
 The resulting geometry is the area that is overlapped by both geometries.
 <br><br><br>
 
 **`xor`**
 
-<img class="smallImage framed" src="gfx/xor.svg">
+<img class="smallImage framed" src="gfx/xor.png">
 
 The resulting geometry is the area that is overlapped by the first or second geometry, but not both.
 <br><br><br>
 
 **`exclude`**
 
-<img class="smallImage framed" src="gfx/exclude.svg">
+<img class="smallImage framed" src="gfx/exclude.png">
 
 The second geometry is subtracted from the first. 
 <br><br><br>
@@ -1496,7 +1496,7 @@ class ArcSegment extends PathSegment
 
 Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:
 
-<img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
+<img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.png">
 
 
 * <font color="#56abff">blue:</font> arcType `small`, sweepDirection `counterclockwise`
@@ -1813,21 +1813,21 @@ Determines the geometry at the start and/or end of a line.
 
 **`flat`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineCapFlat.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapFlat.png">
 
 No extra geometry is added.
 <br><br>
 
 **`round`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineCapRound.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapRound.png">
 
 Adds a half circle with a diameter that is equal to the pens thickness.
 <br><br>
 
 **`square`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineCapSquare.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapSquare.png">
 
 Adds a half square with the side length of the pens thickness.
 
@@ -1844,19 +1844,19 @@ Determines the geometry between two linear segments of a line.
 
 **`bevel`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineJoinBevel.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinBevel.png">
 
 Adds a triangle that connects the two non-overlapping points of the lines.
 <br><br><br>
 **`miter`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineJoinMiter.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinMiter.png">
 
 Extends the outlines of the two lines until they cut each other, and fills the enclosed area.
 <br><br><br>
 **`round`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineJoinRound.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinRound.png">
 
 Creates a circle around the cutting point with a diameter that is equal to the pens thickness.
 
@@ -1937,7 +1937,7 @@ Determines if the text is layouted from the left to the right or from the right 
 
 **`leftToRight` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.png">
 
 Layouting starts at the left boundary.
 
@@ -1945,7 +1945,7 @@ Layouting starts at the left boundary.
 
 **`rightToLeft`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/rightToLeft.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/rightToLeft.png">
 
 Layouting starts at the right boundary.
 
@@ -1962,7 +1962,7 @@ Determines how text is arranged inside the boundaries that are defined by width 
 
 **`left` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignLeft.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignLeft.png">
 
 Aligns text to the left boundary.
 
@@ -1970,7 +1970,7 @@ Aligns text to the left boundary.
 
 **`right`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignRight.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignRight.png">
 
 Aligns text to the right boundary.
 
@@ -1978,7 +1978,7 @@ Aligns text to the right boundary.
 
 **`center`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignCenter.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignCenter.png">
 
 Aligns text centered between the left and the right boundaries.
 
@@ -1986,7 +1986,7 @@ Aligns text centered between the left and the right boundaries.
 
 **`justify`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignJustify.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignJustify.png">
 
 Increases the size of the whitespaces until the text fits between the left and right boundary.
 
@@ -2003,7 +2003,7 @@ Determines what happens when the text exceeds the size of the boundaries. In cas
 
 **`none` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingNone.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingNone.png">
 
 The text will be trimmed at a whitespace if possible, otherwise in a word. No ellipsis are shown.
 
@@ -2011,7 +2011,7 @@ The text will be trimmed at a whitespace if possible, otherwise in a word. No el
 
 **`wordEllipsis`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingWordEllipsis.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingWordEllipsis.png">
 
 The text will be trimmed at a whitespace if possible, otherwise in a word, and ellipsis will be shown.
 
@@ -2019,7 +2019,7 @@ The text will be trimmed at a whitespace if possible, otherwise in a word, and e
 
 **`characterEllipsis`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingCharacterEllipsis.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingCharacterEllipsis.png">
 
 The text will be trimmed in a word, and ellipsis will be shown.
 
@@ -2089,7 +2089,7 @@ Arranges the text according the [`TextAlignment`](#textalignment) and the specif
 
 **`left`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorLeft.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorLeft.png">
 
 Places the anchor point on the left side of the bounding box.
 
@@ -2097,7 +2097,7 @@ Places the anchor point on the left side of the bounding box.
 
 **`right`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorRight.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorRight.png">
 
 Places the anchor point on the right side of the bounding box.
 
@@ -2105,7 +2105,7 @@ Places the anchor point on the right side of the bounding box.
 
 **`center`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorCenter.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorCenter.png">
 
 Places the anchor at the center of the bounding box.
 
@@ -2122,7 +2122,7 @@ Determines how the whole text is arranged vertically relative to the text positi
 
 **`top` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorTop.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorTop.png">
 
 Places the anchor point on the top of the bounding box.
 
@@ -2130,7 +2130,7 @@ Places the anchor point on the top of the bounding box.
 
 **`bottom`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBottom.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBottom.png">
 
 Places the anchor point on the bottom of the bounding box.
 
@@ -2138,7 +2138,7 @@ Places the anchor point on the bottom of the bounding box.
 
 **`center`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorVerticalCenter.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorVerticalCenter.png">
 
 Places the anchor at the center of the bounding box.
 
@@ -2146,7 +2146,7 @@ Places the anchor at the center of the bounding box.
 
 **`baseline`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBaseline.svg">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBaseline.png">
 
 Places the anchor at the height of the baseline of the first line of text. The baseline anchor looks most natural when aligning text to certain positions, e.g. the lines of a scale.
 
