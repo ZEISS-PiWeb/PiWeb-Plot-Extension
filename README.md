@@ -1,92 +1,46 @@
 # PiWeb Custom Plot
 
-![alt text](gfx/Logo.png "logo")
+<img style="display: block; margin: auto;" src="gfx/logo.png" >
 
-# Overview
-
-<!-- TOC -->
 
 - [Quickstart](#quickstart)
-- [The Package Definition](#the-package-definition)
+- [Package Definition](#package-definition)
     - [Localization](#localization)
-    - [Package Format](#package-format)
-        - [Top Level Properties](#top-level-properties)
-        - [Engines Properties](#engines-properties)
-        - [Piweb Actions](#piweb-actions)
-        - [PiWeb Extensions](#piweb-extensions)
-- [PiWeb Host](#piweb-host)
+    - [Dictionaries](#dictionaries)
+    - [Enumerations](#enumerations)
+    - [Package Format](#package-format)       
+- [PiWeb Interface](#piweb-interface)
     - [Basic Functions](#basic-functions)
     - [Environment](#environment)
     - [Properties](#properties)
+- [Localization](#localization-1)
+    - [Enumerations](#enumerations-1)      
+    - [Classes](#classes)      
+    - [Methods](#methods)
 - [Drawing](#drawing)
-    - [Common](#common)
-        - [Point](#point)
-        - [Size](#size)
-    - [DrawingContext](#drawingcontext)
-    - [Geometry](#geometry)
-        - [FillRule](#fillrule)
-        - [GeometryCombineMode](#geometrycombinemode)
-        - [LineGeometry](#linegeometry)
-        - [RectangleGeometry](#rectanglegeometry)
-        - [EllipseGeometry](#ellipsegeometry)
-        - [PathGeometry](#pathgeometry)
-            - [PathFigure](#pathfigure)
-            - [PathSegment](#pathsegment)
-                - [ArcSegment](#arcsegment)
-                - [LineSegment](#linesegment)
-                - [BezierSegment](#beziersegment)
-                - [QuadraticBezierSegment](#quadraticbeziersegment)
-                - [PolyLineSegment](#polylinesegment)
-                - [PolyBezierSegment](#polybeziersegment)
-                - [PolyQuadraticBezierSegment](#polyquadraticbeziersegment)
-        - [GeometryGroup](#geometrygroup)
-        - [CombinedGeometry](#combinedgeometry)
-    - [Pens and Brushes](#pens-and-brushes)
-        - [Color](#color)
-        - [Brush](#brush)
-            - [SolidColorBrush](#solidcolorbrush)
-            - [LinearGradientBrush](#lineargradientbrush)
-            - [RadialGradientBrush](#radialgradientbrush)
-        - [Pen](#pen)
-            - [LineCap](#linecap)
-            - [LineJoin](#linejoin)
-    - [Text](#text)
-        - [FormattedText](#formattedtext)
-    - [Font](#font)
-        - [FontWeight](#fontweight)
-            - [FontStyle](#fontstyle)
-            - [FontStretch](#fontstretch)
+    - [Interfaces](#interfaces)
+    - [Common](#common)       
+    - [Drawing](#drawing-1)       
+    - [Transform](#transform)        
+    - [Geometry](#geometry)        
+    - [Pens and Brushes](#pens-and-brushes)       
+    - [Text](#text)       
 - [Data Provider](#data-provider)
-    - [Common](#common-1)
-        - [AttributeType](#attributetype)
-        - [Attribute](#attribute)
-        - [AttributeItem](#attributeitem)
-    - [Configuration Interface](#configuration-interface)
-        - [Configuration](#configuration)
-        - [EntityType](#entitytype)
-        - [AttributeDefinition](#attributedefinition)
-    - [Catalog Interface](#catalog-interface)
-        - [Catalog](#catalog)
-        - [CatalogEntry](#catalogentry)
-    - [Inspection Plan Interface](#inspection-plan-interface)
-        - [InspectionPlanItemType](#inspectionplanitemtype)
-        - [InspectionPlanPath](#inspectionplanpath)
-        - [InspectionPlanItem](#inspectionplanitem)
-        - [PathElement](#pathelement)
-    - [Measurement Interface](#measurement-interface)
-        - [MeasurementMode](#measurementmode)
-        - [Measurement](#measurement)
-        - [MeasurementValue](#measurementvalue)
-    - [System Variable Interface](#system-variable-interface)
+    - [Common](#common-1)       
+    - [Configuration](#configuration)        
+    - [Catalogs](#catalogs)       
+    - [Inspection Plan](#inspection-plan-interface)        
+    - [Measurements](#measurements)      
+    - [Raw Data](#raw-data)      
+    - [System Variables](#system-variables)
 - [Tooltips](#tooltips)
     - [Introduction](#introduction)
-    - [Classes](#classes)
-        - [TooltipShapeCollection](#tooltipshapecollection)
-        - [TooltipShape](#tooltipshape)
-        - [TooltipPointShape](#tooltippointshape)
-        - [TooltipGeometryShape](#tooltipgeometryshape)
+    - [Classes](#classes-1)        
+- [Logging](#logging)
+    - [Methods](#methods-1)
 
 <!-- /TOC -->
+
 <a id="markdown-quickstart" name="quickstart"></a>
 ## Quickstart
 
@@ -96,54 +50,54 @@ PiWeb searches for extensions in several locations. Ordered by their priority, t
 
   * The `Extensions` folder in the PiWeb installation directory
   * In the program data directory `%PROGRAMDATA%\Zeiss\PiWeb\Extensions`
-  * In the common application data directory `%APPDATA%\Zeiss\Piweb\Extensions`  
+  * In the common application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
 
-In case the `Extensions` folder doesn't exist, you must create it first. Now create your own project folder in the extensions folder an name it `MyExtension`.
+In case the `Extensions` folder doesn't exist, you must create it first. Now create your own project folder in the extensions folder and name it `MyExtension`.
 Now, create the following files and folders in your project folder:
 
-![alt text](gfx/folder_structure.png "Extension folder structure")
+<img class="framed" src="gfx/folder_structure.png"/>
 
-**piweb.d.ts:** Contains the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file ***[here]***.
+**piweb.d.ts:** Contains the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **TODO**.
 
 **tsconfic.json:** Contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.
 
 ```json
 {
     "compilerOptions": {
-        "target": "es6",
-		"strictNullChecks": true,
-        "module": "commonjs",
-        "sourceMap": false,
-        "moduleResolution": "node",
-        "noImplicitAny": true,
-        "outDir" : "lib",       
-        "rootDir" : "src",
-		"typeRoots": ["./@types"]
+    "target": "es6",
+    "strictNullChecks": true,
+    "module": "commonjs",
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir" : "lib",       
+    "rootDir" : "src",
+    "typeRoots": ["./@types"]
     }
 }
 ```
 
-**package.json:** Defines static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found ***[here]***. For now, use the minimum setup shown below.
+**package.json:** Defines static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '[Package Definition](#package-definition)'. For now, use the minimum setup shown below.
 
 ```json
 {
-	"name": "myextension",
-	"version": "0.2.0",
-	"main": "lib",
-	"engines": {
-		"piweb": "0.2.x"
-	},
-	"piweb_actions": {
-		"load": "compile_typescript"
-	},
-	"piweb_extension": {
-		"type": "plot",		
-		"display": "MyExtension"		
-	}
+    "name": "myextension",
+    "version": "0.2.0",
+    "main": "lib",
+    "engines": {
+        "piweb": "0.2.x"
+    },
+    "piweb_actions": {
+        "load": "compile_typescript"
+    },
+    "piweb_extension": {
+        "type": "plot",		
+        "display": "MyExtension"		
+    }
 }
 ```
 
-**index.ts** This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot.
+**index.ts:** This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [`DrawingContext`](#drawingcontext).
 
 ```TypeScript
 import * as piweb from 'piweb'
@@ -159,12 +113,12 @@ function renderPlot(drawingContext: drawing.DrawingContext) {
 }
 ```
 
-When we save all files and start the Piweb Designer, we should find our extension in the **General** section of the toolbox:
+When we save all files and start the PiWeb Designer, we should find our extension in the **General** section of the toolbox:
 
-![alt text](gfx/toolbox_start.png "Toolbox entry")
+<img class="framed" src="gfx/toolbox_start.png">
 
-<a id="markdown-the-package-definition" name="the-package-definition"></a>
-## The Package Definition
+<a id="markdown-package-definition" name="package-definition"></a>
+## Package Definition
 
 
 In [chapter 1](#quickstart) we already created a very simple package definition in the file **package.json**. Although it's sufficient to get us started, there are a lot more settings to be discovered.
@@ -194,49 +148,120 @@ Every text that appears in the user interface of PiWeb can be localized. Simply 
 }
 ```
 
-As you can see, the localized version contains an entry for the invariant culture, which is also used as a fallback value, in case the required culture is not translated. Later in this chapter, all localizable properties marked as `localizable string` properties.
+As you can see, the localized version contains an entry for the invariant culture, which is also used as a fallback value in case the required culture is not translated. Later in this chapter, all localizable properties are marked as `localizable string` properties.
+
+<a id="markdown-dictionaries" name="dictionaries"></a>
+### Dictionaries
+
+Some properties are marked as `dictionary`, which means they are accepting an object with custom keys and a defined value. In the example below, the `items` property accepts a dictionary, and `myFirstItem` as well as `mySecondItem` are user defined entries in this dictionary.
+
+```json
+{
+    "items": {        
+        "myFirstItem": {
+            "name" : "My first item",
+            "value" : "red"
+        }, 
+        "mySecondItem": {
+            "name" : "My second item",
+            "value" : "green"
+        },    
+    }
+}
+```
+
+<a id="markdown-enumerations" name="enumerations"></a>
+### Enumerations
+
+The `enumeration` datatype indicates that only certain **strings** are accepted. The set of accepted strings is listed in the description of the property.
 
 <a id="markdown-package-format" name="package-format"></a>
 ### Package Format
 
+<a id="markdown-structure" name="structure"></a>
+#### Structure
+
+- [**name `string`**](#package-structure-name)
+- [**version `string`**](#package-structure-version)
+- [**main `string`**](#package-structure-main)
+- [**engines `object`**](#package-structure-engines)
+    - [**piweb `string`**](#package-structure-engines-piweb)
+- [**piweb_actions `object`**](#piweb-actions)
+    - [**load `string`**](#package-structure-actions-load)
+- [**piweb_extension `object`**](#piweb-extensions)
+    - [**type `enumeration`**](#package-structure-extensions-type)
+    - [**display `localizable string`**](#package-structure-extensions-display)
+    - [**description `localizable string`**](#package-structure-extensions-description)
+    - [**icon `string`**](#package-structure-extensions-icon)
+    - [**toolbox `object`**](#package-structure-extensions-toolbox)
+        - [**categories `dictionary`**](#package-structure-extensions-toolbox-categories)
+            - [**name `localizable string`**](#package-structure-extensions-toolbox-categories-name)
+            - [**priority `number`**](#package-structure-extensions-toolbox-categories-priority)
+        - [**items `dictionary`**](#package-structure-extensions-toolbox-items)
+            - [**name `localizable string`**](#package-structure-extensions-toolbox-items-name)
+            - [**description `localizable string`**](#package-structure-extensions-toolbox-items-description)
+            - [**icon `string`**](#package-structure-extensions-toolbox-items-icon)
+            - [**category `string`**](#package-structure-extensions-toolbox-items-category)
+            - [**element_size `object`**](#package-structure-extensions-toolbox-items-element_size)
+                - [**width `number`**](#package-structure-extensions-toolbox-items-element_size-width)
+                - [**height `number`**](#package-structure-extensions-toolbox-items-element_size-height)
+    - [**propertygrid `object`**](#package-structure-extensions-propertygrid)
+        - [**categories `dictionary`**](#package-structure-extensions-propertygrid-categories)
+            - [**name `localizable string`**](#package-structure-extensions-propertygrid-categories-name)
+            - [**priority `number`**](#package-structure-extensions-propertygrid-categories-priority)
+        - [**entries `dictionary`**](#package-structure-extensions-propertygrid-entries)
+            - [**name `localizable string`**](#package-structure-extensions-propertygrid-entries-name)
+            - [**description `localizable string`**](#package-structure-extensions-propertygrid-entries-description)
+            - [**type `enumeration`**](#package-structure-extensions-propertygrid-entries-type)
+            - [**category `string`**](#package-structure-extensions-propertygrid-entries-category)
+            - [**default_value `any`**](#package-structure-extensions-propertygrid-entries-default_value)
+            - [**options `dictionary`**](#package-structure-extensions-propertygrid-entries-options)
+                - [**name `localizable string`**](#package-structure-extensions-propertygrid-entries-options-name)
+                - [**description `localizable string`**](#package-structure-extensions-propertygrid-entries-options-description)
+
 <a id="markdown-top-level-properties" name="top-level-properties"></a>
 #### Top Level Properties
 
+<a id="package-structure-name" name="package-structure-name"></a>
 **name `string`**
 
 Custom string that is used to identify the package internally. Must be composed from lower case characters, digits and a set of special characters:
 `'$', '-', '_', '.', '+', '!', '*', '\'', '(', ')', ','`. It must have a length between 1 and 214 characters and may not start with a dot (`.`) or an underscore (`_`).
 
+<a id="package-structure-version" name="package-structure-version"></a>
 **version `string`**
 
 A valid semantic version string containing three numbers, separated by dots. For more information about semantic versioning, visit the [project website](http://semver.org/).
 
+<a id="package-structure-main" name="package-structure-main"></a>
 **main `string`**
 
 Path to folder that contains the `index.js` file. In case you used typescript, it is the value of the property `outDir` in the `tsconfig.json` file.
 
+<a id="package-structure-engines" name="package-structure-engines"></a>
 **engines `object`**
 
-Defines the supported engine versions of this plot. Please read the engines chapter for further information
+Defines the supported engine versions of this plot. Please read the [engines](#engines) chapter for further information.
 
 **piweb_actions `object`**
 
-Defines additional actions. Please read the [actions chapter](#piweb-actions)  for further information
+Defines additional actions. Please read the [actions chapter](#piweb-actions)  for further information.
 
 **piweb_extension `object`**
 
-Defines the content of the extension. Please read the [extensions chapter](#piweb-extensions) for further information
+Defines the content of the extension. Please read the [extensions chapter](#piweb-extensions) for further information.
 
-<a id="markdown-engines-properties" name="engines-properties"></a>
-#### Engines Properties
-
+<a id="markdown-engines" name="engines"></a>
+#### Engines
+<a id="package-structure-engines-piweb" name="package-structure-engines-piweb"></a>
 **piweb `string`**
 
 A valid semantic version string containing three numbers, separated by dots. It identifies the toolset that PiWeb will use to execute the extension. For more information about semantic versioning, visit the [project website](http://semver.org/).
 
 <a id="markdown-piweb-actions" name="piweb-actions"></a>
-#### Piweb Actions
+#### PiWeb Actions
 
+<a id="package-structure-actions-load" name="package-structure-actions-load"></a>
 **load `string`**
 
 A string describing actions, that will be executed when the package loads. Currently, the only recognized value is `compile_typescript`, which will trigger the typescript compiler.
@@ -244,30 +269,302 @@ A string describing actions, that will be executed when the package loads. Curre
 <a id="markdown-piweb-extensions" name="piweb-extensions"></a>
 #### PiWeb Extensions
 
+<a id="package-structure-extensions-type" name="package-structure-extensions-type"></a>
 **type `enumeration`**
 
-Identifies the extension type. Currently, the only accepted value is `plot`, which identifies a piweb plot extension.
+Identifies the extension type. Currently, the only accepted value is `plot`, which identifies a PiWeb plot extension.
 
+<a id="package-structure-extensions-display" name="package-structure-extensions-display"></a>
 **display `localizable string`**
 
-Sets the display name of the entry in the piweb toolbox.
+Sets the display name of the item in the PiWeb Designer toolbox.
 
+<a id="package-structure-extensions-description" name="package-structure-extensions-description"></a>
 **description `localizable string`**
 
-Sets the description of the entry in the piweb toolbox, which is visible when the user hovers over the entry.
+Sets the description of the item in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.
 
+<a id="package-structure-extensions-icon" name="package-structure-extensions-icon"></a>
 **icon `string`**
 
 Path to the icon, relative to the `package.json` file. Usually, you simply specify the filename, and place the icon next to your `package.json` file. The icon is used on several places in PiWeb Designer, such as the toolbox, the page structure and the element properties tab. PiWeb can handle the following file formats: `bmp`, `gif`, `ico`, `jpg`, `png`, `tiff`, `wmp`.
 
 > PiWeb will scale the image to a size of 16\*16 and 32\*32 pixels. To achieve the best result, use an `ico` file that contains bitmaps of both sizes.
 
-**toolbox `object`**
+<a id="package-structure-extensions-toolbox" name="package-structure-extensions-toolbox"></a>
+**toolbox `object`**   
 
+If you want multiple toolbox entries to be generated by your plot (e.g. because your extension provides a full infrastructure of elements), you can define them here. Please read the chapter '[toolbox properties](#toolbox-properties)' for further information.
+
+<a id="package-structure-extensions-propertygrid" name="package-structure-extensions-propertygrid"></a>
 **propertygrid `object`**
 
-<a id="markdown-piweb-host" name="piweb-host"></a>
-## PiWeb Host
+Determines the properties of the plot that can be adjusted by the user in PiWeb Designer. Please read the chapter '[propertygrid properties](#propertygrid-properties)' for further information.
+
+<a id="markdown-toolbox-properties" name="toolbox-properties"></a>
+#### Toolbox Properties
+
+<a id="package-structure-extensions-toolbox-categories" name="package-structure-extensions-toolbox-categories"></a>
+**categories `dictionary`**
+
+Describes additional categories for the element toolbox in PiWeb Designer. Please read the chapter '[toolbox categories](#toolbox-categories)' for further information.
+
+<a id="package-structure-extensions-toolbox-items" name="package-structure-extensions-toolbox-items"></a>
+**items `dictionary`**
+
+Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter '[toolbox items](#toolbox-items)' for further information.
+
+<a id="markdown-toolbox-categories" name="toolbox-categories"></a>
+##### Toolbox Categories
+
+<a id="package-structure-extensions-toolbox-categories-name" name="package-structure-extensions-toolbox-categories-name"></a>
+**name `localizable string`**
+
+The name of the category that is displayed on top of it in the PiWeb Designer.
+
+<a id="package-structure-extensions-toolbox-categories-priority" name="package-structure-extensions-toolbox-categories-priority"></a>
+**priority `number`**
+
+The priority determines where the category is placed relative to the existing categories. 
+
+<a id="markdown-toolbox-items" name="toolbox-items"></a>
+##### Toolbox Items
+
+<a id="package-structure-extensions-toolbox-items-name" name="package-structure-extensions-toolbox-items-name"></a>
+**name `localizable string`**
+
+Sets the display name of the item in the PiWeb Designer toolbox.
+
+<a id="package-structure-extensions-toolbox-items-description" name="package-structure-extensions-toolbox-items-description"></a>
+**description `localizable string`**
+
+Sets the description of the item in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.
+
+<a id="package-structure-extensions-toolbox-items-icon" name="package-structure-extensions-toolbox-items-icon"></a>
+**icon `string`**
+
+Sets the icon of the item in the PiWeb Designer toolbox. Please read the chapter [icon](#package-structure-extensions-icon) for further information.
+
+<a id="package-structure-extensions-toolbox-items-category" name="package-structure-extensions-toolbox-items-category"></a>
+**category `string`**
+
+Sets the category under which the item appears in the PiWeb Designer toolbox. The value must appear as dictionary key in the [`categories`](#package-structure-extensions-toolbox-categories) dictionary or be equal to one of the built in category keys of PiWeb:
+
+| Key                          | English Name        | German Name              |
+|------------------------------|---------------------|--------------------------|
+|**`Audit`**	               |Audit calculations   | Auditberechnungen        |
+|**`AutoShapes`**	           |Autoshapes	         | Autoformen               |
+|**`Container`**	           |Container	         | Container                |
+|**`CustomPlots`** 	           |Extensions	         | Erweiterungen            |
+|**`Formplots`**	           |Form plots	         | Formplots                |
+|**`General`**	               |General              | Allgemein                |
+|**`Images`**	               |Images	             | Bilder                   |
+|**`InteractiveElements`**     |Interactive elements | Interaktive Elemente     |
+|**`Statistics`**	           |Statistics	         | Statistik                |
+|**`TablesAndDirectories`**    |Tables & Directories | Tabellen & Verzeichnisse |
+|**`Templates`**	           |Templates 	         |  Vorlagen                |
+
+
+<a id="package-structure-extensions-toolbox-items-element_size" name="package-structure-extensions-toolbox-items-element_size"></a>
+**element_size `object`**
+
+Describes the initial size of the element when created on the report. Please read the chapter [element size](#element-size) for further information.
+
+<a id="markdown-element-size" name="element-size"></a>
+###### Element Size         
+
+<a id="package-structure-extensions-toolbox-items-element_size-width" name="package-structure-extensions-toolbox-items-element_size-width"></a>
+**width `number`**
+
+The initial element width on the report in **millimeters**.
+
+<a id="package-structure-extensions-toolbox-items-element_size-height" name="package-structure-extensions-toolbox-items-element_size-height"></a>
+**height `number`**               
+
+The initial element height on the report in **millimeters**.
+
+<a id="markdown-propertygrid-properties" name="propertygrid-properties"></a>
+#### Propertygrid Properties
+
+<a id="package-structure-extensions-propertygrid-categories" name="package-structure-extensions-propertygrid-categories"></a>
+**categories `dictionary`**
+
+Describes the categories of the PiWeb Designer that are used by the custom plot. Please read the chapter '[propertygrid categories](#propertygrid-categories)' for further information.
+
+<a id="package-structure-extensions-propertygrid-entries" name="package-structure-extensions-propertygrid-entries"></a>
+**entries `dictionary`**
+
+Describes the additional property grid entries of the plot. The defined property grid entries are added to a set of default properties that every element has. Please read the chapter '[propertygrid entries](#propertygrid-entries)' for further information.
+
+<a id="markdown-propertygrid-categories" name="propertygrid-categories"></a>
+##### Propertygrid Categories
+
+<a id="package-structure-extensions-propertygrid-categories-name" name="package-structure-extensions-propertygrid-categories-name"></a>
+**name `localizable string`**
+
+The name of the category that is displayed in the PiWeb Designer property grid.
+
+<a id="package-structure-extensions-propertygrid-categories-priority" name="package-structure-extensions-propertygrid-categories-priority"></a>
+**priority `number`**
+
+The priority determines where the category is placed relative to the other categories. 
+
+<a id="markdown-propertygrid-entries" name="propertygrid-entries"></a>
+##### Propertygrid Entries
+
+<a id="package-structure-extensions-propertygrid-entries-name" name="package-structure-extensions-propertygrid-entries-name"></a>
+**name `localizable string`**
+
+The name that will be displayed in the property tab of PiWeb Designer
+
+<a id="package-structure-extensions-propertygrid-entries-description" name="package-structure-extensions-propertygrid-entries-description"></a>
+**description `localizable string`**
+
+The info text that will be displayed when hovering the property with the mouse.
+
+<a id="package-structure-extensions-propertygrid-entries-category" name="package-structure-extensions-propertygrid-entries-category"></a>
+**category `string`**
+
+The key of the entry in the [`categories`](#package-structure-extensions-propertygrid-categories) dictionary to which this property is associated. In case you want to use existing categories, like `General`, `Appearance` or `Layout`, you have to use the following keys: 
+
+| Key                   |English name (en-US)           | German name (de-DE) | 
+|-----------------------|-------------------------------|---------------------|
+| **`General`**           | General                       | Allgemein           |
+| **`Axis`**              | Axis                          | Achsen              | 
+| **`Appearance`**        | Appearance                    | Darstellung         | 
+| **`Layout`**            | Layout                        | Layout              |
+| **`GaugeIntegration`**  | Measuring device integration  | Messmittelanbindung |
+| **`Misc`**              | Misc                          | Sonstiges           |
+
+
+
+<a id="package-structure-extensions-propertygrid-entries-type" name="package-structure-extensions-propertygrid-entries-type"></a>
+**type `enumeration`**
+
+The datatype that determines which kind of editor is shown for the property
+
+| Type          | Description           | Editor                   |
+|---------------|-----------------------|--------------------------|
+| **`string`**  | Unicode text          | ![alt text](gfx/textbox.png "combobox")         |
+| **`integer`** | Integral number       | ![alt text](gfx/integerupdown.png "combobox")   |
+| **`double`**  | Floating point number | ![alt text](gfx/integerupdown.png "combobox")   |
+| **`boolean`** | Yes/No value          | ![alt text](gfx/checkbox.png "combobox")           |
+| **`enum`**    | Selection of an option| ![alt text](gfx/combobox.png "combobox")           |
+| **`color`**   | Color with opacity    | ![alt text](gfx/colorpicker.png "combobox")           |
+| **`brush`**   | Color or gradient with opacity  | ![alt text](gfx/brushpicker.png "combobox")           |
+| **`pen`**     | Pen with color, thickness, dashstyle and opacity  | ![alt text](gfx/penpicker.png "combobox")          |
+| **`font`**    | Font with family, color, size and style, as well as textdecorations      | ![alt text](gfx/fontpicker.png "combobox")              |
+
+<a id="package-structure-extensions-propertygrid-entries-default_value" name="package-structure-extensions-propertygrid-entries-default_value"></a>
+**default_value `any`**
+
+Each datatype accepts a different default value:
+
+**`string`**
+```json
+"default_value": "value"
+```
+
+Any unicode string is accepted
+
+**`integer`**
+```json
+"default_value": 1
+```
+
+Integral numbers are accepted
+
+**`double`**
+```json
+"default_value": 1.0
+```
+
+Floating point or integral numbers are accepted
+
+**`boolean`**
+```json
+"default_value": true | false
+```
+
+`true` and `false` are accepted
+
+**`enum`**
+```json
+"default_value": "value"
+```
+
+The keys of the [`options`](#package-structure-extensions-propertygrid-entries-options) property are accepted.
+
+**`color`**
+```json
+"default_value": "#ff0000"
+```
+
+Strings in the form of `#rrggbb`
+
+**`brush`**
+
+```json
+"default_value": {
+    "type": "solid" | "lineargradient" | "radialgradient",
+    "color": "#ff0000", 
+    "color2": "#0000ff", // only gradient brushes
+    "opacity" 1.0,       // [0..1] where 1 is opaque
+    "angle": 0,          // Only for linear gradient
+    "center": {          // Only for radial gradient
+        "x" : 0.5,       // [0..1] 0 = left, 1 = right
+        "y" : 0.5        // [0..1] 0 = top, 1 = bottom
+    }
+}
+```
+
+Accepts an object of the specified structure. Some properties are only used for special brush types.
+
+**`pen`**
+```json
+"default_value": {
+    "color": "#ff0000",
+    "thickness" 0.3     // Millimeters
+}
+```
+
+Only pens with solid color and thickness are accepted.
+
+**`font`**
+```json
+"default_value": {
+    "color": "#ff0000",
+    "family": "Arial",
+    "size": 10,
+    "bold": false,
+    "italic": false,
+    "underline": false,
+    "strikethrough": false,
+}
+```
+
+Accepts a font description object with the properties shown above.
+
+<a id="package-structure-extensions-propertygrid-entries-options" name="package-structure-extensions-propertygrid-entries-options"></a>
+**options `dictionary`**
+
+Determines the possible values of a property with type `enum`. The plot will get the key of the selected entry as value for the property. Please read the chapter '[option properties](#option-properties)' for further information.
+
+<a id="markdown-option-properties" name="option-properties"></a>
+###### Option Properties
+
+<a id="package-structure-extensions-propertygrid-entries-options-name" name="package-structure-extensions-propertygrid-entries-options-name"></a>
+**name `localizable string`**
+
+The name that is displayed in the dropdown.
+
+<a id="package-structure-extensions-propertygrid-entries-options-description" name="package-structure-extensions-propertygrid-entries-options-description"></a>
+**description `localizable string`**
+
+The description that is displayed when hovering an option in the dropdown with the mouse
+
+<a id="markdown-piweb-interface" name="piweb-interface"></a>
+## PiWeb Interface
 
 You can retrieve information about the element, its properties and settings by using the `host` interface. To access it, include the PiWeb host module in your script.
 
@@ -276,7 +573,7 @@ import * as host from 'piweb_host'
 ```
 
 <a id="markdown-basic-functions" name="basic-functions"></a>
-### Basic Functions
+### Basic Functions 
 
 **getSize `Size`**
 
@@ -331,7 +628,7 @@ The properties you define in the `package.json` file can be accessed via the `pi
 **getStringProperty `string`**
 
 ```TypeScript
-piweb.properties.getStringProperty(id : string) : string
+function getStringProperty(id : string) : string
 ```
 
 Returns the value of the property with the name `id` as a string.
@@ -339,7 +636,7 @@ Returns the value of the property with the name `id` as a string.
 **getIntegerProperty `number`**
 
 ```TypeScript
-piweb.properties.getIntegerProperty(id : string) : number
+function getIntegerProperty(id : string) : number
 ```
 
 Returns the value of the property with the name `id` as a number.
@@ -347,15 +644,196 @@ Returns the value of the property with the name `id` as a number.
 **getDoubleProperty `number`**
 
 ```TypeScript
-piweb.properties.getDoubleProperty(id : string) : number
+function getDoubleProperty(id : string) : number
 ```
  
 Returns the value of the property with the name `id` as a number. 
 
+**getBooleanProperty `boolean`**
+
+```TypeScript
+function getBooleanProperty(id : string) : boolean
+```
+ 
+Returns the value of the property with the name `id` as a boolean. 
+
+**getEnumProperty `string`**
+
+```TypeScript
+function getEnumProperty(id : string) : string
+```
+ 
+Returns the key of the selected option of the property with the name `id` as a string. Please read the chapter '[propertygrid options](#package-structure-extensions-propertygrid-entries-options)' for further information.
+
+**getColorProperty `ColorDescription`**
+
+```TypeScript
+function getColorProperty(id : string) : ColorDescription
+```
+ 
+Returns the value of the property with the name `id` as a `ColorDescription`. The result can be used as parameter for the `create` method of the [`Color`](#color) class.
+
+**getBrushProperty `BrushDescription`**
+
+```TypeScript
+function getBrushProperty(id : string) : BrushDescription
+```
+ 
+Returns the value of the property with the name `id` as a `BrushDescription`. The result can be used as parameter for the `create` method of the [`Brush`](#brush) class.
+
+**getPenProperty `PenDescription`**
+
+```TypeScript
+function getPenProperty(id : string) : PenDescription
+```
+ 
+Returns the value of the property with the name `id` as a `PenDescription`. The result can be used as parameter for the `create` method of the [`Pen`](#pen) class.
+
+**getFontProperty `FontDescription`**
+
+```TypeScript
+function getFontProperty(id : string) : FontDescription
+```
+ 
+Returns the value of the property with the name `id` as a `FontDescription`. The result can be used as parameter for the `create` method of the [`Font`](#font) class.
+
+<a id="markdown-localization-1" name="localization-1"></a>
+## Localization
+
+<a id="markdown-enumerations-1" name="enumerations-1"></a>
+### Enumerations
+
+<a id="markdown-datekind" name="datekind"></a>
+#### DateKind
+
+```TypeScript
+enum DateKind
+```
+
+**`AssumeLocal`**
+
+TODO
+        
+**`AssumeUTC`**
+
+TODO
+
+<a id="markdown-classes" name="classes"></a>
+### Classes
+
+<a id="markdown-cultureinfo" name="cultureinfo"></a>
+#### CultureInfo
+
+```TypeScript
+class CultureInfo
+```
+
+Contains the identifiers of a specific culture. PiWeb can use these information to provide localization and correct formatting of numbers and dates.
+
+**twoLetterISOLanguageName: `string`**
+
+The ISO 639-1 two-letter code for the language of the culture.
+
+**threeLetterISOLanguageName: `string`**
+
+The ISO 639-2 three-letter code for the language of the culture.
+
+**name: `string`**
+
+The name of the culture in the format `languagecode2-country/regioncode2`.
+
+<a id="markdown-regioninfo" name="regioninfo"></a>
+#### RegionInfo
+
+```TypeScript
+class RegionInfo
+```
+
+Contains the ifentifiers of a specific country or region. 
+
+**twoLetterISORegionName: `string`**
+
+The two-letter code defined in ISO 3166 for the country/region.
+
+**threeLetterISORegionName: `string`**
+
+The three-letter code defined in ISO 3166 for the country/region.
+
+**name: `string`**
+
+The name or ISO 3166 two-letter country/region code.
+
+
+<a id="markdown-methods" name="methods"></a>
+### Methods
+
+**formatNumber `string`**
+
+```TypeScript
+function formatNumber(
+    value: number, 
+    formatString?: string | null, 
+    culture?: CultureInfo | null
+) : string;
+```
+
+Converts the specified value to its string representation using the specified format string and the culture specific format information.
+
+**parseNumber `number | null`**
+
+```TypeScript
+function parseNumber(
+    str: string, 
+    culture?: CultureInfo | null
+): number | null;
+```
+
+Converts the specified string representation of a number in a specified culture specific format to its `number` equivalent.
+
+**formatDate `string`**
+
+```TypeScript
+function formatDate(
+    date: Date, 
+    offset?: number | null, 
+    format?: string | null, 
+    culture?: CultureInfo | null
+): string;
+```
+
+Converts the specified date to its string representation using the specified format string and the culture specific format information.
+
+**parseDate `Date | null`**
+
+```TypeScript
+function parseDate(
+    str: String, 
+    culture?: CultureInfo | null, 
+    dateKind?: DateKind | null
+) : Date | null;
+```
+
+Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+
+**parseDateExact `Date | null`**
+
+```TypeScript
+function parseDateExact(
+    str: String, 
+    format: string, 
+    culture?: CultureInfo | null, 
+    dateKind?: DateKind | null
+) : Date | null;
+```
+
+Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+
+**TODO:** Link to microsoft format string reference... or a short reference
+
 <a id="markdown-drawing" name="drawing"></a>
 ## Drawing  
  
-To access the drawing classes, import the piweb interface in your script. All necessary classes for drawing are encapsulated in the `piweb.drawing` module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
+To access the drawing classes, import the `piweb` interface into your script. All necessary classes for drawing are encapsulated in the `piweb.drawing` module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
 
 ```TypeScript
 import * as piweb from 'piweb'
@@ -369,9 +847,62 @@ function render(context: piweb.drawing.DrawingContext) {
 ```
  
 Be aware that all coordinates and values are interpreted as **millimeters**. PiWeb draws with a resolution of **96 DPI**, so one millimeter is equal to `96 / 25.4 ~ 3.58` pixels, or one pixel is equal to `25.4 / 96 ~ 0.2646` millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.
+"
+<a id="markdown-interfaces" name="interfaces"></a>
+### Interfaces
+
+Most drawing objects, like [`Color`](#color), [`Brush`](#brush), [`Pen`](#pen), [`Font`](#font) and [`Geometry`](#geometry) implement an interface that is named like the implementing class, with an additional `Description` suffix (e.g. `ColorDescription`).
+Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.<br><br> Constructors in javascript and typescript cannot be overloaded, which means that you have to specifiy a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
+
+**Long version using constructors:**
+
+```TypeScript 
+context.setPen(new piweb.drawing.Pen(
+    new piweb.drawing.SolidColorBrush(
+        new piweb.drawing.Color(255, 0, 0, 255),
+        1.0), 
+    1.0, 				
+    "flat", 			
+    "flat", 			
+    "bevel", 			
+    new Array<number>(),
+    0.0,			
+    "flat"
+));
+
+context.drawLine(
+    new piweb.drawing.Point(0.0, 0.0), // from
+    new piweb.drawing.Point(1.0, 1.0)  // to
+);
+``` 
+
+**Short version using interfaces:**
+
+```TypeScript 
+context.setPen({
+    brush: { 
+        type: "solid", 
+        color: { r: 255, g: 0, b: 0 } 
+    },
+    thickness: 1.0}
+);
+
+context.drawLine(
+    { x: 0.0, y: 0.0 }, 
+    { x: 1.0, y: 1.0 }
+);
+```
+
+As you might have noticed, you don't have to specify all parameters when using the interface version. For almost every value, there is a defined **default value** which is used in case the actual value is not specified. The API reference in the following chapters will not always list all possible parameter types. You'll notice that most types and functions can be configured in several more comfortable ways, as most functions are defined to take interfaces as their parameters.
 
 <a id="markdown-common" name="common"></a>
 ### Common
+
+<a id="markdown-content" name="content"></a>
+#### Content
+
+- [Point](#point)
+- [Size](#size)
 
 <a id="markdown-point" name="point"></a>
 #### Point
@@ -407,135 +938,378 @@ Hoirizontal dimension.
 
 Vertical dimention.
 
+<a id="markdown-drawing-1" name="drawing-1"></a>
+### Drawing
+
+<a id="markdown-content-1" name="content-1"></a>
+#### Content
+
+- [Drawing](#drawing-2)
+- [DrawingContext](#drawingcontext)
+
+<a id="markdown-drawing-2" name="drawing-2"></a>
+#### Drawing
+
+```TypeScript
+class Drawing
+```
+
+Describes a two dimensional vector graphics image.
+
+**open `DrawingContext`**
+
+```TypeScript
+function open() : DrawingContext
+```
+
+Creates a [`DrawingContext`](#drawingcontext) which can be used to create the content of the drawing.
+
 <a id="markdown-drawingcontext" name="drawingcontext"></a>
-### DrawingContext
+#### DrawingContext
 
 ```TypeScript
 class DrawingContext
 ```
 
-Used to draw to the plot area that is displayed by the PiWeb Designer and PiWeb Monitor.
+Describes the content of a drawing with the help of various drawing commands.
 
+<a id="drawingcontext-drawline" name="drawingcontext-drawline"></a>
 **drawLine `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawLine.svg">
-
 ```TypeScript
-function drawLine(start: Point, end: Point): void;
+function drawLine(
+    start: Point, 
+    end: Point
+): void;
 ```
-Draws a line using from `start` to `end` using the pen which has been previously set with the `setPen` function. In case you want to draw a larger number of lines, consider using the `drawLines` or `drawGeometry` function to improve the drawing performance.
+Draws a line using from `start` to `end` using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of lines, consider using the [`drawLines`](#drawingcontext-drawlines) or [`drawGeometry`](#drawingcontext-drawgeometry) function to improve the drawing performance.
 
+<a id="drawingcontext-drawlines" name="drawingcontext-drawlines"></a>
 **drawLines `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawLines.svg">
-
 ```TypeScript
-function drawLines(lines: Point[]): void;
+function drawLines(
+    lines: Point[]
+): void;
 ```
-Draws multiple lines that are **not** connected using the pen which has been previously set with the `setPen` function. The number of points provided as parameter `lines` must be even. Each two points describe a line. In case you want to draw connected points, please consider using the function `drawGeometry` instead of using the `drawLines` function with duplicate points.
+Draws multiple lines that are **not** connected using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. The number of points provided as parameter `lines` must be even. Each two points describe a line. In case you want to draw connected points, please consider using the function [`drawGeometry`](#drawingcontext-drawgeometry) instead of using the [`drawLines`](#drawingcontext-drawlines) function with duplicate points.
 
+<a id="drawingcontext-drawrectangle" name="drawingcontext-drawrectangle"></a>
 **drawRectangle `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawRectangle.svg">
-
 ```TypeScript
-function drawRectangle(x: number, y: number, w: number, h: number): void;
+function drawRectangle(
+    x: number, 
+    y: number, 
+    w: number, 
+    h: number
+): void;
 ```
-Draws a rectangle with of width `w` and height `h` at Point `x;y` and fills it with the brush which has been previously set using the `setBrush` function, and strokes it using the pen which has been previously set with the `setPen` function. In case you want to draw a larger number of rectangles, consider using the `drawGeometry` function with a `GeometryGroup`, containing multiple `RectangleGeometry` objects to improve the drawing performance.
+Draws a rectangle with of width `w` and height `h` at Point `x;y` and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of rectangles, consider using the [`drawGeometry`](#drawingcontext-drawgeometry) function with a [`GeometryGroup`](#geometrygroup), containing multiple [`RectangleGeometry`](#rectanglegeometry) objects to improve the drawing performance.
 
+<a id="drawingcontext-drawellipse" name="drawingcontext-drawellipse"></a>
 **drawEllipse `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawEllipse.png">
-
 ```TypeScript
-function drawEllipse(center: Point, radiusX: number, radiusY: number): void;
+function drawEllipse(
+    center: Point, 
+    radiusX: number, 
+    radiusY: number
+): void;
 ```
-Draws an ellipse around the point `center` and fills it with the brush which has been previously set using the `setBrush` function, and strokes it using the pen which has been previously set with the `setPen` function. In case you want to draw a larger number of ellipses (e.g. points), consider using the `drawGeometry` function with a `GeometryGroup`, containing multiple `EllipseGeometry` objects to improve the drawing performance.
+Draws an ellipse around the point `center` and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of ellipses (e.g. points), consider using the [`drawGeometry`](#drawingcontext-drawgeometry) function with a 
+[`GeometryGroup`](#geometrygroup), containing multiple [`EllipseGeometry`](#ellipsegeometry) objects to improve the drawing performance.
 
+<a id="drawingcontext-drawgeometry" name="drawingcontext-drawgeometry"></a>
 **drawGeometry `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawGeometry.svg">
-
 ```TypeScript
-function drawGeometry(geometry: Geometry): void;
+function drawGeometry(
+    geometry: Geometry
+): void;
 ```
-Draws the specified `Geometry` and fills it with the brush which has been previously set using the `setBrush` function, and strokes it using the pen which has been previously set with the `setPen` function. In case you want to draw a larger number of geometries, consider greating a `GeometryGroup`, containing multiple `Geometry` objects to improve the drawing performance. For more information about geometries, please read the chapter [Geometry](#geometry)
+Draws the specified [`Geometry`](#geometry) and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of geometries, consider greating a [`GeometryGroup`](#geometrygroup), containing multiple [`Geometry`](#geometry) objects to improve the drawing performance.
 
+<a id="drawingcontext-drawtext" name="drawingcontext-drawtext"></a>
 **drawText `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawText.svg">
-
 ```TypeScript
-function drawText(text: FormattedText, position: Point): void;
+function drawText(
+    text: FormattedText, 
+    settings: TextDrawingSettings
+): void;
 ```
-Draws the specified `FormattedText` at the specified `position`. There are numerous properties which will help you to adjust how the text is layouted and displayed. For more information, please read the chapter [FormattedText](#formattedText) and [Font](#font)
+Draws the specified [`FormattedText`](#formattedtext) at with the specified [`TextDrawingSettings`](#textdrawingsettings). There are numerous properties which will help you to adjust how the text is layouted and displayed. For more information, please read the chapter [FormattedText](#formattedtext), [Font](#font) and [TextDrawingSettings](#textdrawingsettings).
 
+<a id="drawingcontext-drawimage" name="drawingcontext-drawimage"></a>
 **drawImage `void`**
 
-<img style="float: right;margin-left:20px" src="gfx/drawImage.svg">
-
 ```TypeScript
-function drawImage(data: Buffer, rectangle: Rect): void;
+function drawImage(
+    data: Buffer, 
+    rectangle: Rect
+): void;
 ```
 
 Draws the specified image buffer into the specifield `rectangle`. In case the image size differs from the rectangle, the image will be stretched.
 
+<a id="drawingcontext-drawdrawing" name="drawingcontext-drawdrawing"></a>
 **drawDrawing `void`**
 
 ```TypeScript
-function drawDrawing(drawing: Drawing): void;
+function drawDrawing(
+    drawing: Drawing
+): void;
 ```
 
-Draws the specified drawing into the current drawing context. To set the position and size of the drawing, use the `pushTransform` function.
+Draws the specified [`Drawing`](#drawing) into the current drawing context. To set the position and size of the drawing, use the [`pushTransform`](#drawingcontext-pushtransform) function.
 
+<a id="drawingcontext-setpen" name="drawingcontext-setpen"></a>
 **setPen `void`**
 ```TypeScript
-function setPen(pen: Pen | null): void;
+function setPen(
+    pen: Pen | null
+): void;
 ```
 
-Sets the pen that will be used for all subsequent calls to `drawLine`, `drawLines`, `drawRectangle`, `drawEllipse` and `drawGeometry`. In case you don't want your rectangle, ellipse or geometry to be stroked, pass `null` as parameter into the function.
+Sets the pen that will be used for all subsequent calls to [`drawLine`](#drawingcontext-drawline), [`drawLines`](#drawingcontext-drawlines), [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be stroked, pass `null` as parameter into the function.
 
+<a id="drawingcontext-setbrush" name="drawingcontext-setbrush"></a>
 **setBrush  `void`**
 
 ```TypeScript
-function setBrush(brush: Brush | null): void;
+function setBrush(
+    brush: Brush | null
+): void;
 ```
 
-Sets the brush that will be used for all subsequent calls to `drawRectangle`, `drawEllipse` and `drawGeometry`. In case you don't want your rectangle, ellipse or geometry to be filled, pass `null` as parameter into the function.
+Sets the brush that will be used for all subsequent calls to [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be filled, pass `null` as parameter into the function.
 
+<a id="drawingcontext-pushtransform" name="drawingcontext-pushtransform"></a>
 **pushTransform `void`**
 
 ```TypeScript
-function pushTransform(transformation: Transform): void;
+function pushTransform(
+    transformation: Transform
+): void;
 ```
-Multiplies the current transformation matrix with a new transformation matrix. To undo it, use the `pop` function.
+Multiplies the current transformation matrix with another [`Transform`](#transform). To undo it, use the [`pop`](#drawingcontext-pop) function.
 
+<a id="drawingcontext-pushclip" name="drawingcontext-pushclip"></a>
 **pushClip `void`**
 
 ```TypeScript
-function pushClip(geometry: Geometry): void;
+function pushClip(
+    geometry: Geometry
+): void;
 ```
 
-Sets a new clip geometry. All subsequent drawing calls will only be rendered inside the fill area of the specified `geometry`. Be aware that unfilled geometries like straight lines don't have any fill area, which means that all subsequent drawing calls have no effect.
+Sets a new clip geometry. All subsequent drawing calls will only be rendered inside the fill area of the specified [`geometry`](#geometry). Be aware that unfilled geometries like straight lines don't have any fill area, which means that all subsequent drawing calls have no effect. To undo it, use the [`pop`](#drawingcontext-pop) function.
 
+<a id="drawingcontext-pushopacity" name="drawingcontext-pushopacity"></a>
 **pushOpacity `void`**
 
 ```TypeScript
-function pushOpacity(opacity: number): void;
+function pushOpacity(
+    opacity: number
+): void;
 ```
 
-Sets the opacity of all subsequent drawing calls. When drawing transparent objects, the transparency of the object is multiplied with the specified `opacity`.
+Sets the opacity of all subsequent drawing calls. When drawing transparent objects, the transparency of the object is multiplied with the specified `opacity`. To undo it, use the [`pop`](#drawingcontext-pop) function.
 
+<a id="drawingcontext-pop" name="drawingcontext-pop"></a>
 **pop `void`**
 
 ```TypeScript
 function pop(): void;
 ```
 
-Removes the most recent effect caused by `pushTransform`, `pushOpacity` or `pushClip` from the stack. This function will cause an error in case none of the specified commands has been executed before.
+Removes the most recent effect caused by [`pushTransform`](#drawingcontext-pushtransform), [`pushOpacity`](#drawingcontext-pushopacity) or [`pushClip`](#drawingcontext-pushclip) from the stack. This function will cause an error in case none of the specified commands has been executed before.
+
+<a id="markdown-transform" name="transform"></a>
+### Transform
+
+<a id="markdown-content-2" name="content-2"></a>
+#### Content
+
+- [Transform](#transform-1)
+- [TranslationTransform](#translationtransform)
+- [RotationTransform](#rotationtransform)
+- [ScalingTransform](#scalingtransform)
+- [ShearTransform](#sheartransform)
+- [MatrixTransform](#matrixtransform)
+- [TransformGroup](#transformgroup)
+
+<a id="markdown-transform-1" name="transform-1"></a>
+#### Transform
+
+```TypeScript
+abstract class Transform
+```
+
+Describes a transformation matrix that can be used to change the position, rotation and size of geometries.
+
+<a id="markdown-translationtransform" name="translationtransform"></a>
+#### TranslationTransform
+
+```TypeScript
+class TranslationTransform extends Transform
+```
+
+Moves an object in horizontal and vertical direction.
+
+<img class="framed" style="width:auto; height:128px;" src="gfx/translateTransform.svg">
+
+**x `number`**
+
+The translation in horizontal direction.
+
+**y `number`**
+
+The translation in vertical direction.
+
+<a id="markdown-rotationtransform" name="rotationtransform"></a>
+#### RotationTransform
+
+```TypeScript
+class RotationTransform extends Transform
+```
+
+Rotates an object around a specific point.
+
+<img class="framed" style="width:auto; height:128px;" src="gfx/rotateTransform.svg">
+
+**angle `number`**
+
+The angle in degrees of clockwise rotation.
+
+**center [`Point`](#point)**
+
+The rotation center.
+
+<a id="markdown-scalingtransform" name="scalingtransform"></a>
+#### ScalingTransform
+
+```TypeScript
+class ScalingTransform extends Transform
+```
+
+Scales an object in horizontal and vertical direction
+
+<img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.svg">
+
+**scaleX `number`**
+
+The horizontal scaling factor.
+
+**scaleY `number`**
+
+The vertical scaling factor.
+
+**center [`Point`](#point)**
+
+The center from which the scaling is calculated.
+
+<a id="markdown-sheartransform" name="sheartransform"></a>
+#### ShearTransform
+
+```TypeScript
+class ShearTransform extends Transform
+```
+
+Describes a transformation that can be used to create the illusion of perspective. 
+
+<img class="framed" style="width:auto; height:128px;" src="gfx/skewTransform.svg">
+
+**angleX `number`**
+
+The rotation angle of the x coordinates.
+
+**angleY `number`**
+
+The rotation angle of the y coordinates.
+
+**center [`Point`](#point)** 
+
+The rotation center.
+
+<a id="markdown-matrixtransform" name="matrixtransform"></a>
+#### MatrixTransform
+
+```TypeScript
+class MatrixTransform extends Transform
+```
+
+All transformation types are converted into a 3x3 matrix when they are applied. With the matrix transformation it's possible to define a transformation that is based on an arbitary 3x3 matrix. 
+
+| **m11** | **m12** | **0** |
+|-----|-----|---|
+| **m21** | **m22** | **0** |
+| **offsetX** | **offsetY** | **1** |
+
+**m11 `number`**
+
+M11 value of the matrix.
+
+**m12 `number`**
+
+M12 value of the matrix.
+
+**m21 `number`**
+
+M21 value of the matrix.
+
+**m22 `number`**
+
+M22 value of the matrix.
+
+**offsetX `number`**
+
+M31 value of the matrix.
+
+**offsetY `number`**
+
+M32 value of the matrix.
+
+
+<a id="markdown-transformgroup" name="transformgroup"></a>
+#### TransformGroup
+
+```TypeScript
+class TransformGroup extends Transform
+```
+
+**children [`Transform[]`](#transform)**
+
+Combines multiple transformations into one by multiplying their matrices. As matrix multiplication is not commutative, the order of the child matrices is important.
 
 <a id="markdown-geometry" name="geometry"></a>
 ### Geometry
+
+<a id="markdown-content-3" name="content-3"></a>
+#### Content
+
+- [Geometry](#geometry-1)
+- [FillRule](#fillrule)
+- [GeometryCombineMode](#geometrycombinemode)
+- [LineGeometry](#linegeometry)
+- [RectangleGeometry](#rectanglegeometry)
+- [EllipseGeometry](#ellipsegeometry)
+- [PathGeometry](#pathgeometry)
+    - [PathFigure](#pathfigure)
+    - [PathSegment](#pathsegment)
+        - [ArcSegment](#arcsegment)
+        - [LineSegment](#linesegment)
+        - [BezierSegment](#beziersegment)
+        - [QuadraticBezierSegment](#quadraticbeziersegment)
+        - [PolyLineSegment](#polylinesegment)
+        - [PolyBezierSegment](#polybeziersegment)
+        - [PolyQuadraticBezierSegment](#polyquadraticbeziersegment)
+- [GeometryGroup](#geometrygroup)
+- [CombinedGeometry](#combinedgeometry)
+
+<a id="markdown-geometry-1" name="geometry-1"></a>
+#### Geometry
 
 ```TypeScript
 abstract class Geometry
@@ -543,7 +1317,7 @@ abstract class Geometry
 
 Geometries can be used for drawing and clipping. Multiple geometries can be combined using the GroupGeometry or CombinedGeometry classes.
 
-**transform `Transform?`**
+**transform [`Transform?`](#transform)**
 
 All geometries can have a transformation. The default value is the identity transform.
 
@@ -558,16 +1332,16 @@ Determines how overlapping geometries are filled.
 
 **`evenOdd` (default)**
 
-<img class="smallImage" src="gfx/evenOdd.svg">
+<img class="framed smallImage" src="gfx/evenOdd.svg">
 
-Fills all areas that are overlapped by an odd number of geometries.
+Fills the area that is overlapped by an odd number of geometries.
 <br><br><br>
 
 **`nonZero`**
 
-<img class="smallImage" src="gfx/nonZero.svg">
+<img class=" framed smallImage" src="gfx/nonZero.svg">
 
-Fills all areas that are overlapped by at least one geometry. 
+Fills the area that is overlapped by at least one geometry. 
 <br><br><br>
 
 <a id="markdown-geometrycombinemode" name="geometrycombinemode"></a>
@@ -579,33 +1353,33 @@ enum GeometryCombineMode
 
 Determines how two geometries are combined.
 
-**`union` (default)**
+**`union` (default)** 
 
-<img class="smallImage" src="gfx/union.svg">
+<img class="smallImage framed" src="gfx/union.svg">
 
 The resulting geometry is the area that is overlapped by the first or second geometry or both.
-<br><br>
+<br><br><br>
 
 **`intersect`**
 
-<img class="smallImage" src="gfx/intersect.svg">
+<img class="smallImage framed" src="gfx/intersect.svg">
 
 The resulting geometry is the area that is overlapped by both geometries.
-<br><br>
+<br><br><br>
 
 **`xor`**
 
-<img class="smallImage" src="gfx/xor.svg">
+<img class="smallImage framed" src="gfx/xor.svg">
 
 The resulting geometry is the area that is overlapped by the first or second geometry, but not both.
-<br><br>
+<br><br><br>
 
 **`exclude`**
 
-<img class="smallImage" src="gfx/exclude.svg">
+<img class="smallImage framed" src="gfx/exclude.svg">
 
 The second geometry is subtracted from the first. 
-<br><br>
+<br><br><br>
 
 <a id="markdown-linegeometry" name="linegeometry"></a>
 #### LineGeometry
@@ -720,9 +1494,9 @@ Path segments define one or more points that describe a line or curve. Following
 class ArcSegment extends PathSegment
 ```
 
-Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first the the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:
+Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:
 
-<img style="margin-left:20px;margin-right:20px; width:256px; height:auto;" src="gfx/arcSegment.svg">
+<img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
 
 
 * <font color="#56abff">blue:</font> arcType `small`, sweepDirection `counterclockwise`
@@ -881,6 +1655,18 @@ Determines how the two geometries are combined into one single geometry.
 <a id="markdown-pens-and-brushes" name="pens-and-brushes"></a>
 ### Pens and Brushes
 
+<a id="markdown-content-4" name="content-4"></a>
+#### Content
+
+- [Color](#color)
+- [Brush](#brush)
+    - [SolidColorBrush](#solidcolorbrush)
+    - [LinearGradientBrush](#lineargradientbrush)
+    - [RadialGradientBrush](#radialgradientbrush)
+- [Pen](#pen)
+    - [LineCap](#linecap)
+    - [LineJoin](#linejoin)
+
 <a id="markdown-color" name="color"></a>
 #### Color
 
@@ -1027,19 +1813,21 @@ Determines the geometry at the start and/or end of a line.
 
 **`flat`**
 
-<img style="float: left;margin-left:20px;margin-right:20px" src="gfx/penLineCapFlat.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapFlat.svg">
 
 No extra geometry is added.
+<br><br>
 
 **`round`**
 
-<img style="float: left;margin-left:20px;margin-right:20px" src="gfx/penLineCapRound.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapRound.svg">
 
-Adds a half circle with the diameter of the pens thickness.
+Adds a half circle with a diameter that is equal to the pens thickness.
+<br><br>
 
 **`square`**
 
-<img style="float: left;margin-left:20px;margin-right:20px" src="gfx/penLineCapSquare.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapSquare.svg">
 
 Adds a half square with the side length of the pens thickness.
 
@@ -1056,26 +1844,42 @@ Determines the geometry between two linear segments of a line.
 
 **`bevel`**
 
-<img style="float: left;margin-left:20px;margin-right:20px" src="gfx/penLineJoinBevel.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinBevel.svg">
 
 Adds a triangle that connects the two non-overlapping points of the lines.
-
+<br><br><br>
 **`miter`**
 
-<img style="float: left;margin-left:20px;margin-right:20px" src="gfx/penLineJoinMiter.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinMiter.svg">
 
 Extends the outlines of the two lines until they cut each other, and fills the enclosed area.
-
+<br><br><br>
 **`round`**
 
-<img style="float: left;margin-left:20px;margin-right:20px" src="gfx/penLineJoinRound.svg">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinRound.svg">
 
-Creates a circle around the cutting point with the radius of half the pens thickness.
+Creates a circle around the cutting point with a diameter that is equal to the pens thickness.
 
 <br>
 
 <a id="markdown-text" name="text"></a>
 ### Text
+
+<a id="markdown-content-5" name="content-5"></a>
+#### Content
+
+- [FormattedText](#formattedtext)
+- [FlowDirection](#flowdirection)
+- [TextAlignment](#textalignment)
+- [TextTrimming](#texttrimming)
+- [TextMeasurements](#textmeasurements)
+- [TextDrawingSettings](#textdrawingsettings)
+- [HorizontalTextAnchor](#horizontaltextanchor)
+- [VerticalTextAnchor](#verticaltextanchor)
+- [Font](#font)
+- [FontWeight](#fontweight)
+- [FontStyle](#fontstyle)
+- [FontStretch](#fontstretch)
 
 <a id="markdown-formattedtext" name="formattedtext"></a>
 #### FormattedText
@@ -1096,18 +1900,266 @@ The font that describes how the text is rendered
 
 **maxTextWidth `number`**
 
-Determines after how many millimeters the text is supposed to wrap.
+Determines the width of the boundaries and therefore, after how many millimeters the text is supposed to wrap.
 
 **maxTextHeight `number`**
 
-Determines, how many lines of text can be rendered. The specified text will be wrapped until the specified `maxTextHeight` is reached. The last line will then either be cut off or rendered will ellipsis, depending on the specified font.
+Determines the height of the boundaries and therefore, how many lines of text can be rendered. The specified text will be wrapped until the specified `maxTextHeight` is reached. The last line will then either be cut off or rendered will ellipsis, depending on the specified `textTrimming`.
+
+**flowDirection [`FlowDirection`](#flowdirection)**
+
+Determines the text flow, which can be different among certain cultures.
+
+**textAlignment [`TextAlignment`](#textalignment)**
+
+Determines how text is arranged inside the boundaries.
+
+**textTrimming [`TextTrimming`](#texttrimming)**
+
+Determines how text is treated, that doesn't fit into the specified boundaries.
+
+**measure [`TextMeasurements`](#textmeasurements)**
+
+```TypeScript
+function measure() : TextMeasurements
+```
+
+Measures the formatted text and returns a  [`TextMeasurements`](#textmeasurements) object that contains information about the final size and layout.
+
+<a id="markdown-flowdirection" name="flowdirection"></a>
+#### FlowDirection
+
+```TypeScript
+enum FlowDirection
+```
+
+Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the [`TextAlignment`](#textalignment), the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.
+
+**`leftToRight` (default)**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.svg">
+
+Layouting starts at the left boundary.
+
+<br>
+
+**`rightToLeft`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/rightToLeft.svg">
+
+Layouting starts at the right boundary.
+
+<br>
+
+<a id="markdown-textalignment" name="textalignment"></a>
+#### TextAlignment
+
+```TypeScript
+enum TextAlignment
+```
+
+Determines how text is arranged inside the boundaries that are defined by width and height. In case no boundaries are defined, the text alignment also determines the position of the text relative to the anchor.
+
+**`left` (default)**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignLeft.svg">
+
+Aligns text to the left boundary.
+
+<br>
+
+**`right`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignRight.svg">
+
+Aligns text to the right boundary.
+
+<br>
+
+**`center`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignCenter.svg">
+
+Aligns text centered between the left and the right boundaries.
+
+<br>
+
+**`justify`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignJustify.svg">
+
+Increases the size of the whitespaces until the text fits between the left and right boundary.
+
+<br>
+
+<a id="markdown-texttrimming" name="texttrimming"></a>
+#### TextTrimming
+
+```TypeScript
+enum TextTrimming
+```
+
+Determines what happens when the text exceeds the size of the boundaries. In case no boundaries are defined, the text trimming has no effect. When the length of a text reaches the `maxTextWidth`, a line break will be inserted in case the `maxTextHeight` allows another line of text. If this is not the case, the text will be cut of, in the way the text trimming describes. A text like **'lorem ipsum'** would be formatted like the following: 
+
+**`none` (default)**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingNone.svg">
+
+The text will be trimmed at a whitespace if possible, otherwise in a word. No ellipsis are shown.
+
+<br>
+
+**`wordEllipsis`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingWordEllipsis.svg">
+
+The text will be trimmed at a whitespace if possible, otherwise in a word, and ellipsis will be shown.
+
+<br>
+
+**`characterEllipsis`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingCharacterEllipsis.svg">
+
+The text will be trimmed in a word, and ellipsis will be shown.
+
+<br>
+
+
+<a id="markdown-textmeasurements" name="textmeasurements"></a>
+#### TextMeasurements
+
+```TypeScript
+class TextMeasurements
+```
+
+Describes the final size and layout of a formatted text.
+
+**baseline `number`**
+
+The distance between the top and the baseline of the first line of text.
+
+**height `number`**
+
+The overall height.
+
+**lineHeight `number`**
+
+The height of a single line of text.
+
+**minWidth `number`**
+
+The actual width of the text itself, excluding leading and trailing whitespace from layouting.
+
+**width `number`**
+
+The overall width, including the possible leading and trailing whitespace from layouting.
+
+<a id="markdown-textdrawingsettings" name="textdrawingsettings"></a>
+#### TextDrawingSettings
+
+```TypeScript
+class TextDrawingSettings
+```
+
+**position [`Point`](#point)**
+
+The position at which the text should be placed.
+
+**anchorX [`HorizontalTextAnchor | undefined`](#horizontaltextanchor)**
+
+Determines how the text is arranged horizontally relative to the position.
+
+**anchorY [`VerticalTextAnchor | undefined`](#verticaltextanchor)**
+
+Determines how the text is arranged vertically relative to the position.
+
+<a id="markdown-horizontaltextanchor" name="horizontaltextanchor"></a>
+#### HorizontalTextAnchor
+
+```TypeScript
+class HorizontalTextAnchor
+```
+
+Determines how the whole text is arranged horizontally relative to the text position.
+
+**`default` (default)**
+
+Arranges the text according the [`TextAlignment`](#textalignment) and the specified size of the bounding box.
+
+**`left`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorLeft.svg">
+
+Places the anchor point on the left side of the bounding box.
+
+<br>
+
+**`right`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorRight.svg">
+
+Places the anchor point on the right side of the bounding box.
+
+<br>
+
+**`center`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorCenter.svg">
+
+Places the anchor at the center of the bounding box.
+
+<br>
+
+<a id="markdown-verticaltextanchor" name="verticaltextanchor"></a>
+#### VerticalTextAnchor
+
+```TypeScript
+class VerticalTextAnchor
+```
+
+Determines how the whole text is arranged vertically relative to the text position.
+
+**`top` (default)**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorTop.svg">
+
+Places the anchor point on the top of the bounding box.
+
+<br>
+
+**`bottom`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBottom.svg">
+
+Places the anchor point on the bottom of the bounding box.
+
+<br>
+
+**`center`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorVerticalCenter.svg">
+
+Places the anchor at the center of the bounding box.
+
+<br>
+
+**`baseline`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBaseline.svg">
+
+Places the anchor at the height of the baseline of the first line of text. The baseline anchor looks most natural when aligning text to certain positions, e.g. the lines of a scale.
+
+<br>
 
 <a id="markdown-font" name="font"></a>
-### Font
+#### Font
 
 ```TypeScript
 class Font
 ```
+
+
 
 Describes how a text is displayed
 
@@ -1158,7 +2210,7 @@ The font weight is used to display letters bolder or thinner. Most fonts only su
 | **`ExtraBlack`**|**950**|
 
 <a id="markdown-fontstyle" name="fontstyle"></a>
-##### FontStyle 
+#### FontStyle 
 
 ```TypeScript
 enum FontStyle
@@ -1176,10 +2228,10 @@ Some fonts have a built in italic letter set, which can be used by specifying th
 
 **`Oblique`**
 
-For fonts which have no built in italic letter set, the oblique font style allows to apply a skew transform to the normal font to make it look cursive. The italic style will usually look more pleasing though.
+For fonts which have no built in italic letter set, the oblique font style allows to apply a [`ShearTransform`](#sheartransform) to the normal font to make it look cursive. The italic style will usually look more pleasing though.
 
 <a id="markdown-fontstretch" name="fontstretch"></a>
-##### FontStretch
+#### FontStretch
 
 ```TypeScript
 enum FontStretch
@@ -1285,15 +2337,17 @@ The list of attributes that belong to this attribute item.
 **getValue `string | number | Date | undefined`**
 
 ```TypeScript
-function getValue(key: number): string | number | Date | undefined
+function getValue(
+    key: number
+): string | number | Date | undefined
 ```
 
 Returns the value that corresponds to the specified attribute key. In case the attribute was not found the function returns `undefined`.
 
-<a id="markdown-configuration-interface" name="configuration-interface"></a>
-### Configuration Interface
+<a id="markdown-configuration" name="configuration"></a>
+### Configuration
 
-Use the following function to get the database configuration from the piweb server. 
+Use the following function to get the database configuration from the  server. 
 
 **getConfiguration [`Configuration`](#configuration)**
 
@@ -1301,7 +2355,7 @@ Use the following function to get the database configuration from the piweb serv
 function getConfiguration() : Configuration
 ```
 
-<a id="markdown-configuration" name="configuration"></a>
+<a id="markdown-configuration-1" name="configuration-1"></a>
 #### Configuration
 
 ```TypeScript
@@ -1386,10 +2440,10 @@ The entity type this attribute belongs to.
 
 In case the `dataType` is `Catalog`, this field contains a base64 encoded guid that identifies the **[`Catalog`](#catalog)** that is used by this attribute.
 
-<a id="markdown-catalog-interface" name="catalog-interface"></a>
-### Catalog Interface
+<a id="markdown-catalogs" name="catalogs"></a>
+### Catalogs
 
-Use the following function to get the catalogs that are configured in the the piweb server. Catalogs are identified by a `Guid`, which is stored as a base64 encoded byte array. 
+Use the following function to get the catalogs that are configured in the the  server. Catalogs are identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 **getCatalogs [`Map<string, Catalog>`](#catalog)**
 
@@ -1507,15 +2561,17 @@ The name of the part or characteristic that is represented by this path element.
 
 The type of the inspection plan item that is represented by this path element.
 
-<a id="markdown-measurement-interface" name="measurement-interface"></a>
-### Measurement Interface
+<a id="markdown-measurements" name="measurements"></a>
+### Measurements
 
 Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in the PiWeb Designer. Every measurement is identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 **getMeasurements [`Map<string, Measurement>`](#measurement)**
 
 ```TypeScript
-function getMeasurements(mode: MeasurementMode) : Map<string, InspectionPlanItem>;
+function getMeasurements(
+    mode: MeasurementMode
+) : Map<string, InspectionPlanItem>;
 ```
 
 <a id="markdown-measurementmode" name="measurementmode"></a>
@@ -1567,13 +2623,83 @@ class MeasurementValue extends AttributeItem
 
 The uuid that identifies the characteristic this measurement value is associated to.
 
-<a id="markdown-system-variable-interface" name="system-variable-interface"></a>
-### System Variable Interface
+<a id="markdown-raw-data" name="raw-data"></a>
+### Raw Data
+
+Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measurement values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine. Because of this reason, the `RawDataItem` is located in the `host` module.
+
+```TypeScript
+import * as host from 'piweb_host';
+function getRawData() : host.RawDataItem[];
+```
+
+<a id="markdown-entitytype-1" name="entitytype-1"></a>
+#### EntityType
+
+```TypeScript
+enum EntityType;
+```
+
+Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to. 
+
+| Type | Entity |
+|----|----|
+| **`Unknown`** | Unknown origin |
+| **`Part`** | Additional data of an inspection plan part |
+| **`Characteristic`** | Additional data of an inspection plan characteristic |
+| **`Measurement`** | Additional data of a measurement |
+| **`MeasurementValue`** | Additional data of a measurement value |
+
+<a id="markdown-rawdataitem" name="rawdataitem"></a>
+#### RawDataItem
+
+```TypeScript
+class RawDataItem;
+```
+
+Describes the information about a single raw data entry on the  server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
+
+**entityType [`EntityType`](#entitytype)**
+
+Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to. 
+
+**name `string`**
+
+The filename of the item.
+
+**size `number`**
+
+The size of the item in bytes.
+
+**mimeType `string`**
+
+The mimetype of the item.
+
+**md5Bytes `Buffer`**
+
+A buffer of 16 bytes length, containing the datas MD5 hash. 
+
+**created `Date`**
+
+The timestamp when the data has been uploaded to the  server.
+
+**lastModified `Date`**
+
+The timestamp of the most recent modification.
+
+**readDataSync() `host.HostBinary`**
+
+Use this function to actually fetch the data associated to the `RawDataItem`. The data is returned as a `HostBuffer`, which can be converted to a `Buffer` using the `makeBuffer` function.
+
+<a id="markdown-system-variables" name="system-variables"></a>
+### System Variables
 
 Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the `dataChange` event occured.
 
 ```TypeScript
-getSystemVariable(expression: string): undefined | string | number | Date | Array<any>;
+function getSystemVariable(
+    expression: string
+): undefined | string | number | Date | Array<any>;
 ```
 
 Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype.
@@ -1602,7 +2728,7 @@ function createTooltipShapes(): piweb.tooltips.TooltipShapeCollection {
 }
 ```
 
-<a id="markdown-classes" name="classes"></a>
+<a id="markdown-classes-1" name="classes-1"></a>
 ### Classes
 
 <a id="markdown-tooltipshapecollection" name="tooltipshapecollection"></a>
@@ -1664,4 +2790,61 @@ Describes a tooltip shape that spans over an area, described by the `geometry` p
 **shape [`Geometry`](#geometry)**
 
 The geometry of the tooltip shape.
- 
+
+<a id="markdown-logging" name="logging"></a>
+## Logging
+
+The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a **significant performance impact**.
+
+```TypeScript
+import * as piweb from 'piweb'
+
+piweb.log.debug("My log message");
+```
+
+<a id="markdown-methods-1" name="methods-1"></a>
+### Methods
+
+**error `void`**
+
+```TypeScript
+function error(
+    format: any,
+    ...param: any[]
+) : void;
+```
+
+Generates a log message with the `error` log level.
+
+**warn `void`**
+
+```TypeScript
+function warn(
+    format: any,
+    ...param: any[]
+) : void;
+```
+
+Generates a log message with the `warning` log level.
+
+**info `void`**
+
+```TypeScript
+function info(
+    format: any,
+    ...param: any[]
+) : void;
+```
+
+Generates a log message with the `info` log level.
+
+**debug `void`**
+
+```TypeScript
+function debug(
+    format: any,
+    ...param: any[]
+) : void;
+```
+
+Generates a log message with the `debug` log level.
