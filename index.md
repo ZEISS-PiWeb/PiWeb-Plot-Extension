@@ -118,26 +118,37 @@
         - [FontStretch](#fontstretch)
 - [Data Provider](#data-provider)
     - [Common](#common-1)
+        - [Content](#content-6)
         - [AttributeType](#attributetype)
         - [Attribute](#attribute)
         - [AttributeItem](#attributeitem)
     - [Configuration](#configuration)
+        - [Content](#content-7)
+        - [Usage](#usage)
         - [Configuration](#configuration-1)
         - [EntityType](#entitytype)
         - [AttributeDefinition](#attributedefinition)
     - [Catalogs](#catalogs)
+        - [Content](#content-8)
+        - [Usage](#usage-1)
         - [Catalog](#catalog)
         - [CatalogEntry](#catalogentry)
     - [Inspection Plan](#inspection-plan)
+        - [Content](#content-9)
+        - [Usage](#usage-2)
         - [InspectionPlanItemType](#inspectionplanitemtype)
         - [InspectionPlanPath](#inspectionplanpath)
         - [InspectionPlanItem](#inspectionplanitem)
         - [PathElement](#pathelement)
     - [Measurements](#measurements)
+        - [Content](#content-10)
+        - [Usage](#usage-3)
         - [MeasurementMode](#measurementmode)
         - [Measurement](#measurement)
         - [MeasurementValue](#measurementvalue)
     - [Raw Data](#raw-data)
+        - [Content](#content-11)
+        - [Usage](#usage-4)
         - [EntityType](#entitytype-1)
         - [RawDataItem](#rawdataitem)
     - [System Variables](#system-variables)
@@ -2384,6 +2395,13 @@ function loadData() {
 <a id="markdown-common-1" name="common-1"></a>
 ### Common
 
+<a id="markdown-content-6" name="content-6"></a>
+#### Content
+
+- [AttributeType](#attributetype)
+- [Attribute](#attribute)
+- [AttributeItem](#attributeitem)
+
 <a id="markdown-attributetype" name="attributetype"></a>
 #### AttributeType
 
@@ -2459,6 +2477,16 @@ Returns the value that corresponds to the specified attribute key. In case the a
 
 <a id="markdown-configuration" name="configuration"></a>
 ### Configuration
+
+<a id="markdown-content-7" name="content-7"></a>
+#### Content
+
+- [Configuration](#configuration-1)
+- [EntityType](#entitytype)
+- [AttributeDefinition](#attributedefinition)
+
+<a id="markdown-usage" name="usage"></a>
+#### Usage
 
 Use the following function to get the database configuration from the  server. 
 
@@ -2556,6 +2584,15 @@ In case the `dataType` is `Catalog`, this field contains a base64 encoded guid t
 <a id="markdown-catalogs" name="catalogs"></a>
 ### Catalogs
 
+<a id="markdown-content-8" name="content-8"></a>
+#### Content
+
+- [Catalog](#catalog)
+- [CatalogEntry](#catalogentry)
+
+<a id="markdown-usage-1" name="usage-1"></a>
+#### Usage
+
 Use the following function to get the catalogs that are configured in the the  server. Catalogs are identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 **getCatalogs [`Map<string, Catalog>`](#catalog)**
@@ -2601,6 +2638,17 @@ A 16 bit integer that identifies the catalog entry. When accessing an attribute 
 
 <a id="markdown-inspection-plan" name="inspection-plan"></a>
 ### Inspection Plan
+
+<a id="markdown-content-9" name="content-9"></a>
+#### Content
+
+- [InspectionPlanItemType](#inspectionplanitemtype)
+- [InspectionPlanPath](#inspectionplanpath)
+- [InspectionPlanItem](#inspectionplanitem)
+- [PathElement](#pathelement)
+
+<a id="markdown-usage-2" name="usage-2"></a>
+#### Usage
 
 **getInspectionPlan [`Map<string, InspectionPlanItem>`](#inspectionplanitem)**
 
@@ -2677,6 +2725,16 @@ The type of the inspection plan item that is represented by this path element.
 <a id="markdown-measurements" name="measurements"></a>
 ### Measurements
 
+<a id="markdown-content-10" name="content-10"></a>
+#### Content
+
+- [MeasurementMode](#measurementmode)
+- [Measurement](#measurement)
+- [MeasurementValue](#measurementvalue)
+
+<a id="markdown-usage-3" name="usage-3"></a>
+#### Usage
+
 Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in the PiWeb Designer. Every measurement is identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 **getMeasurements [`Map<string, Measurement>`](#measurement)**
@@ -2738,6 +2796,15 @@ The uuid that identifies the characteristic this measurement value is associated
 
 <a id="markdown-raw-data" name="raw-data"></a>
 ### Raw Data
+
+<a id="markdown-content-11" name="content-11"></a>
+#### Content
+
+- [EntityType](#entitytype-1)
+- [RawDataItem](#rawdataitem)
+
+<a id="markdown-usage-4" name="usage-4"></a>
+#### Usage
 
 Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measurement values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine. Because of this reason, the `RawDataItem` is located in the `host` module.
 
@@ -2843,6 +2910,11 @@ function createTooltipShapes(): piweb.tooltips.TooltipShapeCollection {
 
 <a id="markdown-classes-1" name="classes-1"></a>
 ### Classes
+
+- [TooltipShapeCollection](#tooltipshapecollection)
+- [TooltipShape](#tooltipshape)
+- [TooltipPointShape](#tooltippointshape)
+- [TooltipGeometryShape](#tooltipgeometryshape)
 
 <a id="markdown-tooltipshapecollection" name="tooltipshapecollection"></a>
 #### TooltipShapeCollection
