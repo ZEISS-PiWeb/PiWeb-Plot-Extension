@@ -1,45 +1,156 @@
+<html>
+<head>   
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.4.1/dist/bootstrap-toc.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="col-md-3">
+    <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+</div>
+<div class="col-md-6 content">
+
 # PiWeb Custom Plot
 
-<img style="display: block; margin: auto;" src="gfx/Logo.png" >
-
+<img style="display: block; margin: auto;" src="gfx/logo.png" >
+<div style="display:none">
+<!-- TOC -->
 
 - [Quickstart](#quickstart)
 - [Package Definition](#package-definition)
     - [Localization](#localization)
     - [Dictionaries](#dictionaries)
     - [Enumerations](#enumerations)
-    - [Package Format](#package-format)       
+    - [Package Format](#package-format)
+        - [Structure](#structure)
+        - [Top Level Properties](#top-level-properties)
+        - [Engines](#engines)
+        - [PiWeb Actions](#piweb-actions)
+        - [PiWeb Extensions](#piweb-extensions)
+        - [Toolbox Properties](#toolbox-properties)
+            - [Toolbox Categories](#toolbox-categories)
+            - [Toolbox Items](#toolbox-items)
+                - [Element Size](#element-size)
+        - [Propertygrid Properties](#propertygrid-properties)
+            - [Propertygrid Categories](#propertygrid-categories)
+            - [Propertygrid Entries](#propertygrid-entries)
+                - [Option Properties](#option-properties)
 - [PiWeb Interface](#piweb-interface)
     - [Basic Functions](#basic-functions)
     - [Environment](#environment)
     - [Properties](#properties)
 - [Localization](#localization-1)
-    - [Enumerations](#enumerations-1)      
-    - [Classes](#classes)      
+    - [Enumerations](#enumerations-1)
+        - [DateKind](#datekind)
+    - [Classes](#classes)
+        - [CultureInfo](#cultureinfo)
+        - [RegionInfo](#regioninfo)
     - [Methods](#methods)
 - [Drawing](#drawing)
     - [Interfaces](#interfaces)
-    - [Common](#common)       
-    - [Drawing](#drawing-1)       
-    - [Transform](#transform)        
-    - [Geometry](#geometry)        
-    - [Pens and Brushes](#pens-and-brushes)       
-    - [Text](#text)       
+    - [Common](#common)
+        - [Content](#content)
+        - [Point](#point)
+        - [Size](#size)
+    - [Drawing](#drawing-1)
+        - [Content](#content-1)
+        - [Drawing](#drawing-2)
+        - [DrawingContext](#drawingcontext)
+    - [Transform](#transform)
+        - [Content](#content-2)
+        - [Transform](#transform-1)
+        - [TranslationTransform](#translationtransform)
+        - [RotationTransform](#rotationtransform)
+        - [ScalingTransform](#scalingtransform)
+        - [ShearTransform](#sheartransform)
+        - [MatrixTransform](#matrixtransform)
+        - [TransformGroup](#transformgroup)
+    - [Geometry](#geometry)
+        - [Content](#content-3)
+        - [Geometry](#geometry-1)
+        - [FillRule](#fillrule)
+        - [GeometryCombineMode](#geometrycombinemode)
+        - [LineGeometry](#linegeometry)
+        - [RectangleGeometry](#rectanglegeometry)
+        - [EllipseGeometry](#ellipsegeometry)
+        - [PathGeometry](#pathgeometry)
+            - [PathFigure](#pathfigure)
+            - [PathSegment](#pathsegment)
+                - [ArcSegment](#arcsegment)
+                - [LineSegment](#linesegment)
+                - [BezierSegment](#beziersegment)
+                - [QuadraticBezierSegment](#quadraticbeziersegment)
+                - [PolyLineSegment](#polylinesegment)
+                - [PolyBezierSegment](#polybeziersegment)
+                - [PolyQuadraticBezierSegment](#polyquadraticbeziersegment)
+        - [GeometryGroup](#geometrygroup)
+        - [CombinedGeometry](#combinedgeometry)
+    - [Pens and Brushes](#pens-and-brushes)
+        - [Content](#content-4)
+        - [Color](#color)
+        - [Brush](#brush)
+            - [SolidColorBrush](#solidcolorbrush)
+            - [LinearGradientBrush](#lineargradientbrush)
+            - [RadialGradientBrush](#radialgradientbrush)
+        - [Pen](#pen)
+            - [LineCap](#linecap)
+            - [LineJoin](#linejoin)
+    - [Text](#text)
+        - [Content](#content-5)
+        - [FormattedText](#formattedtext)
+        - [FlowDirection](#flowdirection)
+        - [TextAlignment](#textalignment)
+        - [TextTrimming](#texttrimming)
+        - [TextMeasurements](#textmeasurements)
+        - [TextDrawingSettings](#textdrawingsettings)
+        - [HorizontalTextAnchor](#horizontaltextanchor)
+        - [VerticalTextAnchor](#verticaltextanchor)
+        - [Font](#font)
+        - [FontWeight](#fontweight)
+        - [FontStyle](#fontstyle)
+        - [FontStretch](#fontstretch)
 - [Data Provider](#data-provider)
-    - [Common](#common-1)       
-    - [Configuration](#configuration)        
-    - [Catalogs](#catalogs)       
-    - [Inspection Plan](#inspection-plan-interface)        
-    - [Measurements](#measurements)      
-    - [Raw Data](#raw-data)      
+    - [Common](#common-1)
+        - [AttributeType](#attributetype)
+        - [Attribute](#attribute)
+        - [AttributeItem](#attributeitem)
+    - [Configuration](#configuration)
+        - [Configuration](#configuration-1)
+        - [EntityType](#entitytype)
+        - [AttributeDefinition](#attributedefinition)
+    - [Catalogs](#catalogs)
+        - [Catalog](#catalog)
+        - [CatalogEntry](#catalogentry)
+    - [Inspection Plan Interface](#inspection-plan-interface)
+        - [InspectionPlanItemType](#inspectionplanitemtype)
+        - [InspectionPlanPath](#inspectionplanpath)
+        - [InspectionPlanItem](#inspectionplanitem)
+        - [PathElement](#pathelement)
+    - [Measurements](#measurements)
+        - [MeasurementMode](#measurementmode)
+        - [Measurement](#measurement)
+        - [MeasurementValue](#measurementvalue)
+    - [Raw Data](#raw-data)
+        - [EntityType](#entitytype-1)
+        - [RawDataItem](#rawdataitem)
     - [System Variables](#system-variables)
 - [Tooltips](#tooltips)
     - [Introduction](#introduction)
-    - [Classes](#classes-1)        
+    - [Classes](#classes-1)
+        - [TooltipShapeCollection](#tooltipshapecollection)
+        - [TooltipShape](#tooltipshape)
+        - [TooltipPointShape](#tooltippointshape)
+        - [TooltipGeometryShape](#tooltipgeometryshape)
 - [Logging](#logging)
     - [Methods](#methods-1)
 
 <!-- /TOC -->
+</div>
 
 <a id="markdown-quickstart" name="quickstart"></a>
 ## Quickstart
@@ -1158,7 +1269,7 @@ class TranslationTransform extends Transform
 
 Moves an object in horizontal and vertical direction.
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/translateTransform.png">
+<img class="framed" style="width:auto; height:128px;" src="gfx/translateTransform.svg">
 
 **x `number`**
 
@@ -1177,7 +1288,7 @@ class RotationTransform extends Transform
 
 Rotates an object around a specific point.
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/rotateTransform.png">
+<img class="framed" style="width:auto; height:128px;" src="gfx/rotateTransform.svg">
 
 **angle `number`**
 
@@ -1196,7 +1307,7 @@ class ScalingTransform extends Transform
 
 Scales an object in horizontal and vertical direction
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.png">
+<img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.svg">
 
 **scaleX `number`**
 
@@ -1219,7 +1330,7 @@ class ShearTransform extends Transform
 
 Describes a transformation that can be used to create the illusion of perspective. 
 
-<img class="framed" style="width:auto; height:128px;" src="gfx/skewTransform.png">
+<img class="framed" style="width:auto; height:128px;" src="gfx/skewTransform.svg">
 
 **angleX `number`**
 
@@ -1332,14 +1443,14 @@ Determines how overlapping geometries are filled.
 
 **`evenOdd` (default)**
 
-<img class="framed smallImage" height="48" src="gfx/evenOdd.png">
+<img class="framed smallImage" src="gfx/evenOdd.svg">
 
 Fills the area that is overlapped by an odd number of geometries.
 <br><br><br>
 
 **`nonZero`**
 
-<img class=" framed smallImage" height="48" src="gfx/nonZero.png">
+<img class=" framed smallImage" src="gfx/nonZero.svg">
 
 Fills the area that is overlapped by at least one geometry. 
 <br><br><br>
@@ -1355,28 +1466,28 @@ Determines how two geometries are combined.
 
 **`union` (default)** 
 
-<img class="smallImage framed" height="48" src="gfx/union.png">
+<img class="smallImage framed" src="gfx/union.svg">
 
 The resulting geometry is the area that is overlapped by the first or second geometry or both.
 <br><br><br>
 
 **`intersect`**
 
-<img class="smallImage framed" height="48" src="gfx/intersect.png">
+<img class="smallImage framed" src="gfx/intersect.svg">
 
 The resulting geometry is the area that is overlapped by both geometries.
 <br><br><br>
 
 **`xor`**
 
-<img class="smallImage framed" height="48" src="gfx/xor.png">
+<img class="smallImage framed" src="gfx/xor.svg">
 
 The resulting geometry is the area that is overlapped by the first or second geometry, but not both.
 <br><br><br>
 
 **`exclude`**
 
-<img class="smallImage framed" height="48" src="gfx/exclude.png">
+<img class="smallImage framed" src="gfx/exclude.svg">
 
 The second geometry is subtracted from the first. 
 <br><br><br>
@@ -1496,7 +1607,7 @@ class ArcSegment extends PathSegment
 
 Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:
 
-<img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.png">
+<img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
 
 
 * <font color="#56abff">blue:</font> arcType `small`, sweepDirection `counterclockwise`
@@ -1813,21 +1924,21 @@ Determines the geometry at the start and/or end of a line.
 
 **`flat`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineCapFlat.png">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapFlat.svg">
 
 No extra geometry is added.
 <br><br>
 
 **`round`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineCapRound.png">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapRound.svg">
 
 Adds a half circle with a diameter that is equal to the pens thickness.
 <br><br>
 
 **`square`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineCapSquare.png">
+<img class="smallimage framed" style="float: left" src="gfx/penLineCapSquare.svg">
 
 Adds a half square with the side length of the pens thickness.
 
@@ -1844,19 +1955,19 @@ Determines the geometry between two linear segments of a line.
 
 **`bevel`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineJoinBevel.png">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinBevel.svg">
 
 Adds a triangle that connects the two non-overlapping points of the lines.
 <br><br><br>
 **`miter`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineJoinMiter.png">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinMiter.svg">
 
 Extends the outlines of the two lines until they cut each other, and fills the enclosed area.
 <br><br><br>
 **`round`**
 
-<img class="smallimage framed" style="float: left" src="gfx/penLineJoinRound.png">
+<img class="smallimage framed" style="float: left" src="gfx/penLineJoinRound.svg">
 
 Creates a circle around the cutting point with a diameter that is equal to the pens thickness.
 
@@ -1937,7 +2048,7 @@ Determines if the text is layouted from the left to the right or from the right 
 
 **`leftToRight` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.svg">
 
 Layouting starts at the left boundary.
 
@@ -1945,7 +2056,7 @@ Layouting starts at the left boundary.
 
 **`rightToLeft`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/rightToLeft.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/rightToLeft.svg">
 
 Layouting starts at the right boundary.
 
@@ -1962,7 +2073,7 @@ Determines how text is arranged inside the boundaries that are defined by width 
 
 **`left` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignLeft.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignLeft.svg">
 
 Aligns text to the left boundary.
 
@@ -1970,7 +2081,7 @@ Aligns text to the left boundary.
 
 **`right`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignRight.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignRight.svg">
 
 Aligns text to the right boundary.
 
@@ -1978,7 +2089,7 @@ Aligns text to the right boundary.
 
 **`center`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignCenter.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignCenter.svg">
 
 Aligns text centered between the left and the right boundaries.
 
@@ -1986,7 +2097,7 @@ Aligns text centered between the left and the right boundaries.
 
 **`justify`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/alignJustify.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/alignJustify.svg">
 
 Increases the size of the whitespaces until the text fits between the left and right boundary.
 
@@ -2003,7 +2114,7 @@ Determines what happens when the text exceeds the size of the boundaries. In cas
 
 **`none` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingNone.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingNone.svg">
 
 The text will be trimmed at a whitespace if possible, otherwise in a word. No ellipsis are shown.
 
@@ -2011,7 +2122,7 @@ The text will be trimmed at a whitespace if possible, otherwise in a word. No el
 
 **`wordEllipsis`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingWordEllipsis.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingWordEllipsis.svg">
 
 The text will be trimmed at a whitespace if possible, otherwise in a word, and ellipsis will be shown.
 
@@ -2019,7 +2130,7 @@ The text will be trimmed at a whitespace if possible, otherwise in a word, and e
 
 **`characterEllipsis`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingCharacterEllipsis.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/textTrimmingCharacterEllipsis.svg">
 
 The text will be trimmed in a word, and ellipsis will be shown.
 
@@ -2089,7 +2200,7 @@ Arranges the text according the [`TextAlignment`](#textalignment) and the specif
 
 **`left`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorLeft.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorLeft.svg">
 
 Places the anchor point on the left side of the bounding box.
 
@@ -2097,7 +2208,7 @@ Places the anchor point on the left side of the bounding box.
 
 **`right`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorRight.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorRight.svg">
 
 Places the anchor point on the right side of the bounding box.
 
@@ -2105,7 +2216,7 @@ Places the anchor point on the right side of the bounding box.
 
 **`center`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorCenter.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorCenter.svg">
 
 Places the anchor at the center of the bounding box.
 
@@ -2122,7 +2233,7 @@ Determines how the whole text is arranged vertically relative to the text positi
 
 **`top` (default)**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorTop.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorTop.svg">
 
 Places the anchor point on the top of the bounding box.
 
@@ -2130,7 +2241,7 @@ Places the anchor point on the top of the bounding box.
 
 **`bottom`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBottom.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBottom.svg">
 
 Places the anchor point on the bottom of the bounding box.
 
@@ -2138,7 +2249,7 @@ Places the anchor point on the bottom of the bounding box.
 
 **`center`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorVerticalCenter.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorVerticalCenter.svg">
 
 Places the anchor at the center of the bounding box.
 
@@ -2146,7 +2257,7 @@ Places the anchor at the center of the bounding box.
 
 **`baseline`**
 
-<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBaseline.png">
+<img class="framed" style="float: left; height: 48px;" src="gfx/anchorBaseline.svg">
 
 Places the anchor at the height of the baseline of the first line of text. The baseline anchor looks most natural when aligning text to certain positions, e.g. the lines of a scale.
 
@@ -2848,3 +2959,13 @@ function debug(
 ```
 
 Generates a log message with the `debug` log level.
+</div>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v0.4.1/dist/bootstrap-toc.min.js"></script>
+</body>
+</html>
+ 

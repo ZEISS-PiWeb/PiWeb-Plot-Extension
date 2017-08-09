@@ -1,0 +1,16 @@
+{
+  "name": "customplotdoc",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "gulp copy"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-util": "^3.0.8",
+    "jekyll": "^3.0.0-beta1",
+    "marked": "^0.3.6",
+    "systemjs": "^0.20.17"
+  }
+}

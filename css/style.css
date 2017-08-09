@@ -1,0 +1,126 @@
+.content{
+    
+    display: table; 
+    margin:auto;   
+}
+.main {
+    display: table-cell;
+    width: 800px;
+    align-content: center;
+    border-left: 2px solid #f0f0f0;
+    border-right: 2px solid #f0f0f0;
+    background-color: white;
+    padding-left: 64px;
+    padding-right: 64px;
+}
+
+.structure {
+    float:left;
+    position:fixed;
+    overflow: scroll;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin: 24px 0 16px;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 1.6em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    padding-bottom: 0.3em;
+}
+
+h2 {
+    font-weight: 800;
+    font-size: 1.4em;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.36);   
+   padding-bottom: 0.2em;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 1.3em;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+   padding-bottom: 0.1em; 
+}
+
+h4 {
+    font-weight: 600;
+    font-size: 1.2em;    
+}
+
+h5 {
+   font-weight: 600;
+    font-size: 1.2em;    
+}
+
+h6 {
+    font-weight: 600;
+    font-size: 1.2em;    
+}
+
+:not(pre):not(.hljs) > code { 
+    font-family: Consolas,"Courier New",monospace;    
+    background: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+pre.hljs code > div {
+   
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+}
+
+table, p, pre.hljs, blockquote{
+   margin-left: 24px;
+   margin-top: 16px;
+}
+
+img {    
+    margin-left:24px;
+    margin-right:16px;
+}
+.framed{
+    background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+    border-radius: 3px;
+    margin-left:24px;
+    margin-right:16px;
+    padding: 4px;
+}
+.smallImage {   
+    
+    width:auto; 
+    height:48px; 
+    float:left;
+    
+}
+
+.mediumimage {   
+    
+    width:auto; 
+    height:64px; 
+    float:left;
+    
+}
+nav[data-toggle='toc'] {
+  margin-left: 24px;
+  margin-top: 24px;
+}
+
+nav[data-toggle='toc'] .nav>li>a{
+    font-size: 1.2em;
+}
+
+nav[data-toggle='toc'] .nav .nav>li>a{
+    font-size: 1.1em;
+}
+
+.content {
+  
+    background-color: white; 
+}
