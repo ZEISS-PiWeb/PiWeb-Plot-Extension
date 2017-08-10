@@ -24,7 +24,7 @@ In case the `Extensions` folder doesn't exist, you must **create** it first. Now
 <a id="markdown-2-create-the-file-packagejson" name="2-create-the-file-packagejson"></a>
 #### 2. Create the file `package.json`
 
-The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '[Package Definition](#package-definition)'. For now, use the minimum setup shown below.
+The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '[Package Definition](http://https://zeiss-piweb.github.io/PiWeb-Customplot/#package-definition)'. For now, use the minimum setup shown below.
 
 ```json
 {
