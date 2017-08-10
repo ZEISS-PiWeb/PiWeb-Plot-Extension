@@ -77,4 +77,4 @@ When we save all files and start the PiWeb Designer, we should find our extensio
 
 <img class="framed" src="gfx/toolbox_start.png">
 
-For further information, please read the [reference manual](#http://zeiss-piweb.github.io/PiWeb-Customplot).
+For further information, please read the [reference manual](http://zeiss-piweb.github.io/PiWeb-Customplot).
