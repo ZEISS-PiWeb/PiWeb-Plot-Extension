@@ -19,7 +19,12 @@
 <div style="display:none">
 <!-- TOC -->
 <ul>
-<li><a href="#quickstart">Quickstart</a></li>
+<li><a href="#quickstart">Quickstart</a>
+- <a href="#1-create-the-folder-myextension">1. Create the folder <code>MyExtension</code></a>
+- <a href="#2-create-the-file-packagejson">2. Create the file <code>package.json</code></a>
+- <a href="#3-create-the-file-tsconficjson">3. Create the file <code>tsconfic.json</code></a>
+- <a href="#4-create-the-folder-types-and-copy-the-file-piwebdts-into-it">4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</a>
+- <a href="#5-create-the-folder-src-and-create-the-file-indexts-in-it">5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</a></li>
 <li><a href="#package-definition">Package Definition</a>
 <ul>
 <li><a href="#localization">Localization</a></li>
@@ -273,26 +278,14 @@
 <li>In the program data directory <code>%PROGRAMDATA%\Zeiss\PiWeb\Extensions</code></li>
 <li>The <code>Extensions</code> folder in the PiWeb installation directory</li>
 </ul>
-<p>In case the <code>Extensions</code> folder doesn't exist, you must create it first. Now create your own project folder in the extensions folder and name it <code>MyExtension</code>.
-Now, create the following files and folders in your project folder:</p>
+<p>The package structure looks like the following:</p>
 <img class="framed" src="gfx/folder_structure.png"/>
-<p><strong>piweb.d.ts:</strong> Contains the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong>TODO</strong>.</p>
-<p><strong>tsconfic.json:</strong> Contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.</p>
-<pre><code class="language-json">{
-    <span class="hljs-attr">"compilerOptions"</span>: {
-    <span class="hljs-attr">"target"</span>: <span class="hljs-string">"es6"</span>,
-    <span class="hljs-attr">"strictNullChecks"</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">"module"</span>: <span class="hljs-string">"commonjs"</span>,
-    <span class="hljs-attr">"sourceMap"</span>: <span class="hljs-literal">false</span>,
-    <span class="hljs-attr">"moduleResolution"</span>: <span class="hljs-string">"node"</span>,
-    <span class="hljs-attr">"noImplicitAny"</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">"outDir"</span> : <span class="hljs-string">"lib"</span>,       
-    <span class="hljs-attr">"rootDir"</span> : <span class="hljs-string">"src"</span>,
-    <span class="hljs-attr">"typeRoots"</span>: [<span class="hljs-string">"./@types"</span>]
-    }
-}
-</code></pre>
-<p><strong>package.json:</strong> Defines static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '<a href="#package-definition">Package Definition</a>'. For now, use the minimum setup shown below.</p>
+<p><a id="markdown-1-create-the-folder-myextension" name="1-create-the-folder-myextension"></a></p>
+<h4>1. Create the folder <code>MyExtension</code></h4>
+<p>In case the <code>Extensions</code> folder doesn't exist, you must <strong>create</strong> it first. Now <strong>create your project folder</strong> in the extensions folder and name it <code>MyExtension</code>.</p>
+<p><a id="markdown-2-create-the-file-packagejson" name="2-create-the-file-packagejson"></a></p>
+<h4>2. Create the file <code>package.json</code></h4>
+<p>The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '<a href="#package-definition">Package Definition</a>'. For now, use the minimum setup shown below.</p>
 <pre><code class="language-json">{
     <span class="hljs-attr">"name"</span>: <span class="hljs-string">"myextension"</span>,
     <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.2.0"</span>,
@@ -309,7 +302,29 @@ Now, create the following files and folders in your project folder:</p>
     }
 }
 </code></pre>
-<p><strong>index.ts:</strong> This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter <a href="#drawingcontext"><code>DrawingContext</code></a>.</p>
+<p><a id="markdown-3-create-the-file-tsconficjson" name="3-create-the-file-tsconficjson"></a></p>
+<h4>3. Create the file <code>tsconfic.json</code></h4>
+<p>It contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.</p>
+<pre><code class="language-json">{
+    <span class="hljs-attr">"compilerOptions"</span>: {
+    <span class="hljs-attr">"target"</span>: <span class="hljs-string">"es6"</span>,
+    <span class="hljs-attr">"strictNullChecks"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"module"</span>: <span class="hljs-string">"commonjs"</span>,
+    <span class="hljs-attr">"sourceMap"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"moduleResolution"</span>: <span class="hljs-string">"node"</span>,
+    <span class="hljs-attr">"noImplicitAny"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"outDir"</span> : <span class="hljs-string">"lib"</span>,       
+    <span class="hljs-attr">"rootDir"</span> : <span class="hljs-string">"src"</span>,
+    <span class="hljs-attr">"typeRoots"</span>: [<span class="hljs-string">"./@types"</span>]
+    }
+}
+</code></pre>
+<p><a id="markdown-4-create-the-folder-types-and-copy-the-file-piwebdts-into-it" name="4-create-the-folder-types-and-copy-the-file-piwebdts-into-it"></a></p>
+<h4>4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</h4>
+<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong>TODO</strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
+<p><a id="markdown-5-create-the-folder-src-and-create-the-file-indexts-in-it" name="5-create-the-folder-src-and-create-the-file-indexts-in-it"></a></p>
+<h4>5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</h4>
+<p>This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter <a href="#drawingcontext"><code>DrawingContext</code></a>.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> host <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb_host'</span>
 <span class="hljs-keyword">import</span> drawing = piweb.drawing;
