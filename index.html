@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="css/style.css">   
 </head>
 <body class="markdown-body" data-spy="scroll" data-target="#toc">
-<div class="col-sm-3">
+<div id="structure" class="col-sm-3">
     <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
 </div>
-<div class="col-sm-6 content">
+<div id="printarea" class="col-sm-6 content">
 <h1>PiWeb Custom Plot</h1>
 <img style="display:block;margin:auto;" src="gfx/Logo.png" >
 <div style="display:none">
@@ -96,9 +96,17 @@
 <li><a href="#drawingcontext">DrawingContext</a></li>
 </ul>
 </li>
-<li><a href="#transform">Transform</a>
+<li><a href="#images">Images</a>
 <ul>
 <li><a href="#content-2">Content</a></li>
+<li><a href="#imagedrawingsettings">ImageDrawingSettings</a></li>
+<li><a href="#horizontalimageanchor">HorizontalImageAnchor</a></li>
+<li><a href="#verticalimageanchor">VerticalImageAnchor</a></li>
+</ul>
+</li>
+<li><a href="#transform">Transform</a>
+<ul>
+<li><a href="#content-3">Content</a></li>
 <li><a href="#transform-1">Transform</a></li>
 <li><a href="#translationtransform">TranslationTransform</a></li>
 <li><a href="#rotationtransform">RotationTransform</a></li>
@@ -110,8 +118,11 @@
 </li>
 <li><a href="#geometry">Geometry</a>
 <ul>
-<li><a href="#content-3">Content</a></li>
+<li><a href="#content-4">Content</a></li>
 <li><a href="#geometry-1">Geometry</a></li>
+<li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a></li>
+<li><a href="#horizontalanchor">HorizontalAnchor</a></li>
+<li><a href="#verticalanchor">VerticalAnchor</a></li>
 <li><a href="#fillrule">FillRule</a></li>
 <li><a href="#geometrycombinemode">GeometryCombineMode</a></li>
 <li><a href="#linegeometry">LineGeometry</a></li>
@@ -139,7 +150,7 @@
 </li>
 <li><a href="#pens-and-brushes">Pens and Brushes</a>
 <ul>
-<li><a href="#content-4">Content</a></li>
+<li><a href="#content-5">Content</a></li>
 <li><a href="#color">Color</a></li>
 <li><a href="#brush">Brush</a>
 <ul>
@@ -158,7 +169,7 @@
 </li>
 <li><a href="#text">Text</a>
 <ul>
-<li><a href="#content-5">Content</a></li>
+<li><a href="#content-6">Content</a></li>
 <li><a href="#formattedtext">FormattedText</a></li>
 <li><a href="#flowdirection">FlowDirection</a></li>
 <li><a href="#textalignment">TextAlignment</a></li>
@@ -179,7 +190,7 @@
 <ul>
 <li><a href="#common-1">Common</a>
 <ul>
-<li><a href="#content-6">Content</a></li>
+<li><a href="#content-7">Content</a></li>
 <li><a href="#attributetype">AttributeType</a></li>
 <li><a href="#attribute">Attribute</a></li>
 <li><a href="#attributeitem">AttributeItem</a></li>
@@ -187,7 +198,7 @@
 </li>
 <li><a href="#configuration">Configuration</a>
 <ul>
-<li><a href="#content-7">Content</a></li>
+<li><a href="#content-8">Content</a></li>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#configuration-1">Configuration</a></li>
 <li><a href="#entitytype">EntityType</a></li>
@@ -196,7 +207,7 @@
 </li>
 <li><a href="#catalogs">Catalogs</a>
 <ul>
-<li><a href="#content-8">Content</a></li>
+<li><a href="#content-9">Content</a></li>
 <li><a href="#usage-1">Usage</a></li>
 <li><a href="#catalog">Catalog</a></li>
 <li><a href="#catalogentry">CatalogEntry</a></li>
@@ -204,7 +215,7 @@
 </li>
 <li><a href="#inspection-plan">Inspection Plan</a>
 <ul>
-<li><a href="#content-9">Content</a></li>
+<li><a href="#content-10">Content</a></li>
 <li><a href="#usage-2">Usage</a></li>
 <li><a href="#inspectionplanitemtype">InspectionPlanItemType</a></li>
 <li><a href="#inspectionplanpath">InspectionPlanPath</a></li>
@@ -214,7 +225,7 @@
 </li>
 <li><a href="#measurements">Measurements</a>
 <ul>
-<li><a href="#content-10">Content</a></li>
+<li><a href="#content-11">Content</a></li>
 <li><a href="#usage-3">Usage</a></li>
 <li><a href="#measurementmode">MeasurementMode</a></li>
 <li><a href="#measurement">Measurement</a></li>
@@ -223,7 +234,7 @@
 </li>
 <li><a href="#raw-data">Raw Data</a>
 <ul>
-<li><a href="#content-11">Content</a></li>
+<li><a href="#content-12">Content</a></li>
 <li><a href="#usage-4">Usage</a></li>
 <li><a href="#entitytype-1">EntityType</a></li>
 <li><a href="#rawdataitem">RawDataItem</a></li>
@@ -258,9 +269,9 @@
 <p>In order to create your first own custom plot, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As javascript is untyped, we suggest you to develop your extension using <strong>Typescript</strong>.</p>
 <p>PiWeb searches for extensions in several locations. Ordered by their priority, these are:</p>
 <ul>
-<li>The <code>Extensions</code> folder in the PiWeb installation directory</li>
+<li>In the application data directory <code>%APPDATA%\Zeiss\PiWeb\Extensions</code></li>
 <li>In the program data directory <code>%PROGRAMDATA%\Zeiss\PiWeb\Extensions</code></li>
-<li>In the common application data directory <code>%APPDATA%\Zeiss\PiWeb\Extensions</code></li>
+<li>The <code>Extensions</code> folder in the PiWeb installation directory</li>
 </ul>
 <p>In case the <code>Extensions</code> folder doesn't exist, you must create it first. Now create your own project folder in the extensions folder and name it <code>MyExtension</code>.
 Now, create the following files and folders in your project folder:</p>
@@ -1091,10 +1102,10 @@ context.drawLine(
 <strong>drawImage <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawImage</span>(<span class="hljs-params">
     data: Buffer, 
-    rectangle: Rect
+    settings: ImageDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified image buffer into the specifield <code>rectangle</code>. In case the image size differs from the rectangle, the image will be stretched.</p>
+<p>Draws the specified image buffer with the specified <a href="#imagedrawingsettings"><code>ImageDrawingSettings</code></a>.</p>
 <p><a id="drawingcontext-drawdrawing" name="drawingcontext-drawdrawing"></a>
 <strong>drawDrawing <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawDrawing</span>(<span class="hljs-params">
@@ -1142,9 +1153,103 @@ context.drawLine(
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pop</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span></span>;
 </code></pre>
 <p>Removes the most recent effect caused by <a href="#drawingcontext-pushtransform"><code>pushTransform</code></a>, <a href="#drawingcontext-pushopacity"><code>pushOpacity</code></a> or <a href="#drawingcontext-pushclip"><code>pushClip</code></a> from the stack. This function will cause an error in case none of the specified commands has been executed before.</p>
+<p><a id="markdown-images" name="images"></a></p>
+<h3>Images</h3>
+<p><a id="markdown-content-2" name="content-2"></a></p>
+<h4>Content</h4>
+<ul>
+<li><a href="#imagedrawingsettings">ImageDrawingSettings</a></li>
+<li><a href="#horizontalimageanchor">HorizontalImageAnchor</a></li>
+<li><a href="#verticalimageanchor">VerticalImageAnchor</a></li>
+</ul>
+<p><a id="markdown-imagedrawingsettings" name="imagedrawingsettings"></a></p>
+<h4>ImageDrawingSettings</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> ImageDrawingSettings
+</code></pre>
+<p>Determines how an image is arranged and layouted. You can specify the stretch/aspect of the image with the <code>width</code>and <code>height</code> parameters like the following:</p>
+<table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Width</th>
+<th>Height</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageByHeight.svg"></td>
+<td><code>undefined</code></td>
+<td><code>16</code></td>
+<td>The image will be drawn with a height of 16 millimeters and keep its aspect ratio.</td>
+</tr>
+<tr>
+<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidth.svg"></td>
+<td><code>16</code></td>
+<td><code>undefined</code></td>
+<td>The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller.</td>
+</tr>
+<tr>
+<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidthAndHeight.svg"></td>
+<td><code>16</code></td>
+<td><code>16</code></td>
+<td>The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched.</td>
+</tr>
+<tr>
+<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageNatural.svg"></td>
+<td><code>undefined</code></td>
+<td><code>undefined</code></td>
+<td>The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>position <a href="#point"><code>point</code></a></strong></p>
+<p>The position to which the image aligns.</p>
+<p><strong>width <code>number?</code></strong></p>
+<p>The desired image width.</p>
+<p><strong>height <code>number?</code></strong></p>
+<p>The desired image height.</p>
+<p><strong>anchorX <a href="#horizontalimageanchor"><code>HorizontalImageAnchor?</code></a></strong></p>
+<p>Determines how the image aligns to the position horizontally.</p>
+<p><strong>anchorY <a href="#verticalimageanchor"><code>VerticalImageAnchor?</code></a></strong></p>
+<p>Determines how the image aligns to the position vertically.</p>
+<p><a id="markdown-horizontalimageanchor" name="horizontalimageanchor"></a></p>
+<h4>HorizontalImageAnchor</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> HorizontalImageAnchor
+</code></pre>
+<p>Determines how the image aligns to the position horizontally.</p>
+<p><strong><code>left</code> (default)</strong></p>
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorLeft.svg">
+<p>The image will be drawn with the position on the left side.</p>
+<br>
+<p><strong><code>center</code></strong></p>
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorHorizontalCenter.svg">
+<p>The image will be drawn with the position at the center.</p>
+<br>
+<p><strong><code>right</code></strong></p>
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorRight.svg">
+<p>The image will be drawn with the position on the right side.</p>
+<br>
+<p><a id="markdown-verticalimageanchor" name="verticalimageanchor"></a></p>
+<h4>VerticalImageAnchor</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> VerticalImageAnchor
+</code></pre>
+<p>Determines how the image aligns to the position vertically.</p>
+<p><strong><code>top</code> (default)</strong></p>
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorTop.svg">
+<p>The image will be drawn with the position on the top.</p>
+<br>
+<p><strong><code>center</code></strong></p>
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorVerticalCenter.svg">
+<p>The image will be drawn with the position at the center.</p>
+<br>
+<p><strong><code>bottom</code></strong></p>
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorBottom.svg">
+<p>The image will be drawn with the position on the bottom.</p>
+<br>
 <p><a id="markdown-transform" name="transform"></a></p>
 <h3>Transform</h3>
-<p><a id="markdown-content-2" name="content-2"></a></p>
+<p><a id="markdown-content-3" name="content-3"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#transform-1">Transform</a></li>
@@ -1250,10 +1355,13 @@ context.drawLine(
 <p>Combines multiple transformations into one by multiplying their matrices. As matrix multiplication is not commutative, the order of the child matrices is important.</p>
 <p><a id="markdown-geometry" name="geometry"></a></p>
 <h3>Geometry</h3>
-<p><a id="markdown-content-3" name="content-3"></a></p>
+<p><a id="markdown-content-4" name="content-4"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#geometry-1">Geometry</a></li>
+<li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a></li>
+<li><a href="#horizontalanchor">HorizontalAnchor</a></li>
+<li><a href="#verticalanchor">VerticalAnchor</a></li>
 <li><a href="#fillrule">FillRule</a></li>
 <li><a href="#geometrycombinemode">GeometryCombineMode</a></li>
 <li><a href="#linegeometry">LineGeometry</a></li>
@@ -1285,6 +1393,59 @@ context.drawLine(
 <p>Geometries can be used for drawing and clipping. Multiple geometries can be combined using the GroupGeometry or CombinedGeometry classes.</p>
 <p><strong>transform <a href="#transform"><code>Transform?</code></a></strong></p>
 <p>All geometries can have a transformation. The default value is the identity transform.</p>
+<p><a id="markdown-geometrydrawingsettings" name="geometrydrawingsettings"></a></p>
+<h4>GeometryDrawingSettings</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryDrawingSettings
+</code></pre>
+<p>Determines how a geometry is arranged when it's drawn. When using anchors, PiWeb calculates a bounding box around the geometry and arranges it according to the anchors on the specified position.</p>
+<p><strong>position <a href="#point"><code>point</code></a></strong></p>
+<p>The position to which the image aligns.</p>
+<p><strong>anchorX <a href="#horizontalanchor"><code>HorizontalAnchor?</code></a></strong></p>
+<p>Determines how the geometry aligns to the position horizontally.</p>
+<p><strong>anchorY <a href="#verticalanchor"><code>VerticalAnchor?</code></a></strong></p>
+<p>Determines how the geometry aligns to the position vertically.</p>
+<p><a id="markdown-horizontalanchor" name="horizontalanchor"></a></p>
+<h4>HorizontalAnchor</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> HorizontalAnchor
+</code></pre>
+<p>Determines how the geometry aligns to the position horizontally.</p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryHorizontalOrigin.svg">
+<p><strong><code>origin</code> (default)</strong></p>
+<p>The image will be drawn with the position as its coordinate origin.</p>
+<p><br><br></p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryLeft.svg">
+<p><strong><code>left</code></strong></p>
+<p>The image will be drawn with the position on the left side.</p>
+<p><br><br></p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryHorizontalCenter.svg">
+<p><strong><code>center</code></strong></p>
+<p>The image will be drawn with the position at the center.</p>
+<p><br><br></p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryRight.svg">
+<p><strong><code>right</code></strong></p>
+<p>The geometry will be drawn with the position on the right side.</p>
+<p><br><br></p>
+<p><a id="markdown-verticalanchor" name="verticalanchor"></a></p>
+<h4>VerticalAnchor</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> VerticalAnchor
+</code></pre>
+<p>Determines how the geometry aligns to the position vertically.</p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryVerticalOrigin.svg">
+<p><strong><code>origin</code> (default)</strong></p>
+<p>The image will be drawn with the position as its coordinate origin.</p>
+<p><br><br></p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryTop.svg">
+<p><strong><code>top</code></strong></p>
+<p>The image will be drawn with the position on the top.</p>
+<p><br><br></p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryVerticalCenter.svg">
+<p><strong><code>center</code></strong></p>
+<p>The image will be drawn with the position at the center.</p>
+<p><br><br></p>
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryBottom.svg">
+<p><strong><code>bottom</code></strong></p>
+<p>The geometry will be drawn with the position on the bottom.</p>
+<p><br><br></p>
 <p><a id="markdown-fillrule" name="fillrule"></a></p>
 <h4>FillRule</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> FillRule
@@ -1467,7 +1628,7 @@ context.drawLine(
 <p>Determines how the two geometries are combined into one single geometry.</p>
 <p><a id="markdown-pens-and-brushes" name="pens-and-brushes"></a></p>
 <h3>Pens and Brushes</h3>
-<p><a id="markdown-content-4" name="content-4"></a></p>
+<p><a id="markdown-content-5" name="content-5"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#color">Color</a></li>
@@ -1591,7 +1752,7 @@ context.drawLine(
 <br>
 <p><a id="markdown-text" name="text"></a></p>
 <h3>Text</h3>
-<p><a id="markdown-content-5" name="content-5"></a></p>
+<p><a id="markdown-content-6" name="content-6"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#formattedtext">FormattedText</a></li>
@@ -1895,7 +2056,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </code></pre>
 <p><a id="markdown-common-1" name="common-1"></a></p>
 <h3>Common</h3>
-<p><a id="markdown-content-6" name="content-6"></a></p>
+<p><a id="markdown-content-7" name="content-7"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#attributetype">AttributeType</a></li>
@@ -1943,7 +2104,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>Returns the value that corresponds to the specified attribute key. In case the attribute was not found the function returns <code>undefined</code>.</p>
 <p><a id="markdown-configuration" name="configuration"></a></p>
 <h3>Configuration</h3>
-<p><a id="markdown-content-7" name="content-7"></a></p>
+<p><a id="markdown-content-8" name="content-8"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#configuration-1">Configuration</a></li>
@@ -2002,7 +2163,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>In case the <code>dataType</code> is <code>Catalog</code>, this field contains a base64 encoded guid that identifies the <strong><a href="#catalog"><code>Catalog</code></a></strong> that is used by this attribute.</p>
 <p><a id="markdown-catalogs" name="catalogs"></a></p>
 <h3>Catalogs</h3>
-<p><a id="markdown-content-8" name="content-8"></a></p>
+<p><a id="markdown-content-9" name="content-9"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#catalog">Catalog</a></li>
@@ -2035,7 +2196,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>A 16 bit integer that identifies the catalog entry. When accessing an attribute with the datatype <code>Catalog</code>, a 16 bit integer is returned that refers to this key.</p>
 <p><a id="markdown-inspection-plan" name="inspection-plan"></a></p>
 <h3>Inspection Plan</h3>
-<p><a id="markdown-content-9" name="content-9"></a></p>
+<p><a id="markdown-content-10" name="content-10"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#inspectionplanitemtype">InspectionPlanItemType</a></li>
@@ -2085,7 +2246,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The type of the inspection plan item that is represented by this path element.</p>
 <p><a id="markdown-measurements" name="measurements"></a></p>
 <h3>Measurements</h3>
-<p><a id="markdown-content-10" name="content-10"></a></p>
+<p><a id="markdown-content-11" name="content-11"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#measurementmode">MeasurementMode</a></li>
@@ -2128,7 +2289,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The uuid that identifies the characteristic this measurement value is associated to.</p>
 <p><a id="markdown-raw-data" name="raw-data"></a></p>
 <h3>Raw Data</h3>
-<p><a id="markdown-content-11" name="content-11"></a></p>
+<p><a id="markdown-content-12" name="content-12"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#entitytype-1">EntityType</a></li>

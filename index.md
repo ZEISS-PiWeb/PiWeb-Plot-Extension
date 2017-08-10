@@ -11,10 +11,10 @@
 </head>
 
 <body class="markdown-body" data-spy="scroll" data-target="#toc">
-<div class="col-sm-3">
+<div id="structure" class="col-sm-3">
     <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
 </div>
-<div class="col-sm-6 content">
+<div id="printarea" class="col-sm-6 content">
 
 # PiWeb Custom Plot
 
@@ -63,8 +63,13 @@
         - [Content](#content-1)
         - [Drawing](#drawing-2)
         - [DrawingContext](#drawingcontext)
-    - [Transform](#transform)
+    - [Images](#images)
         - [Content](#content-2)
+        - [ImageDrawingSettings](#imagedrawingsettings)
+        - [HorizontalImageAnchor](#horizontalimageanchor)
+        - [VerticalImageAnchor](#verticalimageanchor)
+    - [Transform](#transform)
+        - [Content](#content-3)
         - [Transform](#transform-1)
         - [TranslationTransform](#translationtransform)
         - [RotationTransform](#rotationtransform)
@@ -73,8 +78,11 @@
         - [MatrixTransform](#matrixtransform)
         - [TransformGroup](#transformgroup)
     - [Geometry](#geometry)
-        - [Content](#content-3)
+        - [Content](#content-4)
         - [Geometry](#geometry-1)
+        - [GeometryDrawingSettings](#geometrydrawingsettings)
+        - [HorizontalAnchor](#horizontalanchor)
+        - [VerticalAnchor](#verticalanchor)
         - [FillRule](#fillrule)
         - [GeometryCombineMode](#geometrycombinemode)
         - [LineGeometry](#linegeometry)
@@ -93,7 +101,7 @@
         - [GeometryGroup](#geometrygroup)
         - [CombinedGeometry](#combinedgeometry)
     - [Pens and Brushes](#pens-and-brushes)
-        - [Content](#content-4)
+        - [Content](#content-5)
         - [Color](#color)
         - [Brush](#brush)
             - [SolidColorBrush](#solidcolorbrush)
@@ -103,7 +111,7 @@
             - [LineCap](#linecap)
             - [LineJoin](#linejoin)
     - [Text](#text)
-        - [Content](#content-5)
+        - [Content](#content-6)
         - [FormattedText](#formattedtext)
         - [FlowDirection](#flowdirection)
         - [TextAlignment](#textalignment)
@@ -118,36 +126,36 @@
         - [FontStretch](#fontstretch)
 - [Data Provider](#data-provider)
     - [Common](#common-1)
-        - [Content](#content-6)
+        - [Content](#content-7)
         - [AttributeType](#attributetype)
         - [Attribute](#attribute)
         - [AttributeItem](#attributeitem)
     - [Configuration](#configuration)
-        - [Content](#content-7)
+        - [Content](#content-8)
         - [Usage](#usage)
         - [Configuration](#configuration-1)
         - [EntityType](#entitytype)
         - [AttributeDefinition](#attributedefinition)
     - [Catalogs](#catalogs)
-        - [Content](#content-8)
+        - [Content](#content-9)
         - [Usage](#usage-1)
         - [Catalog](#catalog)
         - [CatalogEntry](#catalogentry)
     - [Inspection Plan](#inspection-plan)
-        - [Content](#content-9)
+        - [Content](#content-10)
         - [Usage](#usage-2)
         - [InspectionPlanItemType](#inspectionplanitemtype)
         - [InspectionPlanPath](#inspectionplanpath)
         - [InspectionPlanItem](#inspectionplanitem)
         - [PathElement](#pathelement)
     - [Measurements](#measurements)
-        - [Content](#content-10)
+        - [Content](#content-11)
         - [Usage](#usage-3)
         - [MeasurementMode](#measurementmode)
         - [Measurement](#measurement)
         - [MeasurementValue](#measurementvalue)
     - [Raw Data](#raw-data)
-        - [Content](#content-11)
+        - [Content](#content-12)
         - [Usage](#usage-4)
         - [EntityType](#entitytype-1)
         - [RawDataItem](#rawdataitem)
@@ -172,9 +180,9 @@ In order to create your first own custom plot, you should be familiar with __Jav
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
-* The `Extensions` folder in the PiWeb installation directory
+* In the application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
 * In the program data directory `%PROGRAMDATA%\Zeiss\PiWeb\Extensions`
-* In the common application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
+* The `Extensions` folder in the PiWeb installation directory
 
 In case the `Extensions` folder doesn't exist, you must create it first. Now create your own project folder in the extensions folder and name it `MyExtension`.
 Now, create the following files and folders in your project folder:
@@ -1171,11 +1179,11 @@ Draws the specified [`FormattedText`](#formattedtext) at with the specified [`Te
 ```TypeScript
 function drawImage(
     data: Buffer, 
-    rectangle: Rect
+    settings: ImageDrawingSettings
 ): void;
 ```
 
-Draws the specified image buffer into the specifield `rectangle`. In case the image size differs from the rectangle, the image will be stretched.
+Draws the specified image buffer with the specified [`ImageDrawingSettings`](#imagedrawingsettings).
 
 <a id="drawingcontext-drawdrawing" name="drawingcontext-drawdrawing"></a>
 **drawDrawing `void`**
@@ -1250,10 +1258,122 @@ function pop(): void;
 
 Removes the most recent effect caused by [`pushTransform`](#drawingcontext-pushtransform), [`pushOpacity`](#drawingcontext-pushopacity) or [`pushClip`](#drawingcontext-pushclip) from the stack. This function will cause an error in case none of the specified commands has been executed before.
 
+<a id="markdown-images" name="images"></a>
+### Images
+
+<a id="markdown-content-2" name="content-2"></a>
+#### Content
+
+- [ImageDrawingSettings](#imagedrawingsettings)
+- [HorizontalImageAnchor](#horizontalimageanchor)
+- [VerticalImageAnchor](#verticalimageanchor)
+
+<a id="markdown-imagedrawingsettings" name="imagedrawingsettings"></a>
+#### ImageDrawingSettings
+
+```TypeScript
+class ImageDrawingSettings
+```
+
+Determines how an image is arranged and layouted. You can specify the stretch/aspect of the image with the `width`and `height` parameters like the following:
+
+| Result | Width | Height | Description |
+|------------------------------------|-----------------------------------------------|-|-|
+|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
+|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
+|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
+|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled. |
+
+**position [`point`](#point)**
+
+The position to which the image aligns.
+
+**width `number?`**
+
+The desired image width.
+
+**height `number?`**
+
+The desired image height.
+
+**anchorX [`HorizontalImageAnchor?`](#horizontalimageanchor)**
+
+Determines how the image aligns to the position horizontally.
+
+**anchorY [`VerticalImageAnchor?`](#verticalimageanchor)**
+	   
+Determines how the image aligns to the position vertically.
+
+<a id="markdown-horizontalimageanchor" name="horizontalimageanchor"></a>
+#### HorizontalImageAnchor
+
+```TypeScript
+enum HorizontalImageAnchor
+```
+
+Determines how the image aligns to the position horizontally.
+
+**`left` (default)**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorLeft.svg">
+
+The image will be drawn with the position on the left side.
+
+<br>
+
+**`center`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorHorizontalCenter.svg">
+
+The image will be drawn with the position at the center.
+
+<br>
+
+**`right`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorRight.svg">
+
+The image will be drawn with the position on the right side.
+
+<br>
+
+<a id="markdown-verticalimageanchor" name="verticalimageanchor"></a>
+#### VerticalImageAnchor
+
+```TypeScript
+enum VerticalImageAnchor
+```
+
+Determines how the image aligns to the position vertically.
+
+**`top` (default)**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorTop.svg">
+
+The image will be drawn with the position on the top.
+
+<br>
+
+**`center`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorVerticalCenter.svg">
+
+The image will be drawn with the position at the center.
+
+<br>
+
+**`bottom`**
+
+<img class="framed" style="float: left; height: 48px;" src="gfx/imageAnchorBottom.svg">
+
+The image will be drawn with the position on the bottom.
+
+<br>
+
 <a id="markdown-transform" name="transform"></a>
 ### Transform
 
-<a id="markdown-content-2" name="content-2"></a>
+<a id="markdown-content-3" name="content-3"></a>
 #### Content
 
 - [Transform](#transform-1)
@@ -1410,10 +1530,13 @@ Combines multiple transformations into one by multiplying their matrices. As mat
 <a id="markdown-geometry" name="geometry"></a>
 ### Geometry
 
-<a id="markdown-content-3" name="content-3"></a>
+<a id="markdown-content-4" name="content-4"></a>
 #### Content
 
 - [Geometry](#geometry-1)
+- [GeometryDrawingSettings](#geometrydrawingsettings)
+- [HorizontalAnchor](#horizontalanchor)
+- [VerticalAnchor](#verticalanchor)
 - [FillRule](#fillrule)
 - [GeometryCombineMode](#geometrycombinemode)
 - [LineGeometry](#linegeometry)
@@ -1444,6 +1567,109 @@ Geometries can be used for drawing and clipping. Multiple geometries can be comb
 **transform [`Transform?`](#transform)**
 
 All geometries can have a transformation. The default value is the identity transform.
+
+<a id="markdown-geometrydrawingsettings" name="geometrydrawingsettings"></a>
+#### GeometryDrawingSettings
+
+```TypeScript
+class GeometryDrawingSettings
+```
+
+Determines how a geometry is arranged when it's drawn. When using anchors, PiWeb calculates a bounding box around the geometry and arranges it according to the anchors on the specified position.
+
+**position [`point`](#point)**
+
+The position to which the image aligns.
+
+**anchorX [`HorizontalAnchor?`](#horizontalanchor)**
+
+Determines how the geometry aligns to the position horizontally.
+
+**anchorY [`VerticalAnchor?`](#verticalanchor)**
+	   
+Determines how the geometry aligns to the position vertically.
+
+<a id="markdown-horizontalanchor" name="horizontalanchor"></a>
+#### HorizontalAnchor
+
+```TypeScript
+enum HorizontalAnchor
+```
+
+Determines how the geometry aligns to the position horizontally.
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryHorizontalOrigin.svg">
+
+**`origin` (default)**
+
+The image will be drawn with the position as its coordinate origin.
+
+<br><br>
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryLeft.svg">
+
+**`left`**
+
+The image will be drawn with the position on the left side.
+
+<br><br>
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryHorizontalCenter.svg">
+
+**`center`**
+
+The image will be drawn with the position at the center.
+
+<br><br>
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryRight.svg">
+
+**`right`**
+
+The geometry will be drawn with the position on the right side.
+
+<br><br>
+
+<a id="markdown-verticalanchor" name="verticalanchor"></a>
+#### VerticalAnchor
+
+```TypeScript
+enum VerticalAnchor
+```
+
+Determines how the geometry aligns to the position vertically.
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryVerticalOrigin.svg">
+
+**`origin` (default)**
+
+The image will be drawn with the position as its coordinate origin.
+
+<br><br>
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryTop.svg">
+
+**`top`**
+
+The image will be drawn with the position on the top.
+
+<br><br>
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryVerticalCenter.svg">
+
+**`center`**
+
+The image will be drawn with the position at the center.
+
+<br><br>
+
+<img class="framed" style="float: left; height: 96px;" src="gfx/anchorGeometryBottom.svg">
+
+**`bottom`**
+
+The geometry will be drawn with the position on the bottom.
+
+<br><br>
 
 <a id="markdown-fillrule" name="fillrule"></a>
 #### FillRule
@@ -1779,7 +2005,7 @@ Determines how the two geometries are combined into one single geometry.
 <a id="markdown-pens-and-brushes" name="pens-and-brushes"></a>
 ### Pens and Brushes
 
-<a id="markdown-content-4" name="content-4"></a>
+<a id="markdown-content-5" name="content-5"></a>
 #### Content
 
 - [Color](#color)
@@ -1989,7 +2215,7 @@ Creates a circle around the cutting point with a diameter that is equal to the p
 <a id="markdown-text" name="text"></a>
 ### Text
 
-<a id="markdown-content-5" name="content-5"></a>
+<a id="markdown-content-6" name="content-6"></a>
 #### Content
 
 - [FormattedText](#formattedtext)
@@ -2395,7 +2621,7 @@ function loadData() {
 <a id="markdown-common-1" name="common-1"></a>
 ### Common
 
-<a id="markdown-content-6" name="content-6"></a>
+<a id="markdown-content-7" name="content-7"></a>
 #### Content
 
 - [AttributeType](#attributetype)
@@ -2478,7 +2704,7 @@ Returns the value that corresponds to the specified attribute key. In case the a
 <a id="markdown-configuration" name="configuration"></a>
 ### Configuration
 
-<a id="markdown-content-7" name="content-7"></a>
+<a id="markdown-content-8" name="content-8"></a>
 #### Content
 
 - [Configuration](#configuration-1)
@@ -2584,7 +2810,7 @@ In case the `dataType` is `Catalog`, this field contains a base64 encoded guid t
 <a id="markdown-catalogs" name="catalogs"></a>
 ### Catalogs
 
-<a id="markdown-content-8" name="content-8"></a>
+<a id="markdown-content-9" name="content-9"></a>
 #### Content
 
 - [Catalog](#catalog)
@@ -2639,7 +2865,7 @@ A 16 bit integer that identifies the catalog entry. When accessing an attribute 
 <a id="markdown-inspection-plan" name="inspection-plan"></a>
 ### Inspection Plan
 
-<a id="markdown-content-9" name="content-9"></a>
+<a id="markdown-content-10" name="content-10"></a>
 #### Content
 
 - [InspectionPlanItemType](#inspectionplanitemtype)
@@ -2725,7 +2951,7 @@ The type of the inspection plan item that is represented by this path element.
 <a id="markdown-measurements" name="measurements"></a>
 ### Measurements
 
-<a id="markdown-content-10" name="content-10"></a>
+<a id="markdown-content-11" name="content-11"></a>
 #### Content
 
 - [MeasurementMode](#measurementmode)
@@ -2797,7 +3023,7 @@ The uuid that identifies the characteristic this measurement value is associated
 <a id="markdown-raw-data" name="raw-data"></a>
 ### Raw Data
 
-<a id="markdown-content-11" name="content-11"></a>
+<a id="markdown-content-12" name="content-12"></a>
 #### Content
 
 - [EntityType](#entitytype-1)
