@@ -103,6 +103,7 @@
                 - [PolyLineSegment](#polylinesegment)
                 - [PolyBezierSegment](#polybeziersegment)
                 - [PolyQuadraticBezierSegment](#polyquadraticbeziersegment)
+        - [CustomGeometry](#customgeometry)
         - [GeometryGroup](#geometrygroup)
         - [CombinedGeometry](#combinedgeometry)
     - [Pens and Brushes](#pens-and-brushes)
@@ -1299,12 +1300,12 @@ class ImageDrawingSettings
 
 Determines how an image is arranged and layouted. You can specify the stretch/aspect of the image with the `width`and `height` parameters like the following:
 
-| Result | Width | Height | Description |
-|------------------------------------|-----------------------------------------------|-|-|
-|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
-|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
-|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
-|<img class="framed" style="width:256px;margin:0px;" src="gfx/imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled. |
+| Result                                                                                            | Width | Height | Description |
+|------------------------------------|-|-|-|
+|<img style="height:64px;width:128px;" src="gfx/imageByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
+|<img style="height:64px;width:128px;" src="gfx/imageByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
+|<img style="height:64px;width:128px;" src="gfx/imageByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
+|<img style="height:64px;width:128px;" src="gfx/imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled. |
 
 **position [`point`](#point)**
 
@@ -1574,6 +1575,7 @@ Combines multiple transformations into one by multiplying their matrices. As mat
         - [PolyLineSegment](#polylinesegment)
         - [PolyBezierSegment](#polybeziersegment)
         - [PolyQuadraticBezierSegment](#polyquadraticbeziersegment)
+- [CustomGeometry](#customgeometry)
 - [GeometryGroup](#geometrygroup)
 - [CombinedGeometry](#combinedgeometry)
 
@@ -1985,6 +1987,28 @@ Describes multiple bezier segments, including the last point of the previous seg
 **points [`Point[]`](#point)**
 
 The collection of [Point](#point) objects that defines this segment.
+
+<a id="markdown-customgeometry" name="customgeometry"></a>
+#### CustomGeometry
+
+```TypeScript
+class CustomGeometry extends Geometry
+```
+
+Describes a [`PathGeometry`](#pathgeometry) with a string. The markup is a superset of the [SVG Path Markup](https://www.w3.org/TR/svg-paths/#PathDataGeneralInformation).
+ 
+**pathString `string`**
+
+The path wich is used to define a string. Points are written in the form of `x,y`, where `x` and `y` are either invariant floating point numbers (`0.0`) or integers.
+
+| Markup | Parameters | Class |
+|--------|-------------| -----------|
+| **`M p`**| **`p`** Start point| [`PathFigure`](#pathfigure) | 
+| **`A r a l s p `**| **`r`** Radius x,y<br>**`a`** Angle<br>**`l`** IsLargeArc (1 = true, 0 = false)<br>**`s`** Sweep direction (0 = clockwise, 1 = counterclockwise)<br>**`p`** End point| [`ArcSegment`](#arcsegment) |
+| **`L p`**| **`p`** End point| [`LineSegment`](#linesegment) |
+| **`C c1 c2 p`**| **`c1`** First control point<br>**`c2`** Second control point <br>**`p`** End point|[`CubicBezierSegment`](#cubicbeziersegment) |  
+| **`Q c p`**| **`c`** Control point<br>**`p`** End point| [`QuadraticBezierSegment`](#quadraticbeziersegment) | 
+| **`Z`**| Closes the current figure  |
 
 <a id="markdown-geometrygroup" name="geometrygroup"></a>
 #### GeometryGroup

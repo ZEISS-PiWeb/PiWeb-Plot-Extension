@@ -149,6 +149,7 @@
 </li>
 </ul>
 </li>
+<li><a href="#customgeometry">CustomGeometry</a></li>
 <li><a href="#geometrygroup">GeometryGroup</a></li>
 <li><a href="#combinedgeometry">CombinedGeometry</a></li>
 </ul>
@@ -1193,25 +1194,25 @@ context.drawLine(
 </thead>
 <tbody>
 <tr>
-<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageByHeight.svg"></td>
+<td><img style="height:64px;width:128px;" src="gfx/imageByHeight.svg"></td>
 <td><code>undefined</code></td>
 <td><code>16</code></td>
 <td>The image will be drawn with a height of 16 millimeters and keep its aspect ratio.</td>
 </tr>
 <tr>
-<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidth.svg"></td>
+<td><img style="height:64px;width:128px;" src="gfx/imageByWidth.svg"></td>
 <td><code>16</code></td>
 <td><code>undefined</code></td>
 <td>The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller.</td>
 </tr>
 <tr>
-<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageByWidthAndHeight.svg"></td>
+<td><img style="height:64px;width:128px;" src="gfx/imageByWidthAndHeight.svg"></td>
 <td><code>16</code></td>
 <td><code>16</code></td>
 <td>The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched.</td>
 </tr>
 <tr>
-<td><img class="framed" style="width:256px;margin:0px;" src="gfx/imageNatural.svg"></td>
+<td><img style="height:64px;width:128px;" src="gfx/imageNatural.svg"></td>
 <td><code>undefined</code></td>
 <td><code>undefined</code></td>
 <td>The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled.</td>
@@ -1398,6 +1399,7 @@ context.drawLine(
 </li>
 </ul>
 </li>
+<li><a href="#customgeometry">CustomGeometry</a></li>
 <li><a href="#geometrygroup">GeometryGroup</a></li>
 <li><a href="#combinedgeometry">CombinedGeometry</a></li>
 </ul>
@@ -1621,6 +1623,54 @@ context.drawLine(
 <p>Describes multiple bezier segments, including the last point of the previous segment. The number of points provided must be a multiple of two, since a single quadratic bezier segment is defined by two points.</p>
 <p><strong>points <a href="#point"><code>Point[]</code></a></strong></p>
 <p>The collection of <a href="#point">Point</a> objects that defines this segment.</p>
+<p><a id="markdown-customgeometry" name="customgeometry"></a></p>
+<h4>CustomGeometry</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CustomGeometry <span class="hljs-keyword">extends</span> Geometry
+</code></pre>
+<p>Describes a <a href="#pathgeometry"><code>PathGeometry</code></a> with a string. The markup is a superset of the <a href="https://www.w3.org/TR/svg-paths/#PathDataGeneralInformation">SVG Path Markup</a>.</p>
+<p><strong>pathString <code>string</code></strong></p>
+<p>The path wich is used to define a string. Points are written in the form of <code>x,y</code>, where <code>x</code> and <code>y</code> are either invariant floating point numbers (<code>0.0</code>) or integers.</p>
+<table>
+<thead>
+<tr>
+<th>Markup</th>
+<th>Parameters</th>
+<th>Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>M p</code></strong></td>
+<td><strong><code>p</code></strong> Start point</td>
+<td><a href="#pathfigure"><code>PathFigure</code></a></td>
+</tr>
+<tr>
+<td><strong><code>A r a l s p</code></strong></td>
+<td><strong><code>r</code></strong> Radius x,y<br><strong><code>a</code></strong> Angle<br><strong><code>l</code></strong> IsLargeArc (1 = true, 0 = false)<br><strong><code>s</code></strong> Sweep direction (0 = clockwise, 1 = counterclockwise)<br><strong><code>p</code></strong> End point</td>
+<td><a href="#arcsegment"><code>ArcSegment</code></a></td>
+</tr>
+<tr>
+<td><strong><code>L p</code></strong></td>
+<td><strong><code>p</code></strong> End point</td>
+<td><a href="#linesegment"><code>LineSegment</code></a></td>
+</tr>
+<tr>
+<td><strong><code>C c1 c2 p</code></strong></td>
+<td><strong><code>c1</code></strong> First control point<br><strong><code>c2</code></strong> Second control point <br><strong><code>p</code></strong> End point</td>
+<td><a href="#cubicbeziersegment"><code>CubicBezierSegment</code></a></td>
+</tr>
+<tr>
+<td><strong><code>Q c p</code></strong></td>
+<td><strong><code>c</code></strong> Control point<br><strong><code>p</code></strong> End point</td>
+<td><a href="#quadraticbeziersegment"><code>QuadraticBezierSegment</code></a></td>
+</tr>
+<tr>
+<td><strong><code>Z</code></strong></td>
+<td>Closes the current figure</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p><a id="markdown-geometrygroup" name="geometrygroup"></a></p>
 <h4>GeometryGroup</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryGroup <span class="hljs-keyword">extends</span> Geometry

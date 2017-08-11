@@ -72,12 +72,21 @@
     margin-left:24px;
     margin-right:16px;
 }
+
+.markdown-body td>img {    
+    margin-left:0px;
+    margin-right:0px;
+    margin-top: auto;
+    margin-bottom:auto;
+    vertical-align: center;
+    max-width: none;
+    background:none;
+}
+
 .markdown-body .framed {
     background-color: #f8f8f8;
 	border: 1px solid #cccccc;
-    border-radius: 3px;
-    margin-left:24px;
-    margin-right:16px;
+    border-radius: 3px;    
     padding: 4px;
 }
 .markdown-body .smallImage {   
