@@ -1302,9 +1302,9 @@ Determines how an image is arranged and layouted. You can specify the stretch/as
 
 | Result                                                                                            | Width | Height | Description |
 |------------------------------------|-|-|-|
-|<img style="height:64px;width:128px;" src="gfx/imageByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
-|<img style="height:64px;width:128px;" src="gfx/imageByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
-|<img style="height:64px;width:128px;" src="gfx/imageByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
+|<img style="height:64px;width:128px;" src="gfx/imageSizeByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
+|<img style="height:64px;width:128px;" src="gfx/imageSizeByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
+|<img style="height:64px;width:128px;" src="gfx/imageSizeByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
 |<img style="height:64px;width:128px;" src="gfx/imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled. |
 
 **position [`point`](#point)**
