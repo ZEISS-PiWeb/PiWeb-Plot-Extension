@@ -2594,16 +2594,16 @@ The font weight is used to display letters bolder or thinner. Most fonts only su
 
 | Identifier | numeric value |
 |------------|--------------------|
-| **`Thin`**|**100**|
-| **`ExtraLight`**|**200**|
-| **`Light`**|**300**|
-| **`Normal`**|**400**|
-| **`Medium`**|**500**|
-| **`SemiBold`**|**600**|
-| **`Bold`**|**700**|
-| **`ExtraBold`**|**800**|
-| **`Black`**|**900**|
-| **`ExtraBlack`**|**950**|
+| **`thin`**|**100**|
+| **`extraLight`**|**200**|
+| **`light`**|**300**|
+| **`normal`**|**400**|
+| **`medium`**|**500**|
+| **`semiBold`**|**600**|
+| **`bold`**|**700**|
+| **`extraBold`**|**800**|
+| **`black`**|**900**|
+| **`extraBlack`**|**950**|
 
 <a id="markdown-fontstyle" name="fontstyle"></a>
 #### FontStyle 
@@ -2614,15 +2614,15 @@ enum FontStyle
 
 The font style can be used to display letters in a cursive way. 
 
-**`Normal` (default)**
+**`normal` (default)**
 
 The text will be displayed as usual.
 
-**`Italic`**
+**`italic`**
 
 Some fonts have a built in italic letter set, which can be used by specifying the italic font style.
 
-**`Oblique`**
+**`oblique`**
 
 For fonts which have no built in italic letter set, the oblique font style allows to apply a [`ShearTransform`](#sheartransform) to the normal font to make it look cursive. The italic style will usually look more pleasing though.
 
@@ -2637,15 +2637,15 @@ Used to condense or expand the font horizontally.
 
 | Identifier | Changed width/height ratio |
 |------------|--------------------|
-| **`UltraCondensed`**|**50%** of the default widht/height ratio|
-| **`ExtraCondensed`**|**62.5%** of the default widht/height ratio|
-| **`Condensed`**|**75%** of the default widht/height ratio|
-| **`SemiCondensed`**|**87.5%** of the default widht/height ratio|
-| **`Normal`**|**100%** of the default widht/height ratio|
-| **`SemiExpanded`**|**112.5%** of the default widht/height ratio|
-| **`Expanded`**|**125%** of the default widht/height ratio|
-| **`ExtraExpanded`**|**150%** of the default widht/height ratio|
-| **`UltraExpanded`**|**200%** of the default widht/height ratio|
+| **`ultraCondensed`**|**50%** of the default widht/height ratio|
+| **`extraCondensed`**|**62.5%** of the default widht/height ratio|
+| **`condensed`**|**75%** of the default widht/height ratio|
+| **`semiCondensed`**|**87.5%** of the default widht/height ratio|
+| **`normal`**|**100%** of the default widht/height ratio|
+| **`semiExpanded`**|**112.5%** of the default widht/height ratio|
+| **`expanded`**|**125%** of the default widht/height ratio|
+| **`extraExpanded`**|**150%** of the default widht/height ratio|
+| **`ultraExpanded`**|**200%** of the default widht/height ratio|
 
 <a id="markdown-data-provider" name="data-provider"></a>
 ## Data Provider
