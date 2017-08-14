@@ -326,7 +326,7 @@
 </code></pre>
 <p><a id="markdown-4-create-the-folder-types-and-copy-the-file-piwebdts-into-it" name="4-create-the-folder-types-and-copy-the-file-piwebdts-into-it"></a></p>
 <h4>4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</h4>
-<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong>TODO</strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
+<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong><a href="https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts">here</a></strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
 <p><a id="markdown-5-create-the-folder-src-and-create-the-file-indexts-in-it" name="5-create-the-folder-src-and-create-the-file-indexts-in-it"></a></p>
 <h4>5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</h4>
 <p>This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter <a href="#drawingcontext"><code>DrawingContext</code></a>.</p>
@@ -1206,7 +1206,7 @@ context.drawLine(
     path: <span class="hljs-built_in">string</span>
 </span>) : <span class="hljs-title">Bitmap</span>
 </span></code></pre>
-<p>Loads a bitmap that is stored in the extension package with a path, that is relative to the packages root directory.</p>
+<p>Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages root directory.</p>
 <p><strong>measure <code>BitmapMeasurements</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">measure</span>(<span class="hljs-params"> </span>) : <span class="hljs-title">BitmapMeasurements</span>
 </span></code></pre>

@@ -251,7 +251,7 @@ It contains necessary information for the typescript compiler, like input and ou
 <a id="markdown-4-create-the-folder-types-and-copy-the-file-piwebdts-into-it" name="4-create-the-folder-types-and-copy-the-file-piwebdts-into-it"></a>
 #### 4. Create the folder `@types` and copy the file `piweb.d.ts` into it
 
-These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **TODO**. The folder `@types` was defined as the type root in the `tsconfig.json` file.
+These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts)**. The folder `@types` was defined as the type root in the `tsconfig.json` file.
 
 <a id="markdown-5-create-the-folder-src-and-create-the-file-indexts-in-it" name="5-create-the-folder-src-and-create-the-file-indexts-in-it"></a>
 #### 5. Create the folder `src` and create the file `index.ts` in it
@@ -1335,7 +1335,7 @@ static function loadFromVfs(
 ) : Bitmap
 ```
 
-Loads a bitmap that is stored in the extension package with a path, that is relative to the packages root directory.
+Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages root directory.
 
 **measure `BitmapMeasurements`**
 
