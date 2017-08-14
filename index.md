@@ -734,7 +734,7 @@ import * as host from 'piweb_host'
 <a id="markdown-basic-functions" name="basic-functions"></a>
 ### Basic Functions 
 
-**getSize `Size`**
+**getSize [`Size`](#size)**
 
 ```TypeScript
 function getSize(): Size;
@@ -742,7 +742,7 @@ function getSize(): Size;
 
 Returns the current size of the element in **millimeters**. 
 
-**getPosition `Point`**
+**getPosition [`Point`](#point)**
 
 ```TypeScript
 function getPosition(): Point;
@@ -771,7 +771,7 @@ const toolboxItemName : string = piweb.environment.toolboxItemName;
 
 In case you specified multiple toolbox items in the `package.json` file, this is the interface to find out, which item the user picked. The returned value is equal to the property name you used to identity the toolbox entry.
 
-**currentCulture `CultureInfo`**
+**currentCulture [`CultureInfo`](#cultureinfo)**
 
 ```TypeScript
 const currentCulture : CultureInfo = piweb.environment.currentCulture;
@@ -1115,7 +1115,7 @@ class Drawing
 
 Describes a two dimensional vector graphics image.
 
-**open `DrawingContext`**
+**open [`DrawingContext`](#drawingcontext)**
 
 ```TypeScript
 function open() : DrawingContext
@@ -1393,7 +1393,7 @@ Determines how an image is arranged and layouted. You can specify the stretch/as
 |<img style="height:64px;width:128px;" src="gfx/imageSizeByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
 |<img style="height:64px;width:128px;" src="gfx/imageSizeByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
 |<img style="height:64px;width:128px;" src="gfx/imageSizeByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
-|<img style="height:64px;width:128px;" src="gfx/imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled. |
+|<img style="height:64px;width:128px;" src="gfx/imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually lead to the most appealing result, because the image doesn't need to be stretched. |
 
 **position [`point`](#point)**
 
@@ -1994,11 +1994,12 @@ Represents an elliptical arc between two points. To define an arc segment you ha
 
 <img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
 
-
-* <font color="#56abff">blue:</font> arcType `small`, sweepDirection `counterclockwise`
-* <font color="#ffab56">orange:</font> arcType `small`, sweepDirection `clockwise`
-* <font color="#67cc00">green:</font> arcType `large`, sweepDirection `counterclockwise`
-* <font color="#b40000">red:</font> arcType `large`, sweepDirection `clockwise`
+| color | arcType | sweepDirection |
+|-------|---------|----------------|
+|<font color="#56abff">blue</font> | `small` | `counterclockwise`
+|<font color="#ffab56">orange</font> | `small` | `clockwise`
+|<font color="#67cc00">green</font> | `large` | `counterclockwise`
+|<font color="#b40000">red</font> | `large` | `clockwise`
 
 **to [`Point`](#point)**
 

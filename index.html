@@ -832,11 +832,11 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 </code></pre>
 <p><a id="markdown-basic-functions" name="basic-functions"></a></p>
 <h3>Basic Functions</h3>
-<p><strong>getSize <code>Size</code></strong></p>
+<p><strong>getSize <a href="#size"><code>Size</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSize</span>(<span class="hljs-params"></span>): <span class="hljs-title">Size</span></span>;
 </code></pre>
 <p>Returns the current size of the element in <strong>millimeters</strong>.</p>
-<p><strong>getPosition <code>Point</code></strong></p>
+<p><strong>getPosition <a href="#point"><code>Point</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPosition</span>(<span class="hljs-params"></span>): <span class="hljs-title">Point</span></span>;
 </code></pre>
 <p>Returns the position of the element on the report page in <strong>millimeters</strong>.</p>
@@ -851,7 +851,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> toolboxItemName : <span class="hljs-built_in">string</span> = piweb.environment.toolboxItemName;
 </code></pre>
 <p>In case you specified multiple toolbox items in the <code>package.json</code> file, this is the interface to find out, which item the user picked. The returned value is equal to the property name you used to identity the toolbox entry.</p>
-<p><strong>currentCulture <code>CultureInfo</code></strong></p>
+<p><strong>currentCulture <a href="#cultureinfo"><code>CultureInfo</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> currentCulture : CultureInfo = piweb.environment.currentCulture;
 </code></pre>
 <p>Returns the culture in which the host process has been started. You can use this information to</p>
@@ -1065,7 +1065,7 @@ context.drawLine(
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Drawing
 </code></pre>
 <p>Describes a two dimensional vector graphics image.</p>
-<p><strong>open <code>DrawingContext</code></strong></p>
+<p><strong>open <a href="#drawingcontext"><code>DrawingContext</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">open</span>(<span class="hljs-params"></span>) : <span class="hljs-title">DrawingContext</span>
 </span></code></pre>
 <p>Creates a <a href="#drawingcontext"><code>DrawingContext</code></a> which can be used to create the content of the drawing.</p>
@@ -1271,7 +1271,7 @@ context.drawLine(
 <td><img style="height:64px;width:128px;" src="gfx/imageNatural.svg"></td>
 <td><code>undefined</code></td>
 <td><code>undefined</code></td>
-<td>The image will be drawn in its original size. This will usually result in the most appealing result, because the image doesn't need to be scaled.</td>
+<td>The image will be drawn in its original size. This will usually lead to the most appealing result, because the image doesn't need to be stretched.</td>
 </tr>
 </tbody>
 </table>
@@ -1639,12 +1639,37 @@ context.drawLine(
 </code></pre>
 <p>Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:</p>
 <img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
-<ul>
-<li><font color="#56abff">blue:</font> arcType <code>small</code>, sweepDirection <code>counterclockwise</code></li>
-<li><font color="#ffab56">orange:</font> arcType <code>small</code>, sweepDirection <code>clockwise</code></li>
-<li><font color="#67cc00">green:</font> arcType <code>large</code>, sweepDirection <code>counterclockwise</code></li>
-<li><font color="#b40000">red:</font> arcType <code>large</code>, sweepDirection <code>clockwise</code></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>color</th>
+<th>arcType</th>
+<th>sweepDirection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font color="#56abff">blue</font></td>
+<td><code>small</code></td>
+<td><code>counterclockwise</code></td>
+</tr>
+<tr>
+<td><font color="#ffab56">orange</font></td>
+<td><code>small</code></td>
+<td><code>clockwise</code></td>
+</tr>
+<tr>
+<td><font color="#67cc00">green</font></td>
+<td><code>large</code></td>
+<td><code>counterclockwise</code></td>
+</tr>
+<tr>
+<td><font color="#b40000">red</font></td>
+<td><code>large</code></td>
+<td><code>clockwise</code></td>
+</tr>
+</tbody>
+</table>
 <p><strong>to <a href="#point"><code>Point</code></a></strong></p>
 <p>Endpoint of the arc.</p>
 <p><strong>size <a href="#size"><code>Size</code></a></strong></p>
