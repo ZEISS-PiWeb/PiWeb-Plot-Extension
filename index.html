@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css">   
 </head>
 <body class="markdown-body" data-spy="scroll" data-target="#toc">
-<div id="structure" class="col-sm-3">
+<div id="structure" class="col-sm-2 col-sm-offset-1">
     <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
 </div>
 <div id="printarea" class="col-sm-6 content">
@@ -126,13 +126,19 @@
 <li><a href="#geometry">Geometry</a>
 <ul>
 <li><a href="#content-4">Content</a></li>
-<li><a href="#geometry-1">Geometry</a></li>
+<li><a href="#geometry-1">Geometry</a>
+<ul>
 <li><a href="#geometrymeasurements">GeometryMeasurements</a></li>
-<li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a></li>
+<li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a>
+<ul>
 <li><a href="#horizontalanchor">HorizontalAnchor</a></li>
 <li><a href="#verticalanchor">VerticalAnchor</a></li>
+</ul>
+</li>
 <li><a href="#fillrule">FillRule</a></li>
 <li><a href="#geometrycombinemode">GeometryCombineMode</a></li>
+</ul>
+</li>
 <li><a href="#linegeometry">LineGeometry</a></li>
 <li><a href="#rectanglegeometry">RectangleGeometry</a></li>
 <li><a href="#ellipsegeometry">EllipseGeometry</a></li>
@@ -896,10 +902,11 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <h4>DateKind</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> DateKind
 </code></pre>
+<p>When parsing a date without a specified timezone the <code>DateKind</code> parameter determines which timezone the date has.</p>
 <p><strong><code>AssumeLocal</code></strong></p>
-<p>TODO</p>
+<p>The represented time will be interpreted as local time.</p>
 <p><strong><code>AssumeUTC</code></strong></p>
-<p>TODO</p>
+<p>The represented time will be interpreted as UTC.</p>
 <p><a id="markdown-classes" name="classes"></a></p>
 <h3>Classes</h3>
 <p><a id="markdown-cultureinfo" name="cultureinfo"></a></p>
@@ -967,7 +974,6 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 </span>) : <span class="hljs-title">Date</span> | <span class="hljs-title">null</span></span>;
 </code></pre>
 <p>Converts the specified string to its <code>Date</code> equivalent by using culture specific format information and formatting style.</p>
-<p><strong>TODO:</strong> Link to microsoft format string reference... or a short reference</p>
 <p><a id="markdown-drawing" name="drawing"></a></p>
 <h2>Drawing</h2>
 <p>To access the drawing classes, import the <code>piweb</code> interface into your script. All necessary classes for drawing are encapsulated in the <code>piweb.drawing</code> module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the <code>render</code> event, which has a <a href="#drawingcontext"><code>DrawingContext</code></a> object as its parameter.</p>
@@ -1424,13 +1430,19 @@ context.drawLine(
 <p><a id="markdown-content-4" name="content-4"></a></p>
 <h4>Content</h4>
 <ul>
-<li><a href="#geometry-1">Geometry</a></li>
+<li><a href="#geometry-1">Geometry</a>
+<ul>
 <li><a href="#geometrymeasurements">GeometryMeasurements</a></li>
-<li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a></li>
+<li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a>
+<ul>
 <li><a href="#horizontalanchor">HorizontalAnchor</a></li>
 <li><a href="#verticalanchor">VerticalAnchor</a></li>
+</ul>
+</li>
 <li><a href="#fillrule">FillRule</a></li>
 <li><a href="#geometrycombinemode">GeometryCombineMode</a></li>
+</ul>
+</li>
 <li><a href="#linegeometry">LineGeometry</a></li>
 <li><a href="#rectanglegeometry">RectangleGeometry</a></li>
 <li><a href="#ellipsegeometry">EllipseGeometry</a></li>
@@ -1466,7 +1478,7 @@ context.drawLine(
 </span></code></pre>
 <p>Calculates the bounding box of the geometry.</p>
 <p><a id="markdown-geometrymeasurements" name="geometrymeasurements"></a></p>
-<h4>GeometryMeasurements</h4>
+<h5>GeometryMeasurements</h5>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryMeasurements
 </code></pre>
 <p>Describes size and position of a geometries bounding box.</p>
@@ -1479,7 +1491,7 @@ context.drawLine(
 <p><strong>width <code>number</code></strong></p>
 <p>The overall width, not including the stroke thickness.</p>
 <p><a id="markdown-geometrydrawingsettings" name="geometrydrawingsettings"></a></p>
-<h4>GeometryDrawingSettings</h4>
+<h5>GeometryDrawingSettings</h5>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryDrawingSettings
 </code></pre>
 <p>Determines how a geometry is arranged when it's drawn. When using anchors, PiWeb calculates a bounding box around the geometry and arranges it according to the anchors on the specified position.</p>
@@ -1490,7 +1502,7 @@ context.drawLine(
 <p><strong>anchorY <a href="#verticalanchor"><code>VerticalAnchor?</code></a></strong></p>
 <p>Determines how the geometry aligns to the position vertically.</p>
 <p><a id="markdown-horizontalanchor" name="horizontalanchor"></a></p>
-<h4>HorizontalAnchor</h4>
+<h6>HorizontalAnchor</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> HorizontalAnchor
 </code></pre>
 <p>Determines how the geometry aligns to the position horizontally.</p>
@@ -1511,7 +1523,7 @@ context.drawLine(
 <p>The geometry will be drawn with the position on the right side.</p>
 <p><br><br></p>
 <p><a id="markdown-verticalanchor" name="verticalanchor"></a></p>
-<h4>VerticalAnchor</h4>
+<h6>VerticalAnchor</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> VerticalAnchor
 </code></pre>
 <p>Determines how the geometry aligns to the position vertically.</p>
@@ -1532,7 +1544,7 @@ context.drawLine(
 <p>The geometry will be drawn with the position on the bottom.</p>
 <p><br><br></p>
 <p><a id="markdown-fillrule" name="fillrule"></a></p>
-<h4>FillRule</h4>
+<h5>FillRule</h5>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> FillRule
 </code></pre>
 <p>Determines how overlapping geometries are filled.</p>
@@ -1545,7 +1557,7 @@ context.drawLine(
 <p>Fills the area that is overlapped by at least one geometry.
 <br><br><br></p>
 <p><a id="markdown-geometrycombinemode" name="geometrycombinemode"></a></p>
-<h4>GeometryCombineMode</h4>
+<h5>GeometryCombineMode</h5>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> GeometryCombineMode
 </code></pre>
 <p>Determines how two geometries are combined.</p>

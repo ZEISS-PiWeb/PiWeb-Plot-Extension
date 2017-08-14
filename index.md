@@ -11,7 +11,7 @@
 </head>
 
 <body class="markdown-body" data-spy="scroll" data-target="#toc">
-<div id="structure" class="col-sm-3">
+<div id="structure" class="col-sm-2 col-sm-offset-1">
     <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
 </div>
 <div id="printarea" class="col-sm-6 content">
@@ -87,12 +87,12 @@
     - [Geometry](#geometry)
         - [Content](#content-4)
         - [Geometry](#geometry-1)
-        - [GeometryMeasurements](#geometrymeasurements)
-        - [GeometryDrawingSettings](#geometrydrawingsettings)
-        - [HorizontalAnchor](#horizontalanchor)
-        - [VerticalAnchor](#verticalanchor)
-        - [FillRule](#fillrule)
-        - [GeometryCombineMode](#geometrycombinemode)
+            - [GeometryMeasurements](#geometrymeasurements)
+            - [GeometryDrawingSettings](#geometrydrawingsettings)
+                - [HorizontalAnchor](#horizontalanchor)
+                - [VerticalAnchor](#verticalanchor)
+            - [FillRule](#fillrule)
+            - [GeometryCombineMode](#geometrycombinemode)
         - [LineGeometry](#linegeometry)
         - [RectangleGeometry](#rectanglegeometry)
         - [EllipseGeometry](#ellipsegeometry)
@@ -869,13 +869,15 @@ Returns the value of the property with the name `id` as a `FontDescription`. The
 enum DateKind
 ```
 
+When parsing a date without a specified timezone the `DateKind` parameter determines which timezone the date has.
+
 **`AssumeLocal`**
 
-TODO
+The represented time will be interpreted as local time.
         
 **`AssumeUTC`**
 
-TODO
+The represented time will be interpreted as UTC.
 
 <a id="markdown-classes" name="classes"></a>
 ### Classes
@@ -986,8 +988,6 @@ function parseDateExact(
 ```
 
 Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
-
-**TODO:** Link to microsoft format string reference... or a short reference
 
 <a id="markdown-drawing" name="drawing"></a>
 ## Drawing  
@@ -1645,12 +1645,12 @@ Combines multiple transformations into one by multiplying their matrices. As mat
 #### Content
 
 - [Geometry](#geometry-1)
-- [GeometryMeasurements](#geometrymeasurements)
-- [GeometryDrawingSettings](#geometrydrawingsettings)
-- [HorizontalAnchor](#horizontalanchor)
-- [VerticalAnchor](#verticalanchor)
-- [FillRule](#fillrule)
-- [GeometryCombineMode](#geometrycombinemode)
+    - [GeometryMeasurements](#geometrymeasurements)
+    - [GeometryDrawingSettings](#geometrydrawingsettings)
+        - [HorizontalAnchor](#horizontalanchor)
+        - [VerticalAnchor](#verticalanchor)
+    - [FillRule](#fillrule)
+    - [GeometryCombineMode](#geometrycombinemode)
 - [LineGeometry](#linegeometry)
 - [RectangleGeometry](#rectanglegeometry)
 - [EllipseGeometry](#ellipsegeometry)
@@ -1690,7 +1690,7 @@ function measure() : GeometryMeasurements
 Calculates the bounding box of the geometry.
 
 <a id="markdown-geometrymeasurements" name="geometrymeasurements"></a>
-#### GeometryMeasurements
+##### GeometryMeasurements
 
 ```TypeScript
 class GeometryMeasurements
@@ -1715,7 +1715,7 @@ The overall height, not including the stroke thickness.
 The overall width, not including the stroke thickness.
 
 <a id="markdown-geometrydrawingsettings" name="geometrydrawingsettings"></a>
-#### GeometryDrawingSettings
+##### GeometryDrawingSettings
 
 ```TypeScript
 class GeometryDrawingSettings
@@ -1736,7 +1736,7 @@ Determines how the geometry aligns to the position horizontally.
 Determines how the geometry aligns to the position vertically.
 
 <a id="markdown-horizontalanchor" name="horizontalanchor"></a>
-#### HorizontalAnchor
+###### HorizontalAnchor
 
 ```TypeScript
 enum HorizontalAnchor
@@ -1777,7 +1777,7 @@ The geometry will be drawn with the position on the right side.
 <br><br>
 
 <a id="markdown-verticalanchor" name="verticalanchor"></a>
-#### VerticalAnchor
+###### VerticalAnchor
 
 ```TypeScript
 enum VerticalAnchor
@@ -1818,7 +1818,7 @@ The geometry will be drawn with the position on the bottom.
 <br><br>
 
 <a id="markdown-fillrule" name="fillrule"></a>
-#### FillRule
+##### FillRule
 
 ```TypeScript
 enum FillRule
@@ -1841,7 +1841,7 @@ Fills the area that is overlapped by at least one geometry.
 <br><br><br>
 
 <a id="markdown-geometrycombinemode" name="geometrycombinemode"></a>
-#### GeometryCombineMode
+##### GeometryCombineMode
 
 ```TypeScript
 enum GeometryCombineMode
