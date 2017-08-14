@@ -11,10 +11,10 @@
 </head>
 
 <body class="markdown-body" data-spy="scroll" data-target="#toc">
-<div id="structure" class="col-sm-2 col-sm-offset-1">
+<div id="structure" class="col-sm-3 col-md-2 col-lg-2 col-lg-offset-1 ">
     <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
 </div>
-<div id="printarea" class="col-sm-6 content">
+<div id="printarea" class="col-sm-6 col-md-8 col-lg-6 content ">
 
 # PiWeb Custom Plot
 
@@ -3467,7 +3467,12 @@ function debug(
 
 Generates a log message with the `debug` log level.
     
+<div class="footer">
+    <hr>
+	<a href="http://www.zeiss-izm.de" target="_blank">This project is maintained by Carl Zeiss IZfM</a>
 </div>
+
+</div> <!--content col-sm-9-->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

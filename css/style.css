@@ -118,3 +118,9 @@ nav[data-toggle='toc'] {
    #structure { display:none; }
    #printarea { display:block; }
 }
+
+.footer
+{   
+    margin-bottom: 16px; 
+    text-align: center;
+}
