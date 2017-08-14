@@ -282,7 +282,7 @@
 </div>
 <p><a id="markdown-quickstart" name="quickstart"></a></p>
 <h2>Quickstart</h2>
-<p>In order to create your first own custom plot, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As javascript is untyped, we suggest you to develop your extension using <strong>Typescript</strong>.</p>
+<p>In order to create your first own custom plot, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As JavaScript is untyped, we suggest you to develop your extension using <strong>TypeScript</strong>.</p>
 <p>PiWeb searches for extensions in several locations. Ordered by their priority, these are:</p>
 <ul>
 <li>In the application data directory <code>%APPDATA%\Zeiss\PiWeb\Extensions</code></li>
@@ -902,7 +902,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <h4>DateKind</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> DateKind
 </code></pre>
-<p>When parsing a date without a specified timezone the <code>DateKind</code> parameter determines which timezone the date has.</p>
+<p>When parsing a date without a specified time zone the <code>DateKind</code> parameter determines which time zone the date has.</p>
 <p><strong><code>AssumeLocal</code></strong></p>
 <p>The represented time will be interpreted as local time.</p>
 <p><strong><code>AssumeUTC</code></strong></p>
@@ -991,7 +991,7 @@ host.on(<span class="hljs-string">"render"</span>, render);
 <a id="markdown-interfaces" name="interfaces"></a></p>
 <h3>Interfaces</h3>
 <p>Most drawing objects, like <a href="#color"><code>Color</code></a>, <a href="#brush"><code>Brush</code></a>, <a href="#pen"><code>Pen</code></a>, <a href="#font"><code>Font</code></a> and <a href="#geometry"><code>Geometry</code></a> implement an interface that is named like the implementing class, with an additional <code>Description</code> suffix (e.g. <code>ColorDescription</code>).
-Classes that implement such a description interface have a <code>create</code> method, that takes a description interface as parameter.<br><br> Constructors in javascript and typescript cannot be overloaded, which means that you have to specifiy a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:</p>
+Classes that implement such a description interface have a <code>create</code> method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:</p>
 <p><strong>Long version using constructors:</strong></p>
 <pre><code class="language-TypeScript">context.setPen(<span class="hljs-keyword">new</span> piweb.drawing.Pen(
     <span class="hljs-keyword">new</span> piweb.drawing.SolidColorBrush(
@@ -1040,7 +1040,7 @@ context.drawLine(
 </code></pre>
 <p>Represents a position</p>
 <p><strong>x <code>number</code></strong></p>
-<p>Hoirizontal position.</p>
+<p>Horizontal position.</p>
 <p><strong>y <code>number</code></strong></p>
 <p>Vertical position</p>
 <p><a id="markdown-size" name="size"></a></p>
@@ -1049,9 +1049,9 @@ context.drawLine(
 </code></pre>
 <p>Represents a position</p>
 <p><strong>width <code>number</code></strong></p>
-<p>Hoirizontal dimension.</p>
+<p>Horizontal dimension.</p>
 <p><strong>height <code>number</code></strong></p>
-<p>Vertical dimention.</p>
+<p>Vertical dimension.</p>
 <p><a id="markdown-drawing-1" name="drawing-1"></a></p>
 <h3>Drawing</h3>
 <p><a id="markdown-content-1" name="content-1"></a></p>
@@ -1116,7 +1116,7 @@ context.drawLine(
     settings: GeometryDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified <a href="#geometry"><code>Geometry</code></a> and fills it with the brush which has been previously set using the <a href="#drawingcontext-setbrush"><code>setBrush</code></a> function, and strokes it using the pen which has been previously set with the <a href="#drawingcontext-setpen"><code>setPen</code></a> function. In case you want to draw a larger number of geometries, consider greating a <a href="#geometrygroup"><code>GeometryGroup</code></a>, containing multiple <a href="#geometry"><code>Geometry</code></a> objects to improve the drawing performance. The geometry can be easily aligned with the <a href="#geometrydrawingsettings"><code>settings</code></a> parameter.</p>
+<p>Draws the specified <a href="#geometry"><code>Geometry</code></a> and fills it with the brush which has been previously set using the <a href="#drawingcontext-setbrush"><code>setBrush</code></a> function, and strokes it using the pen which has been previously set with the <a href="#drawingcontext-setpen"><code>setPen</code></a> function. In case you want to draw a larger number of geometries, consider creating a <a href="#geometrygroup"><code>GeometryGroup</code></a>, containing multiple <a href="#geometry"><code>Geometry</code></a> objects to improve the drawing performance. The geometry can be easily aligned with the <a href="#geometrydrawingsettings"><code>settings</code></a> parameter.</p>
 <p><a id="drawingcontext-drawtext" name="drawingcontext-drawtext"></a>
 <strong>drawText <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawText</span>(<span class="hljs-params">
@@ -1124,7 +1124,7 @@ context.drawLine(
     settings: TextDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified <a href="#formattedtext"><code>FormattedText</code></a> at with the specified <a href="#textdrawingsettings"><code>TextDrawingSettings</code></a>. There are numerous properties which will help you to adjust how the text is layouted and displayed. For more information, please read the chapter <a href="#formattedtext">FormattedText</a>, <a href="#font">Font</a> and <a href="#textdrawingsettings">TextDrawingSettings</a>.</p>
+<p>Draws the specified <a href="#formattedtext"><code>FormattedText</code></a> at with the specified <a href="#textdrawingsettings"><code>TextDrawingSettings</code></a>. There are numerous properties which will help you to adjust how the text is arranged and displayed. For more information, please read the chapter <a href="#formattedtext">FormattedText</a>, <a href="#font">Font</a> and <a href="#textdrawingsettings">TextDrawingSettings</a>.</p>
 <p><a id="drawingcontext-drawimage" name="drawingcontext-drawimage"></a>
 <strong>drawImage <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawImage</span>(<span class="hljs-params">
@@ -1159,7 +1159,7 @@ context.drawLine(
     brush: Brush
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Sets the brush that will be used for all subsequent calls to <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be filled,  use the <a href="#drawingcontext-nobrush"><code>noBrush</code></a> function.</p>
+<p>Sets the brush that will be used for all subsequent calls to <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be filled, use the <a href="#drawingcontext-nobrush"><code>noBrush</code></a> function.</p>
 <p><a id="drawingcontext-nobrush" name="drawingcontext-nobrush"></a>
 <strong>noBrush  <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">noBrush</span>(<span class="hljs-params"> </span>): <span class="hljs-title">void</span></span>;
@@ -1238,7 +1238,7 @@ context.drawLine(
 <h4>ImageDrawingSettings</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> ImageDrawingSettings
 </code></pre>
-<p>Determines how an image is arranged and layouted. You can specify the stretch/aspect of the image with the <code>width</code>and <code>height</code> parameters like the following:</p>
+<p>Determines how an image is arranged. You can specify the stretch/aspect of the image with the <code>width</code> and <code>height</code> parameters like the following:</p>
 <table>
 <thead>
 <tr>
@@ -1385,7 +1385,7 @@ context.drawLine(
 <h4>MatrixTransform</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MatrixTransform <span class="hljs-keyword">extends</span> Transform
 </code></pre>
-<p>All transformation types are converted into a 3x3 matrix when they are applied. With the matrix transformation it's possible to define a transformation that is based on an arbitary 3x3 matrix.</p>
+<p>All transformation types are converted into a 3x3 matrix when they are applied. With the matrix transformation it's possible to define a transformation that is based on an arbitrary 3x3 matrix.</p>
 <table>
 <thead>
 <tr>
@@ -1470,7 +1470,7 @@ context.drawLine(
 <h4>Geometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> Geometry
 </code></pre>
-<p>Geometries can be used for drawing and clipping. Multiple geometries can be combined using the GroupGeometry or CombinedGeometry classes.</p>
+<p>Geometries can be used for drawing and clipping. Multiple geometries can be combined using the <a href="#geometrygroup"><code>GeometryGroup</code></a> or <a href="#combinedgeometry"><code>CombinedGeometry</code></a> classes.</p>
 <p><strong>transform <a href="#transform"><code>Transform?</code></a></strong></p>
 <p>All geometries can have a transformation. The default value is the identity transform.</p>
 <p><strong>measure <a href="geometrymeasurements"><code>GeometryMeasurements</code></a></strong></p>
@@ -1483,9 +1483,9 @@ context.drawLine(
 </code></pre>
 <p>Describes size and position of a geometries bounding box.</p>
 <p><strong>x <code>number</code></strong></p>
-<p>the x-coordinate of the top left corner of the bounding box.</p>
+<p>The x-coordinate of the top left corner of the bounding box.</p>
 <p><strong>y <code>number</code></strong></p>
-<p>the y-coordinate of the top left corner of the bounding box.</p>
+<p>The y-coordinate of the top left corner of the bounding box.</p>
 <p><strong>height <code>number</code></strong></p>
 <p>The overall height, not including the stroke thickness.</p>
 <p><strong>width <code>number</code></strong></p>
@@ -1637,7 +1637,7 @@ context.drawLine(
 <h6>ArcSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> ArcSegment <span class="hljs-keyword">extends</span> PathSegment
 </code></pre>
-<p>Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:</p>
+<p>Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specify additional parameters as shown in the following picture:</p>
 <img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
 <table>
 <thead>
@@ -1673,7 +1673,7 @@ context.drawLine(
 <p><strong>to <a href="#point"><code>Point</code></a></strong></p>
 <p>Endpoint of the arc.</p>
 <p><strong>size <a href="#size"><code>Size</code></a></strong></p>
-<p>The x- and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the startpoint and the endpoint, it will be scaled until it fits, preserving the aspect ratio of the ellipse.</p>
+<p>The x- and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.</p>
 <p><strong>angle <code>number</code></strong></p>
 <p>Rotation angle of the ellipse in <em>degrees</em>.</p>
 <p><strong>arcType <code>enumeration</code></strong></p>
@@ -1734,7 +1734,7 @@ context.drawLine(
 </code></pre>
 <p>Describes a <a href="#pathgeometry"><code>PathGeometry</code></a> with a string. The markup is a superset of the <a href="https://www.w3.org/TR/svg-paths/#PathDataGeneralInformation">SVG Path Markup</a>.</p>
 <p><strong>pathString <code>string</code></strong></p>
-<p>The path wich is used to define a string. Points are written in the form of <code>x,y</code>, where <code>x</code> and <code>y</code> are either invariant floating point numbers (<code>0.0</code>) or integers.</p>
+<p>The path which is used to define a string. Points are written in the form of <code>x,y</code>, where <code>x</code> and <code>y</code> are either invariant floating point numbers (<code>0.0</code>) or integers.</p>
 <table>
 <thead>
 <tr>
@@ -1789,7 +1789,7 @@ context.drawLine(
 <h4>CombinedGeometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CombinedGeometry <span class="hljs-keyword">extends</span> Geometry
 </code></pre>
-<p>Describes a geometry, that is composed of exactly two child geometries. The difference to the <a href="#geometrygroup">GeometryGroup</a> is, that the CombinedGeometry is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. CombinedGeometry objects can themselves be combined again.</p>
+<p>Describes a geometry, that is composed of exactly two child geometries. The difference to the <a href="#geometrygroup">GeometryGroup</a> is, that the <a href="#combinedgeometry"><code>CombinedGeometry</code></a> is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. <a href="#combinedgeometry"><code>CombinedGeometry</code></a> objects can themselves be combined again.</p>
 <p><strong>geometry1 <a href="#geometry"><code>Geometry</code></a></strong></p>
 <p>The first child.</p>
 <p><strong>geometry2 <a href="#geometry"><code>Geometry</code></a></strong></p>
@@ -1833,7 +1833,7 @@ context.drawLine(
 <h4>Brush</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> Brush
 </code></pre>
-<p>Describes how an arbitary geometry is filled.</p>
+<p>Describes how an arbitrary geometry is filled.</p>
 <p><strong>opacity <code>number</code></strong></p>
 <p>The opacity of the brush. Valid values are in the range of <code>[0..1]</code>, where <code>0</code> is completely translucent and <code>1</code> is opaque.</p>
 <p><a id="markdown-solidcolorbrush" name="solidcolorbrush"></a></p>
@@ -1873,7 +1873,7 @@ context.drawLine(
 <p><strong>brush <a href="#brush"><code>Brush</code></a></strong></p>
 <p>The brush that is used to fill the outline procudes with the pen.</p>
 <p><strong>thickness <code>number</code></strong></p>
-<p>The thickness of stroke procudes by the pen in <strong>millimeters</strong>.</p>
+<p>The thickness of stroke that is produced by the pen (in <strong>millimeters</strong>).</p>
 <p><strong>startCap <a href="#linecap"><code>LineCap</code></a></strong></p>
 <p>The geometry added to the beginning of the stroke.</p>
 <p><strong>endCap <a href="#linecap"><code>LineCap</code></a></strong></p>
@@ -1881,9 +1881,9 @@ context.drawLine(
 <p><strong>lineJoin <a href="#linejoin"><code>LineJoin</code></a></strong></p>
 <p>The geometry added between to segments of the stroke.</p>
 <p><strong>dashStyle <code>number[]</code></strong></p>
-<p>The definition of the dashses used to render the stroke. The default value is empty, which will render one solid line. The length of the dashses and gaps specified here are multiplied with the thickness of the pen when it is drawn. So in case you want dashses with a length of one millimeter on a pen with 0.1 mm thickness, you must specify a dash of length 10 here.</p>
+<p>The definition of the dashes used to render the stroke. The default value is empty, which will render one solid line. The length of the dashes and gaps specified here are multiplied with the thickness of the pen when it is drawn. So in case you want dashes with a length of one millimeter on a pen with 0.1 mm thickness, you must specify a dash of length 10 here.</p>
 <p><strong>dashOffset <code>number</code></strong></p>
-<p>The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dashstyle. Be aware that a <strong>positive</strong> offset will move the dashses <strong>against stroke direction</strong></p>
+<p>The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dash style. Be aware that a <strong>positive</strong> offset will move the dashes <strong>against stroke direction</strong></p>
 <p><strong>dashCap <a href="#linecap"><code>LineCap</code></a></strong></p>
 <p>The geometry added at the beginning and end of each dash.</p>
 <p><a id="markdown-linecap" name="linecap"></a></p>
@@ -1943,9 +1943,9 @@ context.drawLine(
 <h4>FormattedText</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> FormattedText
 </code></pre>
-<p>Describes a textblock with a certain style and size, in which the text can be arranged.</p>
+<p>Describes a text block with a certain style and size, in which the text can be arranged.</p>
 <p><strong>text <code>string</code></strong></p>
-<p>The text to be formatted. The text can include linebreaks.</p>
+<p>The text to be formatted. The text can include line breaks.</p>
 <p><strong>font <a href="#font"><code>Font</code></a></strong></p>
 <p>The font that describes how the text is rendered</p>
 <p><strong>maxTextWidth <code>number</code></strong></p>
@@ -1968,7 +1968,7 @@ context.drawLine(
 <h4>FlowDirection</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> FlowDirection
 </code></pre>
-<p>Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the <a href="#horizontaltextalignment"><code>HorizontalTextAlignment</code></a>, the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.</p>
+<p>Determines if the text is arranged from the left to the right or from the right to the left. While this seems to be redundant with the <a href="#horizontaltextalignment"><code>HorizontalTextAlignment</code></a>, the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.</p>
 <p><strong><code>leftToRight</code> (default)</strong></p>
 <img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.svg">
 <p>Layouting starts at the left boundary.</p>
@@ -2044,9 +2044,9 @@ context.drawLine(
 <p><strong>lineHeight <code>number</code></strong></p>
 <p>The height of a single line of text.</p>
 <p><strong>minWidth <code>number</code></strong></p>
-<p>The actual width of the text itself, excluding leading and trailing whitespace from layouting.</p>
+<p>The actual width of the text itself, excluding leading and trailing whitespace between the text and the boundaries.</p>
 <p><strong>width <code>number</code></strong></p>
-<p>The overall width, including the possible leading and trailing whitespace from layouting.</p>
+<p>The overall width, including the possible leading and trailing whitespace between the text and the boundaries.</p>
 <p><a id="markdown-textdrawingsettings" name="textdrawingsettings"></a></p>
 <h4>TextDrawingSettings</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> TextDrawingSettings
@@ -2195,39 +2195,39 @@ context.drawLine(
 <tbody>
 <tr>
 <td><strong><code>ultraCondensed</code></strong></td>
-<td><strong>50%</strong> of the default widht/height ratio</td>
+<td><strong>50%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>extraCondensed</code></strong></td>
-<td><strong>62.5%</strong> of the default widht/height ratio</td>
+<td><strong>62.5%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>condensed</code></strong></td>
-<td><strong>75%</strong> of the default widht/height ratio</td>
+<td><strong>75%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>semiCondensed</code></strong></td>
-<td><strong>87.5%</strong> of the default widht/height ratio</td>
+<td><strong>87.5%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>normal</code></strong></td>
-<td><strong>100%</strong> of the default widht/height ratio</td>
+<td><strong>100%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>semiExpanded</code></strong></td>
-<td><strong>112.5%</strong> of the default widht/height ratio</td>
+<td><strong>112.5%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>expanded</code></strong></td>
-<td><strong>125%</strong> of the default widht/height ratio</td>
+<td><strong>125%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>extraExpanded</code></strong></td>
-<td><strong>150%</strong> of the default widht/height ratio</td>
+<td><strong>150%</strong> of the default width/height ratio</td>
 </tr>
 <tr>
 <td><strong><code>ultraExpanded</code></strong></td>
-<td><strong>200%</strong> of the default widht/height ratio</td>
+<td><strong>200%</strong> of the default width/height ratio</td>
 </tr>
 </tbody>
 </table>
@@ -2272,9 +2272,9 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>Attribute</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Attribute
 </code></pre>
-<p>An attribute stores additional information about an arbitary entity. Entities with attributes are parts, characteristics, measurements, measurement values and catalog entries. An attribute is identified by its <code>Key</code>. To get information about the type and usage of an attribute, use the <code>Key</code> to get the <strong><a href="#attributedefinition"><code>AttributeDefinition</code></a></strong> from the <strong><a href="#configuration"><code>Configuration</code></a></strong>.</p>
+<p>An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measurement values and catalog entries. An attribute is identified by its <code>Key</code>. To get information about the type and usage of an attribute, use the <code>Key</code> to get the <strong><a href="#attributedefinition"><code>AttributeDefinition</code></a></strong> from the <strong><a href="#configuration"><code>Configuration</code></a></strong>.</p>
 <p><strong>key <code>number</code></strong></p>
-<p>An unsigned 16 bit integer that identifies the attribues definition.</p>
+<p>An unsigned 16 bit integer that identifies the attributes definition.</p>
 <p><strong>type <a href="#attributetype"><code>AttributeType</code></a></strong></p>
 <p>The datatype of the attributes value.</p>
 <p><strong>value <code>number | string | Date | undefined</code></strong></p>
@@ -2303,7 +2303,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </ul>
 <p><a id="markdown-usage" name="usage"></a></p>
 <h4>Usage</h4>
-<p>Use the following function to get the database configuration from the  server.</p>
+<p>Use the following function to get the database configuration from the server.</p>
 <p><strong>getConfiguration <a href="#configuration"><code>Configuration</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfiguration</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Configuration</span>
 </span></code></pre>
@@ -2313,15 +2313,15 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </code></pre>
 <p>The configuration contains all attribute definitions for parts, characteristics, measurements, measurement values and catalogs.</p>
 <p><strong>partAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions refering to inspection plan parts.</p>
+<p>The set of attribute definitions referring to inspection plan parts.</p>
 <p><strong>characteristicAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions refering to inspection plan characteristics.</p>
+<p>The set of attribute definitions referring to inspection plan characteristics.</p>
 <p><strong>measurementAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions refering to measurements.</p>
+<p>The set of attribute definitions referring to measurements.</p>
 <p><strong>valueAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions refering to measurement values.</p>
+<p>The set of attribute definitions referring to measurement values.</p>
 <p><strong>catalogAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions refering to catalog entries.
+<p>The set of attribute definitions referring to catalog entries.
 <a id="markdown-entitytype" name="entitytype"></a></p>
 <h4>EntityType</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> EntityType
@@ -2350,7 +2350,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>entityType <a href="#entitytype"><code>EntityType</code></a></strong></p>
 <p>The entity type this attribute belongs to.</p>
 <p><strong>catalog <code>string | undefined</code></strong></p>
-<p>In case the <code>dataType</code> is <code>Catalog</code>, this field contains a base64 encoded guid that identifies the <strong><a href="#catalog"><code>Catalog</code></a></strong> that is used by this attribute.</p>
+<p>In case the <code>dataType</code> is <code>Catalog</code>, this field contains a base64 encoded <code>Guid</code> that identifies the <strong><a href="#catalog"><code>Catalog</code></a></strong> that is used by this attribute.</p>
 <p><a id="markdown-catalogs" name="catalogs"></a></p>
 <h3>Catalogs</h3>
 <p><a id="markdown-content-9" name="content-9"></a></p>
@@ -2361,7 +2361,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </ul>
 <p><a id="markdown-usage-1" name="usage-1"></a></p>
 <h4>Usage</h4>
-<p>Use the following function to get the catalogs that are configured in the the  server. Catalogs are identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
+<p>Use the following function to get the catalogs that are configured in the the server. Catalogs are identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
 <p><strong>getCatalogs <a href="#catalog"><code>Map&lt;string, Catalog&gt;</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCatalogs</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Map</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">Catalog</span>&gt;</span>;
 </code></pre>
@@ -2370,7 +2370,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Catalog
 </code></pre>
 <p><strong>guid <code>string</code></strong></p>
-<p>A base64 encoded <code>guid</code> that identifies the catalog.</p>
+<p>A base64 encoded <code>Guid</code> that identifies the catalog.</p>
 <p><strong>name <code>string</code></strong></p>
 <p>An unlocalized name that is used only for displaying purposes.</p>
 <p><strong>validAttributes <code>number[]</code></strong></p>
@@ -2466,9 +2466,9 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </code></pre>
 <p>Describes a measurement of an inspection plan part.</p>
 <p><strong>uuid <code>string</code></strong></p>
-<p>The uuid that identifies this measurement as base64 encoded byte array.</p>
+<p>The <code>Guid</code> that identifies this measurement as base64 encoded byte array.</p>
 <p><strong>part <code>string</code></strong></p>
-<p>The uuid that identifies the part this measurement is associated to.</p>
+<p>The <code>Guid</code> that identifies the part this measurement is associated to.</p>
 <p><strong>values <a href="#measurementvalue"><code>Map&lt;string, MeasurementValue&gt;</code></a></strong></p>
 <p>The values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.</p>
 <p><a id="markdown-measurementvalue" name="measurementvalue"></a></p>
@@ -2476,7 +2476,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementValue <span class="hljs-keyword">extends</span> AttributeItem
 </code></pre>
 <p><strong>characteristic <code>string</code></strong></p>
-<p>The uuid that identifies the characteristic this measurement value is associated to.</p>
+<p>The <code>Guid</code> that identifies the characteristic this measurement value is associated to.</p>
 <p><a id="markdown-raw-data" name="raw-data"></a></p>
 <h3>Raw Data</h3>
 <p><a id="markdown-content-12" name="content-12"></a></p>
@@ -2530,7 +2530,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>RawDataItem</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RawDataItem;
 </code></pre>
-<p>Describes the information about a single raw data entry on the  server. When fetching the raw data items, only these information are fetched from the server, not the data itself.</p>
+<p>Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.</p>
 <p><strong>entityType <a href="#entitytype"><code>EntityType</code></a></strong></p>
 <p>Identifies the type of the entity a <a href="#rawdataitem"><code>RawDataItem</code></a> is attached to.</p>
 <p><strong>name <code>string</code></strong></p>
@@ -2540,16 +2540,16 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>mimeType <code>string</code></strong></p>
 <p>The mimetype of the item.</p>
 <p><strong>md5Bytes <code>Buffer</code></strong></p>
-<p>A buffer of 16 bytes length, containing the datas MD5 hash.</p>
+<p>A buffer of 16 bytes length, containing the data's MD5 hash.</p>
 <p><strong>created <code>Date</code></strong></p>
-<p>The timestamp when the data has been uploaded to the  server.</p>
+<p>The timestamp when the data has been uploaded to the server.</p>
 <p><strong>lastModified <code>Date</code></strong></p>
 <p>The timestamp of the most recent modification.</p>
 <p><strong>readDataSync() <code>host.HostBinary</code></strong></p>
 <p>Use this function to actually fetch the data associated to the <code>RawDataItem</code>. The data is returned as a <code>HostBuffer</code>, which can be converted to a <code>Buffer</code> using the <code>makeBuffer</code> function.</p>
 <p><a id="markdown-system-variables" name="system-variables"></a></p>
 <h3>System Variables</h3>
-<p>Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the <code>dataChange</code> event occured.</p>
+<p>Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the <code>dataChange</code> event occurred.</p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSystemVariable</span>(<span class="hljs-params">
     expression: <span class="hljs-built_in">string</span>
 </span>): <span class="hljs-title">undefined</span> | <span class="hljs-title">string</span> | <span class="hljs-title">number</span> | <span class="hljs-title">Date</span> | <span class="hljs-title">Array</span>&lt;<span class="hljs-title">any</span>&gt;</span>;
@@ -2591,7 +2591,7 @@ piweb.tooltips.provider.onCreateTooltips = createTooltipShapes;
 <h4>TooltipShape</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> TooltipShape
 </code></pre>
-<p>Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded guids, to display a very detailed tooltip that contains information about the measurement value. You must specify both guids to display these additional information.</p>
+<p>Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded <code>Guids</code>, to display a very detailed tooltip that contains information about the measurement value. You must specify both <code>Guids</code> to display these additional information.</p>
 <p><strong>text <code>string</code></strong></p>
 <p>A custom text that is displayed on top of the tooltip.</p>
 <p><strong>characteristic <code>string | undefined</code></strong></p>

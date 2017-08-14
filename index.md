@@ -186,7 +186,7 @@
 <a id="markdown-quickstart" name="quickstart"></a>
 ## Quickstart
 
-In order to create your first own custom plot, you should be familiar with __JavaScript__ and __Json__. As javascript is untyped, we suggest you to develop your extension using __Typescript__.  
+In order to create your first own custom plot, you should be familiar with __JavaScript__ and __Json__. As JavaScript is untyped, we suggest you to develop your extension using __TypeScript__.  
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
@@ -869,7 +869,7 @@ Returns the value of the property with the name `id` as a `FontDescription`. The
 enum DateKind
 ```
 
-When parsing a date without a specified timezone the `DateKind` parameter determines which timezone the date has.
+When parsing a date without a specified time zone the `DateKind` parameter determines which time zone the date has.
 
 **`AssumeLocal`**
 
@@ -1011,7 +1011,7 @@ Be aware that all coordinates and values are interpreted as **millimeters**. PiW
 ### Interfaces
 
 Most drawing objects, like [`Color`](#color), [`Brush`](#brush), [`Pen`](#pen), [`Font`](#font) and [`Geometry`](#geometry) implement an interface that is named like the implementing class, with an additional `Description` suffix (e.g. `ColorDescription`).
-Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.<br><br> Constructors in javascript and typescript cannot be overloaded, which means that you have to specifiy a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
+Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
 
 **Long version using constructors:**
 
@@ -1074,7 +1074,7 @@ Represents a position
 
 **x `number`**
 
-Hoirizontal position.
+Horizontal position.
 
 **y `number`**
 
@@ -1091,11 +1091,11 @@ Represents a position
 
 **width `number`**
 
-Hoirizontal dimension.
+Horizontal dimension.
 
 **height `number`**
 
-Vertical dimention.
+Vertical dimension.
 
 <a id="markdown-drawing-1" name="drawing-1"></a>
 ### Drawing
@@ -1188,7 +1188,7 @@ function drawGeometry(
     settings: GeometryDrawingSettings
 ): void;
 ```
-Draws the specified [`Geometry`](#geometry) and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of geometries, consider greating a [`GeometryGroup`](#geometrygroup), containing multiple [`Geometry`](#geometry) objects to improve the drawing performance. The geometry can be easily aligned with the [`settings`](#geometrydrawingsettings) parameter.
+Draws the specified [`Geometry`](#geometry) and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of geometries, consider creating a [`GeometryGroup`](#geometrygroup), containing multiple [`Geometry`](#geometry) objects to improve the drawing performance. The geometry can be easily aligned with the [`settings`](#geometrydrawingsettings) parameter.
 
 <a id="drawingcontext-drawtext" name="drawingcontext-drawtext"></a>
 **drawText `void`**
@@ -1199,7 +1199,7 @@ function drawText(
     settings: TextDrawingSettings
 ): void;
 ```
-Draws the specified [`FormattedText`](#formattedtext) at with the specified [`TextDrawingSettings`](#textdrawingsettings). There are numerous properties which will help you to adjust how the text is layouted and displayed. For more information, please read the chapter [FormattedText](#formattedtext), [Font](#font) and [TextDrawingSettings](#textdrawingsettings).
+Draws the specified [`FormattedText`](#formattedtext) at with the specified [`TextDrawingSettings`](#textdrawingsettings). There are numerous properties which will help you to adjust how the text is arranged and displayed. For more information, please read the chapter [FormattedText](#formattedtext), [Font](#font) and [TextDrawingSettings](#textdrawingsettings).
 
 <a id="drawingcontext-drawimage" name="drawingcontext-drawimage"></a>
 **drawImage `void`**
@@ -1252,7 +1252,7 @@ function setBrush(
 ): void;
 ```
 
-Sets the brush that will be used for all subsequent calls to [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be filled,  use the [`noBrush`](#drawingcontext-nobrush) function.
+Sets the brush that will be used for all subsequent calls to [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be filled, use the [`noBrush`](#drawingcontext-nobrush) function.
 
 <a id="drawingcontext-nobrush" name="drawingcontext-nobrush"></a>
 **noBrush  `void`**
@@ -1386,7 +1386,7 @@ The vertical resolution of the image.
 class ImageDrawingSettings
 ```
 
-Determines how an image is arranged and layouted. You can specify the stretch/aspect of the image with the `width`and `height` parameters like the following:
+Determines how an image is arranged. You can specify the stretch/aspect of the image with the `width` and `height` parameters like the following:
 
 | Result                                                                                            | Width | Height | Description |
 |------------------------------------|-|-|-|
@@ -1595,7 +1595,7 @@ The rotation center.
 class MatrixTransform extends Transform
 ```
 
-All transformation types are converted into a 3x3 matrix when they are applied. With the matrix transformation it's possible to define a transformation that is based on an arbitary 3x3 matrix. 
+All transformation types are converted into a 3x3 matrix when they are applied. With the matrix transformation it's possible to define a transformation that is based on an arbitrary 3x3 matrix. 
 
 | **m11** | **m12** | **0** |
 |-----|-----|---|
@@ -1675,7 +1675,7 @@ Combines multiple transformations into one by multiplying their matrices. As mat
 abstract class Geometry
 ```
 
-Geometries can be used for drawing and clipping. Multiple geometries can be combined using the GroupGeometry or CombinedGeometry classes.
+Geometries can be used for drawing and clipping. Multiple geometries can be combined using the [`GeometryGroup`](#geometrygroup) or [`CombinedGeometry`](#combinedgeometry) classes.
 
 **transform [`Transform?`](#transform)**
 
@@ -1700,11 +1700,11 @@ Describes size and position of a geometries bounding box.
 
 **x `number`**
 
-the x-coordinate of the top left corner of the bounding box.
+The x-coordinate of the top left corner of the bounding box.
 
 **y `number`**
 
-the y-coordinate of the top left corner of the bounding box.
+The y-coordinate of the top left corner of the bounding box.
 
 **height `number`**
 
@@ -1990,7 +1990,7 @@ Path segments define one or more points that describe a line or curve. Following
 class ArcSegment extends PathSegment
 ```
 
-Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specifiy additional parameters as shown in the following picture:
+Represents an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specify additional parameters as shown in the following picture:
 
 <img class="framed"  style="width:256px; height:auto;" src="gfx/arcSegment.svg">
 
@@ -2007,7 +2007,7 @@ Endpoint of the arc.
 
 **size [`Size`](#size)**
 
-The x- and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the startpoint and the endpoint, it will be scaled until it fits, preserving the aspect ratio of the ellipse.
+The x- and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.
 
 **angle `number`**
 
@@ -2122,7 +2122,7 @@ Describes a [`PathGeometry`](#pathgeometry) with a string. The markup is a super
  
 **pathString `string`**
 
-The path wich is used to define a string. Points are written in the form of `x,y`, where `x` and `y` are either invariant floating point numbers (`0.0`) or integers.
+The path which is used to define a string. Points are written in the form of `x,y`, where `x` and `y` are either invariant floating point numbers (`0.0`) or integers.
 
 | Markup | Parameters | Class |
 |--------|-------------| -----------|
@@ -2157,7 +2157,7 @@ Describes how overlapping geometries are filled.
 class CombinedGeometry extends Geometry
 ```
 
-Describes a geometry, that is composed of exactly two child geometries. The difference to the [GeometryGroup](#geometrygroup) is, that the CombinedGeometry is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. CombinedGeometry objects can themselves be combined again.
+Describes a geometry, that is composed of exactly two child geometries. The difference to the [GeometryGroup](#geometrygroup) is, that the [`CombinedGeometry`](#combinedgeometry) is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. [`CombinedGeometry`](#combinedgeometry) objects can themselves be combined again.
 
 **geometry1 [`Geometry`](#geometry)**
 
@@ -2218,7 +2218,7 @@ The alpha channel value in the range of `[0..255]`, where `0` is completely tran
 abstract class Brush
 ```
 
-Describes how an arbitary geometry is filled.
+Describes how an arbitrary geometry is filled.
 
 **opacity `number`**
 
@@ -2295,7 +2295,7 @@ The brush that is used to fill the outline procudes with the pen.
 
 **thickness `number`**
 
-The thickness of stroke procudes by the pen in **millimeters**.
+The thickness of stroke that is produced by the pen (in **millimeters**).
 
 **startCap [`LineCap`](#linecap)**
 
@@ -2311,11 +2311,11 @@ The geometry added between to segments of the stroke.
 
 **dashStyle `number[]`**
 
-The definition of the dashses used to render the stroke. The default value is empty, which will render one solid line. The length of the dashses and gaps specified here are multiplied with the thickness of the pen when it is drawn. So in case you want dashses with a length of one millimeter on a pen with 0.1 mm thickness, you must specify a dash of length 10 here.
+The definition of the dashes used to render the stroke. The default value is empty, which will render one solid line. The length of the dashes and gaps specified here are multiplied with the thickness of the pen when it is drawn. So in case you want dashes with a length of one millimeter on a pen with 0.1 mm thickness, you must specify a dash of length 10 here.
 
 **dashOffset `number`**
 
-The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dashstyle. Be aware that a **positive** offset will move the dashses **against stroke direction**
+The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dash style. Be aware that a **positive** offset will move the dashes **against stroke direction**
 
 **dashCap [`LineCap`](#linecap)**
 
@@ -2408,11 +2408,11 @@ Creates a circle around the cutting point with a diameter that is equal to the p
 class FormattedText
 ```
 
-Describes a textblock with a certain style and size, in which the text can be arranged.
+Describes a text block with a certain style and size, in which the text can be arranged.
 
 **text `string`**
 
-The text to be formatted. The text can include linebreaks.
+The text to be formatted. The text can include line breaks.
 
 **font [`Font`](#font)**
 
@@ -2457,7 +2457,7 @@ Measures the formatted text and returns a  [`TextMeasurements`](#textmeasurement
 enum FlowDirection
 ```
 
-Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the [`HorizontalTextAlignment`](#horizontaltextalignment), the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.
+Determines if the text is arranged from the left to the right or from the right to the left. While this seems to be redundant with the [`HorizontalTextAlignment`](#horizontaltextalignment), the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.
 
 **`leftToRight` (default)**
 
@@ -2606,11 +2606,11 @@ The height of a single line of text.
 
 **minWidth `number`**
 
-The actual width of the text itself, excluding leading and trailing whitespace from layouting.
+The actual width of the text itself, excluding leading and trailing whitespace between the text and the boundaries.
 
 **width `number`**
 
-The overall width, including the possible leading and trailing whitespace from layouting.
+The overall width, including the possible leading and trailing whitespace between the text and the boundaries.
 
 <a id="markdown-textdrawingsettings" name="textdrawingsettings"></a>
 #### TextDrawingSettings
@@ -2798,15 +2798,15 @@ Used to condense or expand the font horizontally.
 
 | Identifier | Changed width/height ratio |
 |------------|--------------------|
-| **`ultraCondensed`**|**50%** of the default widht/height ratio|
-| **`extraCondensed`**|**62.5%** of the default widht/height ratio|
-| **`condensed`**|**75%** of the default widht/height ratio|
-| **`semiCondensed`**|**87.5%** of the default widht/height ratio|
-| **`normal`**|**100%** of the default widht/height ratio|
-| **`semiExpanded`**|**112.5%** of the default widht/height ratio|
-| **`expanded`**|**125%** of the default widht/height ratio|
-| **`extraExpanded`**|**150%** of the default widht/height ratio|
-| **`ultraExpanded`**|**200%** of the default widht/height ratio|
+| **`ultraCondensed`**|**50%** of the default width/height ratio|
+| **`extraCondensed`**|**62.5%** of the default width/height ratio|
+| **`condensed`**|**75%** of the default width/height ratio|
+| **`semiCondensed`**|**87.5%** of the default width/height ratio|
+| **`normal`**|**100%** of the default width/height ratio|
+| **`semiExpanded`**|**112.5%** of the default width/height ratio|
+| **`expanded`**|**125%** of the default width/height ratio|
+| **`extraExpanded`**|**150%** of the default width/height ratio|
+| **`ultraExpanded`**|**200%** of the default width/height ratio|
 
 <a id="markdown-data-provider" name="data-provider"></a>
 ## Data Provider
@@ -2871,11 +2871,11 @@ The attribute has a `number` value, that is to be interpreted as the key of a **
 class Attribute
 ```
 
-An attribute stores additional information about an arbitary entity. Entities with attributes are parts, characteristics, measurements, measurement values and catalog entries. An attribute is identified by its `Key`. To get information about the type and usage of an attribute, use the `Key` to get the **[`AttributeDefinition`](#attributedefinition)** from the **[`Configuration`](#configuration)**.
+An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measurement values and catalog entries. An attribute is identified by its `Key`. To get information about the type and usage of an attribute, use the `Key` to get the **[`AttributeDefinition`](#attributedefinition)** from the **[`Configuration`](#configuration)**.
 
 **key `number`**
 
-An unsigned 16 bit integer that identifies the attribues definition.
+An unsigned 16 bit integer that identifies the attributes definition.
 
 **type [`AttributeType`](#attributetype)**
 
@@ -2921,7 +2921,7 @@ Returns the value that corresponds to the specified attribute key. In case the a
 <a id="markdown-usage" name="usage"></a>
 #### Usage
 
-Use the following function to get the database configuration from the  server. 
+Use the following function to get the database configuration from the server. 
 
 **getConfiguration [`Configuration`](#configuration)**
 
@@ -2940,23 +2940,23 @@ The configuration contains all attribute definitions for parts, characteristics,
 
 **partAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
-The set of attribute definitions refering to inspection plan parts.
+The set of attribute definitions referring to inspection plan parts.
 
 **characteristicAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
-The set of attribute definitions refering to inspection plan characteristics.
+The set of attribute definitions referring to inspection plan characteristics.
 
 **measurementAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
-The set of attribute definitions refering to measurements.
+The set of attribute definitions referring to measurements.
 
 **valueAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
-The set of attribute definitions refering to measurement values.
+The set of attribute definitions referring to measurement values.
 
 **catalogAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
-The set of attribute definitions refering to catalog entries.
+The set of attribute definitions referring to catalog entries.
 <a id="markdown-entitytype" name="entitytype"></a>
 #### EntityType
 
@@ -3012,7 +3012,7 @@ The entity type this attribute belongs to.
 
 **catalog `string | undefined`**
 
-In case the `dataType` is `Catalog`, this field contains a base64 encoded guid that identifies the **[`Catalog`](#catalog)** that is used by this attribute.
+In case the `dataType` is `Catalog`, this field contains a base64 encoded `Guid` that identifies the **[`Catalog`](#catalog)** that is used by this attribute.
 
 <a id="markdown-catalogs" name="catalogs"></a>
 ### Catalogs
@@ -3026,7 +3026,7 @@ In case the `dataType` is `Catalog`, this field contains a base64 encoded guid t
 <a id="markdown-usage-1" name="usage-1"></a>
 #### Usage
 
-Use the following function to get the catalogs that are configured in the the  server. Catalogs are identified by a `Guid`, which is stored as a base64 encoded byte array. 
+Use the following function to get the catalogs that are configured in the the server. Catalogs are identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 **getCatalogs [`Map<string, Catalog>`](#catalog)**
 
@@ -3042,7 +3042,7 @@ class Catalog
 ```
 **guid `string`**
 
-A base64 encoded `guid` that identifies the catalog.
+A base64 encoded `Guid` that identifies the catalog.
 
 **name `string`**
 
@@ -3206,11 +3206,11 @@ Describes a measurement of an inspection plan part.
 
 **uuid `string`**
 
-The uuid that identifies this measurement as base64 encoded byte array.
+The `Guid` that identifies this measurement as base64 encoded byte array.
 
 **part `string`**
 
-The uuid that identifies the part this measurement is associated to.
+The `Guid` that identifies the part this measurement is associated to.
 
 **values [`Map<string, MeasurementValue>`](#measurementvalue)**
 
@@ -3225,7 +3225,7 @@ class MeasurementValue extends AttributeItem
 
 **characteristic `string`**
 
-The uuid that identifies the characteristic this measurement value is associated to.
+The `Guid` that identifies the characteristic this measurement value is associated to.
 
 <a id="markdown-raw-data" name="raw-data"></a>
 ### Raw Data
@@ -3270,7 +3270,7 @@ Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to
 class RawDataItem;
 ```
 
-Describes the information about a single raw data entry on the  server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
+Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
 
 **entityType [`EntityType`](#entitytype)**
 
@@ -3290,11 +3290,11 @@ The mimetype of the item.
 
 **md5Bytes `Buffer`**
 
-A buffer of 16 bytes length, containing the datas MD5 hash. 
+A buffer of 16 bytes length, containing the data's MD5 hash. 
 
 **created `Date`**
 
-The timestamp when the data has been uploaded to the  server.
+The timestamp when the data has been uploaded to the server.
 
 **lastModified `Date`**
 
@@ -3307,7 +3307,7 @@ Use this function to actually fetch the data associated to the `RawDataItem`. Th
 <a id="markdown-system-variables" name="system-variables"></a>
 ### System Variables
 
-Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the `dataChange` event occured.
+Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the `dataChange` event occurred.
 
 ```TypeScript
 function getSystemVariable(
@@ -3369,7 +3369,7 @@ The shapes of which this collection is composed.
 abstract class TooltipShape
 ```
 
-Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded guids, to display a very detailed tooltip that contains information about the measurement value. You must specify both guids to display these additional information.
+Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded `Guids`, to display a very detailed tooltip that contains information about the measurement value. You must specify both `Guids` to display these additional information.
 
 **text `string`**
 
