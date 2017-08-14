@@ -70,6 +70,8 @@
         - [DrawingContext](#drawingcontext)
     - [Images](#images)
         - [Content](#content-2)
+        - [Bitmap](#bitmap)
+        - [BitmapMeasurements](#bitmapmeasurements)
         - [ImageDrawingSettings](#imagedrawingsettings)
         - [HorizontalImageAnchor](#horizontalimageanchor)
         - [VerticalImageAnchor](#verticalimageanchor)
@@ -85,6 +87,7 @@
     - [Geometry](#geometry)
         - [Content](#content-4)
         - [Geometry](#geometry-1)
+        - [GeometryMeasurements](#geometrymeasurements)
         - [GeometryDrawingSettings](#geometrydrawingsettings)
         - [HorizontalAnchor](#horizontalanchor)
         - [VerticalAnchor](#verticalanchor)
@@ -120,7 +123,8 @@
         - [Content](#content-6)
         - [FormattedText](#formattedtext)
         - [FlowDirection](#flowdirection)
-        - [TextAlignment](#textalignment)
+        - [HorizontalTextAlignment](#horizontaltextalignment)
+        - [VerticalTextAlignment](#verticaltextalignment)
         - [TextTrimming](#texttrimming)
         - [TextMeasurements](#textmeasurements)
         - [TextDrawingSettings](#textdrawingsettings)
@@ -1180,10 +1184,11 @@ Draws an ellipse around the point `center` and fills it with the brush which has
 
 ```TypeScript
 function drawGeometry(
-    geometry: Geometry
+    geometry: Geometry,
+    settings: GeometryDrawingSettings
 ): void;
 ```
-Draws the specified [`Geometry`](#geometry) and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of geometries, consider greating a [`GeometryGroup`](#geometrygroup), containing multiple [`Geometry`](#geometry) objects to improve the drawing performance.
+Draws the specified [`Geometry`](#geometry) and fills it with the brush which has been previously set using the [`setBrush`](#drawingcontext-setbrush) function, and strokes it using the pen which has been previously set with the [`setPen`](#drawingcontext-setpen) function. In case you want to draw a larger number of geometries, consider greating a [`GeometryGroup`](#geometrygroup), containing multiple [`Geometry`](#geometry) objects to improve the drawing performance. The geometry can be easily aligned with the [`settings`](#geometrydrawingsettings) parameter.
 
 <a id="drawingcontext-drawtext" name="drawingcontext-drawtext"></a>
 **drawText `void`**
@@ -1201,44 +1206,62 @@ Draws the specified [`FormattedText`](#formattedtext) at with the specified [`Te
 
 ```TypeScript
 function drawImage(
-    data: Buffer, 
+    image: Bitmap, 
     settings: ImageDrawingSettings
 ): void;
 ```
 
-Draws the specified image buffer with the specified [`ImageDrawingSettings`](#imagedrawingsettings).
+Draws the specified [`Bitmap`](#bitmap) buffer with the specified [`ImageDrawingSettings`](#imagedrawingsettings).
 
 <a id="drawingcontext-drawdrawing" name="drawingcontext-drawdrawing"></a>
 **drawDrawing `void`**
 
 ```TypeScript
 function drawDrawing(
-    drawing: Drawing
+    drawing: Drawing,
+    settings: GeometryDrawingSettings
 ): void;
 ```
 
-Draws the specified [`Drawing`](#drawing) into the current drawing context. To set the position and size of the drawing, use the [`pushTransform`](#drawingcontext-pushtransform) function.
+Draws the specified [`Drawing`](#drawing) into the current drawing context. To set the position and size of the drawing, use the [`pushTransform`](#drawingcontext-pushtransform) function. The drawing can be easily aligned with the [`settings`](#geometrydrawingsettings) parameter.
 
 <a id="drawingcontext-setpen" name="drawingcontext-setpen"></a>
 **setPen `void`**
 ```TypeScript
 function setPen(
-    pen: Pen | null
+    pen: Pen
 ): void;
 ```
 
-Sets the pen that will be used for all subsequent calls to [`drawLine`](#drawingcontext-drawline), [`drawLines`](#drawingcontext-drawlines), [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be stroked, pass `null` as parameter into the function.
+Sets the pen that will be used for all subsequent calls to [`drawLine`](#drawingcontext-drawline), [`drawLines`](#drawingcontext-drawlines), [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be stroked, use the [`nopen`](#drawingcontext-nopen) function.
+
+<a id="drawingcontext-nopen" name="drawingcontext-nopen"></a>
+**noPen `void`**
+```TypeScript
+function noPen( ): void;
+```
+
+Removes the pen that has previously been set with the [`setPen`](#drawingcontext-setpen) function. All subsequent calls to [`drawLine`](#drawingcontext-drawline), [`drawLines`](#drawingcontext-drawlines), [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry) will not be stroked.
 
 <a id="drawingcontext-setbrush" name="drawingcontext-setbrush"></a>
 **setBrush  `void`**
 
 ```TypeScript
 function setBrush(
-    brush: Brush | null
+    brush: Brush
 ): void;
 ```
 
-Sets the brush that will be used for all subsequent calls to [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be filled, pass `null` as parameter into the function.
+Sets the brush that will be used for all subsequent calls to [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be filled,  use the [`noBrush`](#drawingcontext-nobrush) function.
+
+<a id="drawingcontext-nobrush" name="drawingcontext-nobrush"></a>
+**noBrush  `void`**
+
+```TypeScript
+function noBrush( ): void;
+```
+
+Removes the brush that has previously been set with the [`setBrush`](#drawingcontext-setbrush) function. All subsequent calls to [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry) will not be filled.
 
 <a id="drawingcontext-pushtransform" name="drawingcontext-pushtransform"></a>
 **pushTransform `void`**
@@ -1249,6 +1272,8 @@ function pushTransform(
 ): void;
 ```
 Multiplies the current transformation matrix with another [`Transform`](#transform). To undo it, use the [`pop`](#drawingcontext-pop) function.
+
+
 
 <a id="drawingcontext-pushclip" name="drawingcontext-pushclip"></a>
 **pushClip `void`**
@@ -1287,9 +1312,72 @@ Removes the most recent effect caused by [`pushTransform`](#drawingcontext-pusht
 <a id="markdown-content-2" name="content-2"></a>
 #### Content
 
+- [Bitmap](#bitmap)
+- [BitmapMeasurements](#bitmapmeasurements)
 - [ImageDrawingSettings](#imagedrawingsettings)
 - [HorizontalImageAnchor](#horizontalimageanchor)
 - [VerticalImageAnchor](#verticalimageanchor)
+
+<a id="markdown-bitmap" name="bitmap"></a>
+#### Bitmap
+
+```TypeScript
+class Bitmap
+```
+
+Describes an image that can be drawn with the [`DrawImage`](#drawingcontext-drawimage) function of the [`DrawingContext`](#drawingcontext).
+
+**loadFromVfs `Bitmap`**
+
+```TypeScript
+static function loadFromVfs(
+    path: string
+) : Bitmap
+```
+
+Loads a bitmap that is stored in the extension package with a path, that is relative to the packages root directory.
+
+**measure `BitmapMeasurements`**
+
+```TypeScript
+function measure( ) : BitmapMeasurements
+```
+
+Loads information about the bitmap.
+
+<a id="markdown-bitmapmeasurements" name="bitmapmeasurements"></a>
+#### BitmapMeasurements
+
+```TypeScript
+class BitmapMeasurements
+```
+
+Contains information about a bitmap.
+
+**width `number`**
+
+The width of the image in millimeters.
+
+**height `number`**
+
+The height of the image in millimeters.
+
+**pixelWidth `number`**
+
+The width of the image in pixels.
+
+**pixelHeight `number`**
+
+The height of the image in pixels.
+
+**dpiX `number`**
+
+The horizontal resolution of the image.
+
+**dpiY `number`**
+
+The vertical resolution of the image.
+
 
 <a id="markdown-imagedrawingsettings" name="imagedrawingsettings"></a>
 #### ImageDrawingSettings
@@ -1557,6 +1645,7 @@ Combines multiple transformations into one by multiplying their matrices. As mat
 #### Content
 
 - [Geometry](#geometry-1)
+- [GeometryMeasurements](#geometrymeasurements)
 - [GeometryDrawingSettings](#geometrydrawingsettings)
 - [HorizontalAnchor](#horizontalanchor)
 - [VerticalAnchor](#verticalanchor)
@@ -1591,6 +1680,39 @@ Geometries can be used for drawing and clipping. Multiple geometries can be comb
 **transform [`Transform?`](#transform)**
 
 All geometries can have a transformation. The default value is the identity transform.
+
+**measure [`GeometryMeasurements`](geometrymeasurements)**
+
+```TypeScript
+function measure() : GeometryMeasurements
+```
+
+Calculates the bounding box of the geometry.
+
+<a id="markdown-geometrymeasurements" name="geometrymeasurements"></a>
+#### GeometryMeasurements
+
+```TypeScript
+class GeometryMeasurements
+```
+
+Describes size and position of a geometries bounding box.
+
+**x `number`**
+
+the x-coordinate of the top left corner of the bounding box.
+
+**y `number`**
+
+the y-coordinate of the top left corner of the bounding box.
+
+**height `number`**
+
+The overall height, not including the stroke thickness.
+
+**width `number`**
+
+The overall width, not including the stroke thickness.
 
 <a id="markdown-geometrydrawingsettings" name="geometrydrawingsettings"></a>
 #### GeometryDrawingSettings
@@ -2266,7 +2388,8 @@ Creates a circle around the cutting point with a diameter that is equal to the p
 
 - [FormattedText](#formattedtext)
 - [FlowDirection](#flowdirection)
-- [TextAlignment](#textalignment)
+- [HorizontalTextAlignment](#horizontaltextalignment)
+- [VerticalTextAlignment](#verticaltextalignment)
 - [TextTrimming](#texttrimming)
 - [TextMeasurements](#textmeasurements)
 - [TextDrawingSettings](#textdrawingsettings)
@@ -2306,9 +2429,13 @@ Determines the height of the boundaries and therefore, how many lines of text ca
 
 Determines the text flow, which can be different among certain cultures.
 
-**textAlignment [`TextAlignment`](#textalignment)**
+**horizontalTextAlignment [`HorizontalTextAlignment`](#horizontaltextalignment)**
 
-Determines how text is arranged inside the boundaries.
+Determines how text is arranged horizontally inside the boundaries.
+
+**verticalTextAlignment [`VerticalTextAlignment`](#verticaltextalignment)**
+
+Determines how text is arranged vertically inside the boundaries.
 
 **textTrimming [`TextTrimming`](#texttrimming)**
 
@@ -2329,7 +2456,7 @@ Measures the formatted text and returns a  [`TextMeasurements`](#textmeasurement
 enum FlowDirection
 ```
 
-Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the [`TextAlignment`](#textalignment), the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.
+Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the [`HorizontalTextAlignment`](#horizontaltextalignment), the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.
 
 **`leftToRight` (default)**
 
@@ -2347,14 +2474,14 @@ Layouting starts at the right boundary.
 
 <br>
 
-<a id="markdown-textalignment" name="textalignment"></a>
-#### TextAlignment
+<a id="markdown-horizontaltextalignment" name="horizontaltextalignment"></a>
+#### HorizontalTextAlignment
 
 ```TypeScript
-enum TextAlignment
+enum HorizontalTextAlignment
 ```
 
-Determines how text is arranged inside the boundaries that are defined by width and height. In case no boundaries are defined, the text alignment also determines the position of the text relative to the anchor.
+Determines how text is arranged inside the bounding box that is defined by width and height. In case no bounding box is defined, the horizontal text alignment also determines the horizontal position of the text relative to the anchor.
 
 **`left` (default)**
 
@@ -2387,6 +2514,39 @@ Aligns text centered between the left and the right boundaries.
 Increases the size of the whitespaces until the text fits between the left and right boundary.
 
 <br>
+
+<a id="markdown-verticaltextalignment" name="verticaltextalignment"></a>
+#### VerticalTextAlignment
+
+```TypeScript
+enum VerticalTextAlignment
+```
+
+Determines how text is arranged inside the bounding box that is defined by width and height. In case no bounding box is defined, the text vertical alignment also determines the vertical position of the text relative to the anchor.
+
+**`top` (default)**
+
+<img class="framed" style="float: left; height: 72px;" src="gfx/verticalAlignTop.svg">
+
+Aligns the text on the top of the bounding box.
+
+<br><br>
+
+**`bottom`**
+
+<img class="framed" style="float: left; height: 72px;" src="gfx/verticalAlignBottom.svg">
+
+Aligns the text on the bottom of the bounding box.
+
+<br><br>
+
+**`center`**
+
+<img class="framed" style="float: left; height: 72px;" src="gfx/verticalAlignCenter.svg">
+
+Aligns the text centered in the bounding box.
+
+<br><br>
 
 <a id="markdown-texttrimming" name="texttrimming"></a>
 #### TextTrimming
@@ -2481,7 +2641,7 @@ Determines how the whole text is arranged horizontally relative to the text posi
 
 **`default` (default)**
 
-Arranges the text according the [`TextAlignment`](#textalignment) and the specified size of the bounding box.
+Arranges the text according the [`HorizontalTextAlignment`](#horizontaltextalignment) and the specified size of the bounding box.
 
 **`left`**
 

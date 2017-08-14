@@ -104,6 +104,8 @@
 <li><a href="#images">Images</a>
 <ul>
 <li><a href="#content-2">Content</a></li>
+<li><a href="#bitmap">Bitmap</a></li>
+<li><a href="#bitmapmeasurements">BitmapMeasurements</a></li>
 <li><a href="#imagedrawingsettings">ImageDrawingSettings</a></li>
 <li><a href="#horizontalimageanchor">HorizontalImageAnchor</a></li>
 <li><a href="#verticalimageanchor">VerticalImageAnchor</a></li>
@@ -125,6 +127,7 @@
 <ul>
 <li><a href="#content-4">Content</a></li>
 <li><a href="#geometry-1">Geometry</a></li>
+<li><a href="#geometrymeasurements">GeometryMeasurements</a></li>
 <li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a></li>
 <li><a href="#horizontalanchor">HorizontalAnchor</a></li>
 <li><a href="#verticalanchor">VerticalAnchor</a></li>
@@ -178,7 +181,8 @@
 <li><a href="#content-6">Content</a></li>
 <li><a href="#formattedtext">FormattedText</a></li>
 <li><a href="#flowdirection">FlowDirection</a></li>
-<li><a href="#textalignment">TextAlignment</a></li>
+<li><a href="#horizontaltextalignment">HorizontalTextAlignment</a></li>
+<li><a href="#verticaltextalignment">VerticalTextAlignment</a></li>
 <li><a href="#texttrimming">TextTrimming</a></li>
 <li><a href="#textmeasurements">TextMeasurements</a></li>
 <li><a href="#textdrawingsettings">TextDrawingSettings</a></li>
@@ -1102,10 +1106,11 @@ context.drawLine(
 <p><a id="drawingcontext-drawgeometry" name="drawingcontext-drawgeometry"></a>
 <strong>drawGeometry <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawGeometry</span>(<span class="hljs-params">
-    geometry: Geometry
+    geometry: Geometry,
+    settings: GeometryDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified <a href="#geometry"><code>Geometry</code></a> and fills it with the brush which has been previously set using the <a href="#drawingcontext-setbrush"><code>setBrush</code></a> function, and strokes it using the pen which has been previously set with the <a href="#drawingcontext-setpen"><code>setPen</code></a> function. In case you want to draw a larger number of geometries, consider greating a <a href="#geometrygroup"><code>GeometryGroup</code></a>, containing multiple <a href="#geometry"><code>Geometry</code></a> objects to improve the drawing performance.</p>
+<p>Draws the specified <a href="#geometry"><code>Geometry</code></a> and fills it with the brush which has been previously set using the <a href="#drawingcontext-setbrush"><code>setBrush</code></a> function, and strokes it using the pen which has been previously set with the <a href="#drawingcontext-setpen"><code>setPen</code></a> function. In case you want to draw a larger number of geometries, consider greating a <a href="#geometrygroup"><code>GeometryGroup</code></a>, containing multiple <a href="#geometry"><code>Geometry</code></a> objects to improve the drawing performance. The geometry can be easily aligned with the <a href="#geometrydrawingsettings"><code>settings</code></a> parameter.</p>
 <p><a id="drawingcontext-drawtext" name="drawingcontext-drawtext"></a>
 <strong>drawText <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawText</span>(<span class="hljs-params">
@@ -1117,32 +1122,43 @@ context.drawLine(
 <p><a id="drawingcontext-drawimage" name="drawingcontext-drawimage"></a>
 <strong>drawImage <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawImage</span>(<span class="hljs-params">
-    data: Buffer, 
+    image: Bitmap, 
     settings: ImageDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified image buffer with the specified <a href="#imagedrawingsettings"><code>ImageDrawingSettings</code></a>.</p>
+<p>Draws the specified <a href="#bitmap"><code>Bitmap</code></a> buffer with the specified <a href="#imagedrawingsettings"><code>ImageDrawingSettings</code></a>.</p>
 <p><a id="drawingcontext-drawdrawing" name="drawingcontext-drawdrawing"></a>
 <strong>drawDrawing <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawDrawing</span>(<span class="hljs-params">
-    drawing: Drawing
+    drawing: Drawing,
+    settings: GeometryDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified <a href="#drawing"><code>Drawing</code></a> into the current drawing context. To set the position and size of the drawing, use the <a href="#drawingcontext-pushtransform"><code>pushTransform</code></a> function.</p>
+<p>Draws the specified <a href="#drawing"><code>Drawing</code></a> into the current drawing context. To set the position and size of the drawing, use the <a href="#drawingcontext-pushtransform"><code>pushTransform</code></a> function. The drawing can be easily aligned with the <a href="#geometrydrawingsettings"><code>settings</code></a> parameter.</p>
 <p><a id="drawingcontext-setpen" name="drawingcontext-setpen"></a>
 <strong>setPen <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setPen</span>(<span class="hljs-params">
-    pen: Pen | <span class="hljs-literal">null</span>
+    pen: Pen
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Sets the pen that will be used for all subsequent calls to <a href="#drawingcontext-drawline"><code>drawLine</code></a>, <a href="#drawingcontext-drawlines"><code>drawLines</code></a>, <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be stroked, pass <code>null</code> as parameter into the function.</p>
+<p>Sets the pen that will be used for all subsequent calls to <a href="#drawingcontext-drawline"><code>drawLine</code></a>, <a href="#drawingcontext-drawlines"><code>drawLines</code></a>, <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be stroked, use the <a href="#drawingcontext-nopen"><code>nopen</code></a> function.</p>
+<p><a id="drawingcontext-nopen" name="drawingcontext-nopen"></a>
+<strong>noPen <code>void</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">noPen</span>(<span class="hljs-params"> </span>): <span class="hljs-title">void</span></span>;
+</code></pre>
+<p>Removes the pen that has previously been set with the <a href="#drawingcontext-setpen"><code>setPen</code></a> function. All subsequent calls to <a href="#drawingcontext-drawline"><code>drawLine</code></a>, <a href="#drawingcontext-drawlines"><code>drawLines</code></a>, <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a> will not be stroked.</p>
 <p><a id="drawingcontext-setbrush" name="drawingcontext-setbrush"></a>
 <strong>setBrush  <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setBrush</span>(<span class="hljs-params">
-    brush: Brush | <span class="hljs-literal">null</span>
+    brush: Brush
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Sets the brush that will be used for all subsequent calls to <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be filled, pass <code>null</code> as parameter into the function.</p>
+<p>Sets the brush that will be used for all subsequent calls to <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be filled,  use the <a href="#drawingcontext-nobrush"><code>noBrush</code></a> function.</p>
+<p><a id="drawingcontext-nobrush" name="drawingcontext-nobrush"></a>
+<strong>noBrush  <code>void</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">noBrush</span>(<span class="hljs-params"> </span>): <span class="hljs-title">void</span></span>;
+</code></pre>
+<p>Removes the brush that has previously been set with the <a href="#drawingcontext-setbrush"><code>setBrush</code></a> function. All subsequent calls to <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a> will not be filled.</p>
 <p><a id="drawingcontext-pushtransform" name="drawingcontext-pushtransform"></a>
 <strong>pushTransform <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pushTransform</span>(<span class="hljs-params">
@@ -1174,10 +1190,44 @@ context.drawLine(
 <p><a id="markdown-content-2" name="content-2"></a></p>
 <h4>Content</h4>
 <ul>
+<li><a href="#bitmap">Bitmap</a></li>
+<li><a href="#bitmapmeasurements">BitmapMeasurements</a></li>
 <li><a href="#imagedrawingsettings">ImageDrawingSettings</a></li>
 <li><a href="#horizontalimageanchor">HorizontalImageAnchor</a></li>
 <li><a href="#verticalimageanchor">VerticalImageAnchor</a></li>
 </ul>
+<p><a id="markdown-bitmap" name="bitmap"></a></p>
+<h4>Bitmap</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Bitmap
+</code></pre>
+<p>Describes an image that can be drawn with the <a href="#drawingcontext-drawimage"><code>DrawImage</code></a> function of the <a href="#drawingcontext"><code>DrawingContext</code></a>.</p>
+<p><strong>loadFromVfs <code>Bitmap</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFromVfs</span>(<span class="hljs-params">
+    path: <span class="hljs-built_in">string</span>
+</span>) : <span class="hljs-title">Bitmap</span>
+</span></code></pre>
+<p>Loads a bitmap that is stored in the extension package with a path, that is relative to the packages root directory.</p>
+<p><strong>measure <code>BitmapMeasurements</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">measure</span>(<span class="hljs-params"> </span>) : <span class="hljs-title">BitmapMeasurements</span>
+</span></code></pre>
+<p>Loads information about the bitmap.</p>
+<p><a id="markdown-bitmapmeasurements" name="bitmapmeasurements"></a></p>
+<h4>BitmapMeasurements</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> BitmapMeasurements
+</code></pre>
+<p>Contains information about a bitmap.</p>
+<p><strong>width <code>number</code></strong></p>
+<p>The width of the image in millimeters.</p>
+<p><strong>height <code>number</code></strong></p>
+<p>The height of the image in millimeters.</p>
+<p><strong>pixelWidth <code>number</code></strong></p>
+<p>The width of the image in pixels.</p>
+<p><strong>pixelHeight <code>number</code></strong></p>
+<p>The height of the image in pixels.</p>
+<p><strong>dpiX <code>number</code></strong></p>
+<p>The horizontal resolution of the image.</p>
+<p><strong>dpiY <code>number</code></strong></p>
+<p>The vertical resolution of the image.</p>
 <p><a id="markdown-imagedrawingsettings" name="imagedrawingsettings"></a></p>
 <h4>ImageDrawingSettings</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> ImageDrawingSettings
@@ -1375,6 +1425,7 @@ context.drawLine(
 <h4>Content</h4>
 <ul>
 <li><a href="#geometry-1">Geometry</a></li>
+<li><a href="#geometrymeasurements">GeometryMeasurements</a></li>
 <li><a href="#geometrydrawingsettings">GeometryDrawingSettings</a></li>
 <li><a href="#horizontalanchor">HorizontalAnchor</a></li>
 <li><a href="#verticalanchor">VerticalAnchor</a></li>
@@ -1410,6 +1461,23 @@ context.drawLine(
 <p>Geometries can be used for drawing and clipping. Multiple geometries can be combined using the GroupGeometry or CombinedGeometry classes.</p>
 <p><strong>transform <a href="#transform"><code>Transform?</code></a></strong></p>
 <p>All geometries can have a transformation. The default value is the identity transform.</p>
+<p><strong>measure <a href="geometrymeasurements"><code>GeometryMeasurements</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">measure</span>(<span class="hljs-params"></span>) : <span class="hljs-title">GeometryMeasurements</span>
+</span></code></pre>
+<p>Calculates the bounding box of the geometry.</p>
+<p><a id="markdown-geometrymeasurements" name="geometrymeasurements"></a></p>
+<h4>GeometryMeasurements</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryMeasurements
+</code></pre>
+<p>Describes size and position of a geometries bounding box.</p>
+<p><strong>x <code>number</code></strong></p>
+<p>the x-coordinate of the top left corner of the bounding box.</p>
+<p><strong>y <code>number</code></strong></p>
+<p>the y-coordinate of the top left corner of the bounding box.</p>
+<p><strong>height <code>number</code></strong></p>
+<p>The overall height, not including the stroke thickness.</p>
+<p><strong>width <code>number</code></strong></p>
+<p>The overall width, not including the stroke thickness.</p>
 <p><a id="markdown-geometrydrawingsettings" name="geometrydrawingsettings"></a></p>
 <h4>GeometryDrawingSettings</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryDrawingSettings
@@ -1822,7 +1890,8 @@ context.drawLine(
 <ul>
 <li><a href="#formattedtext">FormattedText</a></li>
 <li><a href="#flowdirection">FlowDirection</a></li>
-<li><a href="#textalignment">TextAlignment</a></li>
+<li><a href="#horizontaltextalignment">HorizontalTextAlignment</a></li>
+<li><a href="#verticaltextalignment">VerticalTextAlignment</a></li>
 <li><a href="#texttrimming">TextTrimming</a></li>
 <li><a href="#textmeasurements">TextMeasurements</a></li>
 <li><a href="#textdrawingsettings">TextDrawingSettings</a></li>
@@ -1848,8 +1917,10 @@ context.drawLine(
 <p>Determines the height of the boundaries and therefore, how many lines of text can be rendered. The specified text will be wrapped until the specified <code>maxTextHeight</code> is reached. The last line will then either be cut off or rendered will ellipsis, depending on the specified <code>textTrimming</code>.</p>
 <p><strong>flowDirection <a href="#flowdirection"><code>FlowDirection</code></a></strong></p>
 <p>Determines the text flow, which can be different among certain cultures.</p>
-<p><strong>textAlignment <a href="#textalignment"><code>TextAlignment</code></a></strong></p>
-<p>Determines how text is arranged inside the boundaries.</p>
+<p><strong>horizontalTextAlignment <a href="#horizontaltextalignment"><code>HorizontalTextAlignment</code></a></strong></p>
+<p>Determines how text is arranged horizontally inside the boundaries.</p>
+<p><strong>verticalTextAlignment <a href="#verticaltextalignment"><code>VerticalTextAlignment</code></a></strong></p>
+<p>Determines how text is arranged vertically inside the boundaries.</p>
 <p><strong>textTrimming <a href="#texttrimming"><code>TextTrimming</code></a></strong></p>
 <p>Determines how text is treated, that doesn't fit into the specified boundaries.</p>
 <p><strong>measure <a href="#textmeasurements"><code>TextMeasurements</code></a></strong></p>
@@ -1860,7 +1931,7 @@ context.drawLine(
 <h4>FlowDirection</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> FlowDirection
 </code></pre>
-<p>Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the <a href="#textalignment"><code>TextAlignment</code></a>, the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.</p>
+<p>Determines if the text is layouted from the left to the right or from the right to the left. While this seems to be redundant with the <a href="#horizontaltextalignment"><code>HorizontalTextAlignment</code></a>, the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.</p>
 <p><strong><code>leftToRight</code> (default)</strong></p>
 <img class="framed" style="float: left; height: 48px;" src="gfx/leftToRight.svg">
 <p>Layouting starts at the left boundary.</p>
@@ -1869,11 +1940,11 @@ context.drawLine(
 <img class="framed" style="float: left; height: 48px;" src="gfx/rightToLeft.svg">
 <p>Layouting starts at the right boundary.</p>
 <br>
-<p><a id="markdown-textalignment" name="textalignment"></a></p>
-<h4>TextAlignment</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> TextAlignment
+<p><a id="markdown-horizontaltextalignment" name="horizontaltextalignment"></a></p>
+<h4>HorizontalTextAlignment</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> HorizontalTextAlignment
 </code></pre>
-<p>Determines how text is arranged inside the boundaries that are defined by width and height. In case no boundaries are defined, the text alignment also determines the position of the text relative to the anchor.</p>
+<p>Determines how text is arranged inside the bounding box that is defined by width and height. In case no bounding box is defined, the horizontal text alignment also determines the horizontal position of the text relative to the anchor.</p>
 <p><strong><code>left</code> (default)</strong></p>
 <img class="framed" style="float: left; height: 48px;" src="gfx/alignLeft.svg">
 <p>Aligns text to the left boundary.</p>
@@ -1890,6 +1961,23 @@ context.drawLine(
 <img class="framed" style="float: left; height: 48px;" src="gfx/alignJustify.svg">
 <p>Increases the size of the whitespaces until the text fits between the left and right boundary.</p>
 <br>
+<p><a id="markdown-verticaltextalignment" name="verticaltextalignment"></a></p>
+<h4>VerticalTextAlignment</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> VerticalTextAlignment
+</code></pre>
+<p>Determines how text is arranged inside the bounding box that is defined by width and height. In case no bounding box is defined, the text vertical alignment also determines the vertical position of the text relative to the anchor.</p>
+<p><strong><code>top</code> (default)</strong></p>
+<img class="framed" style="float: left; height: 72px;" src="gfx/verticalAlignTop.svg">
+<p>Aligns the text on the top of the bounding box.</p>
+<p><br><br></p>
+<p><strong><code>bottom</code></strong></p>
+<img class="framed" style="float: left; height: 72px;" src="gfx/verticalAlignBottom.svg">
+<p>Aligns the text on the bottom of the bounding box.</p>
+<p><br><br></p>
+<p><strong><code>center</code></strong></p>
+<img class="framed" style="float: left; height: 72px;" src="gfx/verticalAlignCenter.svg">
+<p>Aligns the text centered in the bounding box.</p>
+<p><br><br></p>
 <p><a id="markdown-texttrimming" name="texttrimming"></a></p>
 <h4>TextTrimming</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> TextTrimming
@@ -1938,7 +2026,7 @@ context.drawLine(
 </code></pre>
 <p>Determines how the whole text is arranged horizontally relative to the text position.</p>
 <p><strong><code>default</code> (default)</strong></p>
-<p>Arranges the text according the <a href="#textalignment"><code>TextAlignment</code></a> and the specified size of the bounding box.</p>
+<p>Arranges the text according the <a href="#horizontaltextalignment"><code>HorizontalTextAlignment</code></a> and the specified size of the bounding box.</p>
 <p><strong><code>left</code></strong></p>
 <img class="framed" style="float: left; height: 48px;" src="gfx/anchorLeft.svg">
 <p>Places the anchor point on the left side of the bounding box.</p>
