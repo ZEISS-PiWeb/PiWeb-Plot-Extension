@@ -47,7 +47,21 @@
 }
 
 .markdown-body code {
-        color: #004d9c;
+    color: #0056AD;
+    font-size: 100%;
+}
+
+.markdown-body code::before, .markdown-body code::after {
+    letter-spacing: normal;
+    content: "";   
+}
+
+.markdown-body blockquote {
+    margin-left: 24px;
+}
+
+.markdown-body blockquote > p {
+    margin: 0px;
 }
 
 .hljs-string,
