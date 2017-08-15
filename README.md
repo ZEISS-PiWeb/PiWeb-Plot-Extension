@@ -8,21 +8,21 @@ In order to create your first own custom plot, you should be familiar with __Jav
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
-* In the application data directory `'%APPDATA%\Zeiss\PiWeb\Extensions'`  
-* In the program data directory `'%PROGRAMDATA%\Zeiss\PiWeb\Extensions'`
-* The `'Extensions'` folder in the PiWeb installation directory
+* In the application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
+* In the program data directory `%PROGRAMDATA%\Zeiss\PiWeb\Extensions`
+* The `Extensions` folder in the PiWeb installation directory
 
 The package structure looks like the following:
 
 <img class="framed" src="gfx/folder_structure.png"/>
 
-### 1. Create the folder `'MyExtension'` 
+### 1. Create the folder `MyExtension` 
 
-In case the `'Extensions'` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `'MyExtension'`.
+In case the `Extensions` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `MyExtension`.
 
-### 2. Create the file `'package.json'`
+### 2. Create the file `package.json`
 
-The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '[Package Definition](#package-definition)'. For now, use the minimum setup shown below.
+The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [Package Definition](#package-definition). For now, use the minimum setup shown below.
 
 ```json
 {
@@ -43,7 +43,7 @@ The package configuration static parameters of your extension, such as its name,
 ```
 
 
-### 3. Create the file `'tsconfic.json'`
+### 3. Create the file `tsconfic.json`
 
 It contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.
 
@@ -63,11 +63,11 @@ It contains necessary information for the typescript compiler, like input and ou
 }
 ```
 
-### 4. Create the folder `'@types'` and copy the file `'piweb.d.ts'` into it
+### 4. Create the folder `@types` and copy the file `piweb.d.ts` into it
 
-These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts)**. The folder `'@types'` was defined as the type root in the `'tsconfig.json'` file.
+These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts)**. The folder `@types` was defined as the type root in the `tsconfig.json` file.
 
-### 5. Create the folder `'src'` and create the file `'index.ts'` in it
+### 5. Create the folder `src` and create the file `index.ts` in it
 
  This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [`DrawingContext`](#drawingcontext).
 
