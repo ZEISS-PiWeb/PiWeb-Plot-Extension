@@ -63,6 +63,7 @@
 </li>
 <li><a href="#environment">Environment</a>
 <ul>
+<li><a href="#introduction">Introduction</a></li>
 <li><a href="#properties">Properties</a></li>
 <li><a href="#methods">Methods</a></li>
 <li><a href="#classes">Classes</a>
@@ -74,19 +75,26 @@
 </li>
 </ul>
 </li>
-<li><a href="#properties-1">Properties</a></li>
+<li><a href="#properties-1">Properties</a>
+<ul>
+<li><a href="#introduction-1">Introduction</a></li>
+<li><a href="#methods-1">Methods</a></li>
+</ul>
+</li>
 <li><a href="#format">Format</a>
 <ul>
+<li><a href="#introduction-2">Introduction</a></li>
 <li><a href="#enumerations-1">Enumerations</a>
 <ul>
 <li><a href="#datekind">DateKind</a></li>
 </ul>
 </li>
-<li><a href="#methods-1">Methods</a></li>
+<li><a href="#methods-2">Methods</a></li>
 </ul>
 </li>
 <li><a href="#drawing">Drawing</a>
 <ul>
+<li><a href="#introduction-3">Introduction</a></li>
 <li><a href="#interfaces">Interfaces</a></li>
 <li><a href="#common">Common</a>
 <ul>
@@ -262,7 +270,7 @@
 </li>
 <li><a href="#tooltips">Tooltips</a>
 <ul>
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#introduction-4">Introduction</a></li>
 <li><a href="#classes-1">Classes</a>
 <ul>
 <li><a href="#tooltipshapecollection">TooltipShapeCollection</a></li>
@@ -275,8 +283,8 @@
 </li>
 <li><a href="#logger">Logger</a>
 <ul>
-<li><a href="#introduction-1">Introduction</a></li>
-<li><a href="#methods-2">Methods</a></li>
+<li><a href="#introduction-5">Introduction</a></li>
+<li><a href="#methods-3">Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -827,7 +835,9 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>The description that is displayed when hovering an option in the dropdown with the mouse.</p>
 <p><a id="markdown-environment" name="environment"></a></p>
 <h2>Environment</h2>
-<p>You can retrieve information about the element, its properties and settings by using the <code>environment</code> interface.</p>
+<p><a id="markdown-introduction" name="introduction"></a></p>
+<h3>Introduction</h3>
+<p>You can retrieve information about the element, its properties and settings by using the <code>piweb.environment</code> interface. It also contains classes that are used by the functions of the <a href="#format"><code>piweb.format</code></a> interface.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> environment = piweb.environment;
 </code></pre>
@@ -836,7 +846,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p><strong>apiVersion <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> apiVersion : <span class="hljs-built_in">string</span>;
 </code></pre>
-<p>The semantic version of the custom plot api that is supported by the piweb host.</p>
+<p>The semantic version of the custom plot API that is supported by the application the custom plot is hosted by.</p>
 <p><strong>clientVersion <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> clientVersion : <span class="hljs-built_in">string</span>;
 </code></pre>
@@ -935,10 +945,14 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>The name of the timezone.</p>
 <p><a id="markdown-properties-1" name="properties-1"></a></p>
 <h2>Properties</h2>
+<p><a id="markdown-introduction-1" name="introduction-1"></a></p>
+<h3>Introduction</h3>
 <p>The properties you define in the <code>package.json</code> file can be accessed via the <code>piweb.properties</code> interface. To enable type checking, there is one function for each available datatype.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> properties = piweb.properties;
 </code></pre>
+<p><a id="markdown-methods-1" name="methods-1"></a></p>
+<h3>Methods</h3>
 <p><strong>getStringProperty <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStringProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">string</span>
 </span></code></pre>
@@ -977,6 +991,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Returns the value of the property with the name <code>id</code> as a <code>FontDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#font"><code>Font</code></a> class.</p>
 <p><a id="markdown-format" name="format"></a></p>
 <h2>Format</h2>
+<p><a id="markdown-introduction-2" name="introduction-2"></a></p>
 <h3>Introduction</h3>
 <p>In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the <code>piweb.format</code> interface.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
@@ -993,7 +1008,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>The represented time will be interpreted as local time.</p>
 <p><strong><code>assumeUTC</code></strong></p>
 <p>The represented time will be interpreted as UTC.</p>
-<p><a id="markdown-methods-1" name="methods-1"></a></p>
+<p><a id="markdown-methods-2" name="methods-2"></a></p>
 <h3>Methods</h3>
 <p><strong>formatNumber <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">formatNumber</span>(<span class="hljs-params">
@@ -1038,7 +1053,9 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Converts the specified string to its <code>Date</code> equivalent by using culture specific format information and formatting style.</p>
 <p><a id="markdown-drawing" name="drawing"></a></p>
 <h2>Drawing</h2>
-<p>To access the drawing classes, import the <code>piweb</code> interface into your script. All necessary classes for drawing are encapsulated in the <code>piweb.drawing</code> module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the <code>render</code> event, which has a <a href="#drawingcontext"><code>DrawingContext</code></a> object as its parameter.</p>
+<p><a id="markdown-introduction-3" name="introduction-3"></a></p>
+<h3>Introduction</h3>
+<p>All necessary classes for drawing are encapsulated in the <code>piweb.drawing</code> interface. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot API will emit the <code>render</code> event, which has a <a href="#drawingcontext"><code>DrawingContext</code></a> object as its parameter.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> drawing = piweb.drawing;
 
@@ -2295,7 +2312,7 @@ context.drawLine(
 </table>
 <p><a id="markdown-data" name="data"></a></p>
 <h2>Data</h2>
-<p>The data provider is exposed in the <code>piweb.data</code> namespace. Be aware that <strong>the data can change</strong>. Whenever this happens, the custom plot engine will emit the <code>dataChanged</code> event.</p>
+<p>The <code>piweb.data</code> interface exposes methods to retrieve the inspection plan items, measurements, values and raw data that is bound to the custom plot element. Be aware that <strong>the data can change</strong>. Whenever this happens, the custom plot engine will emit the <code>dataChanged</code> event.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> data = piweb.data;
 
@@ -2618,7 +2635,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype.</p>
 <p><a id="markdown-tooltips" name="tooltips"></a></p>
 <h2>Tooltips</h2>
-<p><a id="markdown-introduction" name="introduction"></a></p>
+<p><a id="markdown-introduction-4" name="introduction-4"></a></p>
 <h3>Introduction</h3>
 <p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:</p>
 <p><img src="gfx/infomode.png" alt="alt text" title="infomode"></p>
@@ -2676,7 +2693,7 @@ tooltips.provider.onCreateTooltips = createTooltipShapes;
 <p>The geometry of the tooltip shape.</p>
 <p><a id="markdown-logger" name="logger"></a></p>
 <h2>Logger</h2>
-<p><a id="markdown-introduction-1" name="introduction-1"></a></p>
+<p><a id="markdown-introduction-5" name="introduction-5"></a></p>
 <h3>Introduction</h3>
 <p>The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a <strong>significant performance impact</strong>.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
@@ -2684,7 +2701,7 @@ tooltips.provider.onCreateTooltips = createTooltipShapes;
 
 loger.debug(<span class="hljs-string">"My log message"</span>);
 </code></pre>
-<p><a id="markdown-methods-2" name="methods-2"></a></p>
+<p><a id="markdown-methods-3" name="methods-3"></a></p>
 <h3>Methods</h3>
 <p><strong>error <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span>(<span class="hljs-params">

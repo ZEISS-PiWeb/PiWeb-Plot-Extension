@@ -48,6 +48,7 @@
             - [Propertygrid Entries](#propertygrid-entries)
                 - [Option Properties](#option-properties)
 - [Environment](#environment)
+    - [Introduction](#introduction)
     - [Properties](#properties)
     - [Methods](#methods)
     - [Classes](#classes)
@@ -55,12 +56,15 @@
         - [RegionInfo](#regioninfo)
         - [TimeZoneInfo](#timezoneinfo)
 - [Properties](#properties-1)
+    - [Introduction](#introduction-1)
+    - [Methods](#methods-1)
 - [Format](#format)
-    - [Introduction](#introduction)
+    - [Introduction](#introduction-2)
     - [Enumerations](#enumerations-1)
         - [DateKind](#datekind)
-    - [Methods](#methods-1)
+    - [Methods](#methods-2)
 - [Drawing](#drawing)
+    - [Introduction](#introduction-3)
     - [Interfaces](#interfaces)
     - [Common](#common)
         - [Content](#content)
@@ -173,15 +177,15 @@
         - [RawDataItem](#rawdataitem)
     - [System Variables](#system-variables)
 - [Tooltips](#tooltips)
-    - [Introduction](#introduction-1)
+    - [Introduction](#introduction-4)
     - [Classes](#classes-1)
         - [TooltipShapeCollection](#tooltipshapecollection)
         - [TooltipShape](#tooltipshape)
         - [TooltipPointShape](#tooltippointshape)
         - [TooltipGeometryShape](#tooltipgeometryshape)
 - [Logger](#logger)
-    - [Introduction](#introduction-2)
-    - [Methods](#methods-2)
+    - [Introduction](#introduction-5)
+    - [Methods](#methods-3)
 
 <!-- /TOC -->
 </div>
@@ -726,7 +730,10 @@ The description that is displayed when hovering an option in the dropdown with t
 <a id="markdown-environment" name="environment"></a>
 ## Environment
 
-You can retrieve information about the element, its properties and settings by using the `environment` interface.
+<a id="markdown-introduction" name="introduction"></a>
+### Introduction
+
+You can retrieve information about the element, its properties and settings by using the `piweb.environment` interface. It also contains classes that are used by the functions of the [`piweb.format`](#format) interface.
 
 ```TypeScript
 import * as piweb from 'piweb';
@@ -742,7 +749,7 @@ import environment = piweb.environment;
 const apiVersion : string;
 ```
 
-The semantic version of the custom plot api that is supported by the piweb host.
+The semantic version of the custom plot API that is supported by the application the custom plot is hosted by.
 
 **clientVersion `string`**
 
@@ -934,12 +941,18 @@ The name of the timezone.
 <a id="markdown-properties-1" name="properties-1"></a>
 ## Properties
 
+<a id="markdown-introduction-1" name="introduction-1"></a>
+### Introduction
+
 The properties you define in the `package.json` file can be accessed via the `piweb.properties` interface. To enable type checking, there is one function for each available datatype.
 
 ```TypeScript
 import * as piweb from 'piweb';
 import properties = piweb.properties;
 ```
+
+<a id="markdown-methods-1" name="methods-1"></a>
+### Methods
 
 **getStringProperty `string`**
 
@@ -1016,7 +1029,7 @@ Returns the value of the property with the name `id` as a `FontDescription`. The
 <a id="markdown-format" name="format"></a>
 ## Format
 
-<a id="markdown-introduction" name="introduction"></a>
+<a id="markdown-introduction-2" name="introduction-2"></a>
 ### Introduction
 
 In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the `piweb.format` interface.
@@ -1046,7 +1059,7 @@ The represented time will be interpreted as local time.
 
 The represented time will be interpreted as UTC.
 
-<a id="markdown-methods-1" name="methods-1"></a>
+<a id="markdown-methods-2" name="methods-2"></a>
 ### Methods
 
 **formatNumber `string`**
@@ -1113,7 +1126,10 @@ Converts the specified string to its `Date` equivalent by using culture specific
 <a id="markdown-drawing" name="drawing"></a>
 ## Drawing  
 
-To access the drawing classes, import the `piweb` interface into your script. All necessary classes for drawing are encapsulated in the `piweb.drawing` module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
+<a id="markdown-introduction-3" name="introduction-3"></a>
+### Introduction
+
+All necessary classes for drawing are encapsulated in the `piweb.drawing` interface. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot API will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
 
 ```TypeScript
 import * as piweb from 'piweb';
@@ -2933,7 +2949,7 @@ Used to condense or expand the font horizontally.
 <a id="markdown-data" name="data"></a>
 ## Data
 
-The data provider is exposed in the `piweb.data` namespace. Be aware that **the data can change**. Whenever this happens, the custom plot engine will emit the `dataChanged` event.
+The `piweb.data` interface exposes methods to retrieve the inspection plan items, measurements, values and raw data that is bound to the custom plot element. Be aware that **the data can change**. Whenever this happens, the custom plot engine will emit the `dataChanged` event.
 
 ```TypeScript
 import * as piweb from 'piweb';
@@ -3441,7 +3457,7 @@ Some system variable expressions can return arrays as a result. Every member of 
 <a id="markdown-tooltips" name="tooltips"></a>
 ## Tooltips
 
-<a id="markdown-introduction-1" name="introduction-1"></a>
+<a id="markdown-introduction-4" name="introduction-4"></a>
 ### Introduction
 
 PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:
@@ -3534,7 +3550,7 @@ The geometry of the tooltip shape.
 <a id="markdown-logger" name="logger"></a>
 ## Logger
 
-<a id="markdown-introduction-2" name="introduction-2"></a>
+<a id="markdown-introduction-5" name="introduction-5"></a>
 ### Introduction
 
 The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a **significant performance impact**.
@@ -3546,7 +3562,7 @@ import logger = piweb.logger;
 loger.debug("My log message");
 ```
 
-<a id="markdown-methods-2" name="methods-2"></a>
+<a id="markdown-methods-3" name="methods-3"></a>
 ### Methods
 
 **error `void`**
