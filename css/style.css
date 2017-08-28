@@ -26,17 +26,23 @@
 
 .markdown-body h4 {
     font-weight: 600;
-    font-size: 1.2em;    
+    font-size: 1.1em; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18); 
+    padding-bottom: 0.1em;  
 }
 
 .markdown-body h5 {
    font-weight: 600;
-    font-size: 1.2em;    
+   font-size: 1.1em; 
+   border-bottom: 1px solid rgba(0, 0, 0, 0.18); 
+   padding-bottom: 0.1em;  
 }
 
 .markdown-body h6 {
     font-weight: 600;
-    font-size: 1.2em;    
+    font-size: 1.1em; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.18); 
+    padding-bottom: 0.1em;   
 }
 
 .markdown-body :not(pre):not(.hljs) > code { 

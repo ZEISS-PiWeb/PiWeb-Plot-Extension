@@ -24,11 +24,11 @@
 <!-- TOC -->
 
 - [Quickstart](#quickstart)
-        - [1. Create the folder `'MyExtension'`](#1-create-the-folder-myextension)
-        - [2. Create the file `'package.json'`](#2-create-the-file-packagejson)
-        - [3. Create the file `'tsconfic.json'`](#3-create-the-file-tsconficjson)
-        - [4. Create the folder `'@types'` and copy the file `'piweb.d.ts'` into it](#4-create-the-folder-types-and-copy-the-file-piwebdts-into-it)
-        - [5. Create the folder `'src'` and create the file `'index.ts'` in it](#5-create-the-folder-src-and-create-the-file-indexts-in-it)
+        - [1. Create the folder `MyExtension`](#1-create-the-folder-myextension)
+        - [2. Create the file `package.json`](#2-create-the-file-packagejson)
+        - [3. Create the file `tsconfic.json`](#3-create-the-file-tsconficjson)
+        - [4. Create the folder `@types` and copy the file `piweb.d.ts` into it](#4-create-the-folder-types-and-copy-the-file-piwebdts-into-it)
+        - [5. Create the folder `src` and create the file `index.ts` in it](#5-create-the-folder-src-and-create-the-file-indexts-in-it)
 - [Package Definition](#package-definition)
     - [Localization](#localization)
     - [Dictionaries](#dictionaries)
@@ -41,23 +41,25 @@
         - [PiWeb Extensions](#piweb-extensions)
         - [Toolbox Properties](#toolbox-properties)
             - [Toolbox Categories](#toolbox-categories)
-            - [Toolbox Items](#toolbox-items)
+            - [Toolbox Elements](#toolbox-elements)
                 - [Element Size](#element-size)
         - [Propertygrid Properties](#propertygrid-properties)
             - [Propertygrid Categories](#propertygrid-categories)
             - [Propertygrid Entries](#propertygrid-entries)
                 - [Option Properties](#option-properties)
-- [PiWeb Interface](#piweb-interface)
-    - [Basic Functions](#basic-functions)
-    - [Environment](#environment)
+- [Environment](#environment)
     - [Properties](#properties)
-- [Localization](#localization-1)
-    - [Enumerations](#enumerations-1)
-        - [DateKind](#datekind)
+    - [Methods](#methods)
     - [Classes](#classes)
         - [CultureInfo](#cultureinfo)
         - [RegionInfo](#regioninfo)
-    - [Methods](#methods)
+        - [TimeZoneInfo](#timezoneinfo)
+- [Properties](#properties-1)
+- [Format](#format)
+    - [Introduction](#introduction)
+    - [Enumerations](#enumerations-1)
+        - [DateKind](#datekind)
+    - [Methods](#methods-1)
 - [Drawing](#drawing)
     - [Interfaces](#interfaces)
     - [Common](#common)
@@ -134,7 +136,7 @@
         - [FontWeight](#fontweight)
         - [FontStyle](#fontstyle)
         - [FontStretch](#fontstretch)
-- [Data Provider](#data-provider)
+- [Data](#data)
     - [Common](#common-1)
         - [Content](#content-7)
         - [AttributeType](#attributetype)
@@ -171,14 +173,15 @@
         - [RawDataItem](#rawdataitem)
     - [System Variables](#system-variables)
 - [Tooltips](#tooltips)
-    - [Introduction](#introduction)
+    - [Introduction](#introduction-1)
     - [Classes](#classes-1)
         - [TooltipShapeCollection](#tooltipshapecollection)
         - [TooltipShape](#tooltipshape)
         - [TooltipPointShape](#tooltippointshape)
         - [TooltipGeometryShape](#tooltipgeometryshape)
-- [Logging](#logging)
-    - [Methods](#methods-1)
+- [Logger](#logger)
+    - [Introduction](#introduction-2)
+    - [Methods](#methods-2)
 
 <!-- /TOC -->
 </div>
@@ -190,23 +193,23 @@ In order to create your first own custom plot, you should be familiar with __Jav
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
-* In the application data directory `'%APPDATA%\Zeiss\PiWeb\Extensions'`  
-* In the program data directory `'%PROGRAMDATA%\Zeiss\PiWeb\Extensions'`
-* The `'Extensions'` folder in the PiWeb installation directory
+* In the application data directory `%APPDATA%\Zeiss\PiWeb\Extensions`  
+* In the program data directory `%PROGRAMDATA%\Zeiss\PiWeb\Extensions`
+* The `Extensions` folder in the PiWeb installation directory
 
 The package structure looks like the following:
 
 <img class="framed" src="gfx/folder_structure.png"/>
 
 <a id="markdown-1-create-the-folder-myextension" name="1-create-the-folder-myextension"></a>
-#### 1. Create the folder `'MyExtension'` 
+#### 1. Create the folder `MyExtension` 
 
-In case the `'Extensions'` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `'MyExtension'`.
+In case the `Extensions` folder doesn't exist, you must **create** it first. Now **create your project folder** in the extensions folder and name it `MyExtension`.
 
 <a id="markdown-2-create-the-file-packagejson" name="2-create-the-file-packagejson"></a>
-#### 2. Create the file `'package.json'`
+#### 2. Create the file `package.json`
 
-The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '[Package Definition](#package-definition)'. For now, use the minimum setup shown below.
+The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '[package definition](#package-definition)'. For now, use the minimum setup shown below.
 
 ```json
 {
@@ -228,7 +231,7 @@ The package configuration contains static parameters of your extension, such as 
 
 
 <a id="markdown-3-create-the-file-tsconficjson" name="3-create-the-file-tsconficjson"></a>
-#### 3. Create the file `'tsconfic.json'`
+#### 3. Create the file `tsconfic.json`
 
 It contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.
 
@@ -249,30 +252,28 @@ It contains necessary information for the typescript compiler, like input and ou
 ```
 
 <a id="markdown-4-create-the-folder-types-and-copy-the-file-piwebdts-into-it" name="4-create-the-folder-types-and-copy-the-file-piwebdts-into-it"></a>
-#### 4. Create the folder `'@types'` and copy the file `'piweb.d.ts'` into it
+#### 4. Create the folder `@types` and copy the file `piweb.d.ts` into it
 
-These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts)**. The folder `'@types'` was defined as the type root in the `'tsconfig.json'` file.
+These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts)**. The folder `@types` was defined as the type root in the `tsconfig.json` file.
 
 <a id="markdown-5-create-the-folder-src-and-create-the-file-indexts-in-it" name="5-create-the-folder-src-and-create-the-file-indexts-in-it"></a>
-#### 5. Create the folder `'src'` and create the file `'index.ts'` in it
+#### 5. Create the folder `src` and create the file `index.ts` in it
 
-This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [`DrawingContext`](#drawingcontext).
+ This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter '[DrawingContext](#drawingcontext)'.
 
 ```TypeScript
 import * as piweb from 'piweb'
-import * as host from 'piweb_host'
-import drawing = piweb.drawing;
 
-host.on("render", renderPlot);
+piweb.events.on("render", renderPlot);
 
-function renderPlot(drawingContext: drawing.DrawingContext) {
-const size = host.getSize();
-drawingContext.setBrush( drawing.Brushes.OrangeRed);
+function renderPlot(drawingContext: piweb.drawing.DrawingContext) {
+const size = piweb.environment.getSize();
+drawingContext.setBrush( piweb.drawing.Brush.orangeRed);
 drawingContext.drawRectangle(0, 0, size.width, size.height);
 }
 ```
 
-When we save all files and start the PiWeb Designer, we should find our extension in the **General** section of the toolbox:
+When we save all files and start PiWeb Designer, we should find our extension in the **General** category of the toolbox:
 
 <img class="framed" src="gfx/toolbox_start.png">
 
@@ -280,7 +281,7 @@ When we save all files and start the PiWeb Designer, we should find our extensio
 ## Package Definition
 
 
-In [chapter 1](#quickstart) we already created a very simple package definition in the file **package.json**. Although it's sufficient to get us started, there are a lot more settings to be discovered.
+In the chapter '[quickstart](#quickstart)' we already created a very simple package definition in the file **package.json**. Although it's sufficient to get us started, there are a lot more settings to be discovered.
 
 <a id="markdown-localization" name="localization"></a>
 ### Localization
@@ -400,15 +401,15 @@ Path to folder that contains the `index.js` file. In case you used typescript, i
 <a id="package-structure-engines" name="package-structure-engines"></a>
 **engines `object`**
 
-Defines the supported engine versions of this plot. Please read the [engines](#engines) chapter for further information.
+Defines the supported engine versions of this plot. Please read the chapter '[engines](#engines)' for further information.
 
 **piweb_actions `object`**
 
-Defines additional actions. Please read the [actions chapter](#piweb-actions)  for further information.
+Defines additional actions. Please read the chapter '[PiWeb actions](#piweb-actions)' for further information.
 
 **piweb_extension `object`**
 
-Defines the content of the extension. Please read the [extensions chapter](#piweb-extensions) for further information.
+Defines the content of the extension. Please read the chapter '[PiWeb extensions](#piweb-extensions)' for further information.
 
 <a id="markdown-engines" name="engines"></a>
 #### Engines
@@ -436,12 +437,12 @@ Identifies the extension type. Currently, the only accepted value is `plot`, whi
 <a id="package-structure-extensions-display" name="package-structure-extensions-display"></a>
 **display `localizable string`**
 
-Sets the display name of the item in the PiWeb Designer toolbox.
+Sets the display name of the element in the PiWeb Designer toolbox.
 
 <a id="package-structure-extensions-description" name="package-structure-extensions-description"></a>
 **description `localizable string`**
 
-Sets the description of the item in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.
+Sets the description of the element in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.
 
 <a id="package-structure-extensions-icon" name="package-structure-extensions-icon"></a>
 **icon `string`**
@@ -471,7 +472,7 @@ Describes additional categories for the element toolbox in PiWeb Designer. Pleas
 <a id="package-structure-extensions-toolbox-items" name="package-structure-extensions-toolbox-items"></a>
 **items `dictionary`**
 
-Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter '[toolbox items](#toolbox-items)' for further information.
+Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter '[toolbox elements](#toolbox-elements)' for further information.
 
 <a id="markdown-toolbox-categories" name="toolbox-categories"></a>
 ##### Toolbox Categories
@@ -479,35 +480,35 @@ Describes the entries for the element toolbox in PiWeb Designer. Please read the
 <a id="package-structure-extensions-toolbox-categories-name" name="package-structure-extensions-toolbox-categories-name"></a>
 **name `localizable string`**
 
-The name of the category that is displayed on top of it in the PiWeb Designer.
+The name of the category that is displayed on top of it in PiWeb Designer.
 
 <a id="package-structure-extensions-toolbox-categories-priority" name="package-structure-extensions-toolbox-categories-priority"></a>
 **priority `number`**
 
 The priority determines where the category is placed relative to the existing categories. 
 
-<a id="markdown-toolbox-items" name="toolbox-items"></a>
-##### Toolbox Items
+<a id="markdown-toolbox-elements" name="toolbox-elements"></a>
+##### Toolbox Elements
 
 <a id="package-structure-extensions-toolbox-items-name" name="package-structure-extensions-toolbox-items-name"></a>
 **name `localizable string`**
 
-Sets the display name of the item in the PiWeb Designer toolbox.
+Sets the display name of the element in the PiWeb Designer toolbox.
 
 <a id="package-structure-extensions-toolbox-items-description" name="package-structure-extensions-toolbox-items-description"></a>
 **description `localizable string`**
 
-Sets the description of the item in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.
+Sets the description of the element in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.
 
 <a id="package-structure-extensions-toolbox-items-icon" name="package-structure-extensions-toolbox-items-icon"></a>
 **icon `string`**
 
-Sets the icon of the item in the PiWeb Designer toolbox. Please read the chapter [icon](#package-structure-extensions-icon) for further information.
+Sets the icon of the element in the PiWeb Designer toolbox. Please read the chapter ['icon'](#package-structure-extensions-icon) for further information.
 
 <a id="package-structure-extensions-toolbox-items-category" name="package-structure-extensions-toolbox-items-category"></a>
 **category `string`**
 
-Sets the category under which the item appears in the PiWeb Designer toolbox. The value must appear as dictionary key in the [`categories`](#package-structure-extensions-toolbox-categories) dictionary or be equal to one of the built in category keys of PiWeb:
+Sets the category under which the element appears in the PiWeb Designer toolbox. The value must appear as dictionary key in the [`categories`](#package-structure-extensions-toolbox-categories) dictionary or be equal to one of the built in category keys of PiWeb:
 
 | Key                          | English Name        | German Name              |
 |------------------------------|---------------------|--------------------------|
@@ -527,7 +528,7 @@ Sets the category under which the item appears in the PiWeb Designer toolbox. Th
 <a id="package-structure-extensions-toolbox-items-element_size" name="package-structure-extensions-toolbox-items-element_size"></a>
 **element_size `object`**
 
-Describes the initial size of the element when created on the report. Please read the chapter [element size](#element-size) for further information.
+Describes the initial size of the element when created on the report. Please read the chapter '[element size](#element-size)' for further information.
 
 <a id="markdown-element-size" name="element-size"></a>
 ###### Element Size         
@@ -574,7 +575,7 @@ The priority determines where the category is placed relative to the other categ
 <a id="package-structure-extensions-propertygrid-entries-name" name="package-structure-extensions-propertygrid-entries-name"></a>
 **name `localizable string`**
 
-The name that will be displayed in the property tab of PiWeb Designer
+The name that will be displayed in the property tab of PiWeb Designer.
 
 <a id="package-structure-extensions-propertygrid-entries-description" name="package-structure-extensions-propertygrid-entries-description"></a>
 **description `localizable string`**
@@ -600,7 +601,7 @@ The key of the entry in the [`categories`](#package-structure-extensions-propert
 <a id="package-structure-extensions-propertygrid-entries-type" name="package-structure-extensions-propertygrid-entries-type"></a>
 **type `enumeration`**
 
-The datatype that determines which kind of editor is shown for the property
+The datatype that determines which kind of editor is shown for the property:
 
 | Type          | Description           | Editor                   |
 |---------------|-----------------------|--------------------------|
@@ -624,28 +625,28 @@ Each datatype accepts a different default value:
 "default_value": "value"
 ```
 
-Any unicode string is accepted
+Any unicode string is accepted.
 
 **`integer`**
 ```json
 "default_value": 1
 ```
 
-Integral numbers are accepted
+Integral numbers are accepted.
 
 **`double`**
 ```json
 "default_value": 1.0
 ```
 
-Floating point or integral numbers are accepted
+Floating point or integral numbers are accepted.
 
 **`boolean`**
 ```json
 "default_value": true | false
 ```
 
-`true` and `false` are accepted
+`true` and `false` are accepted.
 
 **`enum`**
 ```json
@@ -659,7 +660,7 @@ The keys of the [`options`](#package-structure-extensions-propertygrid-entries-o
 "default_value": "#ff0000"
 ```
 
-Strings in the form of `#rrggbb`
+Strings in the form of `#rrggbb`.
 
 **`brush`**
 
@@ -720,19 +721,56 @@ The name that is displayed in the dropdown.
 <a id="package-structure-extensions-propertygrid-entries-options-description" name="package-structure-extensions-propertygrid-entries-options-description"></a>
 **description `localizable string`**
 
-The description that is displayed when hovering an option in the dropdown with the mouse
+The description that is displayed when hovering an option in the dropdown with the mouse.
 
-<a id="markdown-piweb-interface" name="piweb-interface"></a>
-## PiWeb Interface
+<a id="markdown-environment" name="environment"></a>
+## Environment
 
-You can retrieve information about the element, its properties and settings by using the `host` interface. To access it, include the PiWeb host module in your script.
+You can retrieve information about the element, its properties and settings by using the `environment` interface.
 
 ```TypeScript
-import * as host from 'piweb_host'
+import * as piweb from 'piweb';
+import environment = piweb.environment;
 ```
 
-<a id="markdown-basic-functions" name="basic-functions"></a>
-### Basic Functions 
+<a id="markdown-properties" name="properties"></a>
+### Properties
+
+**apiVersion `string`**
+
+```TypeScript
+const apiVersion : string;
+```
+
+The semantic version of the custom plot api that is supported by the piweb host.
+
+**clientVersion `string`**
+
+```TypeScript
+const clientVersion : string;
+```
+
+The piweb version the custom plot is hosted by
+
+**clientString `string`**
+
+```TypeScript
+const clientString : string;
+```
+
+The name of the client that is hosting the custom plot.
+
+**toolboxItemName `string`**
+
+```TypeScript
+const toolboxItemName : string;
+```
+
+In case you specified multiple toolbox elements in the `package.json` file, this is the interface to find out, which element the user picked. The returned value is equal to the property name you used to identify the toolbox entry.
+
+
+<a id="markdown-methods" name="methods"></a>
+### Methods
 
 **getSize [`Size`](#size)**
 
@@ -742,7 +780,7 @@ function getSize(): Size;
 
 Returns the current size of the element in **millimeters**. 
 
-**getPosition [`Point`](#point)**
+**getLocation [`Point`](#point)**
 
 ```TypeScript
 function getPosition(): Point;
@@ -750,39 +788,158 @@ function getPosition(): Point;
 
 Returns the position of the element on the report page in **millimeters**.
 
-<a id="markdown-environment" name="environment"></a>
-### Environment
-
-The `environment` interface is accessible via the `piweb` interface and exposes the following members
+The `environment` interface is accessible via the `piweb` interface and exposes the following members:
 
 **isDesignMode `boolean`**
 
 ```TypeScript
-const isDesignMode : boolean = piweb.environment.isDesignMode;
+function isDesignMode() : boolean;
 ```
 
-If `true`, the plot is rendered by the PiWeb Designer, otherwise it's rendered by the PiWeb Monitor. Some very complex elements don't render their complete content while in design mode, to guarantee a smooth and fluent editing in PiWeb Designer.
+If `true`, the plot is rendered by PiWeb Designer, otherwise it's rendered by PiWeb Monitor. Some very complex elements don't render their complete content while in design mode, to guarantee a smooth and fluent editing in PiWeb Designer.
 
-**toolboxItemName `string`**
+<a id="markdown-classes" name="classes"></a>
+### Classes
+
+<a id="markdown-cultureinfo" name="cultureinfo"></a>
+#### CultureInfo
 
 ```TypeScript
-const toolboxItemName : string = piweb.environment.toolboxItemName;
+class CultureInfo
 ```
 
-In case you specified multiple toolbox items in the `package.json` file, this is the interface to find out, which item the user picked. The returned value is equal to the property name you used to identity the toolbox entry.
+Contains the identifiers of a specific culture. PiWeb can use these information to provide localization and correct formatting of numbers and dates.
 
-**currentCulture [`CultureInfo`](#cultureinfo)**
+
+**currentCulture: [`CultureInfo`](#cultureinfo)**
 
 ```TypeScript
-const currentCulture : CultureInfo = piweb.environment.currentCulture;
+static currentCulture : CultureInfo;
 ```
 
-Returns the culture in which the host process has been started. You can use this information to
+The culture in which the host application was started.
 
-<a id="markdown-properties" name="properties"></a>
-### Properties
+**invariantCulture: [`CultureInfo`](#cultureinfo)**
+
+```TypeScript
+static invariantCulture : CultureInfo;
+```
+
+The invariant culture.
+
+**twoLetterISOLanguageName: `string`**
+
+```TypeScript
+twoLetterISOLanguageName : string;
+```
+
+The ISO 639-1 two-letter code for the language of the culture.
+
+**threeLetterISOLanguageName: `string`**
+
+```TypeScript
+threeLetterISOLanguageName : string;
+```
+
+The ISO 639-2 three-letter code for the language of the culture.
+
+**name: `string`**
+
+```TypeScript
+name : string;
+```
+
+The name of the culture in the format `languagecode2-country/regioncode2`.
+
+<a id="markdown-regioninfo" name="regioninfo"></a>
+#### RegionInfo
+
+```TypeScript
+class RegionInfo
+```
+
+Contains the identifiers of a specific country or region. 
+
+**currentRegion: [`RegionInfo`](#regioninfo)**
+
+```TypeScript
+static currentRegion : RegionInfo;
+```
+
+The region in which the host application was started.
+
+**twoLetterISORegionName: `string`**
+
+```TypeScript
+static twoLetterISORegionName : string;
+```
+
+The two-letter code defined in ISO 3166 for the country/region.
+
+**threeLetterISORegionName: `string`**
+
+```TypeScript
+static threeLetterISORegionName : string;
+```
+
+The three-letter code defined in ISO 3166 for the country/region.
+
+**name: `string`**
+
+```TypeScript
+static name : string;
+```
+
+The name or ISO 3166 two-letter country/region code.
+
+<a id="markdown-timezoneinfo" name="timezoneinfo"></a>
+#### TimeZoneInfo
+
+```TypeScript
+class TimeZoneInfo
+```
+
+Contains information about a specific timezone. 
+
+**localTimeZone: [`TimeZoneInfo`](#timezoneinfo)**
+
+```TypeScript
+localTimeZone : TimeZoneInfo
+```
+
+The timezone in which the host application was started.
+
+**baseUtcOffset: `number`**
+
+```TypeScript
+baseUtcOffset : number
+```
+
+The standard offset of the timezone in hours.
+
+**getUtcOffset: `number`**
+
+```TypeScript
+function getUtcOffset(
+    time: Date
+) : number
+```
+
+The offset of the timezone at the specified date in hours.
+
+**name: `string`**
+
+The name of the timezone.
+
+<a id="markdown-properties-1" name="properties-1"></a>
+## Properties
 
 The properties you define in the `package.json` file can be accessed via the `piweb.properties` interface. To enable type checking, there is one function for each available datatype.
+
+```TypeScript
+import * as piweb from 'piweb';
+import properties = piweb.properties;
+```
 
 **getStringProperty `string`**
 
@@ -856,8 +1013,18 @@ function getFontProperty(id : string) : FontDescription
 
 Returns the value of the property with the name `id` as a `FontDescription`. The result can be used as parameter for the `create` method of the [`Font`](#font) class.
 
-<a id="markdown-localization-1" name="localization-1"></a>
-## Localization
+<a id="markdown-format" name="format"></a>
+## Format
+
+<a id="markdown-introduction" name="introduction"></a>
+### Introduction
+
+In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the `piweb.format` interface.
+
+```TypeScript
+import * as piweb from 'piweb';
+import drawing = piweb.format;
+```
 
 <a id="markdown-enumerations-1" name="enumerations-1"></a>
 ### Enumerations
@@ -871,61 +1038,15 @@ enum DateKind
 
 When parsing a date without a specified time zone the `DateKind` parameter determines which time zone the date has.
 
-**`AssumeLocal`**
+**`assumeLocal`**
 
 The represented time will be interpreted as local time.
         
-**`AssumeUTC`**
+**`assumeUTC`**
 
 The represented time will be interpreted as UTC.
 
-<a id="markdown-classes" name="classes"></a>
-### Classes
-
-<a id="markdown-cultureinfo" name="cultureinfo"></a>
-#### CultureInfo
-
-```TypeScript
-class CultureInfo
-```
-
-Contains the identifiers of a specific culture. PiWeb can use these information to provide localization and correct formatting of numbers and dates.
-
-**twoLetterISOLanguageName: `string`**
-
-The ISO 639-1 two-letter code for the language of the culture.
-
-**threeLetterISOLanguageName: `string`**
-
-The ISO 639-2 three-letter code for the language of the culture.
-
-**name: `string`**
-
-The name of the culture in the format `languagecode2-country/regioncode2`.
-
-<a id="markdown-regioninfo" name="regioninfo"></a>
-#### RegionInfo
-
-```TypeScript
-class RegionInfo
-```
-
-Contains the ifentifiers of a specific country or region. 
-
-**twoLetterISORegionName: `string`**
-
-The two-letter code defined in ISO 3166 for the country/region.
-
-**threeLetterISORegionName: `string`**
-
-The three-letter code defined in ISO 3166 for the country/region.
-
-**name: `string`**
-
-The name or ISO 3166 two-letter country/region code.
-
-
-<a id="markdown-methods" name="methods"></a>
+<a id="markdown-methods-1" name="methods-1"></a>
 ### Methods
 
 **formatNumber `string`**
@@ -968,7 +1089,7 @@ Converts the specified date to its string representation using the specified for
 
 ```TypeScript
 function parseDate(
-    str: String, 
+    str: string, 
     culture?: CultureInfo | null, 
     dateKind?: DateKind | null
 ) : Date | null;
@@ -980,7 +1101,7 @@ Converts the specified string to its `Date` equivalent by using culture specific
 
 ```TypeScript
 function parseDateExact(
-    str: String, 
+    str: string, 
     format: string, 
     culture?: CultureInfo | null, 
     dateKind?: DateKind | null
@@ -995,18 +1116,19 @@ Converts the specified string to its `Date` equivalent by using culture specific
 To access the drawing classes, import the `piweb` interface into your script. All necessary classes for drawing are encapsulated in the `piweb.drawing` module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
 
 ```TypeScript
-import * as piweb from 'piweb'
-import * as host from 'piweb_host'
+import * as piweb from 'piweb';
+import drawing = piweb.drawing;
 
-host.on("render", render);
 
-function render(context: piweb.drawing.DrawingContext) {
+piweb.events.on("render", render);
+
+function render(context: drawing.DrawingContext) {
     ...
 }
 ```
 
 Be aware that all coordinates and values are interpreted as **millimeters**. PiWeb draws with a resolution of **96 DPI**, so one millimeter is equal to `96 / 25.4 ~ 3.58` pixels, or one pixel is equal to `25.4 / 96 ~ 0.2646` millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.
-"
+
 <a id="markdown-interfaces" name="interfaces"></a>
 ### Interfaces
 
@@ -1070,7 +1192,7 @@ As you might have noticed, you don't have to specify all parameters when using t
 class Point()
 ```
 
-Represents a position
+Represents a position.
 
 **x `number`**
 
@@ -1078,7 +1200,7 @@ Horizontal position.
 
 **y `number`**
 
-Vertical position
+Vertical position.
 
 <a id="markdown-size" name="size"></a>
 #### Size
@@ -1087,7 +1209,7 @@ Vertical position
 class Size()
 ```
 
-Represents a position
+Represents a dimension.
 
 **width `number`**
 
@@ -1199,7 +1321,7 @@ function drawText(
     settings: TextDrawingSettings
 ): void;
 ```
-Draws the specified [`FormattedText`](#formattedtext) at with the specified [`TextDrawingSettings`](#textdrawingsettings). There are numerous properties which will help you to adjust how the text is arranged and displayed. For more information, please read the chapter [FormattedText](#formattedtext), [Font](#font) and [TextDrawingSettings](#textdrawingsettings).
+Draws the specified [`FormattedText`](#formattedtext) at with the specified [`TextDrawingSettings`](#textdrawingsettings). There are numerous properties which will help you to adjust how the text is arranged and displayed. For more information, please read the chapters '[FormattedText](#formattedtext)', '[Font](#font)' and '[TextDrawingSettings](#textdrawingsettings)'.
 
 <a id="drawingcontext-drawimage" name="drawingcontext-drawimage"></a>
 **drawImage `void`**
@@ -1233,7 +1355,7 @@ function setPen(
 ): void;
 ```
 
-Sets the pen that will be used for all subsequent calls to [`drawLine`](#drawingcontext-drawline), [`drawLines`](#drawingcontext-drawlines), [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be stroked, use the [`nopen`](#drawingcontext-nopen) function.
+Sets the pen that will be used for all subsequent calls to [`drawLine`](#drawingcontext-drawline), [`drawLines`](#drawingcontext-drawlines), [`drawRectangle`](#drawingcontext-drawrectangle), [`drawEllipse`](#drawingcontext-drawellipse) and [`drawGeometry`](#drawingcontext-drawgeometry). In case you don't want your rectangle, ellipse or geometry to be stroked, use the [`noPen`](#drawingcontext-nopen) function.
 
 <a id="drawingcontext-nopen" name="drawingcontext-nopen"></a>
 **noPen `void`**
@@ -1549,7 +1671,7 @@ The rotation center.
 class ScalingTransform extends Transform
 ```
 
-Scales an object in horizontal and vertical direction
+Scales an object in horizontal and vertical direction.
 
 <img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.svg">
 
@@ -1700,11 +1822,11 @@ Describes size and position of a geometries bounding box.
 
 **x `number`**
 
-The x-coordinate of the top left corner of the bounding box.
+The x coordinate of the top left corner of the bounding box.
 
 **y `number`**
 
-The y-coordinate of the top left corner of the bounding box.
+The y coordinate of the top left corner of the bounding box.
 
 **height `number`**
 
@@ -1888,11 +2010,11 @@ Line geometries are quite simple, and are mostly used in combination with other 
 
 **start [`Point`](#point)**
 
-The point where the line begins
+The point where the line begins.
 
 **end [`Point`](#point)**
 
-The point where the line ends
+The point where the line ends.
 
 <a id="markdown-rectanglegeometry" name="rectanglegeometry"></a>
 #### RectangleGeometry
@@ -1905,15 +2027,15 @@ Describes a rectangle that can be stroked or filled.
 
 **position [`Point`](#point)**
 
-The position of the top left corner
+The position of the top left corner.
 
 **width `number`**
 
-The horizontal dimension
+The horizontal dimension.
 
 **height `number`**
 
-The vertical dimension
+The vertical dimension.
 
 <a id="markdown-ellipsegeometry" name="ellipsegeometry"></a>
 #### EllipseGeometry
@@ -1926,15 +2048,15 @@ Describes a rectangle that can be stroked or filled.
 
 **position [`Point`](#point)**
 
-The center of the ellipse
+The center of the ellipse.
 
 **radiusX `number`**
 
-The horizontal radius
+The horizontal radius.
 
 **radiusY `number`**
 
-The vertical radius
+The vertical radius.
 
 <a id="markdown-pathgeometry" name="pathgeometry"></a>
 #### PathGeometry
@@ -1943,7 +2065,7 @@ The vertical radius
 class PathGeometry extends Geometry
 ```
 
-Pathgeometries are composed of one or more [PathFigure](#pathfigure) objects, which are themselves composed of [PathSegment](#pathsegment) objects. 
+Pathgeometries are composed of one or more [`PathFigure`](#pathfigure) objects, which are themselves composed of [`PathSegment`](#pathsegment) objects.
 
 **fillRule [`FillRule`](#fillrule)**
 
@@ -1951,7 +2073,7 @@ Describes how overlapping geometries are filled.
 
 **figures [`PathFigure[]`](#pathfigure)**
 
-The collection of path figures, that compose the [`PathGeometry`](#pathgeometry). 
+The collection of path figures, that compose the [`PathGeometry`](#pathgeometry).
 
 <a id="markdown-pathfigure" name="pathfigure"></a>
 ##### PathFigure
@@ -1964,7 +2086,7 @@ Multiple path figures compose a [`PathGeometry`](#pathgeometry). The path figure
 
 **startPoint [`Point`](#point)**
 
-The first Point of the path figure.
+The first point of the path figure.
 
 **segments [`PathSegment[]`](#pathsegment)**
 
@@ -1981,7 +2103,7 @@ Determines whether the last point of the path figure should be connected to the 
 abstract class PathSegment
 ```
 
-Path segments define one or more points that describe a line or curve. Following path segments are supported
+Path segments define one or more points that describe a line or curve. Following path segments are supported:
 
 <a id="markdown-arcsegment" name="arcsegment"></a>
 ###### ArcSegment
@@ -2007,11 +2129,11 @@ Endpoint of the arc.
 
 **size [`Size`](#size)**
 
-The x- and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.
+The x and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.
 
 **angle `number`**
 
-Rotation angle of the ellipse in *degrees*.
+Rotation angle of the ellipse in degrees.
 
 **arcType `enumeration`**
 
@@ -2028,7 +2150,7 @@ Since there are always two different arcs with the same radius and the same arc 
 class LineSegment extends PathSegment
 ```
 
-Creates a line between two points in a [PathFigure](#pathfigure). In case you want to use multiple line segments consecutively, consider using the [PolyLineSegment](#polylinesegment).
+Creates a line between two points in a [`PathFigure`](#pathfigure). In case you want to use multiple line segments consecutively, consider using the [`PolyLineSegment`](#polylinesegment).
 
 **to [`Point`](#point)**
 
@@ -2041,7 +2163,7 @@ The endpoint of the line segment.
 class BezierSegment extends PathSegment
 ```
 
-Describes a bezier segment, using the last point of the previous segment as start point. In case you want to use multiple bezier segments consecutively, consider using the [PolyBezierSegment](#polybeziersegment).
+Describes a bezier segment, using the last point of the previous segment as start point. In case you want to use multiple bezier segments consecutively, consider using the [`PolyBezierSegment`](#polybeziersegment).
 
 **control [`Point`](#point)**
 
@@ -2062,7 +2184,7 @@ End point of the bezier curve.
 class QuadraticBezierSegment extends PathSegment
 ```
 
-Describes a quadratic bezier segment, using the last point of the previous segment as start point. In case you want to use multiple quadratic bezier segments consecutively, consider using the [PolyQuadraticBezierSegment](#polyquadraticbeziersegment).
+Describes a quadratic bezier segment, using the last point of the previous segment as start point. In case you want to use multiple quadratic bezier segments consecutively, consider using the [`PolyQuadraticBezierSegment`](#polyquadraticbeziersegment).
 
 **control [`Point`](#point)**
 
@@ -2083,7 +2205,7 @@ Describes a line strip, including the last point of the previous segment.
 
 **points [`Point[]`](#point)**
 
-The collection of [Point](#point) objects that defines this segment.
+The collection of [`Point`](#point) objects that defines this segment.
 
 <a id="markdown-polybeziersegment" name="polybeziersegment"></a>
 ###### PolyBezierSegment
@@ -2096,7 +2218,7 @@ Describes multiple bezier segments, including the last point of the previous seg
 
 **points [`Point[]`](#point)**
 
-The collection of [Point](#point) objects that defines this segment.
+The collection of [`Point`](#point) objects that defines this segment.
 
 <a id="markdown-polyquadraticbeziersegment" name="polyquadraticbeziersegment"></a>
 ###### PolyQuadraticBezierSegment
@@ -2109,7 +2231,7 @@ Describes multiple bezier segments, including the last point of the previous seg
 
 **points [`Point[]`](#point)**
 
-The collection of [Point](#point) objects that defines this segment.
+The collection of [`Point`](#point) objects that defines this segment.
 
 <a id="markdown-customgeometry" name="customgeometry"></a>
 #### CustomGeometry
@@ -2140,7 +2262,7 @@ The path which is used to define a string. Points are written in the form of `x,
 class GeometryGroup extends Geometry
 ```
 
-Describes a set of geometries that are consolidated into a group. To define how the resulting geometry is filled, use the `fillRule` parameter
+Describes a set of geometries that are consolidated into a group. To define how the resulting geometry is filled, use the `fillRule` parameter.
 
 **children [`Geometry[]`](#geometry)**
 
@@ -2157,7 +2279,7 @@ Describes how overlapping geometries are filled.
 class CombinedGeometry extends Geometry
 ```
 
-Describes a geometry, that is composed of exactly two child geometries. The difference to the [GeometryGroup](#geometrygroup) is, that the [`CombinedGeometry`](#combinedgeometry) is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. [`CombinedGeometry`](#combinedgeometry) objects can themselves be combined again.
+Describes a geometry, that is composed of exactly two child geometries. The difference to the [`GeometryGroup`](#geometrygroup) is, that the [`CombinedGeometry`](#combinedgeometry) is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. [`CombinedGeometry`](#combinedgeometry) objects can themselves be combined again.
 
 **geometry1 [`Geometry`](#geometry)**
 
@@ -2315,7 +2437,7 @@ The definition of the dashes used to render the stroke. The default value is emp
 
 **dashOffset `number`**
 
-The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dash style. Be aware that a **positive** offset will move the dashes **against stroke direction**
+The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dash style. Be aware that a **positive** offset will move the dashes **against stroke direction**.
 
 **dashCap [`LineCap`](#linecap)**
 
@@ -2416,7 +2538,7 @@ The text to be formatted. The text can include line breaks.
 
 **font [`Font`](#font)**
 
-The font that describes how the text is rendered
+The font that describes how the text is rendered.
 
 **maxTextWidth `number`**
 
@@ -2718,7 +2840,7 @@ class Font
 
 
 
-Describes how a text is displayed
+Describes how a text is displayed.
 
 **fontFamily `string`**
 
@@ -2808,19 +2930,19 @@ Used to condense or expand the font horizontally.
 | **`extraExpanded`**|**150%** of the default width/height ratio|
 | **`ultraExpanded`**|**200%** of the default width/height ratio|
 
-<a id="markdown-data-provider" name="data-provider"></a>
-## Data Provider
+<a id="markdown-data" name="data"></a>
+## Data
 
 The data provider is exposed in the `piweb.data` namespace. Be aware that **the data can change**. Whenever this happens, the custom plot engine will emit the `dataChanged` event.
 
 ```TypeScript
-import * as piweb from 'piweb'
-import * as host from 'piweb_host'
+import * as piweb from 'piweb';
+import data = piweb.data;
 
-host.on("dataChanged", loadData);
+piweb.events.on("dataChanged", loadData);
 
 function loadData() {
-    const provider = piweb.data.provider;
+    const provider = data.provider;
     ...
 }
 ```
@@ -2842,7 +2964,7 @@ function loadData() {
 enum AttributeType
 ```
 
-Describes, which kind of value an attribute is supposed to have. All attributes can also have `undefined` as value.
+Describes the kind of value that an attribute is supposed to have. All attributes can also have `undefined` as value.
 
 **`String`**
 
@@ -2871,7 +2993,7 @@ The attribute has a `number` value, that is to be interpreted as the key of a **
 class Attribute
 ```
 
-An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measurement values and catalog entries. An attribute is identified by its `Key`. To get information about the type and usage of an attribute, use the `Key` to get the **[`AttributeDefinition`](#attributedefinition)** from the **[`Configuration`](#configuration)**.
+An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measured values and catalog entries. An attribute is identified by its `Key`. To get information about the type and usage of an attribute, use the `Key` to get the **[`AttributeDefinition`](#attributedefinition)** from the **[`Configuration`](#configuration)**.
 
 **key `number`**
 
@@ -2936,7 +3058,7 @@ function getConfiguration() : Configuration
 class Configuration
 ```
 
-The configuration contains all attribute definitions for parts, characteristics, measurements, measurement values and catalogs.
+The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs.
 
 **partAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
@@ -2952,7 +3074,7 @@ The set of attribute definitions referring to measurements.
 
 **valueAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
-The set of attribute definitions referring to measurement values.
+The set of attribute definitions referring to measured values.
 
 **catalogAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
@@ -2980,11 +3102,11 @@ Measurement. Common attributes are time, machine, operator and batch number.
 
 **`Value`**
 
-Value. The most common attribute is the measurement value (K1).
+Value. The most common attribute is the measured value (K1).
 
 **`Catalog`**
 
-Attributes for Catalog entries. These refer to the "*columns*" of a catalog.
+Attributes for catalog entries. These refer to the "columns" of a catalog.
 
 
 <a id="markdown-attributedefinition" name="attributedefinition"></a>
@@ -3004,7 +3126,7 @@ An unlocalized description text of the attribute.
 
 **dataType [`AttributeType`](#attributetype)**
 
-The datatype of the values of the attribute
+The datatype of the values of the attribute.
 
 **entityType [`EntityType`](#entitytype)**
 
@@ -3059,7 +3181,7 @@ A set of catalog entries of which this catalog is composed.
 <a id="markdown-catalogentry" name="catalogentry"></a>
 #### CatalogEntry
 
-Catalog entries used as enumeration values of attributes in the PiWeb Database.
+Catalog entries used as enumeration values of attributes in the PiWeb database.
 
 ```TypeScript
 class CatalogEntry extends AttributeItem
@@ -3089,7 +3211,7 @@ A 16 bit integer that identifies the catalog entry. When accessing an attribute 
 function getInspectionPlan() : Map<string, InspectionPlanItem>;
 ```
 
-Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in the PiWeb Designer. Every inspection plan entity is identified by a `Guid`, which is stored as a base64 encoded byte array. 
+Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer. Every inspection plan entity is identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 <a id="markdown-inspectionplanitemtype" name="inspectionplanitemtype"></a>
 #### InspectionPlanItemType
@@ -3168,7 +3290,7 @@ The type of the inspection plan item that is represented by this path element.
 <a id="markdown-usage-3" name="usage-3"></a>
 #### Usage
 
-Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in the PiWeb Designer. Every measurement is identified by a `Guid`, which is stored as a base64 encoded byte array. 
+Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in PiWeb Designer. Every measurement is identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
 **getMeasurements [`Map<string, Measurement>`](#measurement)**
 
@@ -3185,7 +3307,7 @@ function getMeasurements(
 enum MeasurementMode
 ```
 
-Determines whether or not to fetch measurement values.
+Determines whether to fetch measured values.
 
 **`WithoutValues`**
 
@@ -3225,7 +3347,7 @@ class MeasurementValue extends AttributeItem
 
 **characteristic `string`**
 
-The `Guid` that identifies the characteristic this measurement value is associated to.
+The `Guid` that identifies the characteristic this measured value is associated to.
 
 <a id="markdown-raw-data" name="raw-data"></a>
 ### Raw Data
@@ -3239,11 +3361,10 @@ The `Guid` that identifies the characteristic this measurement value is associat
 <a id="markdown-usage-4" name="usage-4"></a>
 #### Usage
 
-Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measurement values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine. Because of this reason, the `RawDataItem` is located in the `host` module.
+Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.
 
 ```TypeScript
-import * as host from 'piweb_host';
-function getRawData() : host.RawDataItem[];
+function getRawData() : RawDataItem[];
 ```
 
 <a id="markdown-entitytype-1" name="entitytype-1"></a>
@@ -3261,7 +3382,7 @@ Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to
 | **`Part`** | Additional data of an inspection plan part |
 | **`Characteristic`** | Additional data of an inspection plan characteristic |
 | **`Measurement`** | Additional data of a measurement |
-| **`MeasurementValue`** | Additional data of a measurement value |
+| **`MeasurementValue`** | Additional data of a measured value |
 
 <a id="markdown-rawdataitem" name="rawdataitem"></a>
 #### RawDataItem
@@ -3300,7 +3421,7 @@ The timestamp when the data has been uploaded to the server.
 
 The timestamp of the most recent modification.
 
-**readDataSync() `host.HostBinary`**
+**readDataSync() `HostBinary`**
 
 Use this function to actually fetch the data associated to the `RawDataItem`. The data is returned as a `HostBuffer`, which can be converted to a `Buffer` using the `makeBuffer` function.
 
@@ -3320,7 +3441,7 @@ Some system variable expressions can return arrays as a result. Every member of 
 <a id="markdown-tooltips" name="tooltips"></a>
 ## Tooltips
 
-<a id="markdown-introduction" name="introduction"></a>
+<a id="markdown-introduction-1" name="introduction-1"></a>
 ### Introduction
 
 PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:
@@ -3330,12 +3451,13 @@ PiWeb Monitor has a feature we call `info mode`. While the info mode is active, 
 The custom plot API allows you to define your own tooltips, using the `onCreateTooltips` callback method of the tooltip provider:
 
 ```TypeScript
-import * as piweb from 'piweb'
+import * as piweb from 'piweb';
+import tooltips = piweb.tooltips;
 
-piweb.tooltips.provider.onCreateTooltips = createTooltipShapes;
+tooltips.provider.onCreateTooltips = createTooltipShapes;
 
-function createTooltipShapes(): piweb.tooltips.TooltipShapeCollection {
-    return new piweb.tooltips.TooltipShapeCollection([
+function createTooltipShapes(): tooltips.TooltipShapeCollection {
+    return new tooltips.TooltipShapeCollection([
         ...
     ]);
 }
@@ -3369,7 +3491,7 @@ The shapes of which this collection is composed.
 abstract class TooltipShape
 ```
 
-Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded `Guids`, to display a very detailed tooltip that contains information about the measurement value. You must specify both `Guids` to display these additional information.
+Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded `Guids`, to display a very detailed tooltip that contains information about the measured value. You must specify both `Guids` to display these additional information.
 
 **text `string`**
 
@@ -3403,24 +3525,28 @@ The point on which this tooltip shape is located. The displayed circle uses this
 class TooltipGeometryShape extends TooltipShape
 ```
 
-Describes a tooltip shape that spans over an area, described by the `geometry` parameter. When active, the whole geometry will be highlighted.
+Describes a tooltip shape that spans over an area, described by the `Geometry` parameter. When active, the whole geometry will be highlighted.
 
 **shape [`Geometry`](#geometry)**
 
 The geometry of the tooltip shape.
 
-<a id="markdown-logging" name="logging"></a>
-## Logging
+<a id="markdown-logger" name="logger"></a>
+## Logger
+
+<a id="markdown-introduction-2" name="introduction-2"></a>
+### Introduction
 
 The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a **significant performance impact**.
 
 ```TypeScript
-import * as piweb from 'piweb'
+import * as piweb from 'piweb';
+import logger = piweb.logger;
 
-piweb.log.debug("My log message");
+loger.debug("My log message");
 ```
 
-<a id="markdown-methods-1" name="methods-1"></a>
+<a id="markdown-methods-2" name="methods-2"></a>
 ### Methods
 
 **error `void`**

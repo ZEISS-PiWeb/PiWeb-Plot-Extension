@@ -20,7 +20,7 @@
 <!-- TOC -->
 <ul>
 <li><a href="#quickstart">Quickstart</a>
-- <a href="#1-create-the-folder-myextension">1. Create the folder <code>'MyExtension'</code></a>
+- <a href="#1-create-the-folder-myextension">1. Create the folder <code>MyExtension</code></a>
 - <a href="#2-create-the-file-packagejson">2. Create the file <code>package.json</code></a>
 - <a href="#3-create-the-file-tsconficjson">3. Create the file <code>tsconfic.json</code></a>
 - <a href="#4-create-the-folder-types-and-copy-the-file-piwebdts-into-it">4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</a>
@@ -40,7 +40,7 @@
 <li><a href="#toolbox-properties">Toolbox Properties</a>
 <ul>
 <li><a href="#toolbox-categories">Toolbox Categories</a></li>
-<li><a href="#toolbox-items">Toolbox Items</a>
+<li><a href="#toolbox-elements">Toolbox Elements</a>
 <ul>
 <li><a href="#element-size">Element Size</a></li>
 </ul>
@@ -61,27 +61,28 @@
 </li>
 </ul>
 </li>
-<li><a href="#piweb-interface">PiWeb Interface</a>
+<li><a href="#environment">Environment</a>
 <ul>
-<li><a href="#basic-functions">Basic Functions</a></li>
-<li><a href="#environment">Environment</a></li>
 <li><a href="#properties">Properties</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#classes">Classes</a>
+<ul>
+<li><a href="#cultureinfo">CultureInfo</a></li>
+<li><a href="#regioninfo">RegionInfo</a></li>
+<li><a href="#timezoneinfo">TimeZoneInfo</a></li>
 </ul>
 </li>
-<li><a href="#localization-1">Localization</a>
+</ul>
+</li>
+<li><a href="#properties-1">Properties</a></li>
+<li><a href="#format">Format</a>
 <ul>
 <li><a href="#enumerations-1">Enumerations</a>
 <ul>
 <li><a href="#datekind">DateKind</a></li>
 </ul>
 </li>
-<li><a href="#classes">Classes</a>
-<ul>
-<li><a href="#cultureinfo">CultureInfo</a></li>
-<li><a href="#regioninfo">RegionInfo</a></li>
-</ul>
-</li>
-<li><a href="#methods">Methods</a></li>
+<li><a href="#methods-1">Methods</a></li>
 </ul>
 </li>
 <li><a href="#drawing">Drawing</a>
@@ -202,7 +203,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#data-provider">Data Provider</a>
+<li><a href="#data">Data</a>
 <ul>
 <li><a href="#common-1">Common</a>
 <ul>
@@ -272,9 +273,10 @@
 </li>
 </ul>
 </li>
-<li><a href="#logging">Logging</a>
+<li><a href="#logger">Logger</a>
 <ul>
-<li><a href="#methods-1">Methods</a></li>
+<li><a href="#introduction-1">Introduction</a></li>
+<li><a href="#methods-2">Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -285,18 +287,18 @@
 <p>In order to create your first own custom plot, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As JavaScript is untyped, we suggest you to develop your extension using <strong>TypeScript</strong>.</p>
 <p>PiWeb searches for extensions in several locations. Ordered by their priority, these are:</p>
 <ul>
-<li>In the application data directory <code>'%APPDATA%\Zeiss\PiWeb\Extensions'</code></li>
-<li>In the program data directory <code>'%PROGRAMDATA%\Zeiss\PiWeb\Extensions'</code></li>
-<li>The <code>'Extensions'</code> folder in the PiWeb installation directory</li>
+<li>In the application data directory <code>%APPDATA%\Zeiss\PiWeb\Extensions</code></li>
+<li>In the program data directory <code>%PROGRAMDATA%\Zeiss\PiWeb\Extensions</code></li>
+<li>The <code>Extensions</code> folder in the PiWeb installation directory</li>
 </ul>
 <p>The package structure looks like the following:</p>
 <img class="framed" src="gfx/folder_structure.png"/>
 <p><a id="markdown-1-create-the-folder-myextension" name="1-create-the-folder-myextension"></a></p>
-<h4>1. Create the folder <code>'MyExtension'</code></h4>
-<p>In case the <code>'Extensions'</code> folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it <code>'MyExtension'</code>.</p>
+<h4>1. Create the folder <code>MyExtension</code></h4>
+<p>In case the <code>Extensions</code> folder doesn't exist, you must <strong>create</strong> it first. Now <strong>create your project folder</strong> in the extensions folder and name it <code>MyExtension</code>.</p>
 <p><a id="markdown-2-create-the-file-packagejson" name="2-create-the-file-packagejson"></a></p>
-<h4>2. Create the file <code>'package.json'</code></h4>
-<p>The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '<a href="#package-definition">Package Definition</a>'. For now, use the minimum setup shown below.</p>
+<h4>2. Create the file <code>package.json</code></h4>
+<p>The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter '<a href="#package-definition">package definition</a>'. For now, use the minimum setup shown below.</p>
 <pre><code class="language-json">{
     <span class="hljs-attr">"name"</span>: <span class="hljs-string">"myextension"</span>,
     <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.2.0"</span>,
@@ -314,7 +316,7 @@
 }
 </code></pre>
 <p><a id="markdown-3-create-the-file-tsconficjson" name="3-create-the-file-tsconficjson"></a></p>
-<h4>3. Create the file <code>'tsconfic.json'</code></h4>
+<h4>3. Create the file <code>tsconfic.json</code></h4>
 <p>It contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.</p>
 <pre><code class="language-json">{
     <span class="hljs-attr">"compilerOptions"</span>: {
@@ -331,28 +333,26 @@
 }
 </code></pre>
 <p><a id="markdown-4-create-the-folder-types-and-copy-the-file-piwebdts-into-it" name="4-create-the-folder-types-and-copy-the-file-piwebdts-into-it"></a></p>
-<h4>4. Create the folder <code>'@types'</code> and copy the file <code>'piweb.d.ts'</code> into it</h4>
-<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong><a href="https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts">here</a></strong>. The folder <code>'@types'</code> was defined as the type root in the <code>'tsconfig.json'</code> file.</p>
+<h4>4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</h4>
+<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong><a href="https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts">here</a></strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
 <p><a id="markdown-5-create-the-folder-src-and-create-the-file-indexts-in-it" name="5-create-the-folder-src-and-create-the-file-indexts-in-it"></a></p>
-<h4>5. Create the folder <code>'src'</code> and create the file <code>'index.ts'</code> in it</h4>
-<p>This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter <a href="#drawingcontext"><code>DrawingContext</code></a>.</p>
+<h4>5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</h4>
+<p>This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter '<a href="#drawingcontext">DrawingContext</a>'.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
-<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> host <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb_host'</span>
-<span class="hljs-keyword">import</span> drawing = piweb.drawing;
 
-host.on(<span class="hljs-string">"render"</span>, renderPlot);
+piweb.events.on(<span class="hljs-string">"render"</span>, renderPlot);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderPlot</span>(<span class="hljs-params">drawingContext: drawing.DrawingContext</span>) </span>{
-<span class="hljs-keyword">const</span> size = host.getSize();
-drawingContext.setBrush( drawing.Brushes.OrangeRed);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderPlot</span>(<span class="hljs-params">drawingContext: piweb.drawing.DrawingContext</span>) </span>{
+<span class="hljs-keyword">const</span> size = piweb.environment.getSize();
+drawingContext.setBrush( piweb.drawing.Brush.orangeRed);
 drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size.width, size.height);
 }
 </code></pre>
-<p>When we save all files and start the PiWeb Designer, we should find our extension in the <strong>General</strong> section of the toolbox:</p>
+<p>When we save all files and start PiWeb Designer, we should find our extension in the <strong>General</strong> category of the toolbox:</p>
 <img class="framed" src="gfx/toolbox_start.png">
 <p><a id="markdown-package-definition" name="package-definition"></a></p>
 <h2>Package Definition</h2>
-<p>In <a href="#quickstart">chapter 1</a> we already created a very simple package definition in the file <strong>package.json</strong>. Although it's sufficient to get us started, there are a lot more settings to be discovered.</p>
+<p>In the chapter '<a href="#quickstart">quickstart</a>' we already created a very simple package definition in the file <strong>package.json</strong>. Although it's sufficient to get us started, there are a lot more settings to be discovered.</p>
 <p><a id="markdown-localization" name="localization"></a></p>
 <h3>Localization</h3>
 <p>Every text that appears in the user interface of PiWeb can be localized. Simply replace the plain text with a localization dictionary:</p>
@@ -482,11 +482,11 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Path to folder that contains the <code>index.js</code> file. In case you used typescript, it is the value of the property <code>outDir</code> in the <code>tsconfig.json</code> file.</p>
 <p><a id="package-structure-engines" name="package-structure-engines"></a>
 <strong>engines <code>object</code></strong></p>
-<p>Defines the supported engine versions of this plot. Please read the <a href="#engines">engines</a> chapter for further information.</p>
+<p>Defines the supported engine versions of this plot. Please read the chapter '<a href="#engines">engines</a>' for further information.</p>
 <p><strong>piweb_actions <code>object</code></strong></p>
-<p>Defines additional actions. Please read the <a href="#piweb-actions">actions chapter</a>  for further information.</p>
+<p>Defines additional actions. Please read the chapter '<a href="#piweb-actions">PiWeb actions</a>' for further information.</p>
 <p><strong>piweb_extension <code>object</code></strong></p>
-<p>Defines the content of the extension. Please read the <a href="#piweb-extensions">extensions chapter</a> for further information.</p>
+<p>Defines the content of the extension. Please read the chapter '<a href="#piweb-extensions">PiWeb extensions</a>' for further information.</p>
 <p><a id="markdown-engines" name="engines"></a></p>
 <h4>Engines</h4>
 <p><a id="package-structure-engines-piweb" name="package-structure-engines-piweb"></a>
@@ -504,10 +504,10 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Identifies the extension type. Currently, the only accepted value is <code>plot</code>, which identifies a PiWeb plot extension.</p>
 <p><a id="package-structure-extensions-display" name="package-structure-extensions-display"></a>
 <strong>display <code>localizable string</code></strong></p>
-<p>Sets the display name of the item in the PiWeb Designer toolbox.</p>
+<p>Sets the display name of the element in the PiWeb Designer toolbox.</p>
 <p><a id="package-structure-extensions-description" name="package-structure-extensions-description"></a>
 <strong>description <code>localizable string</code></strong></p>
-<p>Sets the description of the item in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.</p>
+<p>Sets the description of the element in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.</p>
 <p><a id="package-structure-extensions-icon" name="package-structure-extensions-icon"></a>
 <strong>icon <code>string</code></strong></p>
 <p>Path to the icon, relative to the <code>package.json</code> file. Usually, you simply specify the filename, and place the icon next to your <code>package.json</code> file. The icon is used on several places in PiWeb Designer, such as the toolbox, the page structure and the element properties tab. PiWeb can handle the following file formats: <code>bmp</code>, <code>gif</code>, <code>ico</code>, <code>jpg</code>, <code>png</code>, <code>tiff</code>, <code>wmp</code>.</p>
@@ -527,29 +527,29 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Describes additional categories for the element toolbox in PiWeb Designer. Please read the chapter '<a href="#toolbox-categories">toolbox categories</a>' for further information.</p>
 <p><a id="package-structure-extensions-toolbox-items" name="package-structure-extensions-toolbox-items"></a>
 <strong>items <code>dictionary</code></strong></p>
-<p>Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter '<a href="#toolbox-items">toolbox items</a>' for further information.</p>
+<p>Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter '<a href="#toolbox-elements">toolbox elements</a>' for further information.</p>
 <p><a id="markdown-toolbox-categories" name="toolbox-categories"></a></p>
 <h5>Toolbox Categories</h5>
 <p><a id="package-structure-extensions-toolbox-categories-name" name="package-structure-extensions-toolbox-categories-name"></a>
 <strong>name <code>localizable string</code></strong></p>
-<p>The name of the category that is displayed on top of it in the PiWeb Designer.</p>
+<p>The name of the category that is displayed on top of it in PiWeb Designer.</p>
 <p><a id="package-structure-extensions-toolbox-categories-priority" name="package-structure-extensions-toolbox-categories-priority"></a>
 <strong>priority <code>number</code></strong></p>
 <p>The priority determines where the category is placed relative to the existing categories.</p>
-<p><a id="markdown-toolbox-items" name="toolbox-items"></a></p>
-<h5>Toolbox Items</h5>
+<p><a id="markdown-toolbox-elements" name="toolbox-elements"></a></p>
+<h5>Toolbox Elements</h5>
 <p><a id="package-structure-extensions-toolbox-items-name" name="package-structure-extensions-toolbox-items-name"></a>
 <strong>name <code>localizable string</code></strong></p>
-<p>Sets the display name of the item in the PiWeb Designer toolbox.</p>
+<p>Sets the display name of the element in the PiWeb Designer toolbox.</p>
 <p><a id="package-structure-extensions-toolbox-items-description" name="package-structure-extensions-toolbox-items-description"></a>
 <strong>description <code>localizable string</code></strong></p>
-<p>Sets the description of the item in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.</p>
+<p>Sets the description of the element in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.</p>
 <p><a id="package-structure-extensions-toolbox-items-icon" name="package-structure-extensions-toolbox-items-icon"></a>
 <strong>icon <code>string</code></strong></p>
-<p>Sets the icon of the item in the PiWeb Designer toolbox. Please read the chapter <a href="#package-structure-extensions-icon">icon</a> for further information.</p>
+<p>Sets the icon of the element in the PiWeb Designer toolbox. Please read the chapter <a href="#package-structure-extensions-icon">'icon'</a> for further information.</p>
 <p><a id="package-structure-extensions-toolbox-items-category" name="package-structure-extensions-toolbox-items-category"></a>
 <strong>category <code>string</code></strong></p>
-<p>Sets the category under which the item appears in the PiWeb Designer toolbox. The value must appear as dictionary key in the <a href="#package-structure-extensions-toolbox-categories"><code>categories</code></a> dictionary or be equal to one of the built in category keys of PiWeb:</p>
+<p>Sets the category under which the element appears in the PiWeb Designer toolbox. The value must appear as dictionary key in the <a href="#package-structure-extensions-toolbox-categories"><code>categories</code></a> dictionary or be equal to one of the built in category keys of PiWeb:</p>
 <table>
 <thead>
 <tr>
@@ -618,7 +618,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 </table>
 <p><a id="package-structure-extensions-toolbox-items-element_size" name="package-structure-extensions-toolbox-items-element_size"></a>
 <strong>element_size <code>object</code></strong></p>
-<p>Describes the initial size of the element when created on the report. Please read the chapter <a href="#element-size">element size</a> for further information.</p>
+<p>Describes the initial size of the element when created on the report. Please read the chapter '<a href="#element-size">element size</a>' for further information.</p>
 <p><a id="markdown-element-size" name="element-size"></a></p>
 <h6>Element Size</h6>
 <p><a id="package-structure-extensions-toolbox-items-element_size-width" name="package-structure-extensions-toolbox-items-element_size-width"></a>
@@ -647,7 +647,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <h5>Propertygrid Entries</h5>
 <p><a id="package-structure-extensions-propertygrid-entries-name" name="package-structure-extensions-propertygrid-entries-name"></a>
 <strong>name <code>localizable string</code></strong></p>
-<p>The name that will be displayed in the property tab of PiWeb Designer</p>
+<p>The name that will be displayed in the property tab of PiWeb Designer.</p>
 <p><a id="package-structure-extensions-propertygrid-entries-description" name="package-structure-extensions-propertygrid-entries-description"></a>
 <strong>description <code>localizable string</code></strong></p>
 <p>The info text that will be displayed when hovering the property with the mouse.</p>
@@ -697,7 +697,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 </table>
 <p><a id="package-structure-extensions-propertygrid-entries-type" name="package-structure-extensions-propertygrid-entries-type"></a>
 <strong>type <code>enumeration</code></strong></p>
-<p>The datatype that determines which kind of editor is shown for the property</p>
+<p>The datatype that determines which kind of editor is shown for the property:</p>
 <table>
 <thead>
 <tr>
@@ -760,19 +760,19 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p><strong><code>string</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: <span class="hljs-string">"value"</span>
 </code></pre>
-<p>Any unicode string is accepted</p>
+<p>Any unicode string is accepted.</p>
 <p><strong><code>integer</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: <span class="hljs-number">1</span>
 </code></pre>
-<p>Integral numbers are accepted</p>
+<p>Integral numbers are accepted.</p>
 <p><strong><code>double</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: <span class="hljs-number">1.0</span>
 </code></pre>
-<p>Floating point or integral numbers are accepted</p>
+<p>Floating point or integral numbers are accepted.</p>
 <p><strong><code>boolean</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: <span class="hljs-literal">true</span> | <span class="hljs-literal">false</span>
 </code></pre>
-<p><code>true</code> and <code>false</code> are accepted</p>
+<p><code>true</code> and <code>false</code> are accepted.</p>
 <p><strong><code>enum</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: <span class="hljs-string">"value"</span>
 </code></pre>
@@ -780,7 +780,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p><strong><code>color</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: <span class="hljs-string">"#ff0000"</span>
 </code></pre>
-<p>Strings in the form of <code>#rrggbb</code></p>
+<p>Strings in the form of <code>#rrggbb</code>.</p>
 <p><strong><code>brush</code></strong></p>
 <pre><code class="language-json"><span class="hljs-string">"default_value"</span>: {
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"solid"</span> | <span class="hljs-string">"lineargradient"</span> | <span class="hljs-string">"radialgradient"</span>,
@@ -824,40 +824,121 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>The name that is displayed in the dropdown.</p>
 <p><a id="package-structure-extensions-propertygrid-entries-options-description" name="package-structure-extensions-propertygrid-entries-options-description"></a>
 <strong>description <code>localizable string</code></strong></p>
-<p>The description that is displayed when hovering an option in the dropdown with the mouse</p>
-<p><a id="markdown-piweb-interface" name="piweb-interface"></a></p>
-<h2>PiWeb Interface</h2>
-<p>You can retrieve information about the element, its properties and settings by using the <code>host</code> interface. To access it, include the PiWeb host module in your script.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> host <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb_host'</span>
+<p>The description that is displayed when hovering an option in the dropdown with the mouse.</p>
+<p><a id="markdown-environment" name="environment"></a></p>
+<h2>Environment</h2>
+<p>You can retrieve information about the element, its properties and settings by using the <code>environment</code> interface.</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> environment = piweb.environment;
 </code></pre>
-<p><a id="markdown-basic-functions" name="basic-functions"></a></p>
-<h3>Basic Functions</h3>
+<p><a id="markdown-properties" name="properties"></a></p>
+<h3>Properties</h3>
+<p><strong>apiVersion <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> apiVersion : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The semantic version of the custom plot api that is supported by the piweb host.</p>
+<p><strong>clientVersion <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> clientVersion : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The piweb version the custom plot is hosted by</p>
+<p><strong>clientString <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> clientString : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The name of the client that is hosting the custom plot.</p>
+<p><strong>toolboxItemName <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> toolboxItemName : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>In case you specified multiple toolbox elements in the <code>package.json</code> file, this is the interface to find out, which element the user picked. The returned value is equal to the property name you used to identify the toolbox entry.</p>
+<p><a id="markdown-methods" name="methods"></a></p>
+<h3>Methods</h3>
 <p><strong>getSize <a href="#size"><code>Size</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSize</span>(<span class="hljs-params"></span>): <span class="hljs-title">Size</span></span>;
 </code></pre>
 <p>Returns the current size of the element in <strong>millimeters</strong>.</p>
-<p><strong>getPosition <a href="#point"><code>Point</code></a></strong></p>
+<p><strong>getLocation <a href="#point"><code>Point</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPosition</span>(<span class="hljs-params"></span>): <span class="hljs-title">Point</span></span>;
 </code></pre>
 <p>Returns the position of the element on the report page in <strong>millimeters</strong>.</p>
-<p><a id="markdown-environment" name="environment"></a></p>
-<h3>Environment</h3>
-<p>The <code>environment</code> interface is accessible via the <code>piweb</code> interface and exposes the following members</p>
+<p>The <code>environment</code> interface is accessible via the <code>piweb</code> interface and exposes the following members:</p>
 <p><strong>isDesignMode <code>boolean</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> isDesignMode : <span class="hljs-built_in">boolean</span> = piweb.environment.isDesignMode;
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isDesignMode</span>(<span class="hljs-params"></span>) : <span class="hljs-title">boolean</span></span>;
 </code></pre>
-<p>If <code>true</code>, the plot is rendered by the PiWeb Designer, otherwise it's rendered by the PiWeb Monitor. Some very complex elements don't render their complete content while in design mode, to guarantee a smooth and fluent editing in PiWeb Designer.</p>
-<p><strong>toolboxItemName <code>string</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> toolboxItemName : <span class="hljs-built_in">string</span> = piweb.environment.toolboxItemName;
+<p>If <code>true</code>, the plot is rendered by PiWeb Designer, otherwise it's rendered by PiWeb Monitor. Some very complex elements don't render their complete content while in design mode, to guarantee a smooth and fluent editing in PiWeb Designer.</p>
+<p><a id="markdown-classes" name="classes"></a></p>
+<h3>Classes</h3>
+<p><a id="markdown-cultureinfo" name="cultureinfo"></a></p>
+<h4>CultureInfo</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CultureInfo
 </code></pre>
-<p>In case you specified multiple toolbox items in the <code>package.json</code> file, this is the interface to find out, which item the user picked. The returned value is equal to the property name you used to identity the toolbox entry.</p>
-<p><strong>currentCulture <a href="#cultureinfo"><code>CultureInfo</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> currentCulture : CultureInfo = piweb.environment.currentCulture;
+<p>Contains the identifiers of a specific culture. PiWeb can use these information to provide localization and correct formatting of numbers and dates.</p>
+<p><strong>currentCulture: <a href="#cultureinfo"><code>CultureInfo</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> currentCulture : CultureInfo;
 </code></pre>
-<p>Returns the culture in which the host process has been started. You can use this information to</p>
-<p><a id="markdown-properties" name="properties"></a></p>
-<h3>Properties</h3>
+<p>The culture in which the host application was started.</p>
+<p><strong>invariantCulture: <a href="#cultureinfo"><code>CultureInfo</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> invariantCulture : CultureInfo;
+</code></pre>
+<p>The invariant culture.</p>
+<p><strong>twoLetterISOLanguageName: <code>string</code></strong></p>
+<pre><code class="language-TypeScript">twoLetterISOLanguageName : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The ISO 639-1 two-letter code for the language of the culture.</p>
+<p><strong>threeLetterISOLanguageName: <code>string</code></strong></p>
+<pre><code class="language-TypeScript">threeLetterISOLanguageName : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The ISO 639-2 three-letter code for the language of the culture.</p>
+<p><strong>name: <code>string</code></strong></p>
+<pre><code class="language-TypeScript">name : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The name of the culture in the format <code>languagecode2-country/regioncode2</code>.</p>
+<p><a id="markdown-regioninfo" name="regioninfo"></a></p>
+<h4>RegionInfo</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RegionInfo
+</code></pre>
+<p>Contains the identifiers of a specific country or region.</p>
+<p><strong>currentRegion: <a href="#regioninfo"><code>RegionInfo</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> currentRegion : RegionInfo;
+</code></pre>
+<p>The region in which the host application was started.</p>
+<p><strong>twoLetterISORegionName: <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> twoLetterISORegionName : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The two-letter code defined in ISO 3166 for the country/region.</p>
+<p><strong>threeLetterISORegionName: <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> threeLetterISORegionName : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The three-letter code defined in ISO 3166 for the country/region.</p>
+<p><strong>name: <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> name : <span class="hljs-built_in">string</span>;
+</code></pre>
+<p>The name or ISO 3166 two-letter country/region code.</p>
+<p><a id="markdown-timezoneinfo" name="timezoneinfo"></a></p>
+<h4>TimeZoneInfo</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> TimeZoneInfo
+</code></pre>
+<p>Contains information about a specific timezone.</p>
+<p><strong>localTimeZone: <a href="#timezoneinfo"><code>TimeZoneInfo</code></a></strong></p>
+<pre><code class="language-TypeScript">localTimeZone : TimeZoneInfo
+</code></pre>
+<p>The timezone in which the host application was started.</p>
+<p><strong>baseUtcOffset: <code>number</code></strong></p>
+<pre><code class="language-TypeScript">baseUtcOffset : <span class="hljs-built_in">number</span>
+</code></pre>
+<p>The standard offset of the timezone in hours.</p>
+<p><strong>getUtcOffset: <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUtcOffset</span>(<span class="hljs-params">
+    time: <span class="hljs-built_in">Date</span>
+</span>) : <span class="hljs-title">number</span>
+</span></code></pre>
+<p>The offset of the timezone at the specified date in hours.</p>
+<p><strong>name: <code>string</code></strong></p>
+<p>The name of the timezone.</p>
+<p><a id="markdown-properties-1" name="properties-1"></a></p>
+<h2>Properties</h2>
 <p>The properties you define in the <code>package.json</code> file can be accessed via the <code>piweb.properties</code> interface. To enable type checking, there is one function for each available datatype.</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> properties = piweb.properties;
+</code></pre>
 <p><strong>getStringProperty <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStringProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">string</span>
 </span></code></pre>
@@ -894,8 +975,13 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFontProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">FontDescription</span>
 </span></code></pre>
 <p>Returns the value of the property with the name <code>id</code> as a <code>FontDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#font"><code>Font</code></a> class.</p>
-<p><a id="markdown-localization-1" name="localization-1"></a></p>
-<h2>Localization</h2>
+<p><a id="markdown-format" name="format"></a></p>
+<h2>Format</h2>
+<h3>Introduction</h3>
+<p>In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the <code>piweb.format</code> interface.</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> drawing = piweb.format;
+</code></pre>
 <p><a id="markdown-enumerations-1" name="enumerations-1"></a></p>
 <h3>Enumerations</h3>
 <p><a id="markdown-datekind" name="datekind"></a></p>
@@ -903,35 +989,11 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> DateKind
 </code></pre>
 <p>When parsing a date without a specified time zone the <code>DateKind</code> parameter determines which time zone the date has.</p>
-<p><strong><code>AssumeLocal</code></strong></p>
+<p><strong><code>assumeLocal</code></strong></p>
 <p>The represented time will be interpreted as local time.</p>
-<p><strong><code>AssumeUTC</code></strong></p>
+<p><strong><code>assumeUTC</code></strong></p>
 <p>The represented time will be interpreted as UTC.</p>
-<p><a id="markdown-classes" name="classes"></a></p>
-<h3>Classes</h3>
-<p><a id="markdown-cultureinfo" name="cultureinfo"></a></p>
-<h4>CultureInfo</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CultureInfo
-</code></pre>
-<p>Contains the identifiers of a specific culture. PiWeb can use these information to provide localization and correct formatting of numbers and dates.</p>
-<p><strong>twoLetterISOLanguageName: <code>string</code></strong></p>
-<p>The ISO 639-1 two-letter code for the language of the culture.</p>
-<p><strong>threeLetterISOLanguageName: <code>string</code></strong></p>
-<p>The ISO 639-2 three-letter code for the language of the culture.</p>
-<p><strong>name: <code>string</code></strong></p>
-<p>The name of the culture in the format <code>languagecode2-country/regioncode2</code>.</p>
-<p><a id="markdown-regioninfo" name="regioninfo"></a></p>
-<h4>RegionInfo</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RegionInfo
-</code></pre>
-<p>Contains the ifentifiers of a specific country or region.</p>
-<p><strong>twoLetterISORegionName: <code>string</code></strong></p>
-<p>The two-letter code defined in ISO 3166 for the country/region.</p>
-<p><strong>threeLetterISORegionName: <code>string</code></strong></p>
-<p>The three-letter code defined in ISO 3166 for the country/region.</p>
-<p><strong>name: <code>string</code></strong></p>
-<p>The name or ISO 3166 two-letter country/region code.</p>
-<p><a id="markdown-methods" name="methods"></a></p>
+<p><a id="markdown-methods-1" name="methods-1"></a></p>
 <h3>Methods</h3>
 <p><strong>formatNumber <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">formatNumber</span>(<span class="hljs-params">
@@ -959,7 +1021,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Converts the specified date to its string representation using the specified format string and the culture specific format information.</p>
 <p><strong>parseDate <code>Date | null</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseDate</span>(<span class="hljs-params">
-    str: <span class="hljs-built_in">String</span>, 
+    str: <span class="hljs-built_in">string</span>, 
     culture?: CultureInfo | <span class="hljs-literal">null</span>, 
     dateKind?: DateKind | <span class="hljs-literal">null</span>
 </span>) : <span class="hljs-title">Date</span> | <span class="hljs-title">null</span></span>;
@@ -967,7 +1029,7 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p>Converts the specified string to its <code>Date</code> equivalent by using culture specific format information and formatting style.</p>
 <p><strong>parseDateExact <code>Date | null</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseDateExact</span>(<span class="hljs-params">
-    str: <span class="hljs-built_in">String</span>, 
+    str: <span class="hljs-built_in">string</span>, 
     format: <span class="hljs-built_in">string</span>, 
     culture?: CultureInfo | <span class="hljs-literal">null</span>, 
     dateKind?: DateKind | <span class="hljs-literal">null</span>
@@ -977,18 +1039,18 @@ drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hl
 <p><a id="markdown-drawing" name="drawing"></a></p>
 <h2>Drawing</h2>
 <p>To access the drawing classes, import the <code>piweb</code> interface into your script. All necessary classes for drawing are encapsulated in the <code>piweb.drawing</code> module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot api will emit the <code>render</code> event, which has a <a href="#drawingcontext"><code>DrawingContext</code></a> object as its parameter.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
-<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> host <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb_host'</span>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> drawing = piweb.drawing;
 
-host.on(<span class="hljs-string">"render"</span>, render);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params">context: piweb.drawing.DrawingContext</span>) </span>{
+piweb.events.on(<span class="hljs-string">"render"</span>, render);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params">context: drawing.DrawingContext</span>) </span>{
     ...
 }
 </code></pre>
-<p>Be aware that all coordinates and values are interpreted as <strong>millimeters</strong>. PiWeb draws with a resolution of <strong>96 DPI</strong>, so one millimeter is equal to <code>96 / 25.4 ~ 3.58</code> pixels, or one pixel is equal to <code>25.4 / 96 ~ 0.2646</code> millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.
-&quot;
-<a id="markdown-interfaces" name="interfaces"></a></p>
+<p>Be aware that all coordinates and values are interpreted as <strong>millimeters</strong>. PiWeb draws with a resolution of <strong>96 DPI</strong>, so one millimeter is equal to <code>96 / 25.4 ~ 3.58</code> pixels, or one pixel is equal to <code>25.4 / 96 ~ 0.2646</code> millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.</p>
+<p><a id="markdown-interfaces" name="interfaces"></a></p>
 <h3>Interfaces</h3>
 <p>Most drawing objects, like <a href="#color"><code>Color</code></a>, <a href="#brush"><code>Brush</code></a>, <a href="#pen"><code>Pen</code></a>, <a href="#font"><code>Font</code></a> and <a href="#geometry"><code>Geometry</code></a> implement an interface that is named like the implementing class, with an additional <code>Description</code> suffix (e.g. <code>ColorDescription</code>).
 Classes that implement such a description interface have a <code>create</code> method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:</p>
@@ -1038,16 +1100,16 @@ context.drawLine(
 <h4>Point</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Point()
 </code></pre>
-<p>Represents a position</p>
+<p>Represents a position.</p>
 <p><strong>x <code>number</code></strong></p>
 <p>Horizontal position.</p>
 <p><strong>y <code>number</code></strong></p>
-<p>Vertical position</p>
+<p>Vertical position.</p>
 <p><a id="markdown-size" name="size"></a></p>
 <h4>Size</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Size()
 </code></pre>
-<p>Represents a position</p>
+<p>Represents a dimension.</p>
 <p><strong>width <code>number</code></strong></p>
 <p>Horizontal dimension.</p>
 <p><strong>height <code>number</code></strong></p>
@@ -1124,7 +1186,7 @@ context.drawLine(
     settings: TextDrawingSettings
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Draws the specified <a href="#formattedtext"><code>FormattedText</code></a> at with the specified <a href="#textdrawingsettings"><code>TextDrawingSettings</code></a>. There are numerous properties which will help you to adjust how the text is arranged and displayed. For more information, please read the chapter <a href="#formattedtext">FormattedText</a>, <a href="#font">Font</a> and <a href="#textdrawingsettings">TextDrawingSettings</a>.</p>
+<p>Draws the specified <a href="#formattedtext"><code>FormattedText</code></a> at with the specified <a href="#textdrawingsettings"><code>TextDrawingSettings</code></a>. There are numerous properties which will help you to adjust how the text is arranged and displayed. For more information, please read the chapters '<a href="#formattedtext">FormattedText</a>', '<a href="#font">Font</a>' and '<a href="#textdrawingsettings">TextDrawingSettings</a>'.</p>
 <p><a id="drawingcontext-drawimage" name="drawingcontext-drawimage"></a>
 <strong>drawImage <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawImage</span>(<span class="hljs-params">
@@ -1147,7 +1209,7 @@ context.drawLine(
     pen: Pen
 </span>): <span class="hljs-title">void</span></span>;
 </code></pre>
-<p>Sets the pen that will be used for all subsequent calls to <a href="#drawingcontext-drawline"><code>drawLine</code></a>, <a href="#drawingcontext-drawlines"><code>drawLines</code></a>, <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be stroked, use the <a href="#drawingcontext-nopen"><code>nopen</code></a> function.</p>
+<p>Sets the pen that will be used for all subsequent calls to <a href="#drawingcontext-drawline"><code>drawLine</code></a>, <a href="#drawingcontext-drawlines"><code>drawLines</code></a>, <a href="#drawingcontext-drawrectangle"><code>drawRectangle</code></a>, <a href="#drawingcontext-drawellipse"><code>drawEllipse</code></a> and <a href="#drawingcontext-drawgeometry"><code>drawGeometry</code></a>. In case you don't want your rectangle, ellipse or geometry to be stroked, use the <a href="#drawingcontext-nopen"><code>noPen</code></a> function.</p>
 <p><a id="drawingcontext-nopen" name="drawingcontext-nopen"></a>
 <strong>noPen <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">noPen</span>(<span class="hljs-params"> </span>): <span class="hljs-title">void</span></span>;
@@ -1361,7 +1423,7 @@ context.drawLine(
 <h4>ScalingTransform</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> ScalingTransform <span class="hljs-keyword">extends</span> Transform
 </code></pre>
-<p>Scales an object in horizontal and vertical direction</p>
+<p>Scales an object in horizontal and vertical direction.</p>
 <img class="framed" style="width:auto; height:128px;" src="gfx/scaleTransform.svg">
 <p><strong>scaleX <code>number</code></strong></p>
 <p>The horizontal scaling factor.</p>
@@ -1483,9 +1545,9 @@ context.drawLine(
 </code></pre>
 <p>Describes size and position of a geometries bounding box.</p>
 <p><strong>x <code>number</code></strong></p>
-<p>The x-coordinate of the top left corner of the bounding box.</p>
+<p>The x coordinate of the top left corner of the bounding box.</p>
 <p><strong>y <code>number</code></strong></p>
-<p>The y-coordinate of the top left corner of the bounding box.</p>
+<p>The y coordinate of the top left corner of the bounding box.</p>
 <p><strong>height <code>number</code></strong></p>
 <p>The overall height, not including the stroke thickness.</p>
 <p><strong>width <code>number</code></strong></p>
@@ -1583,36 +1645,36 @@ context.drawLine(
 </code></pre>
 <p>Line geometries are quite simple, and are mostly used in combination with other geometries.</p>
 <p><strong>start <a href="#point"><code>Point</code></a></strong></p>
-<p>The point where the line begins</p>
+<p>The point where the line begins.</p>
 <p><strong>end <a href="#point"><code>Point</code></a></strong></p>
-<p>The point where the line ends</p>
+<p>The point where the line ends.</p>
 <p><a id="markdown-rectanglegeometry" name="rectanglegeometry"></a></p>
 <h4>RectangleGeometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RectangleGeometry <span class="hljs-keyword">extends</span> Geometry
 </code></pre>
 <p>Describes a rectangle that can be stroked or filled.</p>
 <p><strong>position <a href="#point"><code>Point</code></a></strong></p>
-<p>The position of the top left corner</p>
+<p>The position of the top left corner.</p>
 <p><strong>width <code>number</code></strong></p>
-<p>The horizontal dimension</p>
+<p>The horizontal dimension.</p>
 <p><strong>height <code>number</code></strong></p>
-<p>The vertical dimension</p>
+<p>The vertical dimension.</p>
 <p><a id="markdown-ellipsegeometry" name="ellipsegeometry"></a></p>
 <h4>EllipseGeometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> EllipseGeometry <span class="hljs-keyword">extends</span> Geometry
 </code></pre>
 <p>Describes a rectangle that can be stroked or filled.</p>
 <p><strong>position <a href="#point"><code>Point</code></a></strong></p>
-<p>The center of the ellipse</p>
+<p>The center of the ellipse.</p>
 <p><strong>radiusX <code>number</code></strong></p>
-<p>The horizontal radius</p>
+<p>The horizontal radius.</p>
 <p><strong>radiusY <code>number</code></strong></p>
-<p>The vertical radius</p>
+<p>The vertical radius.</p>
 <p><a id="markdown-pathgeometry" name="pathgeometry"></a></p>
 <h4>PathGeometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> PathGeometry <span class="hljs-keyword">extends</span> Geometry
 </code></pre>
-<p>Pathgeometries are composed of one or more <a href="#pathfigure">PathFigure</a> objects, which are themselves composed of <a href="#pathsegment">PathSegment</a> objects.</p>
+<p>Pathgeometries are composed of one or more <a href="#pathfigure"><code>PathFigure</code></a> objects, which are themselves composed of <a href="#pathsegment"><code>PathSegment</code></a> objects.</p>
 <p><strong>fillRule <a href="#fillrule"><code>FillRule</code></a></strong></p>
 <p>Describes how overlapping geometries are filled.</p>
 <p><strong>figures <a href="#pathfigure"><code>PathFigure[]</code></a></strong></p>
@@ -1623,7 +1685,7 @@ context.drawLine(
 </code></pre>
 <p>Multiple path figures compose a <a href="#pathgeometry"><code>PathGeometry</code></a>. The path figures of a path geometry are <strong>not</strong> connected, so they appear as independent shapes.</p>
 <p><strong>startPoint <a href="#point"><code>Point</code></a></strong></p>
-<p>The first Point of the path figure.</p>
+<p>The first point of the path figure.</p>
 <p><strong>segments <a href="#pathsegment"><code>PathSegment[]</code></a></strong></p>
 <p>The segments of the path figure. Each segment is connected to the last point of the previous segment, or to the start point in case it's the first segment in the path figure.</p>
 <p><strong>isClosed <code>boolean</code></strong></p>
@@ -1632,7 +1694,7 @@ context.drawLine(
 <h5>PathSegment</h5>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> PathSegment
 </code></pre>
-<p>Path segments define one or more points that describe a line or curve. Following path segments are supported</p>
+<p>Path segments define one or more points that describe a line or curve. Following path segments are supported:</p>
 <p><a id="markdown-arcsegment" name="arcsegment"></a></p>
 <h6>ArcSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> ArcSegment <span class="hljs-keyword">extends</span> PathSegment
@@ -1673,9 +1735,9 @@ context.drawLine(
 <p><strong>to <a href="#point"><code>Point</code></a></strong></p>
 <p>Endpoint of the arc.</p>
 <p><strong>size <a href="#size"><code>Size</code></a></strong></p>
-<p>The x- and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.</p>
+<p>The x and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.</p>
 <p><strong>angle <code>number</code></strong></p>
-<p>Rotation angle of the ellipse in <em>degrees</em>.</p>
+<p>Rotation angle of the ellipse in degrees.</p>
 <p><strong>arcType <code>enumeration</code></strong></p>
 <p>Since there are always two different arcs with the same radius and the same sweep direction between two points, this parameter can be used to determine which one is used. Valid values are <code>small</code> and <code>large</code>.</p>
 <p><strong>sweepDirection <code>enumeration</code></strong></p>
@@ -1684,14 +1746,14 @@ context.drawLine(
 <h6>LineSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> LineSegment <span class="hljs-keyword">extends</span> PathSegment
 </code></pre>
-<p>Creates a line between two points in a <a href="#pathfigure">PathFigure</a>. In case you want to use multiple line segments consecutively, consider using the <a href="#polylinesegment">PolyLineSegment</a>.</p>
+<p>Creates a line between two points in a <a href="#pathfigure"><code>PathFigure</code></a>. In case you want to use multiple line segments consecutively, consider using the <a href="#polylinesegment"><code>PolyLineSegment</code></a>.</p>
 <p><strong>to <a href="#point"><code>Point</code></a></strong></p>
 <p>The endpoint of the line segment.</p>
 <p><a id="markdown-beziersegment" name="beziersegment"></a></p>
 <h6>BezierSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> BezierSegment <span class="hljs-keyword">extends</span> PathSegment
 </code></pre>
-<p>Describes a bezier segment, using the last point of the previous segment as start point. In case you want to use multiple bezier segments consecutively, consider using the <a href="#polybeziersegment">PolyBezierSegment</a>.</p>
+<p>Describes a bezier segment, using the last point of the previous segment as start point. In case you want to use multiple bezier segments consecutively, consider using the <a href="#polybeziersegment"><code>PolyBezierSegment</code></a>.</p>
 <p><strong>control <a href="#point"><code>Point</code></a></strong></p>
 <p>First control point of the bezier curve.</p>
 <p><strong>control2 <a href="#point"><code>Point</code></a></strong></p>
@@ -1702,7 +1764,7 @@ context.drawLine(
 <h6>QuadraticBezierSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> QuadraticBezierSegment <span class="hljs-keyword">extends</span> PathSegment
 </code></pre>
-<p>Describes a quadratic bezier segment, using the last point of the previous segment as start point. In case you want to use multiple quadratic bezier segments consecutively, consider using the <a href="#polyquadraticbeziersegment">PolyQuadraticBezierSegment</a>.</p>
+<p>Describes a quadratic bezier segment, using the last point of the previous segment as start point. In case you want to use multiple quadratic bezier segments consecutively, consider using the <a href="#polyquadraticbeziersegment"><code>PolyQuadraticBezierSegment</code></a>.</p>
 <p><strong>control <a href="#point"><code>Point</code></a></strong></p>
 <p>Control point of the bezier curve.</p>
 <p><strong>to <a href="#point"><code>Point</code></a></strong></p>
@@ -1713,21 +1775,21 @@ context.drawLine(
 </code></pre>
 <p>Describes a line strip, including the last point of the previous segment.</p>
 <p><strong>points <a href="#point"><code>Point[]</code></a></strong></p>
-<p>The collection of <a href="#point">Point</a> objects that defines this segment.</p>
+<p>The collection of <a href="#point"><code>Point</code></a> objects that defines this segment.</p>
 <p><a id="markdown-polybeziersegment" name="polybeziersegment"></a></p>
 <h6>PolyBezierSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> PolyBezierSegment <span class="hljs-keyword">extends</span> PathSegment
 </code></pre>
 <p>Describes multiple bezier segments, including the last point of the previous segment. The number of points provided must be a multiple of three, since a single bezier segment is defined by three points.</p>
 <p><strong>points <a href="#point"><code>Point[]</code></a></strong></p>
-<p>The collection of <a href="#point">Point</a> objects that defines this segment.</p>
+<p>The collection of <a href="#point"><code>Point</code></a> objects that defines this segment.</p>
 <p><a id="markdown-polyquadraticbeziersegment" name="polyquadraticbeziersegment"></a></p>
 <h6>PolyQuadraticBezierSegment</h6>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> PolyQuadraticBezierSegment <span class="hljs-keyword">extends</span> PathSegment
 </code></pre>
 <p>Describes multiple bezier segments, including the last point of the previous segment. The number of points provided must be a multiple of two, since a single quadratic bezier segment is defined by two points.</p>
 <p><strong>points <a href="#point"><code>Point[]</code></a></strong></p>
-<p>The collection of <a href="#point">Point</a> objects that defines this segment.</p>
+<p>The collection of <a href="#point"><code>Point</code></a> objects that defines this segment.</p>
 <p><a id="markdown-customgeometry" name="customgeometry"></a></p>
 <h4>CustomGeometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CustomGeometry <span class="hljs-keyword">extends</span> Geometry
@@ -1780,7 +1842,7 @@ context.drawLine(
 <h4>GeometryGroup</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> GeometryGroup <span class="hljs-keyword">extends</span> Geometry
 </code></pre>
-<p>Describes a set of geometries that are consolidated into a group. To define how the resulting geometry is filled, use the <code>fillRule</code> parameter</p>
+<p>Describes a set of geometries that are consolidated into a group. To define how the resulting geometry is filled, use the <code>fillRule</code> parameter.</p>
 <p><strong>children <a href="#geometry"><code>Geometry[]</code></a></strong></p>
 <p>The geometries of which this geometry group is composed.</p>
 <p><strong>fillRule <a href="#fillrule"><code>FillRule</code></a></strong></p>
@@ -1789,7 +1851,7 @@ context.drawLine(
 <h4>CombinedGeometry</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CombinedGeometry <span class="hljs-keyword">extends</span> Geometry
 </code></pre>
-<p>Describes a geometry, that is composed of exactly two child geometries. The difference to the <a href="#geometrygroup">GeometryGroup</a> is, that the <a href="#combinedgeometry"><code>CombinedGeometry</code></a> is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. <a href="#combinedgeometry"><code>CombinedGeometry</code></a> objects can themselves be combined again.</p>
+<p>Describes a geometry, that is composed of exactly two child geometries. The difference to the <a href="#geometrygroup"><code>GeometryGroup</code></a> is, that the <a href="#combinedgeometry"><code>CombinedGeometry</code></a> is regarded as a single geometry with a single outline, rather than just a collection of children. To achieve this, the combination mode must be specified. <a href="#combinedgeometry"><code>CombinedGeometry</code></a> objects can themselves be combined again.</p>
 <p><strong>geometry1 <a href="#geometry"><code>Geometry</code></a></strong></p>
 <p>The first child.</p>
 <p><strong>geometry2 <a href="#geometry"><code>Geometry</code></a></strong></p>
@@ -1883,7 +1945,7 @@ context.drawLine(
 <p><strong>dashStyle <code>number[]</code></strong></p>
 <p>The definition of the dashes used to render the stroke. The default value is empty, which will render one solid line. The length of the dashes and gaps specified here are multiplied with the thickness of the pen when it is drawn. So in case you want dashes with a length of one millimeter on a pen with 0.1 mm thickness, you must specify a dash of length 10 here.</p>
 <p><strong>dashOffset <code>number</code></strong></p>
-<p>The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dash style. Be aware that a <strong>positive</strong> offset will move the dashes <strong>against stroke direction</strong></p>
+<p>The offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the pens thickness, just like the dash style. Be aware that a <strong>positive</strong> offset will move the dashes <strong>against stroke direction</strong>.</p>
 <p><strong>dashCap <a href="#linecap"><code>LineCap</code></a></strong></p>
 <p>The geometry added at the beginning and end of each dash.</p>
 <p><a id="markdown-linecap" name="linecap"></a></p>
@@ -1947,7 +2009,7 @@ context.drawLine(
 <p><strong>text <code>string</code></strong></p>
 <p>The text to be formatted. The text can include line breaks.</p>
 <p><strong>font <a href="#font"><code>Font</code></a></strong></p>
-<p>The font that describes how the text is rendered</p>
+<p>The font that describes how the text is rendered.</p>
 <p><strong>maxTextWidth <code>number</code></strong></p>
 <p>Determines the width of the boundaries and therefore, after how many millimeters the text is supposed to wrap.</p>
 <p><strong>maxTextHeight <code>number</code></strong></p>
@@ -2101,7 +2163,7 @@ context.drawLine(
 <h4>Font</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Font
 </code></pre>
-<p>Describes how a text is displayed</p>
+<p>Describes how a text is displayed.</p>
 <p><strong>fontFamily <code>string</code></strong></p>
 <p>Determines which font family will be used to display the text. Be aware that some font families don't support all characters.</p>
 <p><strong>fontWeight <a href="#fontweight"><code>FontWeight</code></a></strong></p>
@@ -2231,16 +2293,16 @@ context.drawLine(
 </tr>
 </tbody>
 </table>
-<p><a id="markdown-data-provider" name="data-provider"></a></p>
-<h2>Data Provider</h2>
+<p><a id="markdown-data" name="data"></a></p>
+<h2>Data</h2>
 <p>The data provider is exposed in the <code>piweb.data</code> namespace. Be aware that <strong>the data can change</strong>. Whenever this happens, the custom plot engine will emit the <code>dataChanged</code> event.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
-<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> host <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb_host'</span>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> data = piweb.data;
 
-host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
+piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadData</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">const</span> provider = piweb.data.provider;
+    <span class="hljs-keyword">const</span> provider = data.provider;
     ...
 }
 </code></pre>
@@ -2257,7 +2319,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>AttributeType</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> AttributeType
 </code></pre>
-<p>Describes, which kind of value an attribute is supposed to have. All attributes can also have <code>undefined</code> as value.</p>
+<p>Describes the kind of value that an attribute is supposed to have. All attributes can also have <code>undefined</code> as value.</p>
 <p><strong><code>String</code></strong></p>
 <p>The attribute has a <code>string</code> value.</p>
 <p><strong><code>Integer</code></strong></p>
@@ -2272,7 +2334,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>Attribute</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Attribute
 </code></pre>
-<p>An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measurement values and catalog entries. An attribute is identified by its <code>Key</code>. To get information about the type and usage of an attribute, use the <code>Key</code> to get the <strong><a href="#attributedefinition"><code>AttributeDefinition</code></a></strong> from the <strong><a href="#configuration"><code>Configuration</code></a></strong>.</p>
+<p>An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measured values and catalog entries. An attribute is identified by its <code>Key</code>. To get information about the type and usage of an attribute, use the <code>Key</code> to get the <strong><a href="#attributedefinition"><code>AttributeDefinition</code></a></strong> from the <strong><a href="#configuration"><code>Configuration</code></a></strong>.</p>
 <p><strong>key <code>number</code></strong></p>
 <p>An unsigned 16 bit integer that identifies the attributes definition.</p>
 <p><strong>type <a href="#attributetype"><code>AttributeType</code></a></strong></p>
@@ -2311,7 +2373,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>Configuration</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Configuration
 </code></pre>
-<p>The configuration contains all attribute definitions for parts, characteristics, measurements, measurement values and catalogs.</p>
+<p>The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs.</p>
 <p><strong>partAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to inspection plan parts.</p>
 <p><strong>characteristicAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
@@ -2319,7 +2381,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>measurementAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to measurements.</p>
 <p><strong>valueAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions referring to measurement values.</p>
+<p>The set of attribute definitions referring to measured values.</p>
 <p><strong>catalogAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to catalog entries.
 <a id="markdown-entitytype" name="entitytype"></a></p>
@@ -2334,9 +2396,9 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong><code>Measurement</code></strong></p>
 <p>Measurement. Common attributes are time, machine, operator and batch number.</p>
 <p><strong><code>Value</code></strong></p>
-<p>Value. The most common attribute is the measurement value (K1).</p>
+<p>Value. The most common attribute is the measured value (K1).</p>
 <p><strong><code>Catalog</code></strong></p>
-<p>Attributes for Catalog entries. These refer to the &quot;<em>columns</em>&quot; of a catalog.</p>
+<p>Attributes for catalog entries. These refer to the &quot;columns&quot; of a catalog.</p>
 <p><a id="markdown-attributedefinition" name="attributedefinition"></a></p>
 <h4>AttributeDefinition</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> AttributeDefinition
@@ -2346,7 +2408,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>description <code>string</code></strong></p>
 <p>An unlocalized description text of the attribute.</p>
 <p><strong>dataType <a href="#attributetype"><code>AttributeType</code></a></strong></p>
-<p>The datatype of the values of the attribute</p>
+<p>The datatype of the values of the attribute.</p>
 <p><strong>entityType <a href="#entitytype"><code>EntityType</code></a></strong></p>
 <p>The entity type this attribute belongs to.</p>
 <p><strong>catalog <code>string | undefined</code></strong></p>
@@ -2379,7 +2441,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>A set of catalog entries of which this catalog is composed.</p>
 <p><a id="markdown-catalogentry" name="catalogentry"></a></p>
 <h4>CatalogEntry</h4>
-<p>Catalog entries used as enumeration values of attributes in the PiWeb Database.</p>
+<p>Catalog entries used as enumeration values of attributes in the PiWeb database.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CatalogEntry <span class="hljs-keyword">extends</span> AttributeItem
 </code></pre>
 <p><strong>key <code>number</code></strong></p>
@@ -2399,7 +2461,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>getInspectionPlan <a href="#inspectionplanitem"><code>Map&lt;string, InspectionPlanItem&gt;</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getInspectionPlan</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Map</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">InspectionPlanItem</span>&gt;</span>;
 </code></pre>
-<p>Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in the PiWeb Designer. Every inspection plan entity is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
+<p>Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer. Every inspection plan entity is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
 <p><a id="markdown-inspectionplanitemtype" name="inspectionplanitemtype"></a></p>
 <h4>InspectionPlanItemType</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> InspectionPlanItemType
@@ -2445,7 +2507,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </ul>
 <p><a id="markdown-usage-3" name="usage-3"></a></p>
 <h4>Usage</h4>
-<p>Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in the PiWeb Designer. Every measurement is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
+<p>Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in PiWeb Designer. Every measurement is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
 <p><strong>getMeasurements <a href="#measurement"><code>Map&lt;string, Measurement&gt;</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMeasurements</span>(<span class="hljs-params">
     mode: MeasurementMode
@@ -2455,7 +2517,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>MeasurementMode</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> MeasurementMode
 </code></pre>
-<p>Determines whether or not to fetch measurement values.</p>
+<p>Determines whether to fetch measured values.</p>
 <p><strong><code>WithoutValues</code></strong></p>
 <p>Only the measurements are fetched, including their attributes.</p>
 <p><strong><code>WithValues</code></strong></p>
@@ -2476,7 +2538,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementValue <span class="hljs-keyword">extends</span> AttributeItem
 </code></pre>
 <p><strong>characteristic <code>string</code></strong></p>
-<p>The <code>Guid</code> that identifies the characteristic this measurement value is associated to.</p>
+<p>The <code>Guid</code> that identifies the characteristic this measured value is associated to.</p>
 <p><a id="markdown-raw-data" name="raw-data"></a></p>
 <h3>Raw Data</h3>
 <p><a id="markdown-content-12" name="content-12"></a></p>
@@ -2487,9 +2549,8 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </ul>
 <p><a id="markdown-usage-4" name="usage-4"></a></p>
 <h4>Usage</h4>
-<p>Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measurement values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine. Because of this reason, the <code>RawDataItem</code> is located in the <code>host</code> module.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> host <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb_host'</span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawData</span>(<span class="hljs-params"></span>) : <span class="hljs-title">host</span>.<span class="hljs-title">RawDataItem</span>[]</span>;
+<p>Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.</p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawData</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataItem</span>[]</span>;
 </code></pre>
 <p><a id="markdown-entitytype-1" name="entitytype-1"></a></p>
 <h4>EntityType</h4>
@@ -2522,7 +2583,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </tr>
 <tr>
 <td><strong><code>MeasurementValue</code></strong></td>
-<td>Additional data of a measurement value</td>
+<td>Additional data of a measured value</td>
 </tr>
 </tbody>
 </table>
@@ -2545,7 +2606,7 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The timestamp when the data has been uploaded to the server.</p>
 <p><strong>lastModified <code>Date</code></strong></p>
 <p>The timestamp of the most recent modification.</p>
-<p><strong>readDataSync() <code>host.HostBinary</code></strong></p>
+<p><strong>readDataSync() <code>HostBinary</code></strong></p>
 <p>Use this function to actually fetch the data associated to the <code>RawDataItem</code>. The data is returned as a <code>HostBuffer</code>, which can be converted to a <code>Buffer</code> using the <code>makeBuffer</code> function.</p>
 <p><a id="markdown-system-variables" name="system-variables"></a></p>
 <h3>System Variables</h3>
@@ -2562,12 +2623,13 @@ host.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:</p>
 <p><img src="gfx/infomode.png" alt="alt text" title="infomode"></p>
 <p>The custom plot API allows you to define your own tooltips, using the <code>onCreateTooltips</code> callback method of the tooltip provider:</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> tooltips = piweb.tooltips;
 
-piweb.tooltips.provider.onCreateTooltips = createTooltipShapes;
+tooltips.provider.onCreateTooltips = createTooltipShapes;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createTooltipShapes</span>(<span class="hljs-params"></span>): <span class="hljs-title">piweb</span>.<span class="hljs-title">tooltips</span>.<span class="hljs-title">TooltipShapeCollection</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> piweb.tooltips.TooltipShapeCollection([
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createTooltipShapes</span>(<span class="hljs-params"></span>): <span class="hljs-title">tooltips</span>.<span class="hljs-title">TooltipShapeCollection</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> tooltips.TooltipShapeCollection([
         ...
     ]);
 }
@@ -2591,7 +2653,7 @@ piweb.tooltips.provider.onCreateTooltips = createTooltipShapes;
 <h4>TooltipShape</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> TooltipShape
 </code></pre>
-<p>Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded <code>Guids</code>, to display a very detailed tooltip that contains information about the measurement value. You must specify both <code>Guids</code> to display these additional information.</p>
+<p>Describes a single area or point with additional information that can be accessed when PiWeb Monitor is in info mode. You can specify a characteristic and a measurement in form of their base64 encoded <code>Guids</code>, to display a very detailed tooltip that contains information about the measured value. You must specify both <code>Guids</code> to display these additional information.</p>
 <p><strong>text <code>string</code></strong></p>
 <p>A custom text that is displayed on top of the tooltip.</p>
 <p><strong>characteristic <code>string | undefined</code></strong></p>
@@ -2609,17 +2671,20 @@ piweb.tooltips.provider.onCreateTooltips = createTooltipShapes;
 <h4>TooltipGeometryShape</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> TooltipGeometryShape <span class="hljs-keyword">extends</span> TooltipShape
 </code></pre>
-<p>Describes a tooltip shape that spans over an area, described by the <code>geometry</code> parameter. When active, the whole geometry will be highlighted.</p>
+<p>Describes a tooltip shape that spans over an area, described by the <code>Geometry</code> parameter. When active, the whole geometry will be highlighted.</p>
 <p><strong>shape <a href="#geometry"><code>Geometry</code></a></strong></p>
 <p>The geometry of the tooltip shape.</p>
-<p><a id="markdown-logging" name="logging"></a></p>
-<h2>Logging</h2>
+<p><a id="markdown-logger" name="logger"></a></p>
+<h2>Logger</h2>
+<p><a id="markdown-introduction-1" name="introduction-1"></a></p>
+<h3>Introduction</h3>
 <p>The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a <strong>significant performance impact</strong>.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> logger = piweb.logger;
 
-piweb.log.debug(<span class="hljs-string">"My log message"</span>);
+loger.debug(<span class="hljs-string">"My log message"</span>);
 </code></pre>
-<p><a id="markdown-methods-1" name="methods-1"></a></p>
+<p><a id="markdown-methods-2" name="methods-2"></a></p>
 <h3>Methods</h3>
 <p><strong>error <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span>(<span class="hljs-params">
