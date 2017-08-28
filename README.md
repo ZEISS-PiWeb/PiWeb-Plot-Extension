@@ -72,15 +72,15 @@ These are the type definitions of the PiWeb custom plot interface. It will enabl
  This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [`DrawingContext`](#drawingcontext).
 
 ```TypeScript
-import * as piweb from 'piweb'
-import * as host from 'piweb_host'
+import * as piweb from 'piweb';
+import environment = piweb.environment;
 import drawing = piweb.drawing;
 
 host.on("render", renderPlot);
 
 function renderPlot(drawingContext: drawing.DrawingContext) {
-const size = host.getSize();
-drawingContext.setBrush( drawing.Brushes.OrangeRed);
+const size = environment.getSize();
+drawingContext.setBrush( drawing.Brush.orangeRed);
 drawingContext.drawRectangle(0, 0, size.width, size.height);
 }
 ```
