@@ -219,6 +219,7 @@
 <li><a href="#attributetype">AttributeType</a></li>
 <li><a href="#attribute">Attribute</a></li>
 <li><a href="#attributeitem">AttributeItem</a></li>
+<li><a href="#datareference">DataReference</a></li>
 </ul>
 </li>
 <li><a href="#configuration">Configuration</a>
@@ -226,48 +227,44 @@
 <li><a href="#content-8">Content</a></li>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#configuration-1">Configuration</a></li>
-<li><a href="#entitytype">EntityType</a></li>
+<li><a href="#configurationentity">ConfigurationEntity</a></li>
 <li><a href="#attributedefinition">AttributeDefinition</a></li>
-</ul>
-</li>
-<li><a href="#catalogs">Catalogs</a>
-<ul>
-<li><a href="#content-9">Content</a></li>
-<li><a href="#usage-1">Usage</a></li>
+<li><a href="#catalogcollection">CatalogCollection</a></li>
 <li><a href="#catalog">Catalog</a></li>
 <li><a href="#catalogentry">CatalogEntry</a></li>
 </ul>
 </li>
 <li><a href="#inspection-plan">Inspection Plan</a>
 <ul>
-<li><a href="#content-10">Content</a></li>
-<li><a href="#usage-2">Usage</a></li>
+<li><a href="#content-9">Content</a></li>
+<li><a href="#usage-1">Usage</a></li>
+<li><a href="#inspectionplancollection">InspectionPlanCollection</a></li>
 <li><a href="#inspectionplanitemtype">InspectionPlanItemType</a></li>
-<li><a href="#inspectionplanpath">InspectionPlanPath</a></li>
 <li><a href="#inspectionplanitem">InspectionPlanItem</a></li>
-<li><a href="#pathelement">PathElement</a></li>
 </ul>
 </li>
 <li><a href="#measurements">Measurements</a>
 <ul>
-<li><a href="#content-11">Content</a></li>
-<li><a href="#usage-3">Usage</a></li>
+<li><a href="#content-10">Content</a></li>
+<li><a href="#usage-2">Usage</a></li>
 <li><a href="#measurementmode">MeasurementMode</a></li>
+<li><a href="#measurementcollection">MeasurementCollection</a></li>
 <li><a href="#measurement">Measurement</a></li>
 <li><a href="#measurementvalue">MeasurementValue</a></li>
 </ul>
 </li>
 <li><a href="#raw-data">Raw Data</a>
 <ul>
-<li><a href="#content-12">Content</a></li>
-<li><a href="#usage-4">Usage</a></li>
-<li><a href="#entitytype-1">EntityType</a></li>
+<li><a href="#content-11">Content</a></li>
+<li><a href="#usage-3">Usage</a></li>
+<li><a href="#entitytype">EntityType</a></li>
+<li><a href="#rawdatacollection">RawDataCollection</a></li>
 <li><a href="#rawdataitem">RawDataItem</a></li>
 </ul>
 </li>
-<li><a href="#system-variables">System Variables</a></li>
 </ul>
 </li>
+<li><a href="#expressions">Expressions</a></li>
 <li><a href="#tooltips">Tooltips</a>
 <ul>
 <li><a href="#introduction-4">Introduction</a></li>
@@ -351,9 +348,9 @@
 piweb.events.on(<span class="hljs-string">"render"</span>, renderPlot);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderPlot</span>(<span class="hljs-params">drawingContext: piweb.drawing.DrawingContext</span>) </span>{
-<span class="hljs-keyword">const</span> size = piweb.environment.getSize();
-drawingContext.setBrush( piweb.drawing.Brush.orangeRed);
-drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size.width, size.height);
+    <span class="hljs-keyword">const</span> size = piweb.environment.getSize();
+    drawingContext.setBrush( piweb.drawing.Brush.orangeRed);
+    drawingContext.drawRectangle(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size.width, size.height);
 }
 </code></pre>
 <p>When we save all files and start PiWeb Designer, we should find our extension in the <strong>General</strong> category of the toolbox:</p>
@@ -2331,21 +2328,22 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <li><a href="#attributetype">AttributeType</a></li>
 <li><a href="#attribute">Attribute</a></li>
 <li><a href="#attributeitem">AttributeItem</a></li>
+<li><a href="#datareference">DataReference</a></li>
 </ul>
 <p><a id="markdown-attributetype" name="attributetype"></a></p>
 <h4>AttributeType</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> AttributeType
 </code></pre>
 <p>Describes the kind of value that an attribute is supposed to have. All attributes can also have <code>undefined</code> as value.</p>
-<p><strong><code>String</code></strong></p>
+<p><strong><code>string</code></strong></p>
 <p>The attribute has a <code>string</code> value.</p>
-<p><strong><code>Integer</code></strong></p>
+<p><strong><code>integer</code></strong></p>
 <p>The attribute has an integral <code>number</code> value.</p>
-<p><strong><code>Double</code></strong></p>
+<p><strong><code>float</code></strong></p>
 <p>The attribute has a floating point <code>number</code> value.</p>
-<p><strong><code>Date</code></strong></p>
+<p><strong><code>date</code></strong></p>
 <p>The attribute has a <code>Date</code> value.</p>
-<p><strong><code>Catalog</code></strong></p>
+<p><strong><code>catalog</code></strong></p>
 <p>The attribute has a <code>number</code> value, that is to be interpreted as the key of a <strong><a href="#catalogentry"><code>CatalogEntry</code></a></strong>.</p>
 <p><a id="markdown-attribute" name="attribute"></a></p>
 <h4>Attribute</h4>
@@ -2371,6 +2369,15 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </span>): <span class="hljs-title">string</span> | <span class="hljs-title">number</span> | <span class="hljs-title">Date</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
 <p>Returns the value that corresponds to the specified attribute key. In case the attribute was not found the function returns <code>undefined</code>.</p>
+<p><a id="markdown-datareference" name="datareference"></a></p>
+<h4>DataReference</h4>
+<p>A <code>DataReference</code> is used as indexer in many collections throughout the <code>piweb.data</code> interface.</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">interface</span> DataReference
+</code></pre>
+<p>The following collections can be searched through with a <code>DataReference</code>:</p>
+<ul>
+<li><a href="#rawdatacollection"><code>RawDataCollection</code></a></li>
+</ul>
 <p><a id="markdown-configuration" name="configuration"></a></p>
 <h3>Configuration</h3>
 <p><a id="markdown-content-8" name="content-8"></a></p>
@@ -2379,6 +2386,9 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <li><a href="#configuration-1">Configuration</a></li>
 <li><a href="#entitytype">EntityType</a></li>
 <li><a href="#attributedefinition">AttributeDefinition</a></li>
+<li><a href="#catalogcollection">CatalogCollection</a></li>
+<li><a href="#catalog">Catalog</a></li>
+<li><a href="#catalogentry">CatalogEntry</a></li>
 </ul>
 <p><a id="markdown-usage" name="usage"></a></p>
 <h4>Usage</h4>
@@ -2390,7 +2400,9 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>Configuration</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Configuration
 </code></pre>
-<p>The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs.</p>
+<p>The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.</p>
+<p><strong>allAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
+<p>A map of all attribute definitions.</p>
 <p><strong>partAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to inspection plan parts.</p>
 <p><strong>characteristicAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
@@ -2400,9 +2412,15 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>valueAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to measured values.</p>
 <p><strong>catalogAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
-<p>The set of attribute definitions referring to catalog entries.
-<a id="markdown-entitytype" name="entitytype"></a></p>
-<h4>EntityType</h4>
+<p>The set of attribute definitions referring to catalog entries.</p>
+<p><strong>catalogs <a href="#catalogcollection"><code>CatalogCollection</code></a></strong></p>
+<p>The catalogs that are configured in the piweb database.</p>
+<p><strong>resolveCatalogEntry <a href="#attribute"><code>Attribute</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolveCatalogEntry</span>(<span class="hljs-params">attribute: Attribute</span>): <span class="hljs-title">CatalogEntry</span> | <span class="hljs-title">undefined</span></span>;
+</code></pre>
+<p>Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the inderection between attributes and catalogs.</p>
+<p><a id="markdown-configurationentity" name="configurationentity"></a></p>
+<h4>ConfigurationEntity</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> EntityType
 </code></pre>
 <p>Lists all entities that have attributes attached to them.</p>
@@ -2426,30 +2444,29 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>An unlocalized description text of the attribute.</p>
 <p><strong>dataType <a href="#attributetype"><code>AttributeType</code></a></strong></p>
 <p>The datatype of the values of the attribute.</p>
-<p><strong>entityType <a href="#entitytype"><code>EntityType</code></a></strong></p>
+<p><strong>entityType <a href="#configurationentity"><code>ConfigurationEntity</code></a></strong></p>
 <p>The entity type this attribute belongs to.</p>
 <p><strong>catalog <code>string | undefined</code></strong></p>
 <p>In case the <code>dataType</code> is <code>Catalog</code>, this field contains a base64 encoded <code>Guid</code> that identifies the <strong><a href="#catalog"><code>Catalog</code></a></strong> that is used by this attribute.</p>
-<p><a id="markdown-catalogs" name="catalogs"></a></p>
-<h3>Catalogs</h3>
-<p><a id="markdown-content-9" name="content-9"></a></p>
-<h4>Content</h4>
-<ul>
-<li><a href="#catalog">Catalog</a></li>
-<li><a href="#catalogentry">CatalogEntry</a></li>
-</ul>
-<p><a id="markdown-usage-1" name="usage-1"></a></p>
-<h4>Usage</h4>
-<p>Use the following function to get the catalogs that are configured in the the server. Catalogs are identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
-<p><strong>getCatalogs <a href="#catalog"><code>Map&lt;string, Catalog&gt;</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCatalogs</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Map</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">Catalog</span>&gt;</span>;
+<p><a id="markdown-catalogcollection" name="catalogcollection"></a></p>
+<h4>CatalogCollection</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CatalogCollection
 </code></pre>
+<p>A catalog collection contains a set of catalogs, that can either be iterated over, or accessed with a catalog reference string.</p>
+<p><strong>all <a href="#catalog"><code>Catalog[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Catalog</span>[]</span>;
+</code></pre>
+<p>Returns all catalogs in the collection as an array</p>
+<p><strong>all <a href="#catalog"><code>Catalog[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params"> ref: <span class="hljs-built_in">string</span> </span>) : <span class="hljs-title">Catalog</span> | <span class="hljs-title">undefined</span></span>;
+</code></pre>
+<p>Returns the catalog that is identified by the specified <code>ref</code> string. Catalog reference strings can be found as member of the <a href="#catalog"><code>Catalog</code></a> class, or as value of an <a href="#attribute"><code>Attribute</code></a>.</p>
 <p><a id="markdown-catalog" name="catalog"></a></p>
 <h4>Catalog</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Catalog
 </code></pre>
-<p><strong>guid <code>string</code></strong></p>
-<p>A base64 encoded <code>Guid</code> that identifies the catalog.</p>
+<p><strong>catalogRef <code>string</code></strong></p>
+<p>A base64 encoded <code>Guid</code> that identifies the catalog. It can be used to access a certain catalog in the <a href="#catalogcollection"><code>CatalogCollection</code></a></p>
 <p><strong>name <code>string</code></strong></p>
 <p>An unlocalized name that is used only for displaying purposes.</p>
 <p><strong>validAttributes <code>number[]</code></strong></p>
@@ -2465,111 +2482,171 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>A 16 bit integer that identifies the catalog entry. When accessing an attribute with the datatype <code>Catalog</code>, a 16 bit integer is returned that refers to this key.</p>
 <p><a id="markdown-inspection-plan" name="inspection-plan"></a></p>
 <h3>Inspection Plan</h3>
-<p><a id="markdown-content-10" name="content-10"></a></p>
+<p><a id="markdown-content-9" name="content-9"></a></p>
 <h4>Content</h4>
 <ul>
+<li><a href="#inspectionplancollection">InspectionPlanCollection</a></li>
 <li><a href="#inspectionplanitemtype">InspectionPlanItemType</a></li>
-<li><a href="#inspectionplanpath">InspectionPlanPath</a></li>
 <li><a href="#inspectionplanitem">InspectionPlanItem</a></li>
-<li><a href="#pathelement">PathElement</a></li>
 </ul>
-<p><a id="markdown-usage-2" name="usage-2"></a></p>
+<p><a id="markdown-usage-1" name="usage-1"></a></p>
 <h4>Usage</h4>
-<p><strong>getInspectionPlan <a href="#inspectionplanitem"><code>Map&lt;string, InspectionPlanItem&gt;</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getInspectionPlan</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Map</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">InspectionPlanItem</span>&gt;</span>;
+<p><strong>getInspectionPlanCollection <a href="#inspectionplancollection"><code>InspectionPlanCollection</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getInspectionPlanCollection</span>(<span class="hljs-params"></span>) : <span class="hljs-title">InspectionPlanCollection</span></span>;
 </code></pre>
 <p>Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer. Every inspection plan entity is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
+<p><a id="markdown-inspectionplancollection" name="inspectionplancollection"></a></p>
+<h4>InspectionPlanCollection</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanCollection
+</code></pre>
+<p>A collection of <a href="#inspectionplanitem"><code>InspectionPlanItems</code></a>.</p>
+<p><strong>length <code>number</code></strong></p>
+<p>The number of items in the collection.</p>
+<p><strong>all <a href="#inspectionplanitem"><code>InspectionPlanItem[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>) : <span class="hljs-title">InspectionPlanItem</span>[]
+</span></code></pre>
+<p>Returns all inspection plan items in the collection as an array.</p>
+<p><strong>findByReference <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params"> 
+    reference: DataReference 
+</span>) : <span class="hljs-title">InspectionPlanItem</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the inspection plan item that is identified by the specified <a href="#datareference"><code>DataReference</code></a> or <code>undefined</code> if the collection contains no such inspection plan item.</p>
+<p><strong>findByPath <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByPath</span>(<span class="hljs-params"> 
+    path: <span class="hljs-built_in">string</span> 
+</span>) : <span class="hljs-title">InspectionPlanItem</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the inspection plan item that is identified by the specified path or <code>undefined</code> if the collection contains no such inspection plan item.</p>
+<p><strong>findParent <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findParent</span>(<span class="hljs-params"> 
+    item: InspectionPlanItem 
+</span>) : <span class="hljs-title">InspectionPlanItem</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the parent item of the specified inspection plan item or <code>undefined</code> if the item has no parent, or the collection doesn't contain it.</p>
+<p><strong>findChildren <a href="#inspectionplanitem"><code>InspectionPlanItem[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findChildren</span>(<span class="hljs-params"> 
+    item: InspectionPlanItem 
+</span>) : <span class="hljs-title">InspectionPlanItem</span>[]
+</span></code></pre>
+<p>Returns the child items of the specified inspection plan item or. Please be aware that only those children are returned, that are included in the binding of the element.</p>
 <p><a id="markdown-inspectionplanitemtype" name="inspectionplanitemtype"></a></p>
 <h4>InspectionPlanItemType</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> InspectionPlanItemType
 </code></pre>
-<p><strong><code>Characteristic</code></strong></p>
+<p><strong><code>characteristic</code></strong></p>
 <p>Refers to an inspection plan characteristic.</p>
-<p><strong><code>Part</code></strong></p>
+<p><strong><code>part</code></strong></p>
 <p>Refers to an inspection plan part.</p>
-<p><a id="markdown-inspectionplanpath" name="inspectionplanpath"></a></p>
-<h4>InspectionPlanPath</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanPath
-</code></pre>
-<p>Every inspection plan item can be identified by its path. Inspection plan paths look similar to file system paths, where parts refer to folders and characteristics refer to files. The difference is, that characteristics can have child characteristics.</p>
-<p><strong>pathElements <a href="#pathelement"><code>PathElement[]</code></a></strong></p>
-<p>The set of path elements of which the path is composed.</p>
 <p><a id="markdown-inspectionplanitem" name="inspectionplanitem"></a></p>
 <h4>InspectionPlanItem</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanItem <span class="hljs-keyword">extends</span> AttributeItem
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanItem <span class="hljs-keyword">extends</span> AttributeItem <span class="hljs-keyword">implements</span> DataReference
 </code></pre>
 <p>Describes a part or a characteristic of the inspection plan.</p>
-<p><strong>uuid <code>string</code></strong></p>
-<p>The <code>Guid</code> that is used to identify the item. It is stored as a base64 encoded byte array.</p>
+<p><strong>ID <code>string</code></strong></p>
+<p>The identifier of this inspection plan item which can be used to access other information connected to it.</p>
+<p><strong>parentID <code>string?</code></strong></p>
+<p>The inspectionPlanRef of this items parent in the inspection plan structure.</p>
 <p><strong>type <a href="#inspectionPlanItemType"><code>InspectionPlanItemType</code></a></strong></p>
 <p>The item type, which is either <code>Part</code> or <code>Characteristic</code>.</p>
-<p><strong>path <a href="#inspectionplanpath"><code>InspectionPlanPath</code></a></strong></p>
+<p><strong>path <code>string</code></strong></p>
 <p>The path of the item in the inspection plan structure.</p>
-<p><a id="markdown-pathelement" name="pathelement"></a></p>
-<h4>PathElement</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> PathElement
-</code></pre>
 <p><strong>name <code>string</code></strong></p>
-<p>The name of the part or characteristic that is represented by this path element.</p>
-<p><strong>type <a href="#inspectionPlanItemType"><code>InspectionPlanItemType</code></a></strong></p>
-<p>The type of the inspection plan item that is represented by this path element.</p>
+<p>The name of the item, which is also the last part of the path.</p>
 <p><a id="markdown-measurements" name="measurements"></a></p>
 <h3>Measurements</h3>
-<p><a id="markdown-content-11" name="content-11"></a></p>
+<p><a id="markdown-content-10" name="content-10"></a></p>
 <h4>Content</h4>
 <ul>
 <li><a href="#measurementmode">MeasurementMode</a></li>
+<li><a href="#measurementcollection">MeasurementCollection</a></li>
 <li><a href="#measurement">Measurement</a></li>
 <li><a href="#measurementvalue">MeasurementValue</a></li>
 </ul>
-<p><a id="markdown-usage-3" name="usage-3"></a></p>
+<p><a id="markdown-usage-2" name="usage-2"></a></p>
 <h4>Usage</h4>
 <p>Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in PiWeb Designer. Every measurement is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
-<p><strong>getMeasurements <a href="#measurement"><code>Map&lt;string, Measurement&gt;</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMeasurements</span>(<span class="hljs-params">
+<p><strong>getMeasurementCollection <a href="#measurementcollection"><code>MeasurementCollection</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMeasurementCollection</span>(<span class="hljs-params">
     mode: MeasurementMode
-</span>) : <span class="hljs-title">Map</span>&lt;<span class="hljs-title">string</span>, <span class="hljs-title">InspectionPlanItem</span>&gt;</span>;
+</span>) : <span class="hljs-title">MeasurementCollection</span></span>;
 </code></pre>
 <p><a id="markdown-measurementmode" name="measurementmode"></a></p>
 <h4>MeasurementMode</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> MeasurementMode
 </code></pre>
 <p>Determines whether to fetch measured values.</p>
-<p><strong><code>WithoutValues</code></strong></p>
+<p><strong><code>withoutValues</code></strong></p>
 <p>Only the measurements are fetched, including their attributes.</p>
-<p><strong><code>WithValues</code></strong></p>
+<p><strong><code>withValues</code></strong></p>
 <p>Fetches the measurements as well as their values.</p>
+<p><a id="markdown-measurementcollection" name="measurementcollection"></a></p>
+<h4>MeasurementCollection</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementCollection
+</code></pre>
+<p>A collection of <a href="#measurement"><code>Measurements</code></a>.</p>
+<p><strong>length <code>number</code></strong></p>
+<p>The number of measurements in the collection.</p>
+<p><strong>all <a href="#measurement"><code>Measurement[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Measurement</span>[]
+</span></code></pre>
+<p>Returns all measurements in the collection as an array.</p>
+<p><strong>findMeasurementByReference <a href="#measurement"><code>Measurement</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMeasurementByReference</span>(<span class="hljs-params"> 
+    reference: DataReference 
+</span>) : <span class="hljs-title">Measurement</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the measurement that is identified by the specified <a href="#datareference"><code>DataReference</code></a> or <code>undefined</code> if the collection contains no such measurement.</p>
+<p><strong>findValueByReference <a href="#measurementvalue"><code>MeasurementValue</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findValueByReference</span>(<span class="hljs-params"> 
+    reference: DataReference 
+</span>) : <span class="hljs-title">Measurement</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the measurement value that is identified by the specified <a href="#datareference"><code>DataReference</code></a> or <code>undefined</code> if the collection contains no such measurement value.</p>
 <p><a id="markdown-measurement" name="measurement"></a></p>
 <h4>Measurement</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Measurement <span class="hljs-keyword">extends</span> AttributeItem
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Measurement <span class="hljs-keyword">extends</span> AttributeItem <span class="hljs-keyword">implements</span> DataReference
 </code></pre>
 <p>Describes a measurement of an inspection plan part.</p>
-<p><strong>uuid <code>string</code></strong></p>
-<p>The <code>Guid</code> that identifies this measurement as base64 encoded byte array.</p>
-<p><strong>part <code>string</code></strong></p>
-<p>The <code>Guid</code> that identifies the part this measurement is associated to.</p>
-<p><strong>values <a href="#measurementvalue"><code>Map&lt;string, MeasurementValue&gt;</code></a></strong></p>
+<p><strong>ID <code>string</code></strong></p>
+<p>The identifier of this measurement.</p>
+<p><strong>partID <code>string</code></strong></p>
+<p>The identifier of the part this measurement is associated with.</p>
+<p><strong>findValueByReference <a href="#measurementvalue"><code>MeasurementValue</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findValueByReference</span>(<span class="hljs-params">
+     reference : DataReference
+</span>) : <span class="hljs-title">MeasurementValue</span>
+</span></code></pre>
+<p>Returns the measurement value that is associated to the specified characteristic.</p>
+<p><strong>allValues <a href="#measurementvalue"><code>MeasurementValue[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">allValues</span>(<span class="hljs-params"></span>) : <span class="hljs-title">MeasurementValue</span>[]
+</span></code></pre>
 <p>The values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.</p>
 <p><a id="markdown-measurementvalue" name="measurementvalue"></a></p>
 <h4>MeasurementValue</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementValue <span class="hljs-keyword">extends</span> AttributeItem
 </code></pre>
-<p><strong>characteristic <code>string</code></strong></p>
-<p>The <code>Guid</code> that identifies the characteristic this measured value is associated to.</p>
+<p><strong>characteristicID <code>string</code></strong></p>
+<p>The identifier of the characteristic this measured value is associated to.</p>
 <p><a id="markdown-raw-data" name="raw-data"></a></p>
 <h3>Raw Data</h3>
-<p><a id="markdown-content-12" name="content-12"></a></p>
+<p><a id="markdown-content-11" name="content-11"></a></p>
 <h4>Content</h4>
 <ul>
-<li><a href="#entitytype-1">EntityType</a></li>
+<li><a href="#entitytype">EntityType</a></li>
+<li><a href="#rawdatacollection">RawDataCollection</a></li>
 <li><a href="#rawdataitem">RawDataItem</a></li>
 </ul>
-<p><a id="markdown-usage-4" name="usage-4"></a></p>
+<p><a id="markdown-usage-3" name="usage-3"></a></p>
 <h4>Usage</h4>
-<p>Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.</p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawData</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataItem</span>[]</span>;
+<p>Fetches a list of all raw data entries that are bound to the custom plot via databinding. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.</p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataCollection</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataCollection</span></span>;
 </code></pre>
-<p><a id="markdown-entitytype-1" name="entitytype-1"></a></p>
+<p>You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.</p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setRawDataSources</span>(<span class="hljs-params"> RawDataSource[] sources </span>) : <span class="hljs-title">void</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataSources</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataSource</span>[]</span>;
+</code></pre>
+<p><a id="markdown-entitytype" name="entitytype"></a></p>
 <h4>EntityType</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> EntityType;
 </code></pre>
@@ -2583,30 +2660,42 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </thead>
 <tbody>
 <tr>
-<td><strong><code>Unknown</code></strong></td>
-<td>Unknown origin</td>
-</tr>
-<tr>
-<td><strong><code>Part</code></strong></td>
+<td><strong><code>part</code></strong></td>
 <td>Additional data of an inspection plan part</td>
 </tr>
 <tr>
-<td><strong><code>Characteristic</code></strong></td>
+<td><strong><code>characteristic</code></strong></td>
 <td>Additional data of an inspection plan characteristic</td>
 </tr>
 <tr>
-<td><strong><code>Measurement</code></strong></td>
+<td><strong><code>measurement</code></strong></td>
 <td>Additional data of a measurement</td>
 </tr>
 <tr>
-<td><strong><code>MeasurementValue</code></strong></td>
+<td><strong><code>measurementValue</code></strong></td>
 <td>Additional data of a measured value</td>
 </tr>
 </tbody>
 </table>
+<p><a id="markdown-rawdatacollection" name="rawdatacollection"></a></p>
+<h4>RawDataCollection</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RawDataCollection;
+</code></pre>
+<p>A list of raw data information with additional functions to access certain entries.</p>
+<p><strong>all <a href="#rawdataitem"><code>RawDataItem[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>): <span class="hljs-title">RawDataItem</span>[]</span>;
+</code></pre>
+<p>Returns all raw data information that is bound to the element, restricted by the entities that have previously been set by</p>
+<p><strong>findByName <a href="#rawdataitem"><code>RawDataItem[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByName</span>(<span class="hljs-params">...wildcards: <span class="hljs-built_in">string</span>[]</span>): <span class="hljs-title">RawDataItem</span>[]</span>;
+</code></pre>
+<p><strong>findByReference <a href="#rawdataitem"><code>RawDataItem[]</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params">reference: DataReference</span>): <span class="hljs-title">RawDataItem</span>[]</span>;
+</code></pre>
+<p>Searches for raw data information with the specified <a href="#datareference"><code>DataReference</code></a>.</p>
 <p><a id="markdown-rawdataitem" name="rawdataitem"></a></p>
 <h4>RawDataItem</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RawDataItem;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RawDataItem <span class="hljs-keyword">implements</span> DataReference;
 </code></pre>
 <p>Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.</p>
 <p><strong>entityType <a href="#entitytype"><code>EntityType</code></a></strong></p>
@@ -2617,22 +2706,34 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The size of the item in bytes.</p>
 <p><strong>mimeType <code>string</code></strong></p>
 <p>The mimetype of the item.</p>
-<p><strong>md5Bytes <code>Buffer</code></strong></p>
-<p>A buffer of 16 bytes length, containing the data's MD5 hash.</p>
 <p><strong>created <code>Date</code></strong></p>
 <p>The timestamp when the data has been uploaded to the server.</p>
 <p><strong>lastModified <code>Date</code></strong></p>
 <p>The timestamp of the most recent modification.</p>
-<p><strong>readDataSync() <code>HostBinary</code></strong></p>
+<p><strong>getData() <code>HostBinary</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) : <span class="hljs-title">HostBinary</span>
+</span></code></pre>
 <p>Use this function to actually fetch the data associated to the <code>RawDataItem</code>. The data is returned as a <code>HostBuffer</code>, which can be converted to a <code>Buffer</code> using the <code>makeBuffer</code> function.</p>
-<p><a id="markdown-system-variables" name="system-variables"></a></p>
-<h3>System Variables</h3>
-<p>Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the <code>dataChange</code> event occurred.</p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSystemVariable</span>(<span class="hljs-params">
+<p><strong>getDataBuffer() <code>Buffer</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDataBuffer</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Buffer</span>
+</span></code></pre>
+<p>Use this function to actually fetch the data associated to the <code>RawDataItem</code>. The data is returned as a <code>Buffer</code></p>
+<p><strong>getCheckSum <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCheckSum</span>(<span class="hljs-params"></span>) : <span class="hljs-title">string</span>
+</span></code></pre>
+<p>Returns the data's MD5 hash.</p>
+<p><a id="markdown-expressions" name="expressions"></a></p>
+<h2>Expressions</h2>
+<p>The 'expressions' interface returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the <code>dataChange</code> event occurred.</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> expressions = piweb.expressions;
+</code></pre>
+<p>The interface exposes only one function:</p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">evaluate</span>(<span class="hljs-params">
     expression: <span class="hljs-built_in">string</span>
 </span>): <span class="hljs-title">undefined</span> | <span class="hljs-title">string</span> | <span class="hljs-title">number</span> | <span class="hljs-title">Date</span> | <span class="hljs-title">Array</span>&lt;<span class="hljs-title">any</span>&gt;</span>;
 </code></pre>
-<p>Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype.</p>
+<p>Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype. Nested arrays are also possible.</p>
 <p><a id="markdown-tooltips" name="tooltips"></a></p>
 <h2>Tooltips</h2>
 <p><a id="markdown-introduction-4" name="introduction-4"></a></p>

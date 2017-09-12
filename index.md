@@ -146,36 +146,36 @@
         - [AttributeType](#attributetype)
         - [Attribute](#attribute)
         - [AttributeItem](#attributeitem)
+        - [DataReference](#datareference)
     - [Configuration](#configuration)
         - [Content](#content-8)
         - [Usage](#usage)
         - [Configuration](#configuration-1)
-        - [EntityType](#entitytype)
+        - [ConfigurationEntity](#configurationentity)
         - [AttributeDefinition](#attributedefinition)
-    - [Catalogs](#catalogs)
-        - [Content](#content-9)
-        - [Usage](#usage-1)
+        - [CatalogCollection](#catalogcollection)
         - [Catalog](#catalog)
         - [CatalogEntry](#catalogentry)
     - [Inspection Plan](#inspection-plan)
+        - [Content](#content-9)
+        - [Usage](#usage-1)
+        - [InspectionPlanCollection](#inspectionplancollection)
+        - [InspectionPlanItemType](#inspectionplanitemtype)
+        - [InspectionPlanItem](#inspectionplanitem)
+    - [Measurements](#measurements)
         - [Content](#content-10)
         - [Usage](#usage-2)
-        - [InspectionPlanItemType](#inspectionplanitemtype)
-        - [InspectionPlanPath](#inspectionplanpath)
-        - [InspectionPlanItem](#inspectionplanitem)
-        - [PathElement](#pathelement)
-    - [Measurements](#measurements)
-        - [Content](#content-11)
-        - [Usage](#usage-3)
         - [MeasurementMode](#measurementmode)
+        - [MeasurementCollection](#measurementcollection)
         - [Measurement](#measurement)
         - [MeasurementValue](#measurementvalue)
     - [Raw Data](#raw-data)
-        - [Content](#content-12)
-        - [Usage](#usage-4)
-        - [EntityType](#entitytype-1)
+        - [Content](#content-11)
+        - [Usage](#usage-3)
+        - [EntityType](#entitytype)
+        - [RawDataCollection](#rawdatacollection)
         - [RawDataItem](#rawdataitem)
-    - [System Variables](#system-variables)
+- [Expressions](#expressions)
 - [Tooltips](#tooltips)
     - [Introduction](#introduction-4)
     - [Classes](#classes-1)
@@ -271,9 +271,9 @@ import * as piweb from 'piweb'
 piweb.events.on("render", renderPlot);
 
 function renderPlot(drawingContext: piweb.drawing.DrawingContext) {
-const size = piweb.environment.getSize();
-drawingContext.setBrush( piweb.drawing.Brush.orangeRed);
-drawingContext.drawRectangle(0, 0, size.width, size.height);
+    const size = piweb.environment.getSize();
+    drawingContext.setBrush( piweb.drawing.Brush.orangeRed);
+    drawingContext.drawRectangle(0, 0, size.width, size.height);
 }
 ```
 
@@ -2972,6 +2972,7 @@ function loadData() {
 - [AttributeType](#attributetype)
 - [Attribute](#attribute)
 - [AttributeItem](#attributeitem)
+- [DataReference](#datareference)
 
 <a id="markdown-attributetype" name="attributetype"></a>
 #### AttributeType
@@ -2982,23 +2983,23 @@ enum AttributeType
 
 Describes the kind of value that an attribute is supposed to have. All attributes can also have `undefined` as value.
 
-**`String`**
+**`string`**
 
 The attribute has a `string` value.
 
-**`Integer`**
+**`integer`**
 
 The attribute has an integral `number` value.
 
-**`Double`**
+**`float`**
 
 The attribute has a floating point `number` value.
 
-**`Date`**
+**`date`**
 
 The attribute has a `Date` value.
 
-**`Catalog`**
+**`catalog`**
 
 The attribute has a `number` value, that is to be interpreted as the key of a **[`CatalogEntry`](#catalogentry)**.
 
@@ -3046,6 +3047,19 @@ function getValue(
 
 Returns the value that corresponds to the specified attribute key. In case the attribute was not found the function returns `undefined`.
 
+<a id="markdown-datareference" name="datareference"></a>
+#### DataReference
+
+A `DataReference` is used as indexer in many collections throughout the `piweb.data` interface.
+
+```TypeScript
+interface DataReference
+```
+
+The following collections can be searched through with a `DataReference`:
+
+- [`RawDataCollection`](#rawdatacollection)
+
 <a id="markdown-configuration" name="configuration"></a>
 ### Configuration
 
@@ -3055,6 +3069,9 @@ Returns the value that corresponds to the specified attribute key. In case the a
 - [Configuration](#configuration-1)
 - [EntityType](#entitytype)
 - [AttributeDefinition](#attributedefinition)
+- [CatalogCollection](#catalogcollection)
+- [Catalog](#catalog)
+- [CatalogEntry](#catalogentry)
 
 <a id="markdown-usage" name="usage"></a>
 #### Usage
@@ -3074,7 +3091,11 @@ function getConfiguration() : Configuration
 class Configuration
 ```
 
-The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs.
+The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.
+
+**allAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
+
+A map of all attribute definitions.
 
 **partAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
@@ -3095,8 +3116,21 @@ The set of attribute definitions referring to measured values.
 **catalogAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
 The set of attribute definitions referring to catalog entries.
-<a id="markdown-entitytype" name="entitytype"></a>
-#### EntityType
+
+**catalogs [`CatalogCollection`](#catalogcollection)**
+
+The catalogs that are configured in the piweb database.
+
+**resolveCatalogEntry [`Attribute`](#attribute)**
+
+```TypeScript
+function resolveCatalogEntry(attribute: Attribute): CatalogEntry | undefined;
+```
+
+Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the inderection between attributes and catalogs.
+
+<a id="markdown-configurationentity" name="configurationentity"></a>
+#### ConfigurationEntity
 
 ```TypeScript
 enum EntityType
@@ -3144,7 +3178,7 @@ An unlocalized description text of the attribute.
 
 The datatype of the values of the attribute.
 
-**entityType [`EntityType`](#entitytype)**
+**entityType [`ConfigurationEntity`](#configurationentity)**
 
 The entity type this attribute belongs to.
 
@@ -3152,25 +3186,30 @@ The entity type this attribute belongs to.
 
 In case the `dataType` is `Catalog`, this field contains a base64 encoded `Guid` that identifies the **[`Catalog`](#catalog)** that is used by this attribute.
 
-<a id="markdown-catalogs" name="catalogs"></a>
-### Catalogs
-
-<a id="markdown-content-9" name="content-9"></a>
-#### Content
-
-- [Catalog](#catalog)
-- [CatalogEntry](#catalogentry)
-
-<a id="markdown-usage-1" name="usage-1"></a>
-#### Usage
-
-Use the following function to get the catalogs that are configured in the the server. Catalogs are identified by a `Guid`, which is stored as a base64 encoded byte array. 
-
-**getCatalogs [`Map<string, Catalog>`](#catalog)**
+<a id="markdown-catalogcollection" name="catalogcollection"></a>
+#### CatalogCollection
 
 ```TypeScript
-function getCatalogs() : Map<string, Catalog>;
+class CatalogCollection
 ```
+
+A catalog collection contains a set of catalogs, that can either be iterated over, or accessed with a catalog reference string.
+
+**all [`Catalog[]`](#catalog)**
+
+```TypeScript
+function all() : Catalog[];
+```
+
+Returns all catalogs in the collection as an array
+
+**all [`Catalog[]`](#catalog)**
+
+```TypeScript
+function findByReference( ref: string ) : Catalog | undefined;
+```
+
+Returns the catalog that is identified by the specified `ref` string. Catalog reference strings can be found as member of the [`Catalog`](#catalog) class, or as value of an [`Attribute`](#attribute).
 
 <a id="markdown-catalog" name="catalog"></a>
 #### Catalog
@@ -3178,9 +3217,10 @@ function getCatalogs() : Map<string, Catalog>;
 ```TypeScript
 class Catalog
 ```
-**guid `string`**
 
-A base64 encoded `Guid` that identifies the catalog.
+**catalogRef `string`**
+
+A base64 encoded `Guid` that identifies the catalog. It can be used to access a certain catalog in the [`CatalogCollection`](#catalogcollection)
 
 **name `string`**
 
@@ -3210,24 +3250,85 @@ A 16 bit integer that identifies the catalog entry. When accessing an attribute 
 <a id="markdown-inspection-plan" name="inspection-plan"></a>
 ### Inspection Plan
 
-<a id="markdown-content-10" name="content-10"></a>
+<a id="markdown-content-9" name="content-9"></a>
 #### Content
 
+- [InspectionPlanCollection](#inspectionplancollection)
 - [InspectionPlanItemType](#inspectionplanitemtype)
-- [InspectionPlanPath](#inspectionplanpath)
 - [InspectionPlanItem](#inspectionplanitem)
-- [PathElement](#pathelement)
 
-<a id="markdown-usage-2" name="usage-2"></a>
+
+<a id="markdown-usage-1" name="usage-1"></a>
 #### Usage
 
-**getInspectionPlan [`Map<string, InspectionPlanItem>`](#inspectionplanitem)**
+**getInspectionPlanCollection [`InspectionPlanCollection`](#inspectionplancollection)**
 
 ```TypeScript
-function getInspectionPlan() : Map<string, InspectionPlanItem>;
+function getInspectionPlanCollection() : InspectionPlanCollection;
 ```
 
 Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer. Every inspection plan entity is identified by a `Guid`, which is stored as a base64 encoded byte array. 
+
+<a id="markdown-inspectionplancollection" name="inspectionplancollection"></a>
+#### InspectionPlanCollection
+
+```TypeScript
+class InspectionPlanCollection
+```
+
+A collection of [`InspectionPlanItems`](#inspectionplanitem). 
+
+**length `number`**
+
+The number of items in the collection.
+
+**all [`InspectionPlanItem[]`](#inspectionplanitem)**
+ 
+```TypeScript
+function all() : InspectionPlanItem[]
+```
+
+Returns all inspection plan items in the collection as an array.
+
+**findByReference [`InspectionPlanItem`](#inspectionplanitem)**
+ 
+```TypeScript
+function findByReference( 
+    reference: DataReference 
+) : InspectionPlanItem | undefined
+```
+
+Returns the inspection plan item that is identified by the specified [`DataReference`](#datareference) or `undefined` if the collection contains no such inspection plan item.
+
+**findByPath [`InspectionPlanItem`](#inspectionplanitem)**
+ 
+```TypeScript
+function findByPath( 
+    path: string 
+) : InspectionPlanItem | undefined
+```
+
+Returns the inspection plan item that is identified by the specified path or `undefined` if the collection contains no such inspection plan item.
+
+**findParent [`InspectionPlanItem`](#inspectionplanitem)**
+ 
+```TypeScript
+function findParent( 
+    item: InspectionPlanItem 
+) : InspectionPlanItem | undefined
+```
+
+Returns the parent item of the specified inspection plan item or `undefined` if the item has no parent, or the collection doesn't contain it.
+
+**findChildren [`InspectionPlanItem[]`](#inspectionplanitem)**
+ 
+```TypeScript
+function findChildren( 
+    item: InspectionPlanItem 
+) : InspectionPlanItem[]
+```
+
+Returns the child items of the specified inspection plan item or. Please be aware that only those children are returned, that are included in the binding of the element.
 
 <a id="markdown-inspectionplanitemtype" name="inspectionplanitemtype"></a>
 #### InspectionPlanItemType
@@ -3236,84 +3337,65 @@ Returns all inspection plan items that are bound to the custom plot element with
 enum InspectionPlanItemType
 ```
 
-**`Characteristic`**
+**`characteristic`**
 
 Refers to an inspection plan characteristic.
 
-**`Part`**
+**`part`**
 
 Refers to an inspection plan part.
-
-<a id="markdown-inspectionplanpath" name="inspectionplanpath"></a>
-#### InspectionPlanPath
-
-```TypeScript
-class InspectionPlanPath
-```
-
-Every inspection plan item can be identified by its path. Inspection plan paths look similar to file system paths, where parts refer to folders and characteristics refer to files. The difference is, that characteristics can have child characteristics.
-
-**pathElements [`PathElement[]`](#pathelement)**
-
-The set of path elements of which the path is composed.
 
 <a id="markdown-inspectionplanitem" name="inspectionplanitem"></a>
 #### InspectionPlanItem
 
 ```TypeScript
-class InspectionPlanItem extends AttributeItem
+class InspectionPlanItem extends AttributeItem implements DataReference
 ```
 
 Describes a part or a characteristic of the inspection plan.
 
-**uuid `string`**
+**ID `string`**
 
-The `Guid` that is used to identify the item. It is stored as a base64 encoded byte array.
+The identifier of this inspection plan item which can be used to access other information connected to it.
+
+**parentID `string?`**
+
+The inspectionPlanRef of this items parent in the inspection plan structure.
 
 **type [`InspectionPlanItemType`](#inspectionPlanItemType)**
 
 The item type, which is either `Part` or `Characteristic`.
 
-**path [`InspectionPlanPath`](#inspectionplanpath)**
+**path `string`**
 
 The path of the item in the inspection plan structure.
 
-<a id="markdown-pathelement" name="pathelement"></a>
-#### PathElement
-
-```TypeScript
-class PathElement
-```
-
 **name `string`**
 
-The name of the part or characteristic that is represented by this path element.
-
-**type [`InspectionPlanItemType`](#inspectionPlanItemType)**
-
-The type of the inspection plan item that is represented by this path element.
+The name of the item, which is also the last part of the path.
 
 <a id="markdown-measurements" name="measurements"></a>
 ### Measurements
 
-<a id="markdown-content-11" name="content-11"></a>
+<a id="markdown-content-10" name="content-10"></a>
 #### Content
 
 - [MeasurementMode](#measurementmode)
+- [MeasurementCollection](#measurementcollection)
 - [Measurement](#measurement)
 - [MeasurementValue](#measurementvalue)
 
-<a id="markdown-usage-3" name="usage-3"></a>
+<a id="markdown-usage-2" name="usage-2"></a>
 #### Usage
 
 Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in PiWeb Designer. Every measurement is identified by a `Guid`, which is stored as a base64 encoded byte array. 
 
-**getMeasurements [`Map<string, Measurement>`](#measurement)**
+**getMeasurementCollection [`MeasurementCollection`](#measurementcollection)**
 
 ```TypeScript
-function getMeasurements(
+function getMeasurementCollection(
     mode: MeasurementMode
-) : Map<string, InspectionPlanItem>;
+) : MeasurementCollection;
 ```
 
 <a id="markdown-measurementmode" name="measurementmode"></a>
@@ -3325,32 +3407,87 @@ enum MeasurementMode
 
 Determines whether to fetch measured values.
 
-**`WithoutValues`**
+**`withoutValues`**
 
 Only the measurements are fetched, including their attributes.
 
-**`WithValues`**
+**`withValues`**
 
 Fetches the measurements as well as their values.
+
+<a id="markdown-measurementcollection" name="measurementcollection"></a>
+#### MeasurementCollection
+
+```TypeScript
+class MeasurementCollection
+```
+
+A collection of [`Measurements`](#measurement). 
+
+**length `number`**
+
+The number of measurements in the collection.
+
+**all [`Measurement[]`](#measurement)**
+ 
+```TypeScript
+function all() : Measurement[]
+```
+
+Returns all measurements in the collection as an array.
+
+**findMeasurementByReference [`Measurement`](#measurement)**
+ 
+```TypeScript
+function findMeasurementByReference( 
+    reference: DataReference 
+) : Measurement | undefined
+```
+
+Returns the measurement that is identified by the specified [`DataReference`](#datareference) or `undefined` if the collection contains no such measurement.
+
+**findValueByReference [`MeasurementValue`](#measurementvalue)**
+ 
+```TypeScript
+function findValueByReference( 
+    reference: DataReference 
+) : Measurement | undefined
+```
+
+Returns the measurement value that is identified by the specified [`DataReference`](#datareference) or `undefined` if the collection contains no such measurement value.
 
 <a id="markdown-measurement" name="measurement"></a>
 #### Measurement
 
 ```TypeScript
-class Measurement extends AttributeItem
+class Measurement extends AttributeItem implements DataReference
 ```
 
 Describes a measurement of an inspection plan part. 
 
-**uuid `string`**
+**ID `string`**
 
-The `Guid` that identifies this measurement as base64 encoded byte array.
+The identifier of this measurement.
 
-**part `string`**
+**partID `string`**
 
-The `Guid` that identifies the part this measurement is associated to.
+The identifier of the part this measurement is associated with.
 
-**values [`Map<string, MeasurementValue>`](#measurementvalue)**
+**findValueByReference [`MeasurementValue`](#measurementvalue)**
+
+```TypeScript
+function findValueByReference(
+     reference : DataReference
+) : MeasurementValue
+```
+
+Returns the measurement value that is associated to the specified characteristic.
+
+**allValues [`MeasurementValue[]`](#measurementvalue)**
+
+```TypeScript
+function allValues() : MeasurementValue[]
+```
 
 The values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
 
@@ -3361,29 +3498,38 @@ The values that are associated to this measurement. In case you fetched the meas
 class MeasurementValue extends AttributeItem
 ```
 
-**characteristic `string`**
+**characteristicID `string`**
 
-The `Guid` that identifies the characteristic this measured value is associated to.
+The identifier of the characteristic this measured value is associated to.
 
 <a id="markdown-raw-data" name="raw-data"></a>
 ### Raw Data
 
-<a id="markdown-content-12" name="content-12"></a>
+<a id="markdown-content-11" name="content-11"></a>
 #### Content
 
-- [EntityType](#entitytype-1)
+- [EntityType](#entitytype)
+- [RawDataCollection](#rawdatacollection)
 - [RawDataItem](#rawdataitem)
 
-<a id="markdown-usage-4" name="usage-4"></a>
+<a id="markdown-usage-3" name="usage-3"></a>
 #### Usage
 
-Fetches a list of all raw data entries that are bound to the custom plot via databinding. You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.
+Fetches a list of all raw data entries that are bound to the custom plot via databinding. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.
 
 ```TypeScript
-function getRawData() : RawDataItem[];
+function getRawDataCollection() : RawDataCollection;
 ```
 
-<a id="markdown-entitytype-1" name="entitytype-1"></a>
+You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.
+
+```TypeScript
+function setRawDataSources( RawDataSource[] sources ) : void;
+function getRawDataSources() : RawDataSource[];
+```
+
+
+<a id="markdown-entitytype" name="entitytype"></a>
 #### EntityType
 
 ```TypeScript
@@ -3394,17 +3540,48 @@ Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to
 
 | Type | Entity |
 |----|----|
-| **`Unknown`** | Unknown origin |
-| **`Part`** | Additional data of an inspection plan part |
-| **`Characteristic`** | Additional data of an inspection plan characteristic |
-| **`Measurement`** | Additional data of a measurement |
-| **`MeasurementValue`** | Additional data of a measured value |
+| **`part`** | Additional data of an inspection plan part |
+| **`characteristic`** | Additional data of an inspection plan characteristic |
+| **`measurement`** | Additional data of a measurement |
+| **`measurementValue`** | Additional data of a measured value |
+
+<a id="markdown-rawdatacollection" name="rawdatacollection"></a>
+#### RawDataCollection
+
+```TypeScript
+class RawDataCollection;
+```
+
+A list of raw data information with additional functions to access certain entries.
+
+**all [`RawDataItem[]`](#rawdataitem)**
+
+```TypeScript
+function all(): RawDataItem[];
+```
+
+Returns all raw data information that is bound to the element, restricted by the entities that have previously been set by 
+
+**findByName [`RawDataItem[]`](#rawdataitem)**
+
+```TypeScript
+function findByName(...wildcards: string[]): RawDataItem[];
+```
+
+**findByReference [`RawDataItem[]`](#rawdataitem)**
+
+```TypeScript
+function findByReference(reference: DataReference): RawDataItem[];
+```
+
+Searches for raw data information with the specified [`DataReference`](#datareference).
+
 
 <a id="markdown-rawdataitem" name="rawdataitem"></a>
 #### RawDataItem
 
 ```TypeScript
-class RawDataItem;
+class RawDataItem implements DataReference;
 ```
 
 Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
@@ -3425,10 +3602,6 @@ The size of the item in bytes.
 
 The mimetype of the item.
 
-**md5Bytes `Buffer`**
-
-A buffer of 16 bytes length, containing the data's MD5 hash. 
-
 **created `Date`**
 
 The timestamp when the data has been uploaded to the server.
@@ -3437,22 +3610,50 @@ The timestamp when the data has been uploaded to the server.
 
 The timestamp of the most recent modification.
 
-**readDataSync() `HostBinary`**
+**getData() `HostBinary`**
+
+```TypeScript
+function getData() : HostBinary
+```
 
 Use this function to actually fetch the data associated to the `RawDataItem`. The data is returned as a `HostBuffer`, which can be converted to a `Buffer` using the `makeBuffer` function.
 
-<a id="markdown-system-variables" name="system-variables"></a>
-### System Variables
-
-Returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the `dataChange` event occurred.
+**getDataBuffer() `Buffer`**
 
 ```TypeScript
-function getSystemVariable(
+function getDataBuffer() : Buffer
+```
+
+Use this function to actually fetch the data associated to the `RawDataItem`. The data is returned as a `Buffer`
+
+**getCheckSum `string`**
+
+```TypeScript
+function getCheckSum() : string
+```
+
+Returns the data's MD5 hash. 
+
+
+<a id="markdown-expressions" name="expressions"></a>
+## Expressions
+
+The 'expressions' interface returns the result of a system variable expression. The evaluation result depends on the databinding and measurement selection of the custom plot element, as well as the current page state and many other parameters. Just like the other data provider methods, you should reevaluate the result when the `dataChange` event occurred.
+
+```TypeScript
+import * as piweb from 'piweb';
+import expressions = piweb.expressions;
+```
+
+The interface exposes only one function:
+
+```TypeScript
+function evaluate(
     expression: string
 ): undefined | string | number | Date | Array<any>;
 ```
 
-Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype.
+Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype. Nested arrays are also possible.
 
 <a id="markdown-tooltips" name="tooltips"></a>
 ## Tooltips
