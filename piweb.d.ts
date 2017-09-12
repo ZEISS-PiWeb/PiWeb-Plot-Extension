@@ -1,138 +1,429 @@
-﻿declare module "databinding_index" {
-	export { IAttributeItem, AttributeItem, AttributeDefinition, Attribute, AttributeType, EntityType, InspectionPlanItem, InspectionPlanItemType, InspectionPlanPath, PathElement, Measurement, MeasurementValue, Catalog, CatalogEntry, Configuration, WellKnownKeys } from "databinding/databinding";
-	export { MeasurementMode, SystemVariableType, ImageProvider, provider } from "databinding/image_provider";
+declare module "internal/buffer_reader" {
+	export class BufferReader {
+	    _data: Buffer;
+	    _currentPosition: number;
+	    constructor(stream: Buffer);
+	    readBool(): boolean;
+	    readByte(): number;
+	    readUInt16(): number;
+	    readInt16(): number;
+	    readInt32(): number;
+	    readUInt32(): number;
+	    readDouble(): number;
+	    readDate(): Date;
+	    readGuid(): string;
+	    readString(): string;
+	    readBinary(): Buffer;
+	    readTimeStamp(): Date;
+	}
 }
 
 
-declare module "drawing_index" {
-	export { Point, Rect, Size } from "piweb_drawing/geometry/basics";
-	export { GeometryType, Geometry, GeometryDescription, LineGeometry, LineGeometryDescription, RectangleGeometry, RectangleGeometryDescription, EllipseGeometry, EllipseGeometryDescription, PathGeometry, CombinedGeometry, GeometryGroup } from "piweb_drawing/geometry/geometries";
-	export { PathFigure } from "piweb_drawing/geometry/path_figure";
-	export { PathSegmentType, PathSegment, LineSegment, PolyLineSegment, ArcSegment, BezierSegment, PolyBezierSegment, QuadraticBezierSegment, PolyQuadraticBezierSegment } from "piweb_drawing/geometry/path_segments";
-	export { FillRule, GeometryCombineMode } from "piweb_drawing/geometry/geometries";
-	export { SweepDirection } from "piweb_drawing/geometry/path_segments";
-	export { GeometryDrawingSettings, GeometryDrawingSettingsDescription, HorizontalAnchor, VerticalAnchor } from "piweb_drawing/geometry/settings";
-	export { BrushType, Brush, SolidColorBrush, LinearGradientBrush, RadialGradientBrush, brushes } from "piweb_drawing/material/brushes";
-	export { Color } from "piweb_drawing/material/color";
-	export { colors } from "piweb_drawing/material/colors";
-	export { Pen, LineCap, LineJoin } from "piweb_drawing/material/pen";
-	export { FormattedText, FormattedTextDescription, FlowDirection, HorizontalTextAlignment, VerticalTextAlignment, TextTrimming, TextMeasurements } from "piweb_drawing/text/formatted_text";
-	export { Font, FontDescription, FontStretch, FontStyle, FontWeight, TextDecoration } from "piweb_drawing/text/font";
-	export { TextDrawingSettings, TextDrawingSettingsDescription, HorizontalTextAnchor, VerticalTextAnchor } from "piweb_drawing/text/settings";
-	export { Bitmap, BitmapMeasurements } from "piweb_drawing/image/bitmap";
-	export { ImageDrawingSettings, ImageDrawingSettingsDescription, HorizontalImageAnchor, VerticalImageAnchor } from "piweb_drawing/image/settings";
-	export { TransformationType, Transform, TransformDescription, IdentityTransform, IdentityTransformDescription, MatrixTransform, MatrixTransformDescription, RotationTransform, RotationTransformDescription, ScalingTransform, ScalingTransformDescription, ShearTransform, ShearTransformDescription, TranslationTransform, TranslationTransformDescription, TransformGroup } from "piweb_drawing/transform/transforms";
-	export { Drawing, DrawingContext, DrawingMeasurements } from "piweb_drawing/drawing";
+declare module "internal/buffer_writer" {
+	export class BufferWriter {
+	    private _data;
+	    private _initialBufferSize;
+	    private _currentPosition;
+	    constructor(initialSize?: number);
+	    writeBool(bool: boolean): void;
+	    writeByte(byte: number): void;
+	    writeUInt32(uint: number): void;
+	    writeDouble(double: number): void;
+	    writeString(value: string): void;
+	    writeSizedBinary(data: Buffer, length?: number): void;
+	    writeRawBinary(data: Buffer, length?: number): void;
+	    writeSizeAt(index: number): void;
+	    getData(): Buffer;
+	    getLength(): number;
+	    private _reserve(count);
+	}
+}
+
+
+declare module "internal/drawing_broker" {
+	import { Drawing } from "piweb/drawing";
+	export function execOnRender(plotContext: any): Drawing;
+}
+
+
+declare module "internal/regex_tools" {
+	export function wildcardToRegex(wildcard: string): RegExp;
+	export function escapeRegex(str: string): string;
+}
+
+
+declare module "internal/serializable" {
+	import { BufferWriter } from 'internal/buffer_writer';
+	export interface Serializable {
+	    serialize(target: BufferWriter): void;
+	}
+}
+
+
+declare module "internal/string_tools" {
+	export function bytesToHex(bytes: Uint8Array): string;
+	export function hexToBytes(hex: string): Buffer;
+	export function bytesToGuid(bytes: Uint8Array): string;
+	export function splitString(str: string, delims: string): string[];
+}
+
+
+declare module "internal/tooltip_broker" {
+	export function getTooltipShapes(): Buffer;
+}
+
+
+declare module "piweb/environment" {
+	import { Point, Size } from "piweb/drawing/geometry/basics";
+	export type LengthUnit = "mm" | "inch";
+	export type AngleUnit = "degreeDecimal" | "degreeMinuteSecond" | "radian";
+	export interface RegionInfoDescription {
+	    readonly name: string;
+	}
+	export interface IRegionInfo extends RegionInfoDescription {
+	    readonly twoLetterISORegionName: string;
+	    readonly threeLetterISORegionName: string;
+	}
+	export interface CultureInfoDescription {
+	    readonly name: string;
+	}
+	export interface ICultureInfo extends CultureInfoDescription {
+	    readonly twoLetterISOLanguageName: string;
+	    readonly threeLetterISOLanguageName: string;
+	}
+	export interface ITimeZoneInfo {
+	    readonly name: string;
+	    readonly baseUtcOffset: number;
+	    getUtcOffset(time: Date): number;
+	}
+	export class CultureInfo implements ICultureInfo {
+	    static readonly currentCulture: ICultureInfo;
+	    static readonly invariantCulture: ICultureInfo;
+	    readonly name: string;
+	    readonly twoLetterISOLanguageName: string;
+	    readonly threeLetterISOLanguageName: string;
+	    constructor(name: string);
+	}
+	export class RegionInfo implements IRegionInfo {
+	    static readonly currentRegion: IRegionInfo;
+	    readonly name: string;
+	    readonly twoLetterISORegionName: string;
+	    readonly threeLetterISORegionName: string;
+	    constructor(name: string);
+	}
+	export class TimeZoneInfo implements ITimeZoneInfo {
+	    static readonly LocalTimeZone: ITimeZoneInfo;
+	    readonly name: string;
+	    readonly baseUtcOffset: number;
+	    constructor(name: string);
+	    getUtcOffset(date: Date): any;
+	}
+	export function isDesignMode(): boolean;
+	export function getSize(): Size;
+	export function getLocation(): Point;
+	export const toolboxItemName: string;
+	export const clientString: string;
+	export const clientVersion: string;
+	export const apiVersion: string;
+	export function getLengthUnit(): LengthUnit;
+	export function getAngleUnit(): AngleUnit;
+}
+
+
+declare module "piweb/events" {
+	export type PiWebEvents = "load" | "render" | "dataBindingChanged" | "dataChanged" | "prepare_render";
+	export function on(name: PiWebEvents, callback: Function): any;
+	export function emit(name: PiWebEvents): boolean;
+}
+
+
+declare module "piweb/expressions" {
+	export type SimpleExtensionDataType = string | number | Date | undefined;
+	export interface ExtensionDataTypeArray extends Array<SimpleExtensionDataType | ExtensionDataTypeArray> {
+	}
+	export type ExpressionDataType = SimpleExtensionDataType | ExtensionDataTypeArray;
+	export function evaluate(expression: string): ExpressionDataType;
+}
+
+
+declare module "piweb/format" {
+	import { CultureInfoDescription } from "piweb/environment";
+	export type DateKind = "assumeUtc" | "assumeLocal";
+	export function formatNumber(value: number, formatString: string, culture?: CultureInfoDescription): string;
+	export function parseNumber(str: string, culture?: CultureInfoDescription): number;
+	export function formatDate(date: Date, offsetHours?: number, format?: string, culture?: CultureInfoDescription): string;
+	export function parseDate(str: string, culture?: CultureInfoDescription, dateKind?: DateKind): Date;
+	export function parseDateExact(str: string, format?: string, culture?: CultureInfoDescription, dateKind?: DateKind): Date;
 }
 
 
 declare module "piweb" {
-	import * as drawing from "drawing_index";
-	import * as data from "databinding_index";
-	import * as log from 'piweb_log';
-	import * as tooltips from 'tooltips/tooltip_shape_provider';
-	import * as vfs from 'vfs';
-	export { log };
+	import * as drawing from "piweb/drawing";
 	export { drawing };
+	import * as data from "piweb/data";
 	export { data };
-	export { properties } from "piweb_host";
-	export { environment } from "piweb_host";
+	import * as logger from 'piweb/logger';
+	export { logger };
+	import * as tooltips from 'piweb/tooltips/tooltip_shape_provider';
 	export { tooltips };
-	export { vfs };
+	import * as resources from 'piweb/resources';
+	export { resources };
+	import * as events from 'piweb/events';
+	export { events };
+	import * as properties from 'piweb/properties';
+	export { properties };
+	import * as environment from "piweb/environment";
+	export { environment };
+	import * as format from "piweb/format";
+	export { format };
+	import * as expressions from "piweb/expressions";
+	export { expressions };
 }
 
 
-declare module "databinding/databinding" {
-	import { BufferWriter } from 'shared/buffer_writer';
-	import { Serializable } from 'shared/serializable';
+declare module "piweb/logger" {
+	export function debug(format: any, ...param: any[]): void;
+	export function info(format: any, ...param: any[]): void;
+	export function warn(format: any, ...param: any[]): void;
+	export function error(format: any, ...param: any[]): void;
+}
+
+
+declare module "piweb/properties" {
+	import { Color, Brush, Pen, Font } from "piweb/drawing";
+	export function getBooleanProperty(id: string): boolean;
+	export function getStringProperty(id: string): string;
+	export function getIntegerProperty(id: string): number;
+	export function getDoubleProperty(id: string): number;
+	export function getColorProperty(id: string): Color;
+	export function getBrushProperty(id: string): Brush;
+	export function getPenProperty(id: string): Pen;
+	export function getFontProperty(id: string): Font;
+	export function getEnumProperty(id: string): string;
+}
+
+
+declare module "piweb/data/attributes" {
+	import { BufferReader } from 'internal/buffer_reader';
+	export type AttributeType = "string" | "integer" | "float" | "date" | "catalog";
+	export const enum AttributeTypeId {
+	    String = 0,
+	    Integer = 1,
+	    Float = 2,
+	    Date = 3,
+	    Catalog = 4,
+	}
+	export function mapAttributeType(attributeType: AttributeTypeId): AttributeType;
+	export type AttributeValue = string | number | Date;
+	export class Attribute {
+	    constructor(key: number, type: AttributeType, value: AttributeValue);
+	    key: number;
+	    type: AttributeType;
+	    value: AttributeValue;
+	}
 	export interface IAttributeItem {
-	    attributes: Map<number, Attribute>;
-	    getValue(key: number): string | number | Date | undefined;
+	    attributeCount: number;
+	    getAttribute(key: number): Attribute | undefined;
+	    getAttributeKeys(): number[];
+	    allAttributes(): Attribute[];
 	}
 	export class AttributeItem implements IAttributeItem {
-	    attributes: Map<number, Attribute>;
-	    constructor(attributes: Map<number, Attribute>);
-	    getValue(key: number): string | number | Date | undefined;
+	    readonly _attributes: Map<number, Attribute>;
+	    constructor(attributes: ArrayLike<Attribute>);
+	    readonly attributeCount: number;
+	    getAttributeKeys(): number[];
+	    getAttribute(key: number): Attribute | undefined;
+	    allAttributes(): Attribute[];
 	}
-	export enum EntityType {
-	    Characteristic = 0,
-	    Part = 1,
-	    Measurement = 2,
-	    Value = 3,
-	    Catalog = 4,
+	export function readAttributes(source: BufferReader): Attribute[];
+}
+
+
+declare module "piweb/data/configuration" {
+	import { AttributeItem, Attribute, AttributeType } from "piweb/data/attributes";
+	export function getConfiguration(): Configuration;
+	export type ConfigurationEntity = "characteristic" | "part" | "measurement" | "measurementValue" | "catalog";
+	export class AttributeDefinition {
+	    key: number;
+	    description: string;
+	    dataType: AttributeType;
+	    entityType: ConfigurationEntity;
+	    catalogRef: string | undefined;
+	    constructor(key: number, description: string, dataType: AttributeType, entityType: ConfigurationEntity, catalogRef: string | undefined);
 	}
 	export class Configuration {
 	    partAttributes: Map<number, AttributeDefinition>;
 	    characteristicAttributes: Map<number, AttributeDefinition>;
 	    measurementAttributes: Map<number, AttributeDefinition>;
-	    valueAttributes: Map<number, AttributeDefinition>;
+	    measurementValueAttributes: Map<number, AttributeDefinition>;
 	    catalogAttributes: Map<number, AttributeDefinition>;
-	    constructor(partAttributes: Map<number, AttributeDefinition>, characteristicAttributes: Map<number, AttributeDefinition>, measurementAttributes: Map<number, AttributeDefinition>, valueAttributes: Map<number, AttributeDefinition>, catalogAttributes: Map<number, AttributeDefinition>);
+	    allAttributes: Map<number, AttributeDefinition>;
+	    catalogs: CatalogCollection;
+	    constructor(definitions: ArrayLike<AttributeDefinition>, catalogs: ArrayLike<Catalog>);
+	    resolveCatalogEntry(attribute: Attribute): CatalogEntry | undefined;
 	}
-	export enum InspectionPlanItemType {
-	    Characteristic = 0,
-	    Part = 1,
-	}
-	export class MeasurementValue extends AttributeItem {
-	    characteristic: string;
-	    constructor(characteristic: string, attributes: Map<number, Attribute>);
-	}
-	export class Measurement extends AttributeItem {
-	    uuid: string;
-	    part: string;
-	    values: Map<string, MeasurementValue>;
-	    constructor(uuid: string, part: string, attributes: Map<number, Attribute>, values: Map<string, MeasurementValue>);
-	}
-	export class InspectionPlanItem extends AttributeItem {
-	    uuid: string;
-	    type: InspectionPlanItemType;
-	    path: InspectionPlanPath;
-	    constructor(uuid: string, type: InspectionPlanItemType, path: InspectionPlanPath, attributes: Map<number, Attribute>);
-	}
-	export class InspectionPlanPath implements Serializable {
-	    pathElements: PathElement[];
-	    constructor(pathElements: PathElement[]);
-	    toString(): string;
-	    serialize(target: BufferWriter): void;
-	}
-	export class PathElement implements Serializable {
-	    type: InspectionPlanItemType;
-	    name: string;
-	    constructor(type: InspectionPlanItemType, name: string);
-	    serialize(target: BufferWriter): void;
-	}
-	export class AttributeDefinition {
-	    key: number;
-	    description: string;
-	    dataType: AttributeType;
-	    entityType: EntityType;
-	    catalog: string | undefined;
-	    constructor(key: number, description: string, dataType: AttributeType, entityType: EntityType, catalog: string | undefined);
+	export class CatalogCollection {
+	    private readonly _idMap;
+	    constructor(catalogs: ArrayLike<Catalog>);
+	    readonly length: number;
+	    all(): Catalog[];
+	    findByReference(ref: string): Catalog | undefined;
 	}
 	export class Catalog {
-	    guid: string;
+	    catalogRef: string;
 	    name: string;
 	    validAttributes: number[];
 	    entries: Map<number, CatalogEntry>;
-	    constructor(guid: string, name: string, validAttributes: number[], entries: Map<number, CatalogEntry>);
+	    constructor(reference: string, name: string, validAttributes: ArrayLike<number>, entries: ArrayLike<CatalogEntry>);
+	    getCatalogGuid(): string;
 	}
 	export class CatalogEntry extends AttributeItem {
 	    key: number;
-	    constructor(key: number, attributes: Map<number, Attribute>);
+	    constructor(key: number, attributes: ArrayLike<Attribute>);
+	    toString(): string;
+	    getInspectionString(): string;
 	}
-	export enum AttributeType {
-	    String = 0,
-	    Integer = 1,
-	    Double = 2,
-	    Date = 3,
-	    Catalog = 4,
+}
+
+
+declare module "piweb/data" {
+	export { DataReference, BasicDataReference } from "piweb/data/references";
+	export { AttributeItem, Attribute, AttributeType, AttributeValue } from "piweb/data/attributes";
+	export { getRawDataCollection, RawDataCollection, RawDataItem, getRawDataSources, setRawDataSources, RawDataSource } from "piweb/data/raw_data";
+	export { getInspectionPlanCollection, InspectionPlanCollection, InspectionPlanItem, InspectionPlanItemType } from "piweb/data/inspection";
+	export { getMeasurementCollection, MeasurementCollection, Measurement, MeasurementValue } from "piweb/data/measurements";
+	export { getConfiguration, Configuration, AttributeDefinition, ConfigurationEntity, CatalogCollection, Catalog, CatalogEntry } from "piweb/data/configuration";
+	export { WellKnownKeys } from "piweb/data/wellknown_keys";
+	import * as path from "piweb/data/path";
+	export { path };
+}
+
+
+declare module "piweb/data/inspection" {
+	import { Attribute, AttributeItem } from "piweb/data/attributes";
+	import { DataReference } from "piweb/data/references";
+	export type InspectionPlanItemType = "characteristic" | "part";
+	export class InspectionPlanItem extends AttributeItem implements DataReference {
+	    readonly inspectionRef: string;
+	    readonly parentRef?: string;
+	    readonly type: InspectionPlanItemType;
+	    readonly path: string;
+	    readonly name: string;
+	    constructor(reference: string, parentReference: string | undefined, type: InspectionPlanItemType, path: string, attributes: ArrayLike<Attribute>);
+	    getInspectionGuid(): string;
 	}
-	export class Attribute {
-	    constructor(key: number, type: AttributeType, value: number | string | Date | undefined);
+	export class InspectionPlanCollection {
+	    private readonly _idMap;
+	    private readonly _pathMap;
+	    constructor(items: ArrayLike<InspectionPlanItem>);
+	    readonly length: number;
+	    all(): InspectionPlanItem[];
+	    findByReference(reference: DataReference): InspectionPlanItem | undefined;
+	    findByPath(path: string): InspectionPlanItem | undefined;
+	    findParent(item: InspectionPlanItem): InspectionPlanItem | undefined;
+	    findChildren(item: InspectionPlanItem): InspectionPlanItem[];
+	}
+	export function getInspectionPlanCollection(): InspectionPlanCollection;
+}
+
+
+declare module "piweb/data/measurements" {
+	import { Attribute, AttributeItem } from "piweb/data/attributes";
+	import { DataReference } from "piweb/data/references";
+	export class MeasurementCollection {
+	    private readonly _idMap;
+	    constructor(measurements: ArrayLike<Measurement>);
+	    readonly length: number;
+	    all(): Measurement[];
+	    findMeasurementByReference(reference: DataReference): Measurement | undefined;
+	    findValueByReference(reference: DataReference): MeasurementValue | undefined;
+	}
+	export class Measurement extends AttributeItem implements DataReference {
+	    readonly measurementRef: string;
+	    readonly _partRef: string;
+	    readonly _values: Map<string, MeasurementValue>;
+	    constructor(reference: string, partReference: string, attributes: ArrayLike<Attribute>, values: ArrayLike<MeasurementValue>);
+	    getMeasurementGuid(): string;
+	    findValueByReference(reference: DataReference): MeasurementValue | undefined;
+	    readonly valueCount: number;
+	    allValues(): MeasurementValue[];
+	}
+	export class MeasurementValue extends AttributeItem implements DataReference {
+	    inspectionRef: string;
+	    _measurement: Measurement;
+	    readonly measurementRef: string;
+	    constructor(characteristicReference: string, attributes: ArrayLike<Attribute>);
+	    getMeasurementGuid(): string;
+	    getInspectionGuid(): string;
+	}
+	export function getMeasurementCollection(): MeasurementCollection;
+}
+
+
+declare module "piweb/data/path" {
+	export { dirname, basename, extname, isAbsolute, join, parse, relative, format, normalize, sep } from "piweb/resources/path";
+	/**
+	 * Resolves {pathSegments} to an absolute path.
+	 *
+	 * If the right most argument isn't already absolute, arguments are prepended in right to left order, until an absolute path is found. If after using all paths still no absolute path is found, the path is considered relative to the root.
+	 * The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root directory.
+	 *
+	 * @param pathSegments string paths to join.  Non-string arguments are ignored.
+	 */
+	export function resolve(...pathSegments: any[]): string;
+}
+
+
+declare module "piweb/data/raw_data" {
+	import { HostBinary } from 'piweb/resources/host_binary';
+	import { DataReference } from 'piweb/data/references';
+	export type EntityType = "part" | "characteristic" | "measurement" | "measurementValue";
+	export class RawDataItem implements DataReference {
+	    inspectionRef?: string;
+	    measurementRef?: string;
+	    _checkSumBytes: Buffer;
+	    entityType: EntityType;
 	    key: number;
-	    type: AttributeType;
-	    value: number | string | Date | undefined;
+	    name: string;
+	    size: number;
+	    mimeType?: string;
+	    created: Date;
+	    lastModified: Date;
+	    getCheckSum(): string;
+	    getInspectionGuid(): string | undefined;
+	    getMeasurementGuid(): string | undefined;
+	    getDataBuffer(): Buffer | undefined;
+	    getData(): HostBinary | undefined;
 	}
+	export class RawDataCollection {
+	    private readonly _items;
+	    constructor(items: RawDataItem[]);
+	    readonly length: number;
+	    all(): RawDataItem[];
+	    findByName(...wildcards: string[]): RawDataItem[];
+	    findByReference(reference: DataReference): RawDataItem[];
+	}
+	export function getRawDataCollection(): RawDataCollection;
+	export type RawDataSource = "parts" | "characteristics" | "measurements" | "measurementValues";
+	export function setRawDataSources(sources: ArrayLike<RawDataSource>): void;
+	export function getRawDataSources(): void;
+}
+
+
+declare module "piweb/data/references" {
+	export interface DataReference {
+	    inspectionRef?: string;
+	    measurementRef?: string;
+	}
+	export class BasicDataReference implements DataReference {
+	    constructor(inspectionReference: DataReference | string | undefined, measurementReference: DataReference | string | undefined);
+	    inspectionRef?: string;
+	    measurementRef?: string;
+	}
+}
+
+
+declare module "piweb/data/wellknown_keys" {
 	export namespace WellKnownKeys {
 	    namespace Part {
 	        const Number: number;
@@ -285,84 +576,26 @@ declare module "databinding/databinding" {
 }
 
 
-declare module "databinding/databinding_reader" {
-	import * as databinding from 'databinding/databinding';
-	import { BufferReader } from 'shared/buffer_reader';
-	export class DataBindingReader {
-	    readInspectionPlanItem(source: BufferReader): databinding.InspectionPlanItem;
-	    readPathInformation(source: BufferReader): databinding.InspectionPlanPath;
-	    readPathElement(source: BufferReader): databinding.PathElement;
-	    readAttributeDefinition(source: BufferReader, entityType: databinding.EntityType): databinding.AttributeDefinition;
-	    readAttributeDefinitions(source: BufferReader, entityType: databinding.EntityType): Map<number, databinding.AttributeDefinition>;
-	    readCatalog(source: BufferReader): databinding.Catalog;
-	    readCatalogEntry(source: BufferReader): databinding.CatalogEntry;
-	    readCatalogEntries(source: BufferReader): Map<number, databinding.CatalogEntry>;
-	    readAttribute(source: BufferReader): databinding.Attribute;
-	    readAttributes(source: BufferReader): Map<number, databinding.Attribute>;
-	    readMeasurementValue(source: BufferReader): databinding.MeasurementValue;
-	    readMeasurement(source: BufferReader): databinding.Measurement;
-	}
-}
-
-
-declare module "databinding/image_provider" {
-	import * as databinding from 'databinding/databinding';
-	import * as host from 'piweb_host';
-	export enum SystemVariableType {
-	    None = 0,
-	    String = 1,
-	    Number = 2,
-	    Date = 3,
-	    Array = 4,
-	}
-	export enum MeasurementMode {
-	    WithoutValues = 0,
-	    WithValues = 1,
-	}
-	export interface ImageProvider {
-	    getInspectionPlan(): Map<string, databinding.InspectionPlanItem>;
-	    getConfiguration(): databinding.Configuration;
-	    getCatalogs(): Map<string, databinding.Catalog>;
-	    getMeasurements(mode: MeasurementMode): Map<string, databinding.Measurement>;
-	    getSystemVariable(expression: string): string | Array<any> | number | Date | undefined;
-	    rawDataSources: host.RawDataSource;
-	    getRawData(): host.databinding.RawDataItem[];
-	}
-	export const provider: ImageProvider;
-}
-
-
-declare module "internal/drawing_broker" {
-	import { Drawing } from "piweb_drawing/drawing";
-	export function execOnRender(plotContext: any): Drawing;
-}
-
-
-declare module "internal/tooltip_broker" {
-	export function getTooltipShapes(): Buffer;
-}
-
-
-declare module "piweb_drawing/drawing" {
-	import { BufferWriter } from 'shared/buffer_writer';
-	import { PointDescription } from 'piweb_drawing/geometry/basics';
-	import { BrushDescription } from 'piweb_drawing/material/brushes';
-	import { PenDescription } from 'piweb_drawing/material/pen';
-	import { FormattedTextDescription } from "piweb_drawing/text/formatted_text";
-	import { GeometryDescription } from "piweb_drawing/geometry/geometries";
-	import { TransformDescription } from "piweb_drawing/transform/transforms";
-	import { Serializable } from "shared/serializable";
-	import { TextDrawingSettingsDescription } from "piweb_drawing/text/settings";
-	import { ImageDrawingSettingsDescription } from "piweb_drawing/image/settings";
-	import { GeometryDrawingSettingsDescription } from "piweb_drawing/geometry/settings";
-	import { Bitmap } from "piweb_drawing/image/bitmap";
+declare module "piweb/drawing/drawing" {
+	import { BufferWriter } from 'internal/buffer_writer';
+	import { Serializable } from "internal/serializable";
+	import { PointDescription } from 'piweb/drawing/geometry/basics';
+	import { BrushDescription } from 'piweb/drawing/material/brushes';
+	import { PenDescription } from 'piweb/drawing/material/pen';
+	import { FormattedTextDescription } from "piweb/drawing/text/formatted_text";
+	import { GeometryDescription } from "piweb/drawing/geometry/geometries";
+	import { TransformDescription } from "piweb/drawing/transform/transforms";
+	import { TextDrawingSettingsDescription } from "piweb/drawing/text/settings";
+	import { ImageDrawingSettingsDescription } from "piweb/drawing/image/settings";
+	import { GeometryDrawingSettingsDescription } from "piweb/drawing/geometry/settings";
+	import { Bitmap } from "piweb/drawing/image/bitmap";
 	export interface DrawingContext {
 	    drawLine(start: PointDescription, end: PointDescription): void;
 	    drawLines(lines: PointDescription[]): void;
 	    drawRectangle(x: number, y: number, w: number, h: number): void;
 	    drawEllipse(center: PointDescription, radiusX: number, radiusY: number): void;
 	    drawGeometry(geometry: GeometryDescription, settings?: GeometryDrawingSettingsDescription): void;
-	    drawText(text: FormattedTextDescription, settings: TextDrawingSettingsDescription): void;
+	    drawText(text: FormattedTextDescription | string, settings?: TextDrawingSettingsDescription): void;
 	    drawImage(image: Bitmap, settings?: ImageDrawingSettingsDescription): void;
 	    drawDrawing(drawing: Drawing, settings?: GeometryDrawingSettingsDescription): void;
 	    setPen(pen: PenDescription): void;
@@ -393,7 +626,7 @@ declare module "piweb_drawing/drawing" {
 }
 
 
-declare module "piweb_drawing/drawing_ids" {
+declare module "piweb/drawing/drawing_ids" {
 	export const enum ContextOperation {
 	    NoOp = 0,
 	    DrawLine = 1,
@@ -568,9 +801,30 @@ declare module "piweb_drawing/drawing_ids" {
 }
 
 
-declare module "piweb_drawing/geometry/basics" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
+declare module "piweb/drawing" {
+	export { Point, Rect, Size } from "piweb/drawing/geometry/basics";
+	export { GeometryType, Geometry, GeometryDescription, LineGeometry, LineGeometryDescription, RectangleGeometry, RectangleGeometryDescription, EllipseGeometry, EllipseGeometryDescription, PathGeometry, CombinedGeometry, GeometryGroup } from "piweb/drawing/geometry/geometries";
+	export { PathFigure } from "piweb/drawing/geometry/path_figure";
+	export { PathSegmentType, PathSegment, LineSegment, PolyLineSegment, ArcSegment, BezierSegment, PolyBezierSegment, QuadraticBezierSegment, PolyQuadraticBezierSegment } from "piweb/drawing/geometry/path_segments";
+	export { FillRule, GeometryCombineMode } from "piweb/drawing/geometry/geometries";
+	export { SweepDirection } from "piweb/drawing/geometry/path_segments";
+	export { GeometryDrawingSettings, GeometryDrawingSettingsDescription, HorizontalAnchor, VerticalAnchor } from "piweb/drawing/geometry/settings";
+	export { BrushType, Brush, SolidColorBrush, LinearGradientBrush, RadialGradientBrush } from "piweb/drawing/material/brushes";
+	export { Color } from "piweb/drawing/material/color";
+	export { Pen, LineCap, LineJoin } from "piweb/drawing/material/pen";
+	export { FormattedText, FormattedTextDescription, FlowDirection, HorizontalTextAlignment, VerticalTextAlignment, TextTrimming, TextMeasurements } from "piweb/drawing/text/formatted_text";
+	export { Font, FontDescription, FontStretch, FontStyle, FontWeight, TextDecoration } from "piweb/drawing/text/font";
+	export { TextDrawingSettings, TextDrawingSettingsDescription, HorizontalTextAnchor, VerticalTextAnchor } from "piweb/drawing/text/settings";
+	export { Bitmap, BitmapMeasurements } from "piweb/drawing/image/bitmap";
+	export { ImageDrawingSettings, ImageDrawingSettingsDescription, HorizontalImageAnchor, VerticalImageAnchor } from "piweb/drawing/image/settings";
+	export { TransformationType, Transform, TransformDescription, IdentityTransform, IdentityTransformDescription, MatrixTransform, MatrixTransformDescription, RotationTransform, RotationTransformDescription, ScalingTransform, ScalingTransformDescription, ShearTransform, ShearTransformDescription, TranslationTransform, TranslationTransformDescription, TransformGroup } from "piweb/drawing/transform/transforms";
+	export { Drawing, DrawingContext, DrawingMeasurements } from "piweb/drawing/drawing";
+}
+
+
+declare module "piweb/drawing/geometry/basics" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
 	export interface PointObject {
 	    readonly x?: number;
 	    readonly y?: number;
@@ -607,12 +861,12 @@ declare module "piweb_drawing/geometry/basics" {
 }
 
 
-declare module "piweb_drawing/geometry/geometries" {
-	import { Transform, TransformDescription } from 'piweb_drawing/transform/transforms';
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
-	import { Point, PointDescription } from "piweb_drawing/geometry/basics";
-	import { PathFigure, PathFigureDescription } from "piweb_drawing/geometry/path_figure";
+declare module "piweb/drawing/geometry/geometries" {
+	import { Transform, TransformDescription } from 'piweb/drawing/transform/transforms';
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
+	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
+	import { PathFigure, PathFigureDescription } from "piweb/drawing/geometry/path_figure";
 	export type GeometryCombineMode = "union" | "intersect" | "xor" | "exclude";
 	export type FillRule = "evenOdd" | "nonzero";
 	export type GeometryType = "line" | "rectangle" | "ellipse" | "path" | "custom" | "combined" | "group";
@@ -752,11 +1006,11 @@ declare module "piweb_drawing/geometry/geometries" {
 }
 
 
-declare module "piweb_drawing/geometry/path_figure" {
-	import { Point, PointDescription } from "piweb_drawing/geometry/basics";
-	import { PathSegment, PathSegmentDescription } from "piweb_drawing/geometry/path_segments";
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
+declare module "piweb/drawing/geometry/path_figure" {
+	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
+	import { PathSegment, PathSegmentDescription } from "piweb/drawing/geometry/path_segments";
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
 	export interface PathFigureDescription {
 	    readonly startPoint?: PointDescription;
 	    readonly segments?: ArrayLike<PathSegmentDescription>;
@@ -773,10 +1027,10 @@ declare module "piweb_drawing/geometry/path_figure" {
 }
 
 
-declare module "piweb_drawing/geometry/path_segments" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
-	import { Point, PointDescription, Size, SizeDescription } from "piweb_drawing/geometry/basics";
+declare module "piweb/drawing/geometry/path_segments" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
+	import { Point, PointDescription, Size, SizeDescription } from "piweb/drawing/geometry/basics";
 	export type PathSegmentType = "arc" | "bezier" | "line" | "quadraticBezier" | "polyBezier" | "polyLine" | "polyQuadraticBezier";
 	export type SweepDirection = "clockwise" | "counterclockwise";
 	export type ArcType = "small" | "large";
@@ -895,10 +1149,10 @@ declare module "piweb_drawing/geometry/path_segments" {
 }
 
 
-declare module "piweb_drawing/geometry/settings" {
-	import { Point, PointDescription } from 'piweb_drawing/geometry/basics';
-	import { Serializable } from "shared/serializable";
-	import { BufferWriter } from 'shared/buffer_writer';
+declare module "piweb/drawing/geometry/settings" {
+	import { Point, PointDescription } from 'piweb/drawing/geometry/basics';
+	import { Serializable } from "internal/serializable";
+	import { BufferWriter } from 'internal/buffer_writer';
 	export type HorizontalAnchor = "origin" | "left" | "right" | "center";
 	export type VerticalAnchor = "origin" | "top" | "bottom" | "center";
 	export interface GeometryDrawingSettingsDescription {
@@ -917,10 +1171,10 @@ declare module "piweb_drawing/geometry/settings" {
 }
 
 
-declare module "piweb_drawing/image/bitmap" {
-	import { BufferWriter } from 'shared/buffer_writer';
-	import { HostBinary } from 'internal/host_binary';
-	import { Serializable } from "shared/serializable";
+declare module "piweb/drawing/image/bitmap" {
+	import { BufferWriter } from 'internal/buffer_writer';
+	import { HostBinary } from 'piweb/resources';
+	import { Serializable } from "internal/serializable";
 	export interface BitmapMeasurements {
 	    height: number;
 	    width: number;
@@ -933,7 +1187,7 @@ declare module "piweb_drawing/image/bitmap" {
 	    private _data;
 	    constructor(data: Buffer | HostBinary);
 	    serialize(target: BufferWriter): void;
-	    static loadFromVfs(path: string): Bitmap;
+	    static loadFromResource(path: string): Bitmap;
 	    measure(): {
 	        height: any;
 	        width: any;
@@ -946,10 +1200,10 @@ declare module "piweb_drawing/image/bitmap" {
 }
 
 
-declare module "piweb_drawing/image/settings" {
-	import { Point, PointDescription } from 'piweb_drawing/geometry/basics';
-	import { Serializable } from "shared/serializable";
-	import { BufferWriter } from 'shared/buffer_writer';
+declare module "piweb/drawing/image/settings" {
+	import { Point, PointDescription } from 'piweb/drawing/geometry/basics';
+	import { Serializable } from "internal/serializable";
+	import { BufferWriter } from 'internal/buffer_writer';
 	export type HorizontalImageAnchor = "left" | "right" | "center";
 	export type VerticalImageAnchor = "top" | "bottom" | "center";
 	export interface ImageDrawingSettingsDescription {
@@ -972,11 +1226,11 @@ declare module "piweb_drawing/image/settings" {
 }
 
 
-declare module "piweb_drawing/material/brushes" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
-	import { Color, ColorDescription } from "piweb_drawing/material/color";
-	import { Point, PointDescription } from "piweb_drawing/geometry/basics";
+declare module "piweb/drawing/material/brushes" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
+	import { Color, ColorDescription } from "piweb/drawing/material/color";
+	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
 	export type BrushType = "solid" | "linear" | "radial";
 	export interface SolidDescription {
 	    readonly color?: ColorDescription;
@@ -1010,6 +1264,147 @@ declare module "piweb_drawing/material/brushes" {
 	    readonly abstract type: BrushType;
 	    static create(description?: BrushDescription): Brush;
 	    abstract serialize(target: BufferWriter): void;
+	    static readonly aliceBlue: SolidColorBrush;
+	    static readonly antiqueWhite: SolidColorBrush;
+	    static readonly aqua: SolidColorBrush;
+	    static readonly aquamarine: SolidColorBrush;
+	    static readonly azure: SolidColorBrush;
+	    static readonly beige: SolidColorBrush;
+	    static readonly bisque: SolidColorBrush;
+	    static readonly black: SolidColorBrush;
+	    static readonly blanchedAlmond: SolidColorBrush;
+	    static readonly blue: SolidColorBrush;
+	    static readonly blueViolet: SolidColorBrush;
+	    static readonly brown: SolidColorBrush;
+	    static readonly burlyWood: SolidColorBrush;
+	    static readonly cadetBlue: SolidColorBrush;
+	    static readonly chartreuse: SolidColorBrush;
+	    static readonly chocolate: SolidColorBrush;
+	    static readonly coral: SolidColorBrush;
+	    static readonly cornflowerBlue: SolidColorBrush;
+	    static readonly cornsilk: SolidColorBrush;
+	    static readonly crimson: SolidColorBrush;
+	    static readonly cyan: SolidColorBrush;
+	    static readonly darkBlue: SolidColorBrush;
+	    static readonly darkCyan: SolidColorBrush;
+	    static readonly darkGoldenRod: SolidColorBrush;
+	    static readonly darkGray: SolidColorBrush;
+	    static readonly darkGreen: SolidColorBrush;
+	    static readonly darkKhaki: SolidColorBrush;
+	    static readonly darkMagenta: SolidColorBrush;
+	    static readonly darkOliveGreen: SolidColorBrush;
+	    static readonly darkOrange: SolidColorBrush;
+	    static readonly darkOrchid: SolidColorBrush;
+	    static readonly darkRed: SolidColorBrush;
+	    static readonly darkSalmon: SolidColorBrush;
+	    static readonly darkSeaGreen: SolidColorBrush;
+	    static readonly darkSlateBlue: SolidColorBrush;
+	    static readonly darkSlateGray: SolidColorBrush;
+	    static readonly darkTurquoise: SolidColorBrush;
+	    static readonly darkViolet: SolidColorBrush;
+	    static readonly deepPink: SolidColorBrush;
+	    static readonly deepSkyBlue: SolidColorBrush;
+	    static readonly dimGray: SolidColorBrush;
+	    static readonly dodgerBlue: SolidColorBrush;
+	    static readonly fireBrick: SolidColorBrush;
+	    static readonly floralWhite: SolidColorBrush;
+	    static readonly forestGreen: SolidColorBrush;
+	    static readonly fuchsia: SolidColorBrush;
+	    static readonly gainsboro: SolidColorBrush;
+	    static readonly ghostWhite: SolidColorBrush;
+	    static readonly gold: SolidColorBrush;
+	    static readonly goldenRod: SolidColorBrush;
+	    static readonly gray: SolidColorBrush;
+	    static readonly green: SolidColorBrush;
+	    static readonly greenYellow: SolidColorBrush;
+	    static readonly honeyDew: SolidColorBrush;
+	    static readonly hotPink: SolidColorBrush;
+	    static readonly indianRed: SolidColorBrush;
+	    static readonly indigo: SolidColorBrush;
+	    static readonly ivory: SolidColorBrush;
+	    static readonly khaki: SolidColorBrush;
+	    static readonly lavender: SolidColorBrush;
+	    static readonly lavenderBlush: SolidColorBrush;
+	    static readonly lawnGreen: SolidColorBrush;
+	    static readonly lemonChiffon: SolidColorBrush;
+	    static readonly lightBlue: SolidColorBrush;
+	    static readonly lightCoral: SolidColorBrush;
+	    static readonly lightCyan: SolidColorBrush;
+	    static readonly lightGoldenRodYellow: SolidColorBrush;
+	    static readonly lightGray: SolidColorBrush;
+	    static readonly lightGreen: SolidColorBrush;
+	    static readonly lightPink: SolidColorBrush;
+	    static readonly lightSalmon: SolidColorBrush;
+	    static readonly lightSeaGreen: SolidColorBrush;
+	    static readonly lightSkyBlue: SolidColorBrush;
+	    static readonly lightSlateGray: SolidColorBrush;
+	    static readonly lightSteelBlue: SolidColorBrush;
+	    static readonly lightYellow: SolidColorBrush;
+	    static readonly lime: SolidColorBrush;
+	    static readonly limeGreen: SolidColorBrush;
+	    static readonly linen: SolidColorBrush;
+	    static readonly magenta: SolidColorBrush;
+	    static readonly maroon: SolidColorBrush;
+	    static readonly mediumAquamarine: SolidColorBrush;
+	    static readonly mediumBlue: SolidColorBrush;
+	    static readonly mediumOrchid: SolidColorBrush;
+	    static readonly mediumPurple: SolidColorBrush;
+	    static readonly mediumSeaGreen: SolidColorBrush;
+	    static readonly mediumSlateBlue: SolidColorBrush;
+	    static readonly mediumSpringGreen: SolidColorBrush;
+	    static readonly mediumTurquoise: SolidColorBrush;
+	    static readonly mediumVioletRed: SolidColorBrush;
+	    static readonly midnightBlue: SolidColorBrush;
+	    static readonly mintCream: SolidColorBrush;
+	    static readonly mistyRose: SolidColorBrush;
+	    static readonly moccasin: SolidColorBrush;
+	    static readonly navajoWhite: SolidColorBrush;
+	    static readonly navy: SolidColorBrush;
+	    static readonly oldLace: SolidColorBrush;
+	    static readonly olive: SolidColorBrush;
+	    static readonly oliveDrab: SolidColorBrush;
+	    static readonly orange: SolidColorBrush;
+	    static readonly orangeRed: SolidColorBrush;
+	    static readonly orchid: SolidColorBrush;
+	    static readonly paleGoldenRod: SolidColorBrush;
+	    static readonly paleGreen: SolidColorBrush;
+	    static readonly paleTurquoise: SolidColorBrush;
+	    static readonly paleVioletRed: SolidColorBrush;
+	    static readonly papayaWhip: SolidColorBrush;
+	    static readonly peachPuff: SolidColorBrush;
+	    static readonly peru: SolidColorBrush;
+	    static readonly pink: SolidColorBrush;
+	    static readonly plum: SolidColorBrush;
+	    static readonly powderBlue: SolidColorBrush;
+	    static readonly purple: SolidColorBrush;
+	    static readonly red: SolidColorBrush;
+	    static readonly rosyBrown: SolidColorBrush;
+	    static readonly royalBlue: SolidColorBrush;
+	    static readonly saddleBrown: SolidColorBrush;
+	    static readonly salmon: SolidColorBrush;
+	    static readonly sandyBrown: SolidColorBrush;
+	    static readonly seaGreen: SolidColorBrush;
+	    static readonly seaShell: SolidColorBrush;
+	    static readonly sienna: SolidColorBrush;
+	    static readonly silver: SolidColorBrush;
+	    static readonly skyBlue: SolidColorBrush;
+	    static readonly slateBlue: SolidColorBrush;
+	    static readonly slateGray: SolidColorBrush;
+	    static readonly snow: SolidColorBrush;
+	    static readonly springGreen: SolidColorBrush;
+	    static readonly steelBlue: SolidColorBrush;
+	    static readonly tan: SolidColorBrush;
+	    static readonly teal: SolidColorBrush;
+	    static readonly thistle: SolidColorBrush;
+	    static readonly tomato: SolidColorBrush;
+	    static readonly transparent: SolidColorBrush;
+	    static readonly turquoise: SolidColorBrush;
+	    static readonly violet: SolidColorBrush;
+	    static readonly wheat: SolidColorBrush;
+	    static readonly white: SolidColorBrush;
+	    static readonly whiteSmoke: SolidColorBrush;
+	    static readonly yellow: SolidColorBrush;
+	    static readonly yellowGreen: SolidColorBrush;
 	}
 	export class SolidColorBrush extends Brush implements SolidBrushDescription {
 	    color: Color;
@@ -1036,155 +1431,12 @@ declare module "piweb_drawing/material/brushes" {
 	    static createRadialGradientBrush(description?: RadialDescription): RadialGradientBrush;
 	    serialize(target: BufferWriter): void;
 	}
-	export namespace brushes {
-	    const aliceBlue: SolidColorBrush;
-	    const antiqueWhite: SolidColorBrush;
-	    const aqua: SolidColorBrush;
-	    const aquamarine: SolidColorBrush;
-	    const azure: SolidColorBrush;
-	    const beige: SolidColorBrush;
-	    const bisque: SolidColorBrush;
-	    const black: SolidColorBrush;
-	    const blanchedAlmond: SolidColorBrush;
-	    const blue: SolidColorBrush;
-	    const blueViolet: SolidColorBrush;
-	    const brown: SolidColorBrush;
-	    const burlyWood: SolidColorBrush;
-	    const cadetBlue: SolidColorBrush;
-	    const chartreuse: SolidColorBrush;
-	    const chocolate: SolidColorBrush;
-	    const coral: SolidColorBrush;
-	    const cornflowerBlue: SolidColorBrush;
-	    const cornsilk: SolidColorBrush;
-	    const crimson: SolidColorBrush;
-	    const cyan: SolidColorBrush;
-	    const darkBlue: SolidColorBrush;
-	    const darkCyan: SolidColorBrush;
-	    const darkGoldenRod: SolidColorBrush;
-	    const darkGray: SolidColorBrush;
-	    const darkGreen: SolidColorBrush;
-	    const darkKhaki: SolidColorBrush;
-	    const darkMagenta: SolidColorBrush;
-	    const darkOliveGreen: SolidColorBrush;
-	    const darkOrange: SolidColorBrush;
-	    const darkOrchid: SolidColorBrush;
-	    const darkRed: SolidColorBrush;
-	    const darkSalmon: SolidColorBrush;
-	    const darkSeaGreen: SolidColorBrush;
-	    const darkSlateBlue: SolidColorBrush;
-	    const darkSlateGray: SolidColorBrush;
-	    const darkTurquoise: SolidColorBrush;
-	    const darkViolet: SolidColorBrush;
-	    const deepPink: SolidColorBrush;
-	    const deepSkyBlue: SolidColorBrush;
-	    const dimGray: SolidColorBrush;
-	    const dodgerBlue: SolidColorBrush;
-	    const fireBrick: SolidColorBrush;
-	    const floralWhite: SolidColorBrush;
-	    const forestGreen: SolidColorBrush;
-	    const fuchsia: SolidColorBrush;
-	    const gainsboro: SolidColorBrush;
-	    const ghostWhite: SolidColorBrush;
-	    const gold: SolidColorBrush;
-	    const goldenRod: SolidColorBrush;
-	    const gray: SolidColorBrush;
-	    const green: SolidColorBrush;
-	    const greenYellow: SolidColorBrush;
-	    const honeyDew: SolidColorBrush;
-	    const hotPink: SolidColorBrush;
-	    const indianRed: SolidColorBrush;
-	    const indigo: SolidColorBrush;
-	    const ivory: SolidColorBrush;
-	    const khaki: SolidColorBrush;
-	    const lavender: SolidColorBrush;
-	    const lavenderBlush: SolidColorBrush;
-	    const lawnGreen: SolidColorBrush;
-	    const lemonChiffon: SolidColorBrush;
-	    const lightBlue: SolidColorBrush;
-	    const lightCoral: SolidColorBrush;
-	    const lightCyan: SolidColorBrush;
-	    const lightGoldenRodYellow: SolidColorBrush;
-	    const lightGray: SolidColorBrush;
-	    const lightGreen: SolidColorBrush;
-	    const lightPink: SolidColorBrush;
-	    const lightSalmon: SolidColorBrush;
-	    const lightSeaGreen: SolidColorBrush;
-	    const lightSkyBlue: SolidColorBrush;
-	    const lightSlateGray: SolidColorBrush;
-	    const lightSteelBlue: SolidColorBrush;
-	    const lightYellow: SolidColorBrush;
-	    const lime: SolidColorBrush;
-	    const limeGreen: SolidColorBrush;
-	    const linen: SolidColorBrush;
-	    const magenta: SolidColorBrush;
-	    const maroon: SolidColorBrush;
-	    const mediumAquamarine: SolidColorBrush;
-	    const mediumBlue: SolidColorBrush;
-	    const mediumOrchid: SolidColorBrush;
-	    const mediumPurple: SolidColorBrush;
-	    const mediumSeaGreen: SolidColorBrush;
-	    const mediumSlateBlue: SolidColorBrush;
-	    const mediumSpringGreen: SolidColorBrush;
-	    const mediumTurquoise: SolidColorBrush;
-	    const mediumVioletRed: SolidColorBrush;
-	    const midnightBlue: SolidColorBrush;
-	    const mintCream: SolidColorBrush;
-	    const mistyRose: SolidColorBrush;
-	    const moccasin: SolidColorBrush;
-	    const navajoWhite: SolidColorBrush;
-	    const navy: SolidColorBrush;
-	    const oldLace: SolidColorBrush;
-	    const olive: SolidColorBrush;
-	    const oliveDrab: SolidColorBrush;
-	    const orange: SolidColorBrush;
-	    const orangeRed: SolidColorBrush;
-	    const orchid: SolidColorBrush;
-	    const paleGoldenRod: SolidColorBrush;
-	    const paleGreen: SolidColorBrush;
-	    const paleTurquoise: SolidColorBrush;
-	    const paleVioletRed: SolidColorBrush;
-	    const papayaWhip: SolidColorBrush;
-	    const peachPuff: SolidColorBrush;
-	    const peru: SolidColorBrush;
-	    const pink: SolidColorBrush;
-	    const plum: SolidColorBrush;
-	    const powderBlue: SolidColorBrush;
-	    const purple: SolidColorBrush;
-	    const red: SolidColorBrush;
-	    const rosyBrown: SolidColorBrush;
-	    const royalBlue: SolidColorBrush;
-	    const saddleBrown: SolidColorBrush;
-	    const salmon: SolidColorBrush;
-	    const sandyBrown: SolidColorBrush;
-	    const seaGreen: SolidColorBrush;
-	    const seaShell: SolidColorBrush;
-	    const sienna: SolidColorBrush;
-	    const silver: SolidColorBrush;
-	    const skyBlue: SolidColorBrush;
-	    const slateBlue: SolidColorBrush;
-	    const slateGray: SolidColorBrush;
-	    const snow: SolidColorBrush;
-	    const springGreen: SolidColorBrush;
-	    const steelBlue: SolidColorBrush;
-	    const tan: SolidColorBrush;
-	    const teal: SolidColorBrush;
-	    const thistle: SolidColorBrush;
-	    const tomato: SolidColorBrush;
-	    const transparent: SolidColorBrush;
-	    const turquoise: SolidColorBrush;
-	    const violet: SolidColorBrush;
-	    const wheat: SolidColorBrush;
-	    const white: SolidColorBrush;
-	    const whiteSmoke: SolidColorBrush;
-	    const yellow: SolidColorBrush;
-	    const yellowGreen: SolidColorBrush;
-	}
 }
 
 
-declare module "piweb_drawing/material/color" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
+declare module "piweb/drawing/material/color" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
 	export interface ColorObject {
 	    r: number;
 	    g: number;
@@ -1200,162 +1452,155 @@ declare module "piweb_drawing/material/color" {
 	    constructor(r: number, g: number, b: number, a: number);
 	    serialize(target: BufferWriter): void;
 	    static create(description?: ColorDescription): Color;
+	    static readonly aliceBlue: Color;
+	    static readonly antiqueWhite: Color;
+	    static readonly aqua: Color;
+	    static readonly aquamarine: Color;
+	    static readonly azure: Color;
+	    static readonly beige: Color;
+	    static readonly bisque: Color;
+	    static readonly black: Color;
+	    static readonly blanchedAlmond: Color;
+	    static readonly blue: Color;
+	    static readonly blueViolet: Color;
+	    static readonly brown: Color;
+	    static readonly burlyWood: Color;
+	    static readonly cadetBlue: Color;
+	    static readonly chartreuse: Color;
+	    static readonly chocolate: Color;
+	    static readonly coral: Color;
+	    static readonly cornflowerBlue: Color;
+	    static readonly cornsilk: Color;
+	    static readonly crimson: Color;
+	    static readonly cyan: Color;
+	    static readonly darkBlue: Color;
+	    static readonly darkCyan: Color;
+	    static readonly darkGoldenRod: Color;
+	    static readonly darkGray: Color;
+	    static readonly darkGreen: Color;
+	    static readonly darkKhaki: Color;
+	    static readonly darkMagenta: Color;
+	    static readonly darkOliveGreen: Color;
+	    static readonly darkOrange: Color;
+	    static readonly darkOrchid: Color;
+	    static readonly darkRed: Color;
+	    static readonly darkSalmon: Color;
+	    static readonly darkSeaGreen: Color;
+	    static readonly darkSlateBlue: Color;
+	    static readonly darkSlateGray: Color;
+	    static readonly darkTurquoise: Color;
+	    static readonly darkViolet: Color;
+	    static readonly deepPink: Color;
+	    static readonly deepSkyBlue: Color;
+	    static readonly dimGray: Color;
+	    static readonly dodgerBlue: Color;
+	    static readonly fireBrick: Color;
+	    static readonly floralWhite: Color;
+	    static readonly forestGreen: Color;
+	    static readonly fuchsia: Color;
+	    static readonly gainsboro: Color;
+	    static readonly ghostWhite: Color;
+	    static readonly gold: Color;
+	    static readonly goldenRod: Color;
+	    static readonly gray: Color;
+	    static readonly green: Color;
+	    static readonly greenYellow: Color;
+	    static readonly honeyDew: Color;
+	    static readonly hotPink: Color;
+	    static readonly indianRed: Color;
+	    static readonly indigo: Color;
+	    static readonly ivory: Color;
+	    static readonly khaki: Color;
+	    static readonly lavender: Color;
+	    static readonly lavenderBlush: Color;
+	    static readonly lawnGreen: Color;
+	    static readonly lemonChiffon: Color;
+	    static readonly lightBlue: Color;
+	    static readonly lightCoral: Color;
+	    static readonly lightCyan: Color;
+	    static readonly lightGoldenRodYellow: Color;
+	    static readonly lightGray: Color;
+	    static readonly lightGreen: Color;
+	    static readonly lightPink: Color;
+	    static readonly lightSalmon: Color;
+	    static readonly lightSeaGreen: Color;
+	    static readonly lightSkyBlue: Color;
+	    static readonly lightSlateGray: Color;
+	    static readonly lightSteelBlue: Color;
+	    static readonly lightYellow: Color;
+	    static readonly lime: Color;
+	    static readonly limeGreen: Color;
+	    static readonly linen: Color;
+	    static readonly magenta: Color;
+	    static readonly maroon: Color;
+	    static readonly mediumAquamarine: Color;
+	    static readonly mediumBlue: Color;
+	    static readonly mediumOrchid: Color;
+	    static readonly mediumPurple: Color;
+	    static readonly mediumSeaGreen: Color;
+	    static readonly mediumSlateBlue: Color;
+	    static readonly mediumSpringGreen: Color;
+	    static readonly mediumTurquoise: Color;
+	    static readonly mediumVioletRed: Color;
+	    static readonly midnightBlue: Color;
+	    static readonly mintCream: Color;
+	    static readonly mistyRose: Color;
+	    static readonly moccasin: Color;
+	    static readonly navajoWhite: Color;
+	    static readonly navy: Color;
+	    static readonly oldLace: Color;
+	    static readonly olive: Color;
+	    static readonly oliveDrab: Color;
+	    static readonly orange: Color;
+	    static readonly orangeRed: Color;
+	    static readonly orchid: Color;
+	    static readonly paleGoldenRod: Color;
+	    static readonly paleGreen: Color;
+	    static readonly paleTurquoise: Color;
+	    static readonly paleVioletRed: Color;
+	    static readonly papayaWhip: Color;
+	    static readonly peachPuff: Color;
+	    static readonly peru: Color;
+	    static readonly pink: Color;
+	    static readonly plum: Color;
+	    static readonly powderBlue: Color;
+	    static readonly purple: Color;
+	    static readonly red: Color;
+	    static readonly rosyBrown: Color;
+	    static readonly royalBlue: Color;
+	    static readonly saddleBrown: Color;
+	    static readonly salmon: Color;
+	    static readonly sandyBrown: Color;
+	    static readonly seaGreen: Color;
+	    static readonly seaShell: Color;
+	    static readonly sienna: Color;
+	    static readonly silver: Color;
+	    static readonly skyBlue: Color;
+	    static readonly slateBlue: Color;
+	    static readonly slateGray: Color;
+	    static readonly snow: Color;
+	    static readonly springGreen: Color;
+	    static readonly steelBlue: Color;
+	    static readonly tan: Color;
+	    static readonly teal: Color;
+	    static readonly thistle: Color;
+	    static readonly tomato: Color;
+	    static readonly transparent: Color;
+	    static readonly turquoise: Color;
+	    static readonly violet: Color;
+	    static readonly wheat: Color;
+	    static readonly white: Color;
+	    static readonly whiteSmoke: Color;
+	    static readonly yellow: Color;
+	    static readonly yellowGreen: Color;
 	}
 }
 
 
-declare module "piweb_drawing/material/colors" {
-	import { Color } from 'piweb_drawing/material/color';
-	export namespace colors {
-	    const aliceBlue: Color;
-	    const antiqueWhite: Color;
-	    const aqua: Color;
-	    const aquamarine: Color;
-	    const azure: Color;
-	    const beige: Color;
-	    const bisque: Color;
-	    const black: Color;
-	    const blanchedAlmond: Color;
-	    const blue: Color;
-	    const blueViolet: Color;
-	    const brown: Color;
-	    const burlyWood: Color;
-	    const cadetBlue: Color;
-	    const chartreuse: Color;
-	    const chocolate: Color;
-	    const coral: Color;
-	    const cornflowerBlue: Color;
-	    const cornsilk: Color;
-	    const crimson: Color;
-	    const cyan: Color;
-	    const darkBlue: Color;
-	    const darkCyan: Color;
-	    const darkGoldenRod: Color;
-	    const darkGray: Color;
-	    const darkGreen: Color;
-	    const darkKhaki: Color;
-	    const darkMagenta: Color;
-	    const darkOliveGreen: Color;
-	    const darkOrange: Color;
-	    const darkOrchid: Color;
-	    const darkRed: Color;
-	    const darkSalmon: Color;
-	    const darkSeaGreen: Color;
-	    const darkSlateBlue: Color;
-	    const darkSlateGray: Color;
-	    const darkTurquoise: Color;
-	    const darkViolet: Color;
-	    const deepPink: Color;
-	    const deepSkyBlue: Color;
-	    const dimGray: Color;
-	    const dodgerBlue: Color;
-	    const fireBrick: Color;
-	    const floralWhite: Color;
-	    const forestGreen: Color;
-	    const fuchsia: Color;
-	    const gainsboro: Color;
-	    const ghostWhite: Color;
-	    const gold: Color;
-	    const goldenRod: Color;
-	    const gray: Color;
-	    const green: Color;
-	    const greenYellow: Color;
-	    const honeyDew: Color;
-	    const hotPink: Color;
-	    const indianRed: Color;
-	    const indigo: Color;
-	    const ivory: Color;
-	    const khaki: Color;
-	    const lavender: Color;
-	    const lavenderBlush: Color;
-	    const lawnGreen: Color;
-	    const lemonChiffon: Color;
-	    const lightBlue: Color;
-	    const lightCoral: Color;
-	    const lightCyan: Color;
-	    const lightGoldenRodYellow: Color;
-	    const lightGray: Color;
-	    const lightGreen: Color;
-	    const lightPink: Color;
-	    const lightSalmon: Color;
-	    const lightSeaGreen: Color;
-	    const lightSkyBlue: Color;
-	    const lightSlateGray: Color;
-	    const lightSteelBlue: Color;
-	    const lightYellow: Color;
-	    const lime: Color;
-	    const limeGreen: Color;
-	    const linen: Color;
-	    const magenta: Color;
-	    const maroon: Color;
-	    const mediumAquamarine: Color;
-	    const mediumBlue: Color;
-	    const mediumOrchid: Color;
-	    const mediumPurple: Color;
-	    const mediumSeaGreen: Color;
-	    const mediumSlateBlue: Color;
-	    const mediumSpringGreen: Color;
-	    const mediumTurquoise: Color;
-	    const mediumVioletRed: Color;
-	    const midnightBlue: Color;
-	    const mintCream: Color;
-	    const mistyRose: Color;
-	    const moccasin: Color;
-	    const navajoWhite: Color;
-	    const navy: Color;
-	    const oldLace: Color;
-	    const olive: Color;
-	    const oliveDrab: Color;
-	    const orange: Color;
-	    const orangeRed: Color;
-	    const orchid: Color;
-	    const paleGoldenRod: Color;
-	    const paleGreen: Color;
-	    const paleTurquoise: Color;
-	    const paleVioletRed: Color;
-	    const papayaWhip: Color;
-	    const peachPuff: Color;
-	    const peru: Color;
-	    const pink: Color;
-	    const plum: Color;
-	    const powderBlue: Color;
-	    const purple: Color;
-	    const red: Color;
-	    const rosyBrown: Color;
-	    const royalBlue: Color;
-	    const saddleBrown: Color;
-	    const salmon: Color;
-	    const sandyBrown: Color;
-	    const seaGreen: Color;
-	    const seaShell: Color;
-	    const sienna: Color;
-	    const silver: Color;
-	    const skyBlue: Color;
-	    const slateBlue: Color;
-	    const slateGray: Color;
-	    const snow: Color;
-	    const springGreen: Color;
-	    const steelBlue: Color;
-	    const tan: Color;
-	    const teal: Color;
-	    const thistle: Color;
-	    const tomato: Color;
-	    const transparent: Color;
-	    const turquoise: Color;
-	    const violet: Color;
-	    const wheat: Color;
-	    const white: Color;
-	    const whiteSmoke: Color;
-	    const yellow: Color;
-	    const yellowGreen: Color;
-	}
-}
-
-
-declare module "piweb_drawing/material/pen" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
-	import { Brush, BrushDescription } from "piweb_drawing/material/brushes";
+declare module "piweb/drawing/material/pen" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
+	import { Brush, BrushDescription } from "piweb/drawing/material/brushes";
 	export type LineCap = "flat" | "round" | "square";
 	export type LineJoin = "bevel" | "miter" | "round";
 	export interface PenDescription {
@@ -1384,10 +1629,10 @@ declare module "piweb_drawing/material/pen" {
 }
 
 
-declare module "piweb_drawing/text/font" {
-	import { Serializable } from "shared/serializable";
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Brush, BrushDescription } from "piweb_drawing/material/brushes";
+declare module "piweb/drawing/text/font" {
+	import { Serializable } from "internal/serializable";
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Brush, BrushDescription } from "piweb/drawing/material/brushes";
 	export type FontWeight = "thin" | "extraLight" | "light" | "normal" | "medium" | "semiBold" | "bold" | "extraBold" | "black" | "extraBlack";
 	export type FontStyle = "normal" | "oblique" | "italic";
 	export type FontStretch = "ultraCondensed" | "extraCondensed" | "condensed" | "semiCondensed" | "normal" | "semiExpanded" | "expanded" | "extraExpanded" | "ultraExpanded";
@@ -1417,10 +1662,10 @@ declare module "piweb_drawing/text/font" {
 }
 
 
-declare module "piweb_drawing/text/formatted_text" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Serializable } from "shared/serializable";
-	import { Font, FontDescription } from "piweb_drawing/text/font";
+declare module "piweb/drawing/text/formatted_text" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Serializable } from "internal/serializable";
+	import { Font, FontDescription } from "piweb/drawing/text/font";
 	export type FlowDirection = "leftToRight" | "rightToLeft";
 	export type HorizontalTextAlignment = "left" | "right" | "center" | "justify";
 	export type VerticalTextAlignment = "top" | "bottom" | "center";
@@ -1455,7 +1700,7 @@ declare module "piweb_drawing/text/formatted_text" {
 	    verticalTextAlignment: VerticalTextAlignment;
 	    textTrimming: TextTrimming;
 	    constructor(text: string, font: Font, maxTextWidth: number | undefined, maxTextHeight: number | undefined, flowDirection: FlowDirection, horizontalTextAlignment: HorizontalTextAlignment, verticalTextAlignment: VerticalTextAlignment, textTrimming: TextTrimming);
-	    static create(description?: FormattedTextDescription): FormattedText;
+	    static create(description?: FormattedTextDescription | string): FormattedText;
 	    serialize(target: BufferWriter): void;
 	    measure(): TextMeasurements;
 	    static measure(formattedText: FormattedTextDescription): TextMeasurements;
@@ -1463,10 +1708,10 @@ declare module "piweb_drawing/text/formatted_text" {
 }
 
 
-declare module "piweb_drawing/text/settings" {
-	import { Point, PointDescription } from 'piweb_drawing/geometry/basics';
-	import { Serializable } from "shared/serializable";
-	import { BufferWriter } from 'shared/buffer_writer';
+declare module "piweb/drawing/text/settings" {
+	import { Point, PointDescription } from 'piweb/drawing/geometry/basics';
+	import { Serializable } from "internal/serializable";
+	import { BufferWriter } from 'internal/buffer_writer';
 	export type HorizontalTextAnchor = "default" | "left" | "right" | "center";
 	export type VerticalTextAnchor = "default" | "top" | "bottom" | "center" | "baseline";
 	export interface TextDrawingSettingsDescription {
@@ -1485,9 +1730,9 @@ declare module "piweb_drawing/text/settings" {
 }
 
 
-declare module "piweb_drawing/transform/transforms" {
-	import { BufferWriter } from "shared/buffer_writer";
-	import { Point, PointDescription } from "piweb_drawing/geometry/basics";
+declare module "piweb/drawing/transform/transforms" {
+	import { BufferWriter } from "internal/buffer_writer";
+	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
 	export type TransformationType = "identity" | "translation" | "rotation" | "scaling" | "shear" | "group" | "matrix";
 	export interface TranslationDescription {
 	    x?: number;
@@ -1603,58 +1848,133 @@ declare module "piweb_drawing/transform/transforms" {
 }
 
 
-declare module "shared/buffer_reader" {
-	export class BufferReader {
-	    _data: Buffer;
-	    _currentPosition: number;
-	    constructor(stream: Buffer);
-	    readBool(): boolean;
-	    readByte(): number;
-	    readUInt16(): number;
-	    readInt16(): number;
-	    readInt32(): number;
-	    readUInt32(): number;
-	    readDouble(): number;
-	    readDate(): Date;
-	    readGuid(): string;
-	    readString(): string;
+declare module "piweb/resources/host_binary" {
+	export interface HostBinary {
+	    makeBuffer(): Buffer;
+	    readonly size: number;
 	}
 }
 
 
-declare module "shared/buffer_writer" {
-	export class BufferWriter {
-	    private _data;
-	    private _initialBufferSize;
-	    private _currentPosition;
-	    constructor(initialSize?: number);
-	    writeBool(bool: boolean): void;
-	    writeByte(byte: number): void;
-	    writeUInt32(uint: number): void;
-	    writeDouble(double: number): void;
-	    writeString(value: string): void;
-	    writeSizedBinary(data: Buffer, length?: number): void;
-	    writeRawBinary(data: Buffer, length?: number): void;
-	    writeSizeAt(index: number): void;
-	    getData(): Buffer;
-	    getLength(): number;
-	    private _reserve(count);
-	}
+declare module "piweb/resources" {
+	import { HostBinary } from "piweb/resources/host_binary";
+	export { HostBinary };
+	import * as path from "piweb/resources/path";
+	export { path };
+	export function readFileBufferSync(path: string): Buffer;
+	export function readFileSync(path: string): HostBinary;
 }
 
 
-declare module "shared/serializable" {
-	import { BufferWriter } from 'shared/buffer_writer';
-	export interface Serializable {
-	    serialize(target: BufferWriter): void;
+declare module "piweb/resources/path" {
+	export interface ParsedPath {
+	    /**
+	     * The root of the path such as '/' or 'c:\'
+	     */
+	    root: string;
+	    /**
+	     * The full directory path such as '/home/user/dir'
+	     */
+	    dir: string;
+	    /**
+	     * The file name including extension (if any) such as 'index.html'
+	     */
+	    base: string;
+	    /**
+	     * The file extension (if any) such as '.html'
+	     */
+	    ext: string;
+	    /**
+	     * The file name without extension (if any) such as 'index'
+	     */
+	    name: string;
 	}
+	/**
+	 * The right-most parameter is considered {to}.  Other parameters are considered an array of {from}.
+	 *
+	 * Starting from leftmost {from} paramter, resolves {to} to an absolute path.
+	 *
+	 * If {to} isn't already absolute, {from} arguments are prepended in right to left order, until an absolute path is found. If after using all {from} paths still no absolute path is found, the current working directory is used as well. The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root directory.
+	 *
+	 * @param pathSegments string paths to join.  Non-string arguments are ignored.
+	 */
+	export function resolve(...pathSegments: any[]): string;
+	/**
+	 * Normalize a string path, reducing '..' and '.' parts.
+	 * When multiple slashes are found, they're replaced by a single one; when the path contains a trailing slash, it is preserved.
+	 *
+	 * @param p string path to normalize.
+	 */
+	export function normalize(p: string): string;
+	/**
+	 * Determines whether {path} is an absolute path. An absolute path will always resolve to the same location, regardless of the working directory.
+	 *
+	 * @param path path to test.
+	 */
+	export function isAbsolute(path: string): boolean;
+	/**
+	 * Join all arguments together and normalize the resulting path.
+	 * Arguments must be strings. In v0.8, non-string arguments were silently ignored. In v0.10 and up, an exception is thrown.
+	 *
+	 * @param paths paths to join.
+	 */
+	export function join(...paths: string[]): string;
+	/**
+	 * Solve the relative path from {from} to {to}.
+	 * At times we have two absolute paths, and we need to derive the relative path from one to the other. This is actually the reverse transform of path.resolve.
+	 *
+	 * @param from
+	 * @param to
+	 */
+	export function relative(from: string, to: string): string;
+	/**
+	 * Return the directory name of a path. Similar to the Unix dirname command.
+	 *
+	 * @param p the path to evaluate.
+	 */
+	export function dirname(p: string): string;
+	/**
+	 * Return the last portion of a path. Similar to the Unix basename command.
+	 * Often used to extract the file name from a fully qualified path.
+	 *
+	 * @param p the path to evaluate.
+	 * @param ext optionally, an extension to remove from the result.
+	 */
+	export function basename(p: string, ext?: string): string;
+	/**
+	 * Return the extension of the path, from the last '.' to end of string in the last portion of the path.
+	 * If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string
+	 *
+	 * @param p the path to evaluate.
+	 */
+	export function extname(p: string): string;
+	/**
+	 * Returns a path string from an object - the opposite of parse().
+	 *
+	 * @param pathString path to evaluate.
+	 */
+	export function format(pathObject: ParsedPath): string;
+	/**
+	 * Returns an object from a path string - the opposite of format().
+	 *
+	 * @param pathString path to evaluate.
+	 */
+	export function parse(pathString: string): ParsedPath;
+	/**
+	 * The platform-specific file separator. '\\' or '/'.
+	 */
+	export const sep: string;
+	/**
+	 * The platform-specific file delimiter. ';' or ':'.
+	 */
+	export const delimiter: string;
 }
 
 
-declare module "tooltips/tooltip_shape_provider" {
-	import * as drawing from 'drawing_index';
-	import { BufferWriter } from 'shared/buffer_writer';
-	import { Serializable } from 'shared/serializable';
+declare module "piweb/tooltips/tooltip_shape_provider" {
+	import { Geometry, Point } from 'piweb/drawing';
+	import { BufferWriter } from 'internal/buffer_writer';
+	import { Serializable } from 'internal/serializable';
 	export enum TooltipShapeType {
 	    None = 0,
 	    Point = 1,
@@ -1673,13 +1993,13 @@ declare module "tooltips/tooltip_shape_provider" {
 	    serialize(target: BufferWriter): void;
 	}
 	export class TooltipGeometryShape extends TooltipShape {
-	    shape: drawing.Geometry;
-	    constructor(shape: drawing.Geometry, text: string, characteristic: string | undefined, measurement: string | undefined);
+	    shape: Geometry;
+	    constructor(shape: Geometry, text: string, characteristic: string | undefined, measurement: string | undefined);
 	    serialize(target: BufferWriter): void;
 	}
 	export class TooltipPointShape extends TooltipShape {
-	    point: drawing.Point;
-	    constructor(point: drawing.Point, text: string, characteristic: string | undefined, measurement: string | undefined);
+	    point: Point;
+	    constructor(point: Point, text: string, characteristic: string | undefined, measurement: string | undefined);
 	    serialize(target: BufferWriter): void;
 	}
 	export type TooltipCallback = () => TooltipShapeCollection;
@@ -1693,311 +2013,6 @@ declare module "tooltips/tooltip_shape_provider" {
 }
 
 
-
-
-declare module "piweb_log" {
-    function debug(format: any, ...param: any[]): void;
-    function info(format: any, ...param: any[]): void;
-    function warn(format: any, ...param: any[]): void;
-    function error(format: any, ...param: any[]): void;
-}
-
-declare module "vfs_path"
-{
-    export interface ParsedPath {
-        /**
-         * The root of the path such as '/' or 'c:\'
-         */
-        root: string;
-        /**
-         * The full directory path such as '/home/user/dir' or 'c:\path\dir'
-         */
-        dir: string;
-        /**
-         * The file name including extension (if any) such as 'index.html'
-         */
-        base: string;
-        /**
-         * The file extension (if any) such as '.html'
-         */
-        ext: string;
-        /**
-         * The file name without extension (if any) such as 'index'
-         */
-        name: string;
-    }
-
-    /**
-     * The right-most parameter is considered {to}.  Other parameters are considered an array of {from}.
-     *
-     * Starting from leftmost {from} paramter, resolves {to} to an absolute path.
-     *
-     * If {to} isn't already absolute, {from} arguments are prepended in right to left order, until an absolute path is found. If after using all {from} paths still no absolute path is found, the current working directory is used as well. The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root directory.
-     *
-     * @param pathSegments string paths to join.  Non-string arguments are ignored.
-     */
-    function resolve(...pathSegments: any[]): string;
-
-    /**
-     * Normalize a string path, reducing '..' and '.' parts.
-     * When multiple slashes are found, they're replaced by a single one; when the path contains a trailing slash, it is preserved. On Windows backslashes are used.
-     *
-     * @param p string path to normalize.
-     */
-    function normalize(p: string): string;
-
-    /**
-     * Determines whether {path} is an absolute path. An absolute path will always resolve to the same location, regardless of the working directory.
-     *
-     * @param path path to test.
-     */
-    function isAbsolute(path: string): boolean;
-
-    /**
-     * Join all arguments together and normalize the resulting path.
-     * Arguments must be strings. In v0.8, non-string arguments were silently ignored. In v0.10 and up, an exception is thrown.
-     *
-     * @param paths paths to join.
-     */
-    function join(...paths: string[]): string;
-
-    /**
-     * Solve the relative path from {from} to {to}.
-     * At times we have two absolute paths, and we need to derive the relative path from one to the other. This is actually the reverse transform of path.resolve.
-     *
-     * @param from
-     * @param to
-     */
-    function relative(from: string, to: string): string;
-
-    /**
-     * Return the directory name of a path. Similar to the Unix dirname command.
-     *
-     * @param p the path to evaluate.
-     */
-    function dirname(p: string): string;
-
-    /**
-     * Return the last portion of a path. Similar to the Unix basename command.
-     * Often used to extract the file name from a fully qualified path.
-     *
-     * @param p the path to evaluate.
-     * @param ext optionally, an extension to remove from the result.
-     */
-    function basename(p: string, ext?: string): string;
-
-    /**
-     * Return the extension of the path, from the last '.' to end of string in the last portion of the path.
-     * If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string
-     *
-     * @param p the path to evaluate.
-     */
-    function extname(p: string): string;
-
-    /**
-     * Returns a path string from an object - the opposite of parse().
-     *
-     * @param pathString path to evaluate.
-     */
-    function format(pathObject: ParsedPath): string;
-
-    /**
-     * Returns an object from a path string - the opposite of format().
-     *
-     * @param pathString path to evaluate.
-     */
-    function parse(pathString: string): ParsedPath;
-
-    /**
-     * The platform-specific file separator. '\\' or '/'.
-     */
-    export var sep: string;
-
-    /**
-     * The platform-specific file delimiter. ';' or ':'.
-     */
-    export var delimiter: string;
-}
-
-declare module "internal/host_binary"
-{
-	export interface HostBinary
-	{
-		makeBuffer(): Buffer
-		readonly size: number;
-	}
-}
-
-declare module "vfs"
-{
-    import {HostBinary} from "internal/host_binary";
-
-    function readFileSync(path: string): HostBinary;
-    function readFileBufferSync(path: string): Buffer;
-}
-
-declare module "piweb_local"
-{
-    enum DateKind {
-        AssumeLocal,
-        AssumeUTC
-    }
-
-    class CultureInfo {
-        constructor(name: string);
-
-        twoLetterISOLanguageName: string;
-        threeLetterISOLanguageName: string;
-        name: string;
-    }
-
-    class RegionInfo {
-        constructor(name: string);
-
-        twoLetterISORegionName: string;
-        threeLetterISORegionName: string;
-        name: string;
-    }
-
-    function formatNumber(value: number, formatString?: string | null, culture?: CultureInfo | null): string;
-    function parseNumber(str: string, culture?: CultureInfo | null): number | null;
-
-    function formatDate(date: Date, offset?: number | null, format?: string | null, culture?: CultureInfo | null): string;
-    function parseDate(str: String, culture?: CultureInfo | null, dateKind?: DateKind | null): Date | null;
-    function parseDateExact(str: String, format: string, culture?: CultureInfo | null, dateKind?: DateKind | null): Date | null;
-}
-
-declare module "piweb_host"
-{
-    import { CultureInfo, RegionInfo } from "piweb_local";
-    import { HostBinary } from "internal/host_binary";
-    
-    interface Position {
-        x: number;
-        y: number;
-    }
-
-    interface Size {
-        width: number;
-        height: number;
-    }
-
-    interface PointDescription {
-        x: number;
-        y: number;
-    }
-
-    interface ColorDescription {
-        r: number;
-        g: number;
-        b: number;
-        a?: number;
-    }
-
-	export type BrushType = "solid" | "linear" | "radial"; 
-    interface BrushDescription {
-        type: BrushType;
-        opacity?: number;
-        color?: ColorDescription;
-        color2?: ColorDescription;
-        angle?: number;
-        center?: PointDescription;
-    }
-
-    interface PenDescription {
-        brush?: BrushDescription;
-        thickness?: number;
-        dashStyle?: ArrayLike<number>;
-        dashOffset?: number;
-	}
-	
-	export type FontWeight = "normal" | "bold";
-	export type FontStyle = "normal" | "italic";
-	export type FontStretch = "normal";
-	export type TextDecoration = "underline" | "strikeThrough";
-	interface FontDescription
-	{
-		fontFamily?: string;
-		fontWeight?: FontWeight;
-		fontStyle?: FontStyle;
-		fontStretch?: FontStretch;
-		size?: number;
-		foreground?: BrushDescription;
-		textDecorations?: ArrayLike<TextDecoration>;
-	}
-
-	enum EntityType {
-        Unknown,
-        Part,
-        Characteristic,
-        Measurement,
-        MeasurementValue
-    }
-
-    enum RawDataSource {
-        None = 0,
-        Part = 1,
-        Characteristic = 2,
-        Measurement = 4,
-        MeasurementValue = 8
-    }
-
-    namespace databinding {
-        namespace rawDataOptions {
-            var sources: RawDataSource;
-        }
-
-        interface RawDataItem {
-            readDataSync(): HostBinary;
-            entityType: EntityType;
-            name: string;
-            size: number;
-            mimeType: string;
-            md5Bytes: Buffer;
-            created: Date;
-            lastModified: Date;
-        }
-
-        namespace data {
-        }
-
-        function listRawData(): RawDataItem[];
-    }
-
-    namespace environment {
-        var isDesignMode: boolean;
-        var toolboxItemName: string;
-        var currentCulture: CultureInfo;
-        var currentRegion: RegionInfo;
-        var currentTimeZoneName: string;
-    }
-
-    namespace properties {
-		function getBooleanProperty(id: string): boolean;
-        function getIntegerProperty(id: string): number;
-        function getDoubleProperty(id: string): number;
-        function getStringProperty(id: string): string;
-        function getColorProperty(id: string): ColorDescription;
-        function getBrushProperty(id: string): BrushDescription;
-        function getPenProperty(id: string): PenDescription;
-        function getFontProperty(id: string): FontDescription;
-        function getEnumProperty(id: string): string;
-    }
-
-    function getSize(): Size;
-    function getPosition(): Position;
-
-    var experimental: any;
-}
-
-declare module "piweb_host"
-{
-    import * as own from "piweb_host";
-
-	type HostEvents = "load" | "render" | "dataBindingChanged" | "dataChanged" | "prepare_render";
-	function on(event: HostEvents, listener: Function): typeof own;
-    function emit(event: HostEvents, ...args: any[]): boolean;
-}
 
 
 //declare var process: NodeJS.Process;
