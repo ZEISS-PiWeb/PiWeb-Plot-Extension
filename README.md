@@ -79,9 +79,9 @@ import drawing = piweb.drawing;
 host.on("render", renderPlot);
 
 function renderPlot(drawingContext: drawing.DrawingContext) {
-const size = environment.getSize();
-drawingContext.setBrush( drawing.Brush.orangeRed);
-drawingContext.drawRectangle(0, 0, size.width, size.height);
+    const size = environment.getSize();
+    drawingContext.setBrush( drawing.Brush.orangeRed);
+    drawingContext.drawRectangle(0, 0, size.width, size.height);
 }
 ```
 
