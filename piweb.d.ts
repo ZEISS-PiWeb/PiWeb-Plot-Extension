@@ -68,6 +68,13 @@ declare module "internal/string_tools" {
 }
 
 
+declare module "internal/synchronization_scopes" {
+	export function resetToleranceToken(): void;
+	export function checkToleranceToken(token: any): boolean;
+	export function getToleranceToken(): any;
+}
+
+
 declare module "internal/tooltip_broker" {
 	export function getTooltipShapes(): Buffer;
 }
@@ -127,12 +134,33 @@ declare module "piweb/environment" {
 	export const apiVersion: string;
 	export function getLengthUnit(): LengthUnit;
 	export function getAngleUnit(): AngleUnit;
+	export type LimitUsageReference = "nominal" | "middleOfTolerance";
+	export type LimitType = "tolerance" | "warning" | "control" | "scrap";
+	export class LimitsConfiguration {
+	    constructor(tolerance: LimitConfiguration, warning: LimitConfiguration, control: LimitConfiguration, scrap: LimitConfiguration, yellowLimitType: LimitType, redLimitType: LimitType, limitUsageReference: LimitUsageReference);
+	    readonly toleranceLimitConfiguration: LimitConfiguration;
+	    readonly warningLimitConfiguration: LimitConfiguration;
+	    readonly controlLimitConfiguration: LimitConfiguration;
+	    readonly scrapLimitConfiguration: LimitConfiguration;
+	    readonly yellowLimitConfiguration: LimitConfiguration;
+	    readonly redLimitConfiguration: LimitConfiguration;
+	    readonly limitUsageReference: LimitUsageReference;
+	    getLimitConfiguration(type: LimitType): LimitConfiguration;
+	}
+	export class LimitConfiguration {
+	    constructor(type: LimitType, toleranceFactor: number | undefined, name: string, priority: number);
+	    readonly type: LimitType;
+	    readonly toleranceFactor: number | undefined;
+	    readonly name: string;
+	    readonly priority: number;
+	}
+	export function getLimitsConfiguration(): LimitsConfiguration;
 }
 
 
 declare module "piweb/events" {
 	export type PiWebEvents = "load" | "render" | "dataBindingChanged" | "dataChanged" | "prepare_render";
-	export function on(name: PiWebEvents, callback: Function): any;
+	export function on(name: PiWebEvents, callback: Function): void;
 	export function emit(name: PiWebEvents): boolean;
 }
 
@@ -222,25 +250,31 @@ declare module "piweb/data/attributes" {
 	    value: AttributeValue;
 	}
 	export interface IAttributeItem {
-	    attributeCount: number;
-	    getAttribute(key: number): Attribute | undefined;
-	    getAttributeKeys(): number[];
-	    allAttributes(): Attribute[];
+	    readonly attributes: AttributeCollection;
 	}
-	export class AttributeItem implements IAttributeItem {
+	export class AttributeCollection {
 	    readonly _attributes: Map<number, Attribute>;
-	    constructor(attributes: ArrayLike<Attribute>);
-	    readonly attributeCount: number;
-	    getAttributeKeys(): number[];
+	    constructor(attributes: Iterable<Attribute>);
+	    [Symbol.iterator](): Iterator<Attribute>;
+	    readonly length: number;
+	    readonly keys: IterableIterator<number>;
 	    getAttribute(key: number): Attribute | undefined;
-	    allAttributes(): Attribute[];
+	    getValue(key: number): string | number | Date | undefined;
+	    getStringValue(key: number): string | undefined;
+	    getIntegerValue(key: number): number | undefined;
+	    getFloatValue(key: number): number | undefined;
+	    getDateValue(key: number): Date | undefined;
+	    getCatalogIndex(key: number): number | undefined;
+	    getNumericValue(key: number): number | undefined;
 	}
 	export function readAttributes(source: BufferReader): Attribute[];
 }
 
 
 declare module "piweb/data/configuration" {
-	import { AttributeItem, Attribute, AttributeType } from "piweb/data/attributes";
+	import { AttributeCollection, IAttributeItem, Attribute, AttributeType } from "piweb/data/attributes";
+	import { InspectionPlanItem } from "piweb/data/inspection";
+	import { MeasurementValue } from "piweb/data/measurements";
 	export function getConfiguration(): Configuration;
 	export type ConfigurationEntity = "characteristic" | "part" | "measurement" | "measurementValue" | "catalog";
 	export class AttributeDefinition {
@@ -248,8 +282,8 @@ declare module "piweb/data/configuration" {
 	    description: string;
 	    dataType: AttributeType;
 	    entityType: ConfigurationEntity;
-	    catalogRef: string | undefined;
-	    constructor(key: number, description: string, dataType: AttributeType, entityType: ConfigurationEntity, catalogRef: string | undefined);
+	    catalogId: string | undefined;
+	    constructor(key: number, description: string, dataType: AttributeType, entityType: ConfigurationEntity, catalogId: string | undefined);
 	}
 	export class Configuration {
 	    partAttributes: Map<number, AttributeDefinition>;
@@ -259,27 +293,31 @@ declare module "piweb/data/configuration" {
 	    catalogAttributes: Map<number, AttributeDefinition>;
 	    allAttributes: Map<number, AttributeDefinition>;
 	    catalogs: CatalogCollection;
-	    constructor(definitions: ArrayLike<AttributeDefinition>, catalogs: ArrayLike<Catalog>);
-	    resolveCatalogEntry(attribute: Attribute): CatalogEntry | undefined;
+	    constructor(definitions: Iterable<AttributeDefinition>, catalogs: Iterable<Catalog>);
+	    findCatalogEntry(attribute: Attribute): CatalogEntry | undefined;
+	    findEnumeratedCatalogEntry(characteristic: InspectionPlanItem, measurementValue: MeasurementValue): CatalogEntry | undefined;
+	    findCatalog(attribute: Attribute | InspectionPlanItem): Catalog | undefined;
+	    findDefinition(attribute: Attribute): AttributeDefinition | undefined;
 	}
 	export class CatalogCollection {
 	    private readonly _idMap;
-	    constructor(catalogs: ArrayLike<Catalog>);
+	    constructor(catalogs: Iterable<Catalog>);
+	    [Symbol.iterator](): Iterator<Catalog>;
 	    readonly length: number;
-	    all(): Catalog[];
-	    findByReference(ref: string): Catalog | undefined;
+	    find(definition: AttributeDefinition | InspectionPlanItem | string): Catalog | undefined;
 	}
 	export class Catalog {
-	    catalogRef: string;
+	    catalogId: string;
 	    name: string;
-	    validAttributes: number[];
+	    validAttributes: Iterable<number>;
 	    entries: Map<number, CatalogEntry>;
-	    constructor(reference: string, name: string, validAttributes: ArrayLike<number>, entries: ArrayLike<CatalogEntry>);
+	    constructor(reference: string, name: string, validAttributes: Iterable<number>, entries: Iterable<CatalogEntry>);
 	    getCatalogGuid(): string;
 	}
-	export class CatalogEntry extends AttributeItem {
-	    key: number;
-	    constructor(key: number, attributes: ArrayLike<Attribute>);
+	export class CatalogEntry implements IAttributeItem {
+	    readonly key: number;
+	    readonly attributes: AttributeCollection;
+	    constructor(key: number, attributes: Iterable<Attribute>);
 	    toString(): string;
 	    getInspectionString(): string;
 	}
@@ -287,9 +325,8 @@ declare module "piweb/data/configuration" {
 
 
 declare module "piweb/data" {
-	export { DataReference, BasicDataReference } from "piweb/data/references";
-	export { AttributeItem, Attribute, AttributeType, AttributeValue } from "piweb/data/attributes";
-	export { getRawDataCollection, RawDataCollection, RawDataItem, getRawDataSources, setRawDataSources, RawDataSource } from "piweb/data/raw_data";
+	export { IAttributeItem, Attribute, AttributeType, AttributeValue } from "piweb/data/attributes";
+	export { getRawDataCollection, RawDataEntity, RawDataCollection, RawDataItem, getRawDataSources, setRawDataSources } from "piweb/data/raw_data";
 	export { getInspectionPlanCollection, InspectionPlanCollection, InspectionPlanItem, InspectionPlanItemType } from "piweb/data/inspection";
 	export { getMeasurementCollection, MeasurementCollection, Measurement, MeasurementValue } from "piweb/data/measurements";
 	export { getConfiguration, Configuration, AttributeDefinition, ConfigurationEntity, CatalogCollection, Catalog, CatalogEntry } from "piweb/data/configuration";
@@ -300,61 +337,77 @@ declare module "piweb/data" {
 
 
 declare module "piweb/data/inspection" {
-	import { Attribute, AttributeItem } from "piweb/data/attributes";
-	import { DataReference } from "piweb/data/references";
+	import { AttributeCollection, Attribute, IAttributeItem } from "piweb/data/attributes";
+	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
+	import { RawDataItem } from 'piweb/data/raw_data';
 	export type InspectionPlanItemType = "characteristic" | "part";
-	export class InspectionPlanItem extends AttributeItem implements DataReference {
-	    readonly inspectionRef: string;
-	    readonly parentRef?: string;
+	export class InspectionPlanItem implements IAttributeItem {
+	    readonly inspectionPlanItemId: string;
+	    readonly parentId?: string;
+	    readonly attributes: AttributeCollection;
 	    readonly type: InspectionPlanItemType;
 	    readonly path: string;
+	    readonly characteristicDepth: number;
+	    readonly partDepth: number;
+	    readonly isEnumerated: boolean;
+	    readonly isCounted: boolean;
+	    readonly catalogId?: string;
 	    readonly name: string;
-	    constructor(reference: string, parentReference: string | undefined, type: InspectionPlanItemType, path: string, attributes: ArrayLike<Attribute>);
-	    getInspectionGuid(): string;
+	    constructor(id: string, parentId: string | undefined, type: InspectionPlanItemType, isEnumerated: boolean, catalogId: string | undefined, isCounted: boolean, path: string, partDepth: number, characteristicDepth: number, attributes: Iterable<Attribute>);
+	    getInspectionPlanGuid(): string;
 	}
-	export class InspectionPlanCollection {
+	export class InspectionPlanCollection implements Iterable<InspectionPlanItem> {
 	    private readonly _idMap;
 	    private readonly _pathMap;
-	    constructor(items: ArrayLike<InspectionPlanItem>);
+	    constructor(items: Iterable<InspectionPlanItem>);
+	    [Symbol.iterator](): Iterator<InspectionPlanItem>;
 	    readonly length: number;
-	    all(): InspectionPlanItem[];
-	    findByReference(reference: DataReference): InspectionPlanItem | undefined;
+	    getCharacteristics(): IterableIterator<InspectionPlanItem>;
+	    getParts(): IterableIterator<InspectionPlanItem>;
+	    findByEntity(entity: Measurement | MeasurementValue | RawDataItem): InspectionPlanItem | undefined;
 	    findByPath(path: string): InspectionPlanItem | undefined;
 	    findParent(item: InspectionPlanItem): InspectionPlanItem | undefined;
-	    findChildren(item: InspectionPlanItem): InspectionPlanItem[];
+	    findParentPart(item: InspectionPlanItem): InspectionPlanItem | undefined;
+	    findChildren(item: InspectionPlanItem): IterableIterator<InspectionPlanItem>;
 	}
 	export function getInspectionPlanCollection(): InspectionPlanCollection;
 }
 
 
 declare module "piweb/data/measurements" {
-	import { Attribute, AttributeItem } from "piweb/data/attributes";
-	import { DataReference } from "piweb/data/references";
+	import { AttributeCollection, Attribute, IAttributeItem } from "piweb/data/attributes";
+	import { InspectionPlanItem } from 'piweb/data/inspection';
+	import { RawDataItem } from 'piweb/data/raw_data';
 	export class MeasurementCollection {
 	    private readonly _idMap;
-	    constructor(measurements: ArrayLike<Measurement>);
+	    constructor(measurements: Iterable<Measurement>);
+	    [Symbol.iterator](): Iterator<Measurement>;
 	    readonly length: number;
-	    all(): Measurement[];
-	    findMeasurementByReference(reference: DataReference): Measurement | undefined;
-	    findValueByReference(reference: DataReference): MeasurementValue | undefined;
+	    findMeasurementByEntity(entity: RawDataItem): Measurement | undefined;
+	    findMeasurementsByEntity(entity: InspectionPlanItem): Iterable<Measurement>;
+	    findValueByEntity(entity: RawDataItem): MeasurementValue | undefined;
+	    findValuesByEntity(entity: InspectionPlanItem): Iterable<MeasurementValue>;
 	}
-	export class Measurement extends AttributeItem implements DataReference {
-	    readonly measurementRef: string;
-	    readonly _partRef: string;
+	export class Measurement implements IAttributeItem {
+	    readonly attributes: AttributeCollection;
+	    readonly measurementId: string;
+	    readonly partId: string;
 	    readonly _values: Map<string, MeasurementValue>;
-	    constructor(reference: string, partReference: string, attributes: ArrayLike<Attribute>, values: ArrayLike<MeasurementValue>);
+	    constructor(id: string, partId: string, attributes: Iterable<Attribute>, values: Iterable<MeasurementValue>);
 	    getMeasurementGuid(): string;
-	    findValueByReference(reference: DataReference): MeasurementValue | undefined;
+	    getPartGuid(): string;
+	    findValueByEntity(entity: InspectionPlanItem): MeasurementValue | undefined;
 	    readonly valueCount: number;
-	    allValues(): MeasurementValue[];
+	    readonly allMeasurementValues: IterableIterator<MeasurementValue>;
 	}
-	export class MeasurementValue extends AttributeItem implements DataReference {
-	    inspectionRef: string;
-	    _measurement: Measurement;
-	    readonly measurementRef: string;
-	    constructor(characteristicReference: string, attributes: ArrayLike<Attribute>);
+	export class MeasurementValue implements IAttributeItem {
+	    readonly attributes: AttributeCollection;
+	    readonly characteristicId: string;
+	    measurement: Measurement;
+	    readonly measurementId: string;
+	    constructor(characteristicId: string, attributes: Iterable<Attribute>);
 	    getMeasurementGuid(): string;
-	    getInspectionGuid(): string;
+	    getCharacteristicGuid(): string;
 	}
 	export function getMeasurementCollection(): MeasurementCollection;
 }
@@ -362,27 +415,30 @@ declare module "piweb/data/measurements" {
 
 declare module "piweb/data/path" {
 	export { dirname, basename, extname, isAbsolute, join, parse, relative, format, normalize, sep } from "piweb/resources/path";
+	export { dirname as parentname } from "piweb/resources/path";
 	/**
 	 * Resolves {pathSegments} to an absolute path.
 	 *
 	 * If the right most argument isn't already absolute, arguments are prepended in right to left order, until an absolute path is found. If after using all paths still no absolute path is found, the path is considered relative to the root.
-	 * The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root directory.
+	 * The resulting path is normalized, and trailing slashes are removed unless the path gets resolved to the root.
 	 *
 	 * @param pathSegments string paths to join.  Non-string arguments are ignored.
 	 */
 	export function resolve(...pathSegments: any[]): string;
+	export function escapePathElement(pathElement: string): string;
 }
 
 
 declare module "piweb/data/raw_data" {
 	import { HostBinary } from 'piweb/resources/host_binary';
-	import { DataReference } from 'piweb/data/references';
-	export type EntityType = "part" | "characteristic" | "measurement" | "measurementValue";
-	export class RawDataItem implements DataReference {
-	    inspectionRef?: string;
-	    measurementRef?: string;
+	import { InspectionPlanItem } from 'piweb/data/inspection';
+	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
+	export type RawDataEntity = "part" | "characteristic" | "measurement" | "measurementValue";
+	export class RawDataItem {
+	    inspectionPlanItemId?: string;
+	    measurementId?: string;
 	    _checkSumBytes: Buffer;
-	    entityType: EntityType;
+	    entityType: RawDataEntity;
 	    key: number;
 	    name: string;
 	    size: number;
@@ -397,29 +453,14 @@ declare module "piweb/data/raw_data" {
 	}
 	export class RawDataCollection {
 	    private readonly _items;
-	    constructor(items: RawDataItem[]);
+	    constructor(items: Iterable<RawDataItem>);
 	    readonly length: number;
-	    all(): RawDataItem[];
-	    findByName(...wildcards: string[]): RawDataItem[];
-	    findByReference(reference: DataReference): RawDataItem[];
+	    findByName(...wildcards: string[]): Iterable<RawDataItem>;
+	    findByEntity(entity: InspectionPlanItem | Measurement | MeasurementValue): Iterable<RawDataItem>;
 	}
 	export function getRawDataCollection(): RawDataCollection;
-	export type RawDataSource = "parts" | "characteristics" | "measurements" | "measurementValues";
-	export function setRawDataSources(sources: ArrayLike<RawDataSource>): void;
-	export function getRawDataSources(): void;
-}
-
-
-declare module "piweb/data/references" {
-	export interface DataReference {
-	    inspectionRef?: string;
-	    measurementRef?: string;
-	}
-	export class BasicDataReference implements DataReference {
-	    constructor(inspectionReference: DataReference | string | undefined, measurementReference: DataReference | string | undefined);
-	    inspectionRef?: string;
-	    measurementRef?: string;
-	}
+	export function setRawDataSources(sources: Iterable<RawDataEntity>): void;
+	export function getRawDataSources(): Iterable<RawDataEntity>;
 }
 
 
@@ -473,8 +514,8 @@ declare module "piweb/data/wellknown_keys" {
 	        const UpperTolerance: number;
 	        const LowerScrapLimit: number;
 	        const UpperScrapLimit: number;
-	        const LowerNaturallyBoundary: number;
-	        const UpperNaturallyBoundary: number;
+	        const LowerBoundaryType: number;
+	        const UpperBoundaryType: number;
 	        const Unit: number;
 	        const Category: number;
 	        const I: number;
@@ -2353,4 +2394,118 @@ declare module "util" {
     export function isSymbol(object: any): boolean;
     export function isUndefined(object: any): boolean;
     //export function deprecate(fn: Function, message: string): Function;
+}
+
+declare module "iter" {
+    export interface Comparer<T> {
+        (a: T, b: T): number;
+    }
+
+    export interface Equals<T> {
+        (a: T, b: T): boolean;
+    }
+
+    export interface Combine<T, U> {
+        (a: T, b: U): U;
+    }
+
+    export interface Transform<T, U> {
+        (a: T): U;
+    }
+
+    export interface Predicate<T> {
+        (a: T): boolean;
+    }
+
+    export interface Process<T> {
+        (a: T): void;
+    }
+
+    export interface Generator<T> {
+        (): Iterator<T>;
+    }
+
+    export interface FindResult<T> {
+        value: T;
+        index: number;
+    }
+
+    export interface MismatchResult<T> {
+        lhsValue: T;
+        rhsValue: T;
+        index: number;
+    }
+
+    export interface MinmaxResult<T> {
+        min: FindResult<T>;
+        max: FindResult<T>;
+    }
+
+    export interface Iter<T> extends Iterable<T> {
+        map<U>(transform: Transform<T, U>): Iter<U>;
+        filter(predicate: Predicate<T>): Iter<T>;
+        take(numberOrPredicate: (number | Predicate<T>)): Iter<T>;
+        skip(numberOrPredicate: (number | Predicate<T>)): Iter<T>;
+        do(process: Process<T>): Iter<T>;
+        buffer(size: number): Iter<T[]>;
+        window(size: number): Iter<T[]>;
+        flatten<U>(transform?: Transform<T, Iterable<U>>): Iter<U>;
+        filterConsecutiveDuplicates(equals?: Equals<T>): Iter<T>;
+        scan(combine: Combine<T, T>, seed?: T): Iter<T>;
+        scan<U>(combine: Combine<T, U>, seed: U): Iter<U>;
+        concat(...others: Iterable<T>[]): Iter<T>;
+        concat(...others: Iterable<any>[]): Iter<any>;
+        repeat(count?: number): Iter<T>;
+        zip(...others: Iterable<T>[]): Iter<T[]>;
+        zip(...others: Iterable<any>[]): Iter<any[]>;
+        merge(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        setUnion(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        setIntersection(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        setSymmetricDifference(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        setDifference(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        interleave<U>(other: Iterable<U>): Iter<(T | U)>;
+
+        forEach(process: Process<T>): void;
+        count(): number;
+        isEmpty(): boolean;
+        first(): FindResult<T>;
+        last(): FindResult<T>;
+        at(index: number): FindResult<T>;
+        find(predicate: Predicate<T>): FindResult<T>;
+        every(predicate: Predicate<T>): boolean;
+        some(predicate: Predicate<T>): boolean;
+        min(comparer?: Comparer<T>): FindResult<T>;
+        max(comparer?: Comparer<T>): FindResult<T>;
+        minmax(comparer?: Comparer<T>): MinmaxResult<T>;
+        fold(combine: Combine<T, T>, seed?: T): T;
+        fold<U>(combine: Combine<T, U>, seed: U): U;
+        toArray(): T[];
+        toObject(nameSelector: Transform<T, string>): { [name: string]: T };
+        toObject<U>(nameSelector: Transform<T, string>, valueSelector: Transform<T, U>): { [name: string]: U };
+        toMap<K>(keySelector: Transform<T, K>): Map<K, T>;
+        toMap<K, V>(keySelector: Transform<T, K>, valueSelector: Transform<T, V>): Map<K, V>;
+        toSet(): Set<T>;
+        equal(other: Iterable<T>, equals?: Equals<T>): boolean;
+        findMismatch(other: Iterable<T>, equals?: Equals<T>): MismatchResult<T>;
+    }
+
+    export function iter<T>(fnOrObject: (Iterable<T> | Generator<T>)): Iter<T>;
+    export namespace iter {
+        function values<T>(...items: T[]): Iter<T>;
+        function range(start: number, end?: number): Iter<number>;
+        function repeat<T>(value: T, count?: number): Iter<T>;
+        function concat<T>(...iterables: Iterable<T>[]): Iter<T>;
+        function concat(...iterables: Iterable<any>[]): Iter<any>;
+        function zip<T>(...iterables: Iterable<T>[]): Iter<T[]>;
+        function zip(...iterables: Iterable<any>[]): Iter<any[]>;
+        function compare<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): number;
+        function equal<T>(lhs: Iterable<T>, rhs: Iterable<T>, equals?: Equals<T>): boolean;
+        function findMismatch<T>(lhs: Iterable<T>, rhs: Iterable<T>, equals?: Equals<T>): MismatchResult<T>;
+        function merge<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        function setUnion<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        function setIntersection<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        function setSymmetricDifference<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        function setDifference<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
+        function interleave<T, U>(lhs: Iterable<T>, rhs: Iterable<U>): Iter<(T | U)>;
+    }
 }
