@@ -75,26 +75,32 @@
 </li>
 </ul>
 </li>
-<li><a href="#properties-1">Properties</a>
-<ul>
-<li><a href="#introduction-1">Introduction</a></li>
-<li><a href="#methods-1">Methods</a></li>
-</ul>
-</li>
 <li><a href="#format">Format</a>
 <ul>
-<li><a href="#introduction-2">Introduction</a></li>
+<li><a href="#introduction-1">Introduction</a></li>
 <li><a href="#enumerations-1">Enumerations</a>
 <ul>
 <li><a href="#datekind">DateKind</a></li>
 </ul>
 </li>
+<li><a href="#methods-1">Methods</a></li>
+</ul>
+</li>
+<li><a href="#properties-1">Properties</a>
+<ul>
+<li><a href="#introduction-2">Introduction</a></li>
 <li><a href="#methods-2">Methods</a></li>
+</ul>
+</li>
+<li><a href="#resources">Resources</a>
+<ul>
+<li><a href="#introduction-3">Introduction</a></li>
+<li><a href="#methods-3">Methods</a></li>
 </ul>
 </li>
 <li><a href="#drawing">Drawing</a>
 <ul>
-<li><a href="#introduction-3">Introduction</a></li>
+<li><a href="#introduction-4">Introduction</a></li>
 <li><a href="#interfaces">Interfaces</a></li>
 <li><a href="#common">Common</a>
 <ul>
@@ -219,7 +225,7 @@
 <li><a href="#attributetype">AttributeType</a></li>
 <li><a href="#attribute">Attribute</a></li>
 <li><a href="#attributeitem">AttributeItem</a></li>
-<li><a href="#datareference">DataReference</a></li>
+<li><a href="#attributecollection">AttributeCollection</a></li>
 </ul>
 </li>
 <li><a href="#configuration">Configuration</a>
@@ -257,7 +263,7 @@
 <ul>
 <li><a href="#content-11">Content</a></li>
 <li><a href="#usage-3">Usage</a></li>
-<li><a href="#entitytype">EntityType</a></li>
+<li><a href="#rawdataentity">RawDataEntity</a></li>
 <li><a href="#rawdatacollection">RawDataCollection</a></li>
 <li><a href="#rawdataitem">RawDataItem</a></li>
 </ul>
@@ -267,7 +273,7 @@
 <li><a href="#expressions">Expressions</a></li>
 <li><a href="#tooltips">Tooltips</a>
 <ul>
-<li><a href="#introduction-4">Introduction</a></li>
+<li><a href="#introduction-5">Introduction</a></li>
 <li><a href="#classes-1">Classes</a>
 <ul>
 <li><a href="#tooltipshapecollection">TooltipShapeCollection</a></li>
@@ -280,8 +286,8 @@
 </li>
 <li><a href="#logger">Logger</a>
 <ul>
-<li><a href="#introduction-5">Introduction</a></li>
-<li><a href="#methods-3">Methods</a></li>
+<li><a href="#introduction-6">Introduction</a></li>
+<li><a href="#methods-4">Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -940,55 +946,9 @@ piweb.events.on(<span class="hljs-string">"render"</span>, renderPlot);
 <p>The offset of the timezone at the specified date in hours.</p>
 <p><strong>name: <code>string</code></strong></p>
 <p>The name of the timezone.</p>
-<p><a id="markdown-properties-1" name="properties-1"></a></p>
-<h2>Properties</h2>
-<p><a id="markdown-introduction-1" name="introduction-1"></a></p>
-<h3>Introduction</h3>
-<p>The properties you define in the <code>package.json</code> file can be accessed via the <code>piweb.properties</code> interface. To enable type checking, there is one function for each available datatype.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
-<span class="hljs-keyword">import</span> properties = piweb.properties;
-</code></pre>
-<p><a id="markdown-methods-1" name="methods-1"></a></p>
-<h3>Methods</h3>
-<p><strong>getStringProperty <code>string</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStringProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">string</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a string.</p>
-<p><strong>getIntegerProperty <code>number</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getIntegerProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">number</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a number.</p>
-<p><strong>getDoubleProperty <code>number</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDoubleProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">number</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a number.</p>
-<p><strong>getBooleanProperty <code>boolean</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBooleanProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">boolean</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a boolean.</p>
-<p><strong>getEnumProperty <code>string</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getEnumProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">string</span>
-</span></code></pre>
-<p>Returns the key of the selected option of the property with the name <code>id</code> as a string. Please read the chapter '<a href="#package-structure-extensions-propertygrid-entries-options">propertygrid options</a>' for further information.</p>
-<p><strong>getColorProperty <code>ColorDescription</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getColorProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">ColorDescription</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a <code>ColorDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#color"><code>Color</code></a> class.</p>
-<p><strong>getBrushProperty <code>BrushDescription</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBrushProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">BrushDescription</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a <code>BrushDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#brush"><code>Brush</code></a> class.</p>
-<p><strong>getPenProperty <code>PenDescription</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPenProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">PenDescription</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a <code>PenDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#pen"><code>Pen</code></a> class.</p>
-<p><strong>getFontProperty <code>FontDescription</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFontProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">FontDescription</span>
-</span></code></pre>
-<p>Returns the value of the property with the name <code>id</code> as a <code>FontDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#font"><code>Font</code></a> class.</p>
 <p><a id="markdown-format" name="format"></a></p>
 <h2>Format</h2>
-<p><a id="markdown-introduction-2" name="introduction-2"></a></p>
+<p><a id="markdown-introduction-1" name="introduction-1"></a></p>
 <h3>Introduction</h3>
 <p>In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the <code>piweb.format</code> interface.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
@@ -1005,7 +965,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, renderPlot);
 <p>The represented time will be interpreted as local time.</p>
 <p><strong><code>assumeUTC</code></strong></p>
 <p>The represented time will be interpreted as UTC.</p>
-<p><a id="markdown-methods-2" name="methods-2"></a></p>
+<p><a id="markdown-methods-1" name="methods-1"></a></p>
 <h3>Methods</h3>
 <p><strong>formatNumber <code>string</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">formatNumber</span>(<span class="hljs-params">
@@ -1048,9 +1008,70 @@ piweb.events.on(<span class="hljs-string">"render"</span>, renderPlot);
 </span>) : <span class="hljs-title">Date</span> | <span class="hljs-title">null</span></span>;
 </code></pre>
 <p>Converts the specified string to its <code>Date</code> equivalent by using culture specific format information and formatting style.</p>
+<p><a id="markdown-properties-1" name="properties-1"></a></p>
+<h2>Properties</h2>
+<p><a id="markdown-introduction-2" name="introduction-2"></a></p>
+<h3>Introduction</h3>
+<p>The properties you define in the <code>package.json</code> file can be accessed via the <code>piweb.properties</code> interface. To enable type checking, there is one function for each available datatype.</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+<span class="hljs-keyword">import</span> properties = piweb.properties;
+</code></pre>
+<p><a id="markdown-methods-2" name="methods-2"></a></p>
+<h3>Methods</h3>
+<p><strong>getStringProperty <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStringProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">string</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a string.</p>
+<p><strong>getIntegerProperty <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getIntegerProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">number</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a number.</p>
+<p><strong>getDoubleProperty <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDoubleProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">number</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a number.</p>
+<p><strong>getBooleanProperty <code>boolean</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBooleanProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">boolean</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a boolean.</p>
+<p><strong>getEnumProperty <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getEnumProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">string</span>
+</span></code></pre>
+<p>Returns the key of the selected option of the property with the name <code>id</code> as a string. Please read the chapter '<a href="#package-structure-extensions-propertygrid-entries-options">propertygrid options</a>' for further information.</p>
+<p><strong>getColorProperty <code>ColorDescription</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getColorProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">ColorDescription</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a <code>ColorDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#color"><code>Color</code></a> class.</p>
+<p><strong>getBrushProperty <code>BrushDescription</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBrushProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">BrushDescription</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a <code>BrushDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#brush"><code>Brush</code></a> class.</p>
+<p><strong>getPenProperty <code>PenDescription</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPenProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">PenDescription</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a <code>PenDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#pen"><code>Pen</code></a> class.</p>
+<p><strong>getFontProperty <code>FontDescription</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFontProperty</span>(<span class="hljs-params">id : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">FontDescription</span>
+</span></code></pre>
+<p>Returns the value of the property with the name <code>id</code> as a <code>FontDescription</code>. The result can be used as parameter for the <code>create</code> method of the <a href="#font"><code>Font</code></a> class.</p>
+<p><a id="markdown-resources" name="resources"></a></p>
+<h2>Resources</h2>
+<p><a id="markdown-introduction-3" name="introduction-3"></a></p>
+<h3>Introduction</h3>
+<p>The <code>piweb.resources</code> interface can be used to access files that are part of your PiWeb extension package. All paths must be specified relative to the extensions output directory, which has been specified with the <code>outDir</code> parameter in the <code>tsconfig.json</code> file.</p>
+<p><a id="markdown-methods-3" name="methods-3"></a></p>
+<h3>Methods</h3>
+<p><strong>readFileBufferSync <code>Buffer</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readFileBufferSync</span>(<span class="hljs-params">path : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">Buffer</span>
+</span></code></pre>
+<p>Reads the content of the file at the specified path and returns it as a <code>Buffer</code>. The returned buffer can be read as string, or be interpreted as an image resource by the <a href="#bitmap"><code>Bitmap</code></a> class.</p>
+<p><strong>readFileSync <code>HostBinary</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readFileSync</span>(<span class="hljs-params">path : <span class="hljs-built_in">string</span></span>) : <span class="hljs-title">HostBinary</span>
+</span></code></pre>
+<p>Reads the content of the file at the specified path and returns it as a <code>HostBinary</code>. The returned binary can be interpreted as an image resource by the <a href="#bitmap"><code>Bitmap</code></a> class.</p>
 <p><a id="markdown-drawing" name="drawing"></a></p>
 <h2>Drawing</h2>
-<p><a id="markdown-introduction-3" name="introduction-3"></a></p>
+<p><a id="markdown-introduction-4" name="introduction-4"></a></p>
 <h3>Introduction</h3>
 <p>All necessary classes for drawing are encapsulated in the <code>piweb.drawing</code> interface. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot API will emit the <code>render</code> event, which has a <a href="#drawingcontext"><code>DrawingContext</code></a> object as its parameter.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
@@ -1283,12 +1304,12 @@ context.drawLine(
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Bitmap
 </code></pre>
 <p>Describes an image that can be drawn with the <a href="#drawingcontext-drawimage"><code>DrawImage</code></a> function of the <a href="#drawingcontext"><code>DrawingContext</code></a>.</p>
-<p><strong>loadFromVfs <code>Bitmap</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFromVfs</span>(<span class="hljs-params">
+<p><strong>loadFromResource <code>Bitmap</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFromResource</span>(<span class="hljs-params">
     path: <span class="hljs-built_in">string</span>
 </span>) : <span class="hljs-title">Bitmap</span>
 </span></code></pre>
-<p>Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages root directory.</p>
+<p>Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages output directory, which has been specified with the <code>outDir</code> parameter in the <code>tsconfig.json</code> file.</p>
 <p><strong>measure <code>BitmapMeasurements</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">measure</span>(<span class="hljs-params"> </span>) : <span class="hljs-title">BitmapMeasurements</span>
 </span></code></pre>
@@ -2316,7 +2337,8 @@ context.drawLine(
 piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadData</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">const</span> provider = data.provider;
+    <span class="hljs-keyword">const</span> configuration = data.getConfiguration();
+    <span class="hljs-keyword">const</span> inspectionPlan = data.getInspectionPlan();
     ...
 }
 </code></pre>
@@ -2328,7 +2350,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <li><a href="#attributetype">AttributeType</a></li>
 <li><a href="#attribute">Attribute</a></li>
 <li><a href="#attributeitem">AttributeItem</a></li>
-<li><a href="#datareference">DataReference</a></li>
+<li><a href="#attributecollection">AttributeCollection</a></li>
 </ul>
 <p><a id="markdown-attributetype" name="attributetype"></a></p>
 <h4>AttributeType</h4>
@@ -2358,26 +2380,52 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The actual value of the attribute. Refer to the <code>type</code> to get the datatype.</p>
 <p><a id="markdown-attributeitem" name="attributeitem"></a></p>
 <h4>AttributeItem</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> AttributeItem
+<pre><code class="language-TypeScript"><span class="hljs-keyword">interface</span> IAttributeItem
 </code></pre>
-<p>An attribute item has a set of attributes. Only attributes that actually have a value are returned, so the number of attributes is usually lower than the number of attribute definitions that refer to the entity type of the attribute item.</p>
-<p><strong>attributes <a href="#attribute"><code>Map&lt;number, Attribute&gt;</code></a></strong></p>
-<p>The list of attributes that belong to this attribute item.</p>
-<p><strong>getValue <code>string | number | Date | undefined</code></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getValue</span>(<span class="hljs-params">
-    key: <span class="hljs-built_in">number</span>
-</span>): <span class="hljs-title">string</span> | <span class="hljs-title">number</span> | <span class="hljs-title">Date</span> | <span class="hljs-title">undefined</span>
+<p>An attribute item has a collection of attributes. The collection contains only attributes that actually have a value, so the number of attributes is usually lower than the number of attribute definitions that refer to the entity type of the attribute item.</p>
+<p><strong>attributes <a href="#attributecollection"><code>AttributeCollection</code></a></strong></p>
+<p>The collection of attributes that belong to this attribute item.</p>
+<p><a id="markdown-attributecollection" name="attributecollection"></a></p>
+<h4>AttributeCollection</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> AttributeCollection
+</code></pre>
+<p>Describes an accessible collection of <a href="#attribute"><code>Attributes</code></a>, that is attached to an <a href="#attributeitem"><code>AttributeItem</code></a>. The collection offers a wide range of helper functions to allow a type safe access to the attributes values. You can iterate over the collection with a <code>for ... of</code> loop.</p>
+<p><strong>length <code>number</code></strong></p>
+<p>Gets the number of attributes stored in the collection.</p>
+<p><strong>keys <code>IterableIterator&lt;number&gt;</code></strong></p>
+<p>Gets an iterator over the available keys in the collection.</p>
+<p><strong>getAttribute <a href="#attribute"><code>Attribute</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAttribute</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>) :  <span class="hljs-title">Attribute</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
-<p>Returns the value that corresponds to the specified attribute key. In case the attribute was not found the function returns <code>undefined</code>.</p>
-<p><a id="markdown-datareference" name="datareference"></a></p>
-<h4>DataReference</h4>
-<p>A <code>DataReference</code> is used as indexer in many collections throughout the <code>piweb.data</code> interface.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">interface</span> DataReference
-</code></pre>
-<p>The following collections can be searched through with a <code>DataReference</code>:</p>
-<ul>
-<li><a href="#rawdatacollection"><code>RawDataCollection</code></a></li>
-</ul>
+<p>Returns the attribute with the specified key, or <code>undefined</code> in case there is no attribute with this key.</p>
+<p><strong>getValue <code>string | number | Date | undefined</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getValue</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>) : <span class="hljs-title">string</span> | <span class="hljs-title">number</span> | <span class="hljs-title">Date</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key, or <code>undefined</code> in case there is no attribute with this key.</p>
+<p><strong>getStringValue <code>string</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStringValue</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">string</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key as <code>string</code>, or <code>undefined</code> in case there is no attribute with this key.</p>
+<p><strong>getIntegerValue <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getIntegerValue</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">number</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key as integral <code>number</code>, or <code>undefined</code> in case there is no attribute with this key or the attributes value can't be converted into an integral <code>number</code> representation.</p>
+<p><strong>getFloatValue <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFloatValue</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">number</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key as floating point <code>number</code>, or <code>undefined</code> in case there is no attribute with this key or the attributes value can't be converted into a floating point <code>number</code> representation.</p>
+<p><strong>getDateValue <code>Date</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDateValue</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">Date</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key as <code>Date</code>, or <code>undefined</code> in case there is no attribute with this key or the attributes value can't be converted into a <code>Date</code> representation.</p>
+<p><strong>getCatalogIndex <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCatalogIndex</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">number</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key as integral <code>number</code>, representing the key of a catalog entry, or <code>undefined</code> in case there is no attribute with this key or the attributes value can't be converted into an integral <code>number</code> representation.</p>
+<p><strong>getNumericValue <code>number</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getNumericValue</span>(<span class="hljs-params">key: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">number</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the value of the attribute with the specified key as <code>number</code>, or <code>undefined</code> in case there is no attribute with this key or the attributes value can't be converted into a <code>number</code> representation.</p>
 <p><a id="markdown-configuration" name="configuration"></a></p>
 <h3>Configuration</h3>
 <p><a id="markdown-content-8" name="content-8"></a></p>
@@ -2400,7 +2448,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>Configuration</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Configuration
 </code></pre>
-<p>The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.</p>
+<p>The configuration contains all <a href="#attributedefinition"><code>AttributeDefinitions</code></a> for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.</p>
 <p><strong>allAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>A map of all attribute definitions.</p>
 <p><strong>partAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
@@ -2409,7 +2457,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The set of attribute definitions referring to inspection plan characteristics.</p>
 <p><strong>measurementAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to measurements.</p>
-<p><strong>valueAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
+<p><strong>measurementValueAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to measured values.</p>
 <p><strong>catalogAttributes <a href="#attributedefinition"><code>Map&lt;number, AttributeDefinition&gt;</code></a></strong></p>
 <p>The set of attribute definitions referring to catalog entries.</p>
@@ -2421,18 +2469,18 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the inderection between attributes and catalogs.</p>
 <p><a id="markdown-configurationentity" name="configurationentity"></a></p>
 <h4>ConfigurationEntity</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> EntityType
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> ConfigurationEntity
 </code></pre>
 <p>Lists all entities that have attributes attached to them.</p>
-<p><strong><code>Characteristic</code></strong></p>
+<p><strong><code>characteristic</code></strong></p>
 <p>Inspection plan characteristic. Common attributes are tolerances and classification attributes.</p>
-<p><strong><code>Part</code></strong></p>
+<p><strong><code>part</code></strong></p>
 <p>Inspection plan part. Common attributes are identification attributes, e.g. name and number.</p>
-<p><strong><code>Measurement</code></strong></p>
+<p><strong><code>measurement</code></strong></p>
 <p>Measurement. Common attributes are time, machine, operator and batch number.</p>
-<p><strong><code>Value</code></strong></p>
+<p><strong><code>measurementValue</code></strong></p>
 <p>Value. The most common attribute is the measured value (K1).</p>
-<p><strong><code>Catalog</code></strong></p>
+<p><strong><code>catalog</code></strong></p>
 <p>Attributes for catalog entries. These refer to the &quot;columns&quot; of a catalog.</p>
 <p><a id="markdown-attributedefinition" name="attributedefinition"></a></p>
 <h4>AttributeDefinition</h4>
@@ -2446,27 +2494,51 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The datatype of the values of the attribute.</p>
 <p><strong>entityType <a href="#configurationentity"><code>ConfigurationEntity</code></a></strong></p>
 <p>The entity type this attribute belongs to.</p>
-<p><strong>catalog <code>string | undefined</code></strong></p>
-<p>In case the <code>dataType</code> is <code>Catalog</code>, this field contains a base64 encoded <code>Guid</code> that identifies the <strong><a href="#catalog"><code>Catalog</code></a></strong> that is used by this attribute.</p>
+<p><strong>catalogId <code>string | undefined</code></strong></p>
+<p>In case the <code>dataType</code> is <code>Catalog</code>, this field contains the id of the <a href="#catalog"><code>Catalog</code></a> that is used by this attribute. You can pass the id or the whole attribute definition into a <a href="#catalogcollection"><code>CatalogCollection</code></a> to get the <a href="#catalog"><code>Catalog</code></a>.</p>
 <p><a id="markdown-catalogcollection" name="catalogcollection"></a></p>
 <h4>CatalogCollection</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CatalogCollection
 </code></pre>
-<p>A catalog collection contains a set of catalogs, that can either be iterated over, or accessed with a catalog reference string.</p>
-<p><strong>all <a href="#catalog"><code>Catalog[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Catalog</span>[]</span>;
+<p>A catalog collection contains a set of catalogs, that can be accessed with an <a href="#attributedefinition"><code>AttributeDefinition</code></a>, an <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a> or a catalog id. It's possible to iterate over the catalogs like the following:</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> catalog of catalogs)
 </code></pre>
-<p>Returns all catalogs in the collection as an array</p>
-<p><strong>all <a href="#catalog"><code>Catalog[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params"> ref: <span class="hljs-built_in">string</span> </span>) : <span class="hljs-title">Catalog</span> | <span class="hljs-title">undefined</span></span>;
+<p><strong>length <code>number</code></strong></p>
+<p>Gets the total number of catalogs stored in the collection.</p>
+<p><strong>find <a href="#catalog"><code>Catalog</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">find</span>(<span class="hljs-params"> 
+    entry: AttributeDefinition | InspectionPlanItem | <span class="hljs-built_in">string</span>
+</span>): <span class="hljs-title">Catalog</span> | <span class="hljs-title">undefined</span></span>;
 </code></pre>
-<p>Returns the catalog that is identified by the specified <code>ref</code> string. Catalog reference strings can be found as member of the <a href="#catalog"><code>Catalog</code></a> class, or as value of an <a href="#attribute"><code>Attribute</code></a>.</p>
+<p>Returns the catalog that is associated to the specified entry. The following associations are assumed:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Association</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#attributedefinition"><code>AttributeDefinition</code></a></td>
+<td>The catalog that is used by a catalog attribute</td>
+</tr>
+<tr>
+<td><a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></td>
+<td>The measurement value catalog that is configured in attributive characteristics</td>
+</tr>
+<tr>
+<td><code>string</code></td>
+<td>A catalog id that can be found in <a href="#attributedefinition"><code>AttributeDefinitions</code></a> or <a href="#catalog"><code>Catalogs</code></a></td>
+</tr>
+</tbody>
+</table>
 <p><a id="markdown-catalog" name="catalog"></a></p>
 <h4>Catalog</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Catalog
 </code></pre>
-<p><strong>catalogRef <code>string</code></strong></p>
-<p>A base64 encoded <code>Guid</code> that identifies the catalog. It can be used to access a certain catalog in the <a href="#catalogcollection"><code>CatalogCollection</code></a></p>
+<p><strong>catalogId <code>string</code></strong></p>
+<p>The id of the catalog. It can be used to access a certain catalog in the <a href="#catalogcollection"><code>CatalogCollection</code></a></p>
 <p><strong>name <code>string</code></strong></p>
 <p>An unlocalized name that is used only for displaying purposes.</p>
 <p><strong>validAttributes <code>number[]</code></strong></p>
@@ -2476,10 +2548,12 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><a id="markdown-catalogentry" name="catalogentry"></a></p>
 <h4>CatalogEntry</h4>
 <p>Catalog entries used as enumeration values of attributes in the PiWeb database.</p>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CatalogEntry <span class="hljs-keyword">extends</span> AttributeItem
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> CatalogEntry <span class="hljs-keyword">implements</span> IAttributeItem
 </code></pre>
 <p><strong>key <code>number</code></strong></p>
-<p>A 16 bit integer that identifies the catalog entry. When accessing an attribute with the datatype <code>Catalog</code>, a 16 bit integer is returned that refers to this key.</p>
+<p>A 16 bit integer that identifies the catalog entry.</p>
+<p><strong>attributes <a href="#attributecollection"><code>AttributeCollection</code></a></strong></p>
+<p>The catalog attributes, often referred to as the values of the catalogs columns.</p>
 <p><a id="markdown-inspection-plan" name="inspection-plan"></a></p>
 <h3>Inspection Plan</h3>
 <p><a id="markdown-content-9" name="content-9"></a></p>
@@ -2494,24 +2568,56 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>getInspectionPlanCollection <a href="#inspectionplancollection"><code>InspectionPlanCollection</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getInspectionPlanCollection</span>(<span class="hljs-params"></span>) : <span class="hljs-title">InspectionPlanCollection</span></span>;
 </code></pre>
-<p>Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer. Every inspection plan entity is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
+<p>Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer.</p>
 <p><a id="markdown-inspectionplancollection" name="inspectionplancollection"></a></p>
 <h4>InspectionPlanCollection</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanCollection
 </code></pre>
-<p>A collection of <a href="#inspectionplanitem"><code>InspectionPlanItems</code></a>.</p>
+<p>A collection of <a href="#inspectionplanitem"><code>InspectionPlanItems</code></a>. It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> inspectionPlanCollection = piweb.data.getInspectionPlanCollection();
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> item of inspectionPlanCollection)
+{
+    ...
+}
+</code></pre>
 <p><strong>length <code>number</code></strong></p>
-<p>The number of items in the collection.</p>
-<p><strong>all <a href="#inspectionplanitem"><code>InspectionPlanItem[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>) : <span class="hljs-title">InspectionPlanItem</span>[]
-</span></code></pre>
-<p>Returns all inspection plan items in the collection as an array.</p>
-<p><strong>findByReference <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params"> 
-    reference: DataReference 
+<p>Gets the total number of items stored in the collection.</p>
+<p><strong>getParts <code>IterableIterator&lt;InspectionPlanItem&gt;</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getParts</span>(<span class="hljs-params"> </span>) : <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">InspectionPlanItem</span>&gt;</span>;
+</code></pre>
+<p>Returns an iterator over all parts stored in the collection.</p>
+<p><strong>getCharacteristics <code>IterableIterator&lt;InspectionPlanItem&gt;</code></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCharacteristics</span>(<span class="hljs-params"> </span>) : <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">InspectionPlanItem</span>&gt;</span>;
+</code></pre>
+<p>Returns an iterator over all characteristics stored in the collection.</p>
+<p><strong>findByEntity <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByEntity</span>(<span class="hljs-params"> 
+    entity: Measurement | MeasurementValue | RawDataItem
 </span>) : <span class="hljs-title">InspectionPlanItem</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
-<p>Returns the inspection plan item that is identified by the specified <a href="#datareference"><code>DataReference</code></a> or <code>undefined</code> if the collection contains no such inspection plan item.</p>
+<p>Returns the inspection plan item that associated to the the specified entity or <code>undefined</code> if the collection contains no such inspection plan item. The following associations are assumed:</p>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Association</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#measurement"><code>Measurement</code></a></td>
+<td>The part to which the measurement is attached</td>
+</tr>
+<tr>
+<td><a href="#measurementvalue"><code>MeasurementValue</code></a></td>
+<td>The characteristic to which the measurement value is attached</td>
+</tr>
+<tr>
+<td><a href="#rawdataitem"><code>RawDataItem</code></a></td>
+<td>The part or characteristic to which the raw data is attached</td>
+</tr>
+</tbody>
+</table>
 <p><strong>findByPath <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByPath</span>(<span class="hljs-params"> 
     path: <span class="hljs-built_in">string</span> 
@@ -2524,10 +2630,16 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </span>) : <span class="hljs-title">InspectionPlanItem</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
 <p>Returns the parent item of the specified inspection plan item or <code>undefined</code> if the item has no parent, or the collection doesn't contain it.</p>
+<p><strong>findParentPart <a href="#inspectionplanitem"><code>InspectionPlanItem</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findParentPart</span>(<span class="hljs-params"> 
+    item: InspectionPlanItem 
+</span>) : <span class="hljs-title">InspectionPlanItem</span> | <span class="hljs-title">undefined</span>
+</span></code></pre>
+<p>Returns the parent part of the specified inspection plan item or <code>undefined</code> if the item has no parent, or the collection doesn't contain it.</p>
 <p><strong>findChildren <a href="#inspectionplanitem"><code>InspectionPlanItem[]</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findChildren</span>(<span class="hljs-params"> 
     item: InspectionPlanItem 
-</span>) : <span class="hljs-title">InspectionPlanItem</span>[]
+</span>) : <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">InspectionPlanItem</span>&gt;
 </span></code></pre>
 <p>Returns the child items of the specified inspection plan item or. Please be aware that only those children are returned, that are included in the binding of the element.</p>
 <p><a id="markdown-inspectionplanitemtype" name="inspectionplanitemtype"></a></p>
@@ -2540,19 +2652,25 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>Refers to an inspection plan part.</p>
 <p><a id="markdown-inspectionplanitem" name="inspectionplanitem"></a></p>
 <h4>InspectionPlanItem</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanItem <span class="hljs-keyword">extends</span> AttributeItem <span class="hljs-keyword">implements</span> DataReference
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> InspectionPlanItem <span class="hljs-keyword">implements</span> AttributeItem
 </code></pre>
 <p>Describes a part or a characteristic of the inspection plan.</p>
-<p><strong>ID <code>string</code></strong></p>
+<p><strong>inspectionPlanItemId <code>string</code></strong></p>
 <p>The identifier of this inspection plan item which can be used to access other information connected to it.</p>
 <p><strong>parentID <code>string?</code></strong></p>
 <p>The inspectionPlanRef of this items parent in the inspection plan structure.</p>
+<p><strong>attributes <a href="#attributecollection"><code>AttributeCollection</code></a></strong></p>
+<p>The attributes of this inspection plan item.</p>
 <p><strong>type <a href="#inspectionPlanItemType"><code>InspectionPlanItemType</code></a></strong></p>
 <p>The item type, which is either <code>Part</code> or <code>Characteristic</code>.</p>
 <p><strong>path <code>string</code></strong></p>
 <p>The path of the item in the inspection plan structure.</p>
 <p><strong>name <code>string</code></strong></p>
 <p>The name of the item, which is also the last part of the path.</p>
+<p><strong>isEnumerated <code>boolean</code></strong></p>
+<p>Gets a value indicating whether the characteristic is an enumerated characteristic, which means that its measurement value represents the key of a catalog entry.</p>
+<p><strong>isCounting <code>boolean</code></strong></p>
+<p>Gets a value indicating whether the characteristic is a counting characteristic, which means that its measurement value represents a number of arbitrary entities.</p>
 <p><a id="markdown-measurements" name="measurements"></a></p>
 <h3>Measurements</h3>
 <p><a id="markdown-content-10" name="content-10"></a></p>
@@ -2584,56 +2702,76 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>MeasurementCollection</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementCollection
 </code></pre>
-<p>A collection of <a href="#measurement"><code>Measurements</code></a>.</p>
+<p>A collection of <a href="#measurement"><code>Measurements</code></a>. It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> measurementCollection = piweb.data.getMeasurementCollection();
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> measurement of measurementCollection)
+{
+    ...
+}
+</code></pre>
 <p><strong>length <code>number</code></strong></p>
 <p>The number of measurements in the collection.</p>
-<p><strong>all <a href="#measurement"><code>Measurement[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">all</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Measurement</span>[]
-</span></code></pre>
-<p>Returns all measurements in the collection as an array.</p>
-<p><strong>findMeasurementByReference <a href="#measurement"><code>Measurement</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMeasurementByReference</span>(<span class="hljs-params"> 
-    reference: DataReference 
+<p><strong>findMeasurementByEntity <a href="#measurement"><code>Measurement</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMeasurementByEntity</span>(<span class="hljs-params"> 
+    entity: RawDataItem 
 </span>) : <span class="hljs-title">Measurement</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
-<p>Returns the measurement that is identified by the specified <a href="#datareference"><code>DataReference</code></a> or <code>undefined</code> if the collection contains no such measurement.</p>
-<p><strong>findValueByReference <a href="#measurementvalue"><code>MeasurementValue</code></a></strong></p>
+<p>Returns the measurement that associated to the the specified <a href="#rawdataitem"><code>RawDataItem</code></a> or <code>undefined</code> if the collection contains no such measurement.</p>
+<p><strong>findMeasurementsByEntity <a href="#measurement"><code>IterableIterator&lt;Measurement&gt;</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMeasurementsByEntity</span>(<span class="hljs-params"> 
+    entity: InspectionPlanItem 
+</span>) : <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">Measurement</span>&gt;
+</span></code></pre>
+<p>Returns the measurements that are associated to the the specified inspection plan part or <code>undefined</code> if the collection contains no such measurement.</p>
+<p><strong>findValueByEntity <a href="#measurementvalue"><code>MeasurementValue</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findValueByReference</span>(<span class="hljs-params"> 
-    reference: DataReference 
-</span>) : <span class="hljs-title">Measurement</span> | <span class="hljs-title">undefined</span>
+    entity: RawDataItem 
+</span>) : <span class="hljs-title">MeasurementValue</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
-<p>Returns the measurement value that is identified by the specified <a href="#datareference"><code>DataReference</code></a> or <code>undefined</code> if the collection contains no such measurement value.</p>
+<p>Returns the measurement value that is associated to the specified <a href="#rawdataitem"><code>RawDataItem</code></a> or <code>undefined</code> if the collection contains no such measurement value.</p>
+<p><strong>findValuesByEntity <a href="#measurement"><code>IterableIterator&lt;MeasurementValue&gt;</code></a></strong></p>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findValuesByEntity</span>(<span class="hljs-params"> 
+    entity: InspectionPlanItem 
+</span>) : <span class="hljs-title">IterableIterator</span>&lt;<span class="hljs-title">MeasurementValue</span>&gt;
+</span></code></pre>
+<p>Returns the measurements that are associated to the the specified inspection plan characteristic or <code>undefined</code> if the collection contains no such measurement.</p>
 <p><a id="markdown-measurement" name="measurement"></a></p>
 <h4>Measurement</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Measurement <span class="hljs-keyword">extends</span> AttributeItem <span class="hljs-keyword">implements</span> DataReference
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Measurement <span class="hljs-keyword">implements</span> IAttributeItem
 </code></pre>
 <p>Describes a measurement of an inspection plan part.</p>
-<p><strong>ID <code>string</code></strong></p>
-<p>The identifier of this measurement.</p>
-<p><strong>partID <code>string</code></strong></p>
-<p>The identifier of the part this measurement is associated with.</p>
-<p><strong>findValueByReference <a href="#measurementvalue"><code>MeasurementValue</code></a></strong></p>
+<p><strong>measurementId <code>string</code></strong></p>
+<p>Gets the identifier of this measurement.</p>
+<p><strong>partId <code>string</code></strong></p>
+<p>Gets the identifier of the part this measurement is associated with.</p>
+<p><strong>attributes <a href="#attributecollection"><code>AttributeCollection</code></a></strong></p>
+<p>Gets the attributes of this measurement.</p>
+<p><strong>valueCount <code>number</code></strong></p>
+<p>Gets the number of measurement values associated to this measurement.</p>
+<p><strong>allMeasurementValues <a href="#measurementvalue"><code>IterableIterator&lt;MeasurementValue&gt;</code></a></strong></p>
+<p>Gets the values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.</p>
+<p><strong>findValueByEntity <a href="#measurementvalue"><code>MeasurementValue</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findValueByReference</span>(<span class="hljs-params">
-     reference : DataReference
-</span>) : <span class="hljs-title">MeasurementValue</span>
+     entity : InspectionPlanItem
+</span>) : <span class="hljs-title">MeasurementValue</span> | <span class="hljs-title">undefined</span>
 </span></code></pre>
-<p>Returns the measurement value that is associated to the specified characteristic.</p>
-<p><strong>allValues <a href="#measurementvalue"><code>MeasurementValue[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">allValues</span>(<span class="hljs-params"></span>) : <span class="hljs-title">MeasurementValue</span>[]
-</span></code></pre>
-<p>The values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.</p>
+<p>Returns the measurement value that is associated to the specified characteristic or <code>undefined</code> if the measurement contains no such measurement value.</p>
 <p><a id="markdown-measurementvalue" name="measurementvalue"></a></p>
 <h4>MeasurementValue</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementValue <span class="hljs-keyword">extends</span> AttributeItem
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementValue <span class="hljs-keyword">implements</span> IAttributeItem
 </code></pre>
-<p><strong>characteristicID <code>string</code></strong></p>
+<p><strong>characteristicId <code>string</code></strong></p>
 <p>The identifier of the characteristic this measured value is associated to.</p>
+<p><strong>attributes <a href="#attributecollection"><code>AttributeCollection</code></a></strong></p>
+<p>Gets the attributes of this measurement value</p>
+<p><strong>measurement <a href="#measurement"><code>Measurement</code></a></strong></p>
+<p>Gets the measurement to which this measurement value belongs.</p>
 <p><a id="markdown-raw-data" name="raw-data"></a></p>
 <h3>Raw Data</h3>
 <p><a id="markdown-content-11" name="content-11"></a></p>
 <h4>Content</h4>
 <ul>
-<li><a href="#entitytype">EntityType</a></li>
+<li><a href="#rawdataentity">RawDataEntity</a></li>
 <li><a href="#rawdatacollection">RawDataCollection</a></li>
 <li><a href="#rawdataitem">RawDataItem</a></li>
 </ul>
@@ -2643,12 +2781,12 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataCollection</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataCollection</span></span>;
 </code></pre>
 <p>You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.</p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setRawDataSources</span>(<span class="hljs-params"> RawDataSource[] sources </span>) : <span class="hljs-title">void</span></span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataSources</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataSource</span>[]</span>;
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setRawDataSources</span>(<span class="hljs-params"> Iterable&lt;RawDataEntity&gt; sources </span>) : <span class="hljs-title">void</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataSources</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataEntity</span>[]</span>;
 </code></pre>
-<p><a id="markdown-entitytype" name="entitytype"></a></p>
-<h4>EntityType</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> EntityType;
+<p><a id="markdown-rawdataentity" name="rawdataentity"></a></p>
+<h4>RawDataEntity</h4>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> RawDataEntity;
 </code></pre>
 <p>Identifies the type of the entity a <a href="#rawdataitem"><code>RawDataItem</code></a> is attached to.</p>
 <table>
@@ -2695,10 +2833,10 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>Searches for raw data information with the specified <a href="#datareference"><code>DataReference</code></a>.</p>
 <p><a id="markdown-rawdataitem" name="rawdataitem"></a></p>
 <h4>RawDataItem</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RawDataItem <span class="hljs-keyword">implements</span> DataReference;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> RawDataItem;
 </code></pre>
 <p>Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.</p>
-<p><strong>entityType <a href="#entitytype"><code>EntityType</code></a></strong></p>
+<p><strong>entityType <a href="#rawdataentity"><code>RawDataEntity</code></a></strong></p>
 <p>Identifies the type of the entity a <a href="#rawdataitem"><code>RawDataItem</code></a> is attached to.</p>
 <p><strong>name <code>string</code></strong></p>
 <p>The filename of the item.</p>
@@ -2710,11 +2848,11 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The timestamp when the data has been uploaded to the server.</p>
 <p><strong>lastModified <code>Date</code></strong></p>
 <p>The timestamp of the most recent modification.</p>
-<p><strong>getData() <code>HostBinary</code></strong></p>
+<p><strong>getData <code>HostBinary</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) : <span class="hljs-title">HostBinary</span>
 </span></code></pre>
 <p>Use this function to actually fetch the data associated to the <code>RawDataItem</code>. The data is returned as a <code>HostBuffer</code>, which can be converted to a <code>Buffer</code> using the <code>makeBuffer</code> function.</p>
-<p><strong>getDataBuffer() <code>Buffer</code></strong></p>
+<p><strong>getDataBuffer <code>Buffer</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDataBuffer</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Buffer</span>
 </span></code></pre>
 <p>Use this function to actually fetch the data associated to the <code>RawDataItem</code>. The data is returned as a <code>Buffer</code></p>
@@ -2736,7 +2874,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>Some system variable expressions can return arrays as a result. Every member of this array might have a different datatype. Nested arrays are also possible.</p>
 <p><a id="markdown-tooltips" name="tooltips"></a></p>
 <h2>Tooltips</h2>
-<p><a id="markdown-introduction-4" name="introduction-4"></a></p>
+<p><a id="markdown-introduction-5" name="introduction-5"></a></p>
 <h3>Introduction</h3>
 <p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:</p>
 <p><img src="gfx/infomode.png" alt="alt text" title="infomode"></p>
@@ -2794,7 +2932,7 @@ tooltips.provider.onCreateTooltips = createTooltipShapes;
 <p>The geometry of the tooltip shape.</p>
 <p><a id="markdown-logger" name="logger"></a></p>
 <h2>Logger</h2>
-<p><a id="markdown-introduction-5" name="introduction-5"></a></p>
+<p><a id="markdown-introduction-6" name="introduction-6"></a></p>
 <h3>Introduction</h3>
 <p>The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a <strong>significant performance impact</strong>.</p>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
@@ -2802,7 +2940,7 @@ tooltips.provider.onCreateTooltips = createTooltipShapes;
 
 loger.debug(<span class="hljs-string">"My log message"</span>);
 </code></pre>
-<p><a id="markdown-methods-3" name="methods-3"></a></p>
+<p><a id="markdown-methods-4" name="methods-4"></a></p>
 <h3>Methods</h3>
 <p><strong>error <code>void</code></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span>(<span class="hljs-params">

@@ -55,16 +55,19 @@
         - [CultureInfo](#cultureinfo)
         - [RegionInfo](#regioninfo)
         - [TimeZoneInfo](#timezoneinfo)
-- [Properties](#properties-1)
-    - [Introduction](#introduction-1)
-    - [Methods](#methods-1)
 - [Format](#format)
-    - [Introduction](#introduction-2)
+    - [Introduction](#introduction-1)
     - [Enumerations](#enumerations-1)
         - [DateKind](#datekind)
+    - [Methods](#methods-1)
+- [Properties](#properties-1)
+    - [Introduction](#introduction-2)
     - [Methods](#methods-2)
-- [Drawing](#drawing)
+- [Resources](#resources)
     - [Introduction](#introduction-3)
+    - [Methods](#methods-3)
+- [Drawing](#drawing)
+    - [Introduction](#introduction-4)
     - [Interfaces](#interfaces)
     - [Common](#common)
         - [Content](#content)
@@ -146,7 +149,7 @@
         - [AttributeType](#attributetype)
         - [Attribute](#attribute)
         - [AttributeItem](#attributeitem)
-        - [DataReference](#datareference)
+        - [AttributeCollection](#attributecollection)
     - [Configuration](#configuration)
         - [Content](#content-8)
         - [Usage](#usage)
@@ -172,20 +175,20 @@
     - [Raw Data](#raw-data)
         - [Content](#content-11)
         - [Usage](#usage-3)
-        - [EntityType](#entitytype)
+        - [RawDataEntity](#rawdataentity)
         - [RawDataCollection](#rawdatacollection)
         - [RawDataItem](#rawdataitem)
 - [Expressions](#expressions)
 - [Tooltips](#tooltips)
-    - [Introduction](#introduction-4)
+    - [Introduction](#introduction-5)
     - [Classes](#classes-1)
         - [TooltipShapeCollection](#tooltipshapecollection)
         - [TooltipShape](#tooltipshape)
         - [TooltipPointShape](#tooltippointshape)
         - [TooltipGeometryShape](#tooltipgeometryshape)
 - [Logger](#logger)
-    - [Introduction](#introduction-5)
-    - [Methods](#methods-3)
+    - [Introduction](#introduction-6)
+    - [Methods](#methods-4)
 
 <!-- /TOC -->
 </div>
@@ -938,10 +941,107 @@ The offset of the timezone at the specified date in hours.
 
 The name of the timezone.
 
+<a id="markdown-format" name="format"></a>
+## Format
+
+<a id="markdown-introduction-1" name="introduction-1"></a>
+### Introduction
+
+In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the `piweb.format` interface.
+
+```TypeScript
+import * as piweb from 'piweb';
+import drawing = piweb.format;
+```
+
+<a id="markdown-enumerations-1" name="enumerations-1"></a>
+### Enumerations
+
+<a id="markdown-datekind" name="datekind"></a>
+#### DateKind
+
+```TypeScript
+enum DateKind
+```
+
+When parsing a date without a specified time zone the `DateKind` parameter determines which time zone the date has.
+
+**`assumeLocal`**
+
+The represented time will be interpreted as local time.
+        
+**`assumeUTC`**
+
+The represented time will be interpreted as UTC.
+
+<a id="markdown-methods-1" name="methods-1"></a>
+### Methods
+
+**formatNumber `string`**
+
+```TypeScript
+function formatNumber(
+    value: number, 
+    formatString?: string | null, 
+    culture?: CultureInfo | null
+) : string;
+```
+
+Converts the specified value to its string representation using the specified format string and the culture specific format information.
+
+**parseNumber `number | null`**
+
+```TypeScript
+function parseNumber(
+    str: string, 
+    culture?: CultureInfo | null
+): number | null;
+```
+
+Converts the specified string representation of a number in a specified culture specific format to its `number` equivalent.
+
+**formatDate `string`**
+
+```TypeScript
+function formatDate(
+    date: Date, 
+    offset?: number | null, 
+    format?: string | null, 
+    culture?: CultureInfo | null
+): string;
+```
+
+Converts the specified date to its string representation using the specified format string and the culture specific format information.
+
+**parseDate `Date | null`**
+
+```TypeScript
+function parseDate(
+    str: string, 
+    culture?: CultureInfo | null, 
+    dateKind?: DateKind | null
+) : Date | null;
+```
+
+Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+
+**parseDateExact `Date | null`**
+
+```TypeScript
+function parseDateExact(
+    str: string, 
+    format: string, 
+    culture?: CultureInfo | null, 
+    dateKind?: DateKind | null
+) : Date | null;
+```
+
+Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+
 <a id="markdown-properties-1" name="properties-1"></a>
 ## Properties
 
-<a id="markdown-introduction-1" name="introduction-1"></a>
+<a id="markdown-introduction-2" name="introduction-2"></a>
 ### Introduction
 
 The properties you define in the `package.json` file can be accessed via the `piweb.properties` interface. To enable type checking, there is one function for each available datatype.
@@ -951,7 +1051,7 @@ import * as piweb from 'piweb';
 import properties = piweb.properties;
 ```
 
-<a id="markdown-methods-1" name="methods-1"></a>
+<a id="markdown-methods-2" name="methods-2"></a>
 ### Methods
 
 **getStringProperty `string`**
@@ -1026,107 +1126,37 @@ function getFontProperty(id : string) : FontDescription
 
 Returns the value of the property with the name `id` as a `FontDescription`. The result can be used as parameter for the `create` method of the [`Font`](#font) class.
 
-<a id="markdown-format" name="format"></a>
-## Format
+<a id="markdown-resources" name="resources"></a>
+## Resources
 
-<a id="markdown-introduction-2" name="introduction-2"></a>
+<a id="markdown-introduction-3" name="introduction-3"></a>
 ### Introduction
 
-In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files. To ensure the correct formatting, you can use the `piweb.format` interface.
+The `piweb.resources` interface can be used to access files that are part of your PiWeb extension package. All paths must be specified relative to the extensions output directory, which has been specified with the `outDir` parameter in the `tsconfig.json` file.
 
-```TypeScript
-import * as piweb from 'piweb';
-import drawing = piweb.format;
-```
-
-<a id="markdown-enumerations-1" name="enumerations-1"></a>
-### Enumerations
-
-<a id="markdown-datekind" name="datekind"></a>
-#### DateKind
-
-```TypeScript
-enum DateKind
-```
-
-When parsing a date without a specified time zone the `DateKind` parameter determines which time zone the date has.
-
-**`assumeLocal`**
-
-The represented time will be interpreted as local time.
-        
-**`assumeUTC`**
-
-The represented time will be interpreted as UTC.
-
-<a id="markdown-methods-2" name="methods-2"></a>
+<a id="markdown-methods-3" name="methods-3"></a>
 ### Methods
 
-**formatNumber `string`**
+**readFileBufferSync `Buffer`**
 
 ```TypeScript
-function formatNumber(
-    value: number, 
-    formatString?: string | null, 
-    culture?: CultureInfo | null
-) : string;
+function readFileBufferSync(path : string) : Buffer
 ```
 
-Converts the specified value to its string representation using the specified format string and the culture specific format information.
+Reads the content of the file at the specified path and returns it as a `Buffer`. The returned buffer can be read as string, or be interpreted as an image resource by the [`Bitmap`](#bitmap) class.
 
-**parseNumber `number | null`**
+**readFileSync `HostBinary`**
 
 ```TypeScript
-function parseNumber(
-    str: string, 
-    culture?: CultureInfo | null
-): number | null;
+function readFileSync(path : string) : HostBinary
 ```
 
-Converts the specified string representation of a number in a specified culture specific format to its `number` equivalent.
-
-**formatDate `string`**
-
-```TypeScript
-function formatDate(
-    date: Date, 
-    offset?: number | null, 
-    format?: string | null, 
-    culture?: CultureInfo | null
-): string;
-```
-
-Converts the specified date to its string representation using the specified format string and the culture specific format information.
-
-**parseDate `Date | null`**
-
-```TypeScript
-function parseDate(
-    str: string, 
-    culture?: CultureInfo | null, 
-    dateKind?: DateKind | null
-) : Date | null;
-```
-
-Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
-
-**parseDateExact `Date | null`**
-
-```TypeScript
-function parseDateExact(
-    str: string, 
-    format: string, 
-    culture?: CultureInfo | null, 
-    dateKind?: DateKind | null
-) : Date | null;
-```
-
-Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+Reads the content of the file at the specified path and returns it as a `HostBinary`. The returned binary can be interpreted as an image resource by the [`Bitmap`](#bitmap) class.
 
 <a id="markdown-drawing" name="drawing"></a>
 ## Drawing  
 
-<a id="markdown-introduction-3" name="introduction-3"></a>
+<a id="markdown-introduction-4" name="introduction-4"></a>
 ### Introduction
 
 All necessary classes for drawing are encapsulated in the `piweb.drawing` interface. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens, the custom plot API will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
@@ -1465,15 +1495,15 @@ class Bitmap
 
 Describes an image that can be drawn with the [`DrawImage`](#drawingcontext-drawimage) function of the [`DrawingContext`](#drawingcontext).
 
-**loadFromVfs `Bitmap`**
+**loadFromResource `Bitmap`**
 
 ```TypeScript
-static function loadFromVfs(
+static function loadFromResource(
     path: string
 ) : Bitmap
 ```
 
-Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages root directory.
+Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages output directory, which has been specified with the `outDir` parameter in the `tsconfig.json` file.
 
 **measure `BitmapMeasurements`**
 
@@ -2958,7 +2988,8 @@ import data = piweb.data;
 piweb.events.on("dataChanged", loadData);
 
 function loadData() {
-    const provider = data.provider;
+    const configuration = data.getConfiguration();
+    const inspectionPlan = data.getInspectionPlan();
     ...
 }
 ```
@@ -2972,7 +3003,7 @@ function loadData() {
 - [AttributeType](#attributetype)
 - [Attribute](#attribute)
 - [AttributeItem](#attributeitem)
-- [DataReference](#datareference)
+- [AttributeCollection](#attributecollection)
 
 <a id="markdown-attributetype" name="attributetype"></a>
 #### AttributeType
@@ -3028,37 +3059,96 @@ The actual value of the attribute. Refer to the `type` to get the datatype.
 #### AttributeItem
 
 ```TypeScript
-abstract class AttributeItem
+interface IAttributeItem
 ```
 
-An attribute item has a set of attributes. Only attributes that actually have a value are returned, so the number of attributes is usually lower than the number of attribute definitions that refer to the entity type of the attribute item.
+An attribute item has a collection of attributes. The collection contains only attributes that actually have a value, so the number of attributes is usually lower than the number of attribute definitions that refer to the entity type of the attribute item.
 
-**attributes [`Map<number, Attribute>`](#attribute)**
+**attributes [`AttributeCollection`](#attributecollection)**
 
-The list of attributes that belong to this attribute item. 
+The collection of attributes that belong to this attribute item. 
+
+<a id="markdown-attributecollection" name="attributecollection"></a>
+#### AttributeCollection
+
+```TypeScript
+class AttributeCollection
+```
+
+Describes an accessible collection of [`Attributes`](#attribute), that is attached to an [`AttributeItem`](#attributeitem). The collection offers a wide range of helper functions to allow a type safe access to the attributes values. You can iterate over the collection with a `for ... of` loop.
+
+**length `number`**
+
+Gets the number of attributes stored in the collection.
+
+**keys `IterableIterator<number>`**
+
+Gets an iterator over the available keys in the collection.
+
+**getAttribute [`Attribute`](#attribute)**
+
+```TypeScript
+function getAttribute(key: number) :  Attribute | undefined
+```
+
+Returns the attribute with the specified key, or `undefined` in case there is no attribute with this key.
 
 **getValue `string | number | Date | undefined`**
 
 ```TypeScript
-function getValue(
-    key: number
-): string | number | Date | undefined
+function getValue(key: number) : string | number | Date | undefined
 ```
 
-Returns the value that corresponds to the specified attribute key. In case the attribute was not found the function returns `undefined`.
+Returns the value of the attribute with the specified key, or `undefined` in case there is no attribute with this key.
 
-<a id="markdown-datareference" name="datareference"></a>
-#### DataReference
-
-A `DataReference` is used as indexer in many collections throughout the `piweb.data` interface.
+**getStringValue `string`**
 
 ```TypeScript
-interface DataReference
+function getStringValue(key: number): string | undefined
 ```
 
-The following collections can be searched through with a `DataReference`:
+Returns the value of the attribute with the specified key as `string`, or `undefined` in case there is no attribute with this key.
 
-- [`RawDataCollection`](#rawdatacollection)
+**getIntegerValue `number`**
+
+```TypeScript
+function getIntegerValue(key: number): number | undefined
+```
+
+Returns the value of the attribute with the specified key as integral `number`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into an integral `number` representation.
+
+**getFloatValue `number`**
+
+```TypeScript
+function getFloatValue(key: number): number | undefined
+```
+
+Returns the value of the attribute with the specified key as floating point `number`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into a floating point `number` representation.
+
+**getDateValue `Date`**
+
+```TypeScript
+function getDateValue(key: number): Date | undefined
+```
+
+Returns the value of the attribute with the specified key as `Date`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into a `Date` representation.
+
+**getCatalogIndex `number`**
+
+```TypeScript
+function getCatalogIndex(key: number): number | undefined
+```
+
+Returns the value of the attribute with the specified key as integral `number`, representing the key of a catalog entry, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into an integral `number` representation.
+
+
+**getNumericValue `number`**
+
+```TypeScript
+function getNumericValue(key: number): number | undefined
+```
+
+Returns the value of the attribute with the specified key as `number`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into a `number` representation.
 
 <a id="markdown-configuration" name="configuration"></a>
 ### Configuration
@@ -3091,7 +3181,7 @@ function getConfiguration() : Configuration
 class Configuration
 ```
 
-The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.
+The configuration contains all [`AttributeDefinitions`](#attributedefinition) for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.
 
 **allAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
@@ -3109,7 +3199,7 @@ The set of attribute definitions referring to inspection plan characteristics.
 
 The set of attribute definitions referring to measurements.
 
-**valueAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
+**measurementValueAttributes [`Map<number, AttributeDefinition>`](#attributedefinition)**
 
 The set of attribute definitions referring to measured values.
 
@@ -3133,28 +3223,28 @@ Attributes, that are returned with inspection plan items, measurements or measur
 #### ConfigurationEntity
 
 ```TypeScript
-enum EntityType
+enum ConfigurationEntity
 ```
 
 Lists all entities that have attributes attached to them.
 
-**`Characteristic`**
+**`characteristic`**
 
 Inspection plan characteristic. Common attributes are tolerances and classification attributes.
 
-**`Part`**
+**`part`**
 
 Inspection plan part. Common attributes are identification attributes, e.g. name and number.
 
-**`Measurement`**
+**`measurement`**
 
 Measurement. Common attributes are time, machine, operator and batch number.
 
-**`Value`**
+**`measurementValue`**
 
 Value. The most common attribute is the measured value (K1).
 
-**`Catalog`**
+**`catalog`**
 
 Attributes for catalog entries. These refer to the "columns" of a catalog.
 
@@ -3182,9 +3272,9 @@ The datatype of the values of the attribute.
 
 The entity type this attribute belongs to.
 
-**catalog `string | undefined`**
+**catalogId `string | undefined`**
 
-In case the `dataType` is `Catalog`, this field contains a base64 encoded `Guid` that identifies the **[`Catalog`](#catalog)** that is used by this attribute.
+In case the `dataType` is `Catalog`, this field contains the id of the [`Catalog`](#catalog) that is used by this attribute. You can pass the id or the whole attribute definition into a [`CatalogCollection`](#catalogcollection) to get the [`Catalog`](#catalog).
 
 <a id="markdown-catalogcollection" name="catalogcollection"></a>
 #### CatalogCollection
@@ -3193,23 +3283,31 @@ In case the `dataType` is `Catalog`, this field contains a base64 encoded `Guid`
 class CatalogCollection
 ```
 
-A catalog collection contains a set of catalogs, that can either be iterated over, or accessed with a catalog reference string.
-
-**all [`Catalog[]`](#catalog)**
+A catalog collection contains a set of catalogs, that can be accessed with an [`AttributeDefinition`](#attributedefinition), an [`InspectionPlanItem`](#inspectionplanitem) or a catalog id. It's possible to iterate over the catalogs like the following:
 
 ```TypeScript
-function all() : Catalog[];
+for (let catalog of catalogs)
 ```
 
-Returns all catalogs in the collection as an array
+**length `number`**
 
-**all [`Catalog[]`](#catalog)**
+Gets the total number of catalogs stored in the collection.
+
+**find [`Catalog`](#catalog)**
 
 ```TypeScript
-function findByReference( ref: string ) : Catalog | undefined;
+function find( 
+    entry: AttributeDefinition | InspectionPlanItem | string
+): Catalog | undefined;
 ```
 
-Returns the catalog that is identified by the specified `ref` string. Catalog reference strings can be found as member of the [`Catalog`](#catalog) class, or as value of an [`Attribute`](#attribute).
+Returns the catalog that is associated to the specified entry. The following associations are assumed:
+
+| Entry                            | Association |
+|----------------------------------|------------------------------------------------------|
+| [`AttributeDefinition`](#attributedefinition) | The catalog that is used by a catalog attribute |
+| [`InspectionPlanItem`](#inspectionplanitem) | The measurement value catalog that is configured in attributive characteristics |
+| `string` | A catalog id that can be found in [`AttributeDefinitions`](#attributedefinition) or [`Catalogs`](#catalog) |
 
 <a id="markdown-catalog" name="catalog"></a>
 #### Catalog
@@ -3218,9 +3316,9 @@ Returns the catalog that is identified by the specified `ref` string. Catalog re
 class Catalog
 ```
 
-**catalogRef `string`**
+**catalogId `string`**
 
-A base64 encoded `Guid` that identifies the catalog. It can be used to access a certain catalog in the [`CatalogCollection`](#catalogcollection)
+The id of the catalog. It can be used to access a certain catalog in the [`CatalogCollection`](#catalogcollection)
 
 **name `string`**
 
@@ -3240,12 +3338,16 @@ A set of catalog entries of which this catalog is composed.
 Catalog entries used as enumeration values of attributes in the PiWeb database.
 
 ```TypeScript
-class CatalogEntry extends AttributeItem
+class CatalogEntry implements IAttributeItem
 ```
 
 **key `number`**
 
-A 16 bit integer that identifies the catalog entry. When accessing an attribute with the datatype `Catalog`, a 16 bit integer is returned that refers to this key.
+A 16 bit integer that identifies the catalog entry.
+
+**attributes [`AttributeCollection`](#attributecollection)**
+
+The catalog attributes, often referred to as the values of the catalogs columns.
 
 <a id="markdown-inspection-plan" name="inspection-plan"></a>
 ### Inspection Plan
@@ -3267,7 +3369,7 @@ A 16 bit integer that identifies the catalog entry. When accessing an attribute 
 function getInspectionPlanCollection() : InspectionPlanCollection;
 ```
 
-Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer. Every inspection plan entity is identified by a `Guid`, which is stored as a base64 encoded byte array. 
+Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer.
 
 <a id="markdown-inspectionplancollection" name="inspectionplancollection"></a>
 #### InspectionPlanCollection
@@ -3276,29 +3378,51 @@ Returns all inspection plan items that are bound to the custom plot element with
 class InspectionPlanCollection
 ```
 
-A collection of [`InspectionPlanItems`](#inspectionplanitem). 
+A collection of [`InspectionPlanItems`](#inspectionplanitem). It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:
+
+```TypeScript
+const inspectionPlanCollection = piweb.data.getInspectionPlanCollection();
+for (let item of inspectionPlanCollection)
+{
+    ...
+}
+```
 
 **length `number`**
 
-The number of items in the collection.
+Gets the total number of items stored in the collection.
 
-**all [`InspectionPlanItem[]`](#inspectionplanitem)**
- 
+**getParts `IterableIterator<InspectionPlanItem>`**
+
 ```TypeScript
-function all() : InspectionPlanItem[]
+function getParts( ) : IterableIterator<InspectionPlanItem>;
 ```
 
-Returns all inspection plan items in the collection as an array.
+Returns an iterator over all parts stored in the collection.
 
-**findByReference [`InspectionPlanItem`](#inspectionplanitem)**
+**getCharacteristics `IterableIterator<InspectionPlanItem>`**
+
+```TypeScript
+function getCharacteristics( ) : IterableIterator<InspectionPlanItem>;
+```
+
+Returns an iterator over all characteristics stored in the collection.
+
+**findByEntity [`InspectionPlanItem`](#inspectionplanitem)**
  
 ```TypeScript
-function findByReference( 
-    reference: DataReference 
+function findByEntity( 
+    entity: Measurement | MeasurementValue | RawDataItem
 ) : InspectionPlanItem | undefined
 ```
 
-Returns the inspection plan item that is identified by the specified [`DataReference`](#datareference) or `undefined` if the collection contains no such inspection plan item.
+Returns the inspection plan item that associated to the the specified entity or `undefined` if the collection contains no such inspection plan item. The following associations are assumed:
+
+| Entity                            | Association |
+|----------------------------------|------------------------------------------------------|
+| [`Measurement`](#measurement) | The part to which the measurement is attached |
+| [`MeasurementValue`](#measurementvalue) | The characteristic to which the measurement value is attached |
+| [`RawDataItem`](#rawdataitem) | The part or characteristic to which the raw data is attached |
 
 **findByPath [`InspectionPlanItem`](#inspectionplanitem)**
  
@@ -3320,12 +3444,22 @@ function findParent(
 
 Returns the parent item of the specified inspection plan item or `undefined` if the item has no parent, or the collection doesn't contain it.
 
+**findParentPart [`InspectionPlanItem`](#inspectionplanitem)**
+ 
+```TypeScript
+function findParentPart( 
+    item: InspectionPlanItem 
+) : InspectionPlanItem | undefined
+```
+
+Returns the parent part of the specified inspection plan item or `undefined` if the item has no parent, or the collection doesn't contain it.
+
 **findChildren [`InspectionPlanItem[]`](#inspectionplanitem)**
  
 ```TypeScript
 function findChildren( 
     item: InspectionPlanItem 
-) : InspectionPlanItem[]
+) : IterableIterator<InspectionPlanItem>
 ```
 
 Returns the child items of the specified inspection plan item or. Please be aware that only those children are returned, that are included in the binding of the element.
@@ -3349,18 +3483,22 @@ Refers to an inspection plan part.
 #### InspectionPlanItem
 
 ```TypeScript
-class InspectionPlanItem extends AttributeItem implements DataReference
+class InspectionPlanItem implements AttributeItem
 ```
 
 Describes a part or a characteristic of the inspection plan.
 
-**ID `string`**
+**inspectionPlanItemId `string`**
 
 The identifier of this inspection plan item which can be used to access other information connected to it.
 
 **parentID `string?`**
 
 The inspectionPlanRef of this items parent in the inspection plan structure.
+
+**attributes [`AttributeCollection`](#attributecollection)**
+
+The attributes of this inspection plan item.
 
 **type [`InspectionPlanItemType`](#inspectionPlanItemType)**
 
@@ -3373,6 +3511,14 @@ The path of the item in the inspection plan structure.
 **name `string`**
 
 The name of the item, which is also the last part of the path.
+
+**isEnumerated `boolean`**
+
+Gets a value indicating whether the characteristic is an enumerated characteristic, which means that its measurement value represents the key of a catalog entry.
+
+**isCounting `boolean`**
+
+Gets a value indicating whether the characteristic is a counting characteristic, which means that its measurement value represents a number of arbitrary entities.
 
 <a id="markdown-measurements" name="measurements"></a>
 ### Measurements
@@ -3422,85 +3568,117 @@ Fetches the measurements as well as their values.
 class MeasurementCollection
 ```
 
-A collection of [`Measurements`](#measurement). 
+A collection of [`Measurements`](#measurement). It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:
+
+```TypeScript
+const measurementCollection = piweb.data.getMeasurementCollection();
+for (let measurement of measurementCollection)
+{
+    ...
+}
+```
 
 **length `number`**
 
 The number of measurements in the collection.
 
-**all [`Measurement[]`](#measurement)**
+**findMeasurementByEntity [`Measurement`](#measurement)**
  
 ```TypeScript
-function all() : Measurement[]
-```
-
-Returns all measurements in the collection as an array.
-
-**findMeasurementByReference [`Measurement`](#measurement)**
- 
-```TypeScript
-function findMeasurementByReference( 
-    reference: DataReference 
+function findMeasurementByEntity( 
+    entity: RawDataItem 
 ) : Measurement | undefined
 ```
 
-Returns the measurement that is identified by the specified [`DataReference`](#datareference) or `undefined` if the collection contains no such measurement.
+Returns the measurement that associated to the the specified [`RawDataItem`](#rawdataitem) or `undefined` if the collection contains no such measurement. 
 
-**findValueByReference [`MeasurementValue`](#measurementvalue)**
+**findMeasurementsByEntity [`IterableIterator<Measurement>`](#measurement)**
+ 
+```TypeScript
+function findMeasurementsByEntity( 
+    entity: InspectionPlanItem 
+) : IterableIterator<Measurement>
+```
+
+Returns the measurements that are associated to the the specified inspection plan part or `undefined` if the collection contains no such measurement.
+
+**findValueByEntity [`MeasurementValue`](#measurementvalue)**
  
 ```TypeScript
 function findValueByReference( 
-    reference: DataReference 
-) : Measurement | undefined
+    entity: RawDataItem 
+) : MeasurementValue | undefined
 ```
 
-Returns the measurement value that is identified by the specified [`DataReference`](#datareference) or `undefined` if the collection contains no such measurement value.
+Returns the measurement value that is associated to the specified [`RawDataItem`](#rawdataitem) or `undefined` if the collection contains no such measurement value.
+
+**findValuesByEntity [`IterableIterator<MeasurementValue>`](#measurement)**
+ 
+```TypeScript
+function findValuesByEntity( 
+    entity: InspectionPlanItem 
+) : IterableIterator<MeasurementValue>
+```
+
+Returns the measurements that are associated to the the specified inspection plan characteristic or `undefined` if the collection contains no such measurement.
 
 <a id="markdown-measurement" name="measurement"></a>
 #### Measurement
 
 ```TypeScript
-class Measurement extends AttributeItem implements DataReference
+class Measurement implements IAttributeItem
 ```
 
 Describes a measurement of an inspection plan part. 
 
-**ID `string`**
+**measurementId `string`**
 
-The identifier of this measurement.
+Gets the identifier of this measurement.
 
-**partID `string`**
+**partId `string`**
 
-The identifier of the part this measurement is associated with.
+Gets the identifier of the part this measurement is associated with.
 
-**findValueByReference [`MeasurementValue`](#measurementvalue)**
+**attributes [`AttributeCollection`](#attributecollection)**
+
+Gets the attributes of this measurement.
+
+**valueCount `number`**
+
+Gets the number of measurement values associated to this measurement.
+
+**allMeasurementValues [`IterableIterator<MeasurementValue>`](#measurementvalue)**
+
+Gets the values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
+
+**findValueByEntity [`MeasurementValue`](#measurementvalue)**
 
 ```TypeScript
 function findValueByReference(
-     reference : DataReference
-) : MeasurementValue
+     entity : InspectionPlanItem
+) : MeasurementValue | undefined
 ```
 
-Returns the measurement value that is associated to the specified characteristic.
-
-**allValues [`MeasurementValue[]`](#measurementvalue)**
-
-```TypeScript
-function allValues() : MeasurementValue[]
-```
-
-The values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
+Returns the measurement value that is associated to the specified characteristic or `undefined` if the measurement contains no such measurement value.
 
 <a id="markdown-measurementvalue" name="measurementvalue"></a>
 #### MeasurementValue
 
 ```TypeScript
-class MeasurementValue extends AttributeItem
+class MeasurementValue implements IAttributeItem
 ```
 
-**characteristicID `string`**
+**characteristicId `string`**
 
 The identifier of the characteristic this measured value is associated to.
+
+**attributes [`AttributeCollection`](#attributecollection)**
+
+Gets the attributes of this measurement value
+
+**measurement [`Measurement`](#measurement)**
+
+Gets the measurement to which this measurement value belongs.
 
 <a id="markdown-raw-data" name="raw-data"></a>
 ### Raw Data
@@ -3508,7 +3686,7 @@ The identifier of the characteristic this measured value is associated to.
 <a id="markdown-content-11" name="content-11"></a>
 #### Content
 
-- [EntityType](#entitytype)
+- [RawDataEntity](#rawdataentity)
 - [RawDataCollection](#rawdatacollection)
 - [RawDataItem](#rawdataitem)
 
@@ -3524,16 +3702,16 @@ function getRawDataCollection() : RawDataCollection;
 You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.
 
 ```TypeScript
-function setRawDataSources( RawDataSource[] sources ) : void;
-function getRawDataSources() : RawDataSource[];
+function setRawDataSources( Iterable<RawDataEntity> sources ) : void;
+function getRawDataSources() : RawDataEntity[];
 ```
 
 
-<a id="markdown-entitytype" name="entitytype"></a>
-#### EntityType
+<a id="markdown-rawdataentity" name="rawdataentity"></a>
+#### RawDataEntity
 
 ```TypeScript
-enum EntityType;
+enum RawDataEntity;
 ```
 
 Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to. 
@@ -3581,12 +3759,12 @@ Searches for raw data information with the specified [`DataReference`](#datarefe
 #### RawDataItem
 
 ```TypeScript
-class RawDataItem implements DataReference;
+class RawDataItem;
 ```
 
 Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
 
-**entityType [`EntityType`](#entitytype)**
+**entityType [`RawDataEntity`](#rawdataentity)**
 
 Identifies the type of the entity a [`RawDataItem`](#rawdataitem) is attached to. 
 
@@ -3610,7 +3788,7 @@ The timestamp when the data has been uploaded to the server.
 
 The timestamp of the most recent modification.
 
-**getData() `HostBinary`**
+**getData `HostBinary`**
 
 ```TypeScript
 function getData() : HostBinary
@@ -3618,7 +3796,7 @@ function getData() : HostBinary
 
 Use this function to actually fetch the data associated to the `RawDataItem`. The data is returned as a `HostBuffer`, which can be converted to a `Buffer` using the `makeBuffer` function.
 
-**getDataBuffer() `Buffer`**
+**getDataBuffer `Buffer`**
 
 ```TypeScript
 function getDataBuffer() : Buffer
@@ -3633,7 +3811,6 @@ function getCheckSum() : string
 ```
 
 Returns the data's MD5 hash. 
-
 
 <a id="markdown-expressions" name="expressions"></a>
 ## Expressions
@@ -3658,7 +3835,7 @@ Some system variable expressions can return arrays as a result. Every member of 
 <a id="markdown-tooltips" name="tooltips"></a>
 ## Tooltips
 
-<a id="markdown-introduction-4" name="introduction-4"></a>
+<a id="markdown-introduction-5" name="introduction-5"></a>
 ### Introduction
 
 PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:
@@ -3751,7 +3928,7 @@ The geometry of the tooltip shape.
 <a id="markdown-logger" name="logger"></a>
 ## Logger
 
-<a id="markdown-introduction-5" name="introduction-5"></a>
+<a id="markdown-introduction-6" name="introduction-6"></a>
 ### Introduction
 
 The PiWeb custom plot API provides a logging interface. You can create log entries as error, warning, info or debug messages. Be aware that generating log messages has a **significant performance impact**.
@@ -3763,7 +3940,7 @@ import logger = piweb.logger;
 loger.debug("My log message");
 ```
 
-<a id="markdown-methods-3" name="methods-3"></a>
+<a id="markdown-methods-4" name="methods-4"></a>
 ### Methods
 
 **error `void`**

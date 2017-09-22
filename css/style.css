@@ -1,6 +1,11 @@
 .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6{
     color: black;
-    margin: 24px 0 16px;
+    margin-top: 1.5em; 
+    margin-bottom: 1.3em;  
+    padding-bottom: 0.2em;
+    font-weight: 600;
+    font-size: 1.3em;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.18);
 }
 
 .markdown-body h1 {
@@ -8,42 +13,20 @@
     font-size: 1.6em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.8);
     padding-bottom: 0.3em;
+   
 }
 
 .markdown-body h2 {
     font-weight: 800;
     font-size: 1.4em;
-   border-bottom: 1px solid rgba(0, 0, 0, 0.36);   
-   padding-bottom: 0.2em;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.36); 
 }
 
-.markdown-body h3 {
-    font-weight: 600;
-    font-size: 1.3em;
-   border-bottom: 1px solid rgba(0, 0, 0, 0.18);
-   padding-bottom: 0.1em; 
+.markdown-body h3 {   
+    font-size: 1.3em;  
 }
 
-.markdown-body h4 {
-    font-weight: 600;
-    font-size: 1.1em; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18); 
-    padding-bottom: 0.1em;  
-}
 
-.markdown-body h5 {
-   font-weight: 600;
-   font-size: 1.1em; 
-   border-bottom: 1px solid rgba(0, 0, 0, 0.18); 
-   padding-bottom: 0.1em;  
-}
-
-.markdown-body h6 {
-    font-weight: 600;
-    font-size: 1.1em; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.18); 
-    padding-bottom: 0.1em;   
-}
 
 .markdown-body :not(pre):not(.hljs) > code { 
     font-family: Consolas,"Courier New",monospace;    
@@ -86,6 +69,7 @@
 .markdown-body table, p, pre, blockquote{
    margin-left: 24px;
    margin-top: 16px;
+   margin-bottom: 16px;
 }
 
 .markdown-body :not(td)>img {    
