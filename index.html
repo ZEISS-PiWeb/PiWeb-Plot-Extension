@@ -1088,7 +1088,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 <p><a id="markdown-interfaces" name="interfaces"></a></p>
 <h3>Interfaces</h3>
 <p>Most drawing objects, like <a href="#color"><code>Color</code></a>, <a href="#brush"><code>Brush</code></a>, <a href="#pen"><code>Pen</code></a>, <a href="#font"><code>Font</code></a> and <a href="#geometry"><code>Geometry</code></a> implement an interface that is named like the implementing class, with an additional <code>Description</code> suffix (e.g. <code>ColorDescription</code>).
-Classes that implement such a description interface have a <code>create</code> method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:</p>
+Classes that implement such a description interface have a <code>create</code> method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is, that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:</p>
 <p><strong>Long version using constructors:</strong></p>
 <pre><code class="language-TypeScript">context.setPen(<span class="hljs-keyword">new</span> piweb.drawing.Pen(
     <span class="hljs-keyword">new</span> piweb.drawing.SolidColorBrush(
@@ -2366,12 +2366,12 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong><code>date</code></strong></p>
 <p>The attribute has a <code>Date</code> value.</p>
 <p><strong><code>catalog</code></strong></p>
-<p>The attribute has a <code>number</code> value, that is to be interpreted as the key of a <strong><a href="#catalogentry"><code>CatalogEntry</code></a></strong>.</p>
+<p>The attribute has a <code>number</code> value, that is to be interpreted as the key of a <a href="#catalogentry"><code>CatalogEntry</code></a>.</p>
 <p><a id="markdown-attribute" name="attribute"></a></p>
 <h4>Attribute</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> Attribute
 </code></pre>
-<p>An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measured values and catalog entries. An attribute is identified by its <code>Key</code>. To get information about the type and usage of an attribute, use the <code>Key</code> to get the <strong><a href="#attributedefinition"><code>AttributeDefinition</code></a></strong> from the <strong><a href="#configuration"><code>Configuration</code></a></strong>.</p>
+<p>An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measured values and catalog entries. An attribute is identified by its <code>Key</code>. To get information about the type and usage of an attribute, use the <code>Key</code> to get the <a href="#attributedefinition"><code>AttributeDefinition</code></a> from the <a href="#configuration"><code>Configuration</code></a>.</p>
 <p><strong>key <code>number</code></strong></p>
 <p>An unsigned 16 bit integer that identifies the attributes definition.</p>
 <p><strong>type <a href="#attributetype"><code>AttributeType</code></a></strong></p>
@@ -2466,7 +2466,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><strong>resolveCatalogEntry <a href="#attribute"><code>Attribute</code></a></strong></p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">resolveCatalogEntry</span>(<span class="hljs-params">attribute: Attribute</span>): <span class="hljs-title">CatalogEntry</span> | <span class="hljs-title">undefined</span></span>;
 </code></pre>
-<p>Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the inderection between attributes and catalogs.</p>
+<p>Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the indirection between attributes and catalogs.</p>
 <p><a id="markdown-configurationentity" name="configurationentity"></a></p>
 <h4>ConfigurationEntity</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> ConfigurationEntity
@@ -2676,7 +2676,6 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p><a id="markdown-content-10" name="content-10"></a></p>
 <h4>Content</h4>
 <ul>
-<li><a href="#measurementmode">MeasurementMode</a></li>
 <li><a href="#measurementcollection">MeasurementCollection</a></li>
 <li><a href="#measurement">Measurement</a></li>
 <li><a href="#measurementvalue">MeasurementValue</a></li>
@@ -2685,19 +2684,9 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <h4>Usage</h4>
 <p>Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding. You can change the databinding and the measurement selection in PiWeb Designer. Every measurement is identified by a <code>Guid</code>, which is stored as a base64 encoded byte array.</p>
 <p><strong>getMeasurementCollection <a href="#measurementcollection"><code>MeasurementCollection</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMeasurementCollection</span>(<span class="hljs-params">
-    mode: MeasurementMode
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMeasurementCollection</span>(<span class="hljs-params">   
 </span>) : <span class="hljs-title">MeasurementCollection</span></span>;
 </code></pre>
-<p><a id="markdown-measurementmode" name="measurementmode"></a></p>
-<h4>MeasurementMode</h4>
-<pre><code class="language-TypeScript"><span class="hljs-keyword">enum</span> MeasurementMode
-</code></pre>
-<p>Determines whether to fetch measured values.</p>
-<p><strong><code>withoutValues</code></strong></p>
-<p>Only the measurements are fetched, including their attributes.</p>
-<p><strong><code>withValues</code></strong></p>
-<p>Fetches the measurements as well as their values.</p>
 <p><a id="markdown-measurementcollection" name="measurementcollection"></a></p>
 <h4>MeasurementCollection</h4>
 <pre><code class="language-TypeScript"><span class="hljs-keyword">class</span> MeasurementCollection

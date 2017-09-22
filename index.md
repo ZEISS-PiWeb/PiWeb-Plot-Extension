@@ -168,7 +168,6 @@
     - [Measurements](#measurements)
         - [Content](#content-10)
         - [Usage](#usage-2)
-        - [MeasurementMode](#measurementmode)
         - [MeasurementCollection](#measurementcollection)
         - [Measurement](#measurement)
         - [MeasurementValue](#measurementvalue)
@@ -1179,7 +1178,7 @@ Be aware that all coordinates and values are interpreted as **millimeters**. PiW
 ### Interfaces
 
 Most drawing objects, like [`Color`](#color), [`Brush`](#brush), [`Pen`](#pen), [`Font`](#font) and [`Geometry`](#geometry) implement an interface that is named like the implementing class, with an additional `Description` suffix (e.g. `ColorDescription`).
-Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
+Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.<br><br> Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is, that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
 
 **Long version using constructors:**
 
@@ -3032,7 +3031,7 @@ The attribute has a `Date` value.
 
 **`catalog`**
 
-The attribute has a `number` value, that is to be interpreted as the key of a **[`CatalogEntry`](#catalogentry)**.
+The attribute has a `number` value, that is to be interpreted as the key of a [`CatalogEntry`](#catalogentry).
 
 <a id="markdown-attribute" name="attribute"></a>
 #### Attribute
@@ -3041,7 +3040,7 @@ The attribute has a `number` value, that is to be interpreted as the key of a **
 class Attribute
 ```
 
-An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measured values and catalog entries. An attribute is identified by its `Key`. To get information about the type and usage of an attribute, use the `Key` to get the **[`AttributeDefinition`](#attributedefinition)** from the **[`Configuration`](#configuration)**.
+An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements, measured values and catalog entries. An attribute is identified by its `Key`. To get information about the type and usage of an attribute, use the `Key` to get the [`AttributeDefinition`](#attributedefinition) from the [`Configuration`](#configuration).
 
 **key `number`**
 
@@ -3217,7 +3216,7 @@ The catalogs that are configured in the piweb database.
 function resolveCatalogEntry(attribute: Attribute): CatalogEntry | undefined;
 ```
 
-Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the inderection between attributes and catalogs.
+Attributes, that are returned with inspection plan items, measurements or measurement values, only contain the catalog entries key. This function helps to resolve the indirection between attributes and catalogs.
 
 <a id="markdown-configurationentity" name="configurationentity"></a>
 #### ConfigurationEntity
@@ -3526,7 +3525,6 @@ Gets a value indicating whether the characteristic is a counting characteristic,
 <a id="markdown-content-10" name="content-10"></a>
 #### Content
 
-- [MeasurementMode](#measurementmode)
 - [MeasurementCollection](#measurementcollection)
 - [Measurement](#measurement)
 - [MeasurementValue](#measurementvalue)
@@ -3539,27 +3537,9 @@ Returns all measurements that are associated to the parts that are bound to the 
 **getMeasurementCollection [`MeasurementCollection`](#measurementcollection)**
 
 ```TypeScript
-function getMeasurementCollection(
-    mode: MeasurementMode
+function getMeasurementCollection(   
 ) : MeasurementCollection;
 ```
-
-<a id="markdown-measurementmode" name="measurementmode"></a>
-#### MeasurementMode
-
-```TypeScript
-enum MeasurementMode
-```
-
-Determines whether to fetch measured values.
-
-**`withoutValues`**
-
-Only the measurements are fetched, including their attributes.
-
-**`withValues`**
-
-Fetches the measurements as well as their values.
 
 <a id="markdown-measurementcollection" name="measurementcollection"></a>
 #### MeasurementCollection
