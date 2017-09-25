@@ -253,7 +253,6 @@
 <ul>
 <li><a href="#content-10">Content</a></li>
 <li><a href="#usage-2">Usage</a></li>
-<li><a href="#measurementmode">MeasurementMode</a></li>
 <li><a href="#measurementcollection">MeasurementCollection</a></li>
 <li><a href="#measurement">Measurement</a></li>
 <li><a href="#measurementvalue">MeasurementValue</a></li>
@@ -2541,7 +2540,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 <p>The id of the catalog. It can be used to access a certain catalog in the <a href="#catalogcollection"><code>CatalogCollection</code></a></p>
 <p><strong>name <code>string</code></strong></p>
 <p>An unlocalized name that is used only for displaying purposes.</p>
-<p><strong>validAttributes <code>number[]</code></strong></p>
+<p><strong>validAttributes <code>Iterable&lt;number&gt;</code></strong></p>
 <p>A list of keys that refer to the <a href="#attributedefinition"><code>AttributeDefinitions</code></a> that correspond to this catalog.</p>
 <p><strong>entries <a href="#catalogentry"><code>Map&lt;number, CatalogEntry&gt;</code></a></strong></p>
 <p>A set of catalog entries of which this catalog is composed.</p>
@@ -2771,7 +2770,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </code></pre>
 <p>You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.</p>
 <pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setRawDataSources</span>(<span class="hljs-params"> Iterable&lt;RawDataEntity&gt; sources </span>) : <span class="hljs-title">void</span></span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataSources</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataEntity</span>[]</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataSources</span>(<span class="hljs-params"></span>) : <span class="hljs-title">Iterable</span>&lt;<span class="hljs-title">RawDataEntity</span>&gt;</span>;
 </code></pre>
 <p><a id="markdown-rawdataentity" name="rawdataentity"></a></p>
 <h4>RawDataEntity</h4>
@@ -2814,11 +2813,11 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 </code></pre>
 <p>Returns all raw data information that is bound to the element, restricted by the entities that have previously been set by</p>
 <p><strong>findByName <a href="#rawdataitem"><code>RawDataItem[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByName</span>(<span class="hljs-params">...wildcards: <span class="hljs-built_in">string</span>[]</span>): <span class="hljs-title">RawDataItem</span>[]</span>;
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByName</span>(<span class="hljs-params">...wildcards: <span class="hljs-built_in">string</span>[]</span>): <span class="hljs-title">Iterable</span>&lt;<span class="hljs-title">RawDataItem</span>&gt;</span>;
 </code></pre>
 <p><strong>findByReference <a href="#rawdataitem"><code>RawDataItem[]</code></a></strong></p>
-<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params">reference: DataReference</span>): <span class="hljs-title">RawDataItem</span>[]</span>;
-</code></pre>
+<pre><code class="language-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findByReference</span>(<span class="hljs-params">reference: DataReference</span>): <span class="hljs-title">Iterable</span>&lt;<span class="hljs-title">RawDataItem</span>&gt;
+</span></code></pre>
 <p>Searches for raw data information with the specified <a href="#datareference"><code>DataReference</code></a>.</p>
 <p><a id="markdown-rawdataitem" name="rawdataitem"></a></p>
 <h4>RawDataItem</h4>

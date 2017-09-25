@@ -3323,7 +3323,7 @@ The id of the catalog. It can be used to access a certain catalog in the [`Catal
 
 An unlocalized name that is used only for displaying purposes.
 
-**validAttributes `number[]`**
+**validAttributes `Iterable<number>`**
 
 A list of keys that refer to the [`AttributeDefinitions`](#attributedefinition) that correspond to this catalog.
 
@@ -3683,7 +3683,7 @@ You can specify the entity from which you wish to get the raw data, e.g. measure
 
 ```TypeScript
 function setRawDataSources( Iterable<RawDataEntity> sources ) : void;
-function getRawDataSources() : RawDataEntity[];
+function getRawDataSources() : Iterable<RawDataEntity>;
 ```
 
 
@@ -3723,13 +3723,13 @@ Returns all raw data information that is bound to the element, restricted by the
 **findByName [`RawDataItem[]`](#rawdataitem)**
 
 ```TypeScript
-function findByName(...wildcards: string[]): RawDataItem[];
+function findByName(...wildcards: string[]): Iterable<RawDataItem>;
 ```
 
 **findByReference [`RawDataItem[]`](#rawdataitem)**
 
 ```TypeScript
-function findByReference(reference: DataReference): RawDataItem[];
+function findByReference(reference: DataReference): Iterable<RawDataItem>
 ```
 
 Searches for raw data information with the specified [`DataReference`](#datareference).
