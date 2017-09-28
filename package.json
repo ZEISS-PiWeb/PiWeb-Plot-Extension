@@ -9,6 +9,9 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-markdown-it": "^0.1.1",
-    "highlight.js": "^9.12.0"
+    "gulp-typedoc": "^2.1.0",
+    "highlight.js": "^9.12.0",
+    "typedoc": "^0.8.0",
+    "typedoc-plugin-external-module-name": "^1.0.9"
   }
 }
