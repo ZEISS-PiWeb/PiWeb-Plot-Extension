@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   viewBox="0 0 64.000001 64.000001"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="evenOdd.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.2"
+     inkscape:cx="44.906257"
+     inkscape:cy="25.101789"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     units="px"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:object-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true"
+     inkscape:snap-grids="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1378"
+     inkscape:window-x="1672"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4136"
+       spacingx="4.0000001"
+       spacingy="4.0000001" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-988.36216)">
+    <path
+       style="fill:#56abff;fill-opacity:1;stroke:#404040;stroke-width:1.25;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 32 7.2167969 A 15.999191 15.999191 0 0 0 16.001953 23.216797 A 15.999191 15.999191 0 0 0 16.861328 28.326172 A 16 16 0 0 1 20 28 A 16 16 0 0 1 31.996094 33.441406 A 16 16 0 0 1 44 28 A 16 16 0 0 1 47.150391 28.314453 A 15.999191 15.999191 0 0 0 48 23.216797 A 15.999191 15.999191 0 0 0 32 7.2167969 z M 47.150391 28.314453 A 15.999191 15.999191 0 0 1 35.140625 38.888672 A 16 16 0 0 1 36 44 A 16 16 0 0 1 32.003906 54.558594 A 16 16 0 0 0 44 60 A 16 16 0 0 0 60 44 A 16 16 0 0 0 47.150391 28.314453 z M 32.003906 54.558594 A 16 16 0 0 1 28 44 A 16 16 0 0 1 28.849609 38.900391 A 15.999191 15.999191 0 0 1 16.861328 28.326172 A 16 16 0 0 0 4 44 A 16 16 0 0 0 20 60 A 16 16 0 0 0 32.003906 54.558594 z M 28.849609 38.900391 A 15.999191 15.999191 0 0 0 32 39.214844 A 15.999191 15.999191 0 0 0 35.140625 38.888672 A 16 16 0 0 0 31.996094 33.441406 A 16 16 0 0 0 28.849609 38.900391 z "
+       transform="translate(0,988.36216)"
+       id="path4138" />
+  </g>
+</svg>

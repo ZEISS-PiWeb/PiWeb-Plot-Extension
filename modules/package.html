@@ -1,0 +1,654 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>package | PiWeb Customplot API Reference</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">PiWeb Customplot API Reference</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="package.html">package</a>
+				</li>
+			</ul>
+			<h1>External module package</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<h1 id="package-definition">Package Definition</h1>
+					<p>In the quickstart we already created a very simple package definition in the file <strong>package.json</strong>. Although it&#39;s sufficient to get us started, there are a lot more settings to be discovered.</p>
+					<p><br/><a id="markdown-localization" name="localization"></a></p>
+					<h2 id="localization">Localization</h2>
+					<p>Every text that appears in the user interface of PiWeb can be localized. Simply replace the plain text with a localization dictionary:</p>
+					<pre><code class="lang-json">{
+    <span class="hljs-attr">"piweb_extension"</span>: {        
+        <span class="hljs-attr">"display"</span>: <span class="hljs-string">"MyExtension"</span>        
+    }
+}
+</code></pre>
+					<pre><code class="lang-json">{
+    <span class="hljs-attr">"piweb_extension"</span>: {        
+        <span class="hljs-attr">"display"</span>: {
+            <span class="hljs-attr">""</span> : <span class="hljs-string">"My invariant Extension"</span>,
+            <span class="hljs-attr">"en-US"</span>: <span class="hljs-string">"My Extension"</span>,
+            <span class="hljs-attr">"de-DE"</span>: <span class="hljs-string">"Meine Erweiterung"</span>
+        }   
+    }
+}
+</code></pre>
+					<p>As you can see, the localized version contains an entry for the invariant culture, which is also used as a fallback value in case the required culture is not translated. Later in this chapter, all localizable properties are marked as <code>localizable string</code> properties.</p>
+					<p><br/><a id="markdown-dictionaries" name="dictionaries"></a></p>
+					<h2 id="dictionaries">Dictionaries</h2>
+					<p>Some properties are marked as <code>dictionary</code>, which means they are accepting an object with custom keys and a defined value. In the example below, the <code>items</code> property accepts a dictionary, and <code>myFirstItem</code> as well as <code>mySecondItem</code> are user defined entries in this dictionary.</p>
+					<pre><code class="lang-json">{
+    <span class="hljs-attr">"items"</span>: {        
+        <span class="hljs-attr">"myFirstItem"</span>: {
+            <span class="hljs-attr">"name"</span> : <span class="hljs-string">"My first item"</span>,
+            <span class="hljs-attr">"value"</span> : <span class="hljs-string">"red"</span>
+        }, 
+        <span class="hljs-attr">"mySecondItem"</span>: {
+            <span class="hljs-attr">"name"</span> : <span class="hljs-string">"My second item"</span>,
+            <span class="hljs-attr">"value"</span> : <span class="hljs-string">"green"</span>
+        },    
+    }
+}
+</code></pre>
+					<p><br/><a id="markdown-enumerations" name="enumerations"></a></p>
+					<h2 id="enumerations">Enumerations</h2>
+					<p>The <code>enumeration</code> datatype indicates that only certain <strong>strings</strong> are accepted. The set of accepted strings is listed in the description of the property.</p>
+					<p><br/><a id="markdown-package-format" name="package-format"></a></p>
+					<h2 id="package-format">Package Format</h2>
+					<p><br/><a id="markdown-structure" name="structure"></a></p>
+					<h3 id="structure">Structure</h3>
+					<ul>
+						<li><a href="#package-structure-name">name <code>string</code></a></li>
+						<li><a href="#package-structure-version">version <code>string</code></a></li>
+						<li><a href="#package-structure-main">main <code>string</code></a></li>
+						<li><a href="#package-structure-engines">engines <code>object</code></a><ul>
+								<li><a href="#package-structure-engines-piweb">piweb <code>string</code></a></li>
+							</ul>
+						</li>
+						<li><a href="#piweb-actions">piweb_actions <code>object</code></a><ul>
+								<li><a href="#package-structure-actions-load">load <code>string</code></a></li>
+							</ul>
+						</li>
+						<li><a href="#piweb-extensions">piweb_extension <code>object</code></a><ul>
+								<li><a href="#package-structure-extensions-type">type <code>enumeration</code></a></li>
+								<li><a href="#package-structure-extensions-display">display <code>localizable string</code></a></li>
+								<li><a href="#package-structure-extensions-description">description <code>localizable string</code></a></li>
+								<li><a href="#package-structure-extensions-icon">icon <code>string</code></a></li>
+								<li><a href="#package-structure-extensions-toolbox">toolbox <code>object</code></a><ul>
+										<li><a href="#package-structure-extensions-toolbox-categories">categories <code>dictionary</code></a><ul>
+												<li><a href="#package-structure-extensions-toolbox-categories-name">name <code>localizable string</code></a></li>
+												<li><a href="#package-structure-extensions-toolbox-categories-priority">priority <code>number</code></a></li>
+											</ul>
+										</li>
+										<li><a href="#package-structure-extensions-toolbox-items">items <code>dictionary</code></a><ul>
+												<li><a href="#package-structure-extensions-toolbox-items-name">name <code>localizable string</code></a></li>
+												<li><a href="#package-structure-extensions-toolbox-items-description">description <code>localizable string</code></a></li>
+												<li><a href="#package-structure-extensions-toolbox-items-icon">icon <code>string</code></a></li>
+												<li><a href="#package-structure-extensions-toolbox-items-category">category <code>string</code></a></li>
+												<li><a href="#package-structure-extensions-toolbox-items-element_size">element_size <code>object</code></a><ul>
+														<li><a href="#package-structure-extensions-toolbox-items-element_size-width">width <code>number</code></a></li>
+														<li><a href="#package-structure-extensions-toolbox-items-element_size-height">height <code>number</code></a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li><a href="#package-structure-extensions-propertygrid">propertygrid <code>object</code></a><ul>
+										<li><a href="#package-structure-extensions-propertygrid-categories">categories <code>dictionary</code></a><ul>
+												<li><a href="#package-structure-extensions-propertygrid-categories-name">name <code>localizable string</code></a></li>
+												<li><a href="#package-structure-extensions-propertygrid-categories-priority">priority <code>number</code></a></li>
+											</ul>
+										</li>
+										<li><a href="#package-structure-extensions-propertygrid-entries">entries <code>dictionary</code></a><ul>
+												<li><a href="#package-structure-extensions-propertygrid-entries-name">name <code>localizable string</code></a></li>
+												<li><a href="#package-structure-extensions-propertygrid-entries-description">description <code>localizable string</code></a></li>
+												<li><a href="#package-structure-extensions-propertygrid-entries-type">type <code>enumeration</code></a></li>
+												<li><a href="#package-structure-extensions-propertygrid-entries-category">category <code>string</code></a></li>
+												<li><a href="#package-structure-extensions-propertygrid-entries-default_value">default_value <code>any</code></a></li>
+												<li><a href="#package-structure-extensions-propertygrid-entries-options">options <code>dictionary</code></a><ul>
+														<li><a href="#package-structure-extensions-propertygrid-entries-options-name">name <code>localizable string</code></a></li>
+														<li><a href="#package-structure-extensions-propertygrid-entries-options-description">description <code>localizable string</code></a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<p><br/><a id="markdown-top-level-properties" name="top-level-properties"></a></p>
+					<h3 id="top-level-properties">Top Level Properties</h3>
+					<p><br/><a id="package-structure-name" name="package-structure-name"></a>
+					<strong>name <code>string</code></strong></p>
+					<p>Custom string that is used to identify the package internally. Must be composed from lower case characters, digits and a set of special characters:
+					<code>&#39;$&#39;, &#39;-&#39;, &#39;_&#39;, &#39;.&#39;, &#39;+&#39;, &#39;!&#39;, &#39;*&#39;, &#39;\&#39;&#39;, &#39;(&#39;, &#39;)&#39;, &#39;,&#39;</code>. It must have a length between 1 and 214 characters and may not start with a dot (<code>.</code>) or an underscore (<code>_</code>).</p>
+					<p><br/><a id="package-structure-version" name="package-structure-version"></a>
+					<strong>version <code>string</code></strong></p>
+					<p>A valid semantic version string containing three numbers, separated by dots. For more information about semantic versioning, visit the <a href="http://semver.org/">project website</a>.</p>
+					<p><br/><a id="package-structure-main" name="package-structure-main"></a>
+					<strong>main <code>string</code></strong></p>
+					<p>Path to folder that contains the <code>index.js</code> file. In case you used typescript, it is the value of the property <code>outDir</code> in the <code>tsconfig.json</code> file.</p>
+					<p><br/><a id="package-structure-engines" name="package-structure-engines"></a>
+					<strong>engines <code>object</code></strong></p>
+					<p>Defines the supported engine versions of this plot. Please read the chapter &#39;<a href="#engines">engines</a>&#39; for further information.</p>
+					<p><br/><a id="package-structure-piweb-actions" name="package-structure-piweb-actions"></a>
+					<strong>piweb_actions <code>object</code></strong></p>
+					<p>Defines additional actions. Please read the chapter &#39;<a href="#piweb-actions">PiWeb actions</a>&#39; for further information.</p>
+					<p><br/><a id="package-structure-piweb-extension" name="package-structure-piweb-extension"></a>
+					<strong>piweb_extension <code>object</code></strong></p>
+					<p>Defines the content of the extension. Please read the chapter &#39;<a href="#piweb-extensions">PiWeb extensions</a>&#39; for further information.</p>
+					<p><br/><a id="markdown-engines" name="engines"></a></p>
+					<h3 id="engines">Engines</h3>
+					<p><br/><a id="package-structure-engines-piweb" name="package-structure-engines-piweb"></a>
+					<strong>piweb <code>string</code></strong></p>
+					<p>A valid semantic version string containing three numbers, separated by dots. It identifies the toolset that PiWeb will use to execute the extension. For more information about semantic versioning, visit the <a href="http://semver.org/">project website</a>.</p>
+					<p><br/><a id="markdown-piweb-actions" name="piweb-actions"></a></p>
+					<h3 id="piweb-actions">PiWeb Actions</h3>
+					<p><br/><a id="package-structure-actions-load" name="package-structure-actions-load"></a>
+					<strong>load <code>string</code></strong></p>
+					<p>A string describing actions, that will be executed when the package loads. Currently, the only recognized value is <code>compile_typescript</code>, which will trigger the typescript compiler.</p>
+					<p><br/><a id="markdown-piweb-extensions" name="piweb-extensions"></a></p>
+					<h3 id="piweb-extensions">PiWeb Extensions</h3>
+					<p><br/><a id="package-structure-extensions-type" name="package-structure-extensions-type"></a>
+					<strong>type <code>enumeration</code></strong></p>
+					<p>Identifies the extension type. Currently, the only accepted value is <code>plot</code>, which identifies a PiWeb plot extension.</p>
+					<p><br/><a id="package-structure-extensions-display" name="package-structure-extensions-display"></a>
+					<strong>display <code>localizable string</code></strong></p>
+					<p>Sets the display name of the element in the PiWeb Designer toolbox.</p>
+					<p><br/><a id="package-structure-extensions-description" name="package-structure-extensions-description"></a>
+					<strong>description <code>localizable string</code></strong></p>
+					<p>Sets the description of the element in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.</p>
+					<p><br/><a id="package-structure-extensions-icon" name="package-structure-extensions-icon"></a>
+					<strong>icon <code>string</code></strong></p>
+					<p>Path to the icon, relative to the <code>package.json</code> file. Usually, you simply specify the filename, and place the icon next to your <code>package.json</code> file. The icon is used on several places in PiWeb Designer, such as the toolbox, the page structure and the element properties tab. PiWeb can handle the following file formats: <code>bmp</code>, <code>gif</code>, <code>ico</code>, <code>jpg</code>, <code>png</code>, <code>tiff</code>, <code>wmp</code>.</p>
+					<blockquote>
+						<p>PiWeb will scale the image to a size of 16*16 and 32*32 pixels. To achieve the best result, use an <code>ico</code> file that contains bitmaps of both sizes.</p>
+					</blockquote>
+					<p><br/><a id="package-structure-extensions-toolbox" name="package-structure-extensions-toolbox"></a>
+					<strong>toolbox <code>object</code></strong>   </p>
+					<p>If you want multiple toolbox entries to be generated by your plot (e.g. because your extension provides a full infrastructure of elements), you can define them here. Please read the chapter &#39;<a href="#toolbox-properties">toolbox properties</a>&#39; for further information.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid" name="package-structure-extensions-propertygrid"></a>
+					<strong>propertygrid <code>object</code></strong></p>
+					<p>Determines the properties of the plot that can be adjusted by the user in PiWeb Designer. Please read the chapter &#39;<a href="#propertygrid-properties">propertygrid properties</a>&#39; for further information.</p>
+					<p><br/><a id="markdown-toolbox-properties" name="toolbox-properties"></a></p>
+					<h3 id="toolbox-properties">Toolbox Properties</h3>
+					<p><br/><a id="package-structure-extensions-toolbox-categories" name="package-structure-extensions-toolbox-categories"></a>
+					<strong>categories <code>dictionary</code></strong></p>
+					<p>Describes additional categories for the element toolbox in PiWeb Designer. Please read the chapter &#39;<a href="#toolbox-categories">toolbox categories</a>&#39; for further information.</p>
+					<p><br/><a id="package-structure-extensions-toolbox-items" name="package-structure-extensions-toolbox-items"></a>
+					<strong>items <code>dictionary</code></strong></p>
+					<p>Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter &#39;<a href="#toolbox-elements">toolbox elements</a>&#39; for further information.</p>
+					<p><br/><a id="markdown-toolbox-categories" name="toolbox-categories"></a></p>
+					<h3 id="toolbox-categories">Toolbox Categories</h3>
+					<p><br/><a id="package-structure-extensions-toolbox-categories-name" name="package-structure-extensions-toolbox-categories-name"></a>
+					<strong>name <code>localizable string</code></strong></p>
+					<p>The name of the category that is displayed on top of it in PiWeb Designer.</p>
+					<p><br/><a id="package-structure-extensions-toolbox-categories-priority" name="package-structure-extensions-toolbox-categories-priority"></a>
+					<strong>priority <code>number</code></strong></p>
+					<p>The priority determines where the category is placed relative to the existing categories. </p>
+					<p><br/><a id="markdown-toolbox-elements" name="toolbox-elements"></a></p>
+					<h3 id="toolbox-elements">Toolbox Elements</h3>
+					<p><br/><a id="package-structure-extensions-toolbox-items-name" name="package-structure-extensions-toolbox-items-name"></a>
+					<strong>name <code>localizable string</code></strong></p>
+					<p>Sets the display name of the element in the PiWeb Designer toolbox.</p>
+					<p><br/><a id="package-structure-extensions-toolbox-items-description" name="package-structure-extensions-toolbox-items-description"></a>
+					<strong>description <code>localizable string</code></strong></p>
+					<p>Sets the description of the element in the PiWeb Designer toolbox, which is visible when the user hovers over the entry.</p>
+					<p><br/><a id="package-structure-extensions-toolbox-items-icon" name="package-structure-extensions-toolbox-items-icon"></a>
+					<strong>icon <code>string</code></strong></p>
+					<p>Sets the icon of the element in the PiWeb Designer toolbox. Please read the chapter <a href="#package-structure-extensions-icon">&#39;icon&#39;</a> for further information.</p>
+					<p><br/><a id="package-structure-extensions-toolbox-items-category" name="package-structure-extensions-toolbox-items-category"></a>
+					<strong>category <code>string</code></strong></p>
+					<p>Sets the category under which the element appears in the PiWeb Designer toolbox. The value must appear as dictionary key in the <a href="#package-structure-extensions-toolbox-categories"><code>categories</code></a> dictionary or be equal to one of the built in category keys of PiWeb:</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Key</th>
+								<th>English Name</th>
+								<th>German Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong><code>Audit</code></strong></td>
+								<td>Audit calculations</td>
+								<td>Auditberechnungen</td>
+							</tr>
+							<tr>
+								<td><strong><code>AutoShapes</code></strong></td>
+								<td>Autoshapes</td>
+								<td>Autoformen</td>
+							</tr>
+							<tr>
+								<td><strong><code>Container</code></strong></td>
+								<td>Container</td>
+								<td>Container</td>
+							</tr>
+							<tr>
+								<td><strong><code>CustomPlots</code></strong></td>
+								<td>Extensions</td>
+								<td>Erweiterungen</td>
+							</tr>
+							<tr>
+								<td><strong><code>Formplots</code></strong></td>
+								<td>Form plots</td>
+								<td>Formplots</td>
+							</tr>
+							<tr>
+								<td><strong><code>General</code></strong></td>
+								<td>General</td>
+								<td>Allgemein</td>
+							</tr>
+							<tr>
+								<td><strong><code>Images</code></strong></td>
+								<td>Images</td>
+								<td>Bilder</td>
+							</tr>
+							<tr>
+								<td><strong><code>InteractiveElements</code></strong></td>
+								<td>Interactive elements</td>
+								<td>Interaktive Elemente</td>
+							</tr>
+							<tr>
+								<td><strong><code>Statistics</code></strong></td>
+								<td>Statistics</td>
+								<td>Statistik</td>
+							</tr>
+							<tr>
+								<td><strong><code>TablesAndDirectories</code></strong></td>
+								<td>Tables &amp; Directories</td>
+								<td>Tabellen &amp; Verzeichnisse</td>
+							</tr>
+							<tr>
+								<td><strong><code>Templates</code></strong></td>
+								<td>Templates</td>
+								<td>Vorlagen</td>
+							</tr>
+						</tbody>
+					</table>
+					<p><br/><a id="package-structure-extensions-toolbox-items-element_size" name="package-structure-extensions-toolbox-items-element_size"></a>
+					<strong>element_size <code>object</code></strong></p>
+					<p>Describes the initial size of the element when created on the report. Please read the chapter &#39;<a href="#element-size">element size</a>&#39; for further information.</p>
+					<p><br/><a id="markdown-element-size" name="element-size"></a></p>
+					<h3 id="element-size">Element Size</h3>
+					<p><br/><a id="package-structure-extensions-toolbox-items-element_size-width" name="package-structure-extensions-toolbox-items-element_size-width"></a>
+					<strong>width <code>number</code></strong></p>
+					<p>The initial element width on the report in <strong>millimeters</strong>.</p>
+					<p><br/><a id="package-structure-extensions-toolbox-items-element_size-height" name="package-structure-extensions-toolbox-items-element_size-height"></a>
+					<strong>height <code>number</code></strong>               </p>
+					<p>The initial element height on the report in <strong>millimeters</strong>.</p>
+					<p><br/><a id="markdown-propertygrid-properties" name="propertygrid-properties"></a></p>
+					<h3 id="propertygrid-properties">Propertygrid Properties</h3>
+					<p><br/><a id="package-structure-extensions-propertygrid-categories" name="package-structure-extensions-propertygrid-categories"></a>
+					<strong>categories <code>dictionary</code></strong></p>
+					<p>Describes the categories of the PiWeb Designer that are used by the custom plot. Please read the chapter &#39;<a href="#propertygrid-categories">propertygrid categories</a>&#39; for further information.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries" name="package-structure-extensions-propertygrid-entries"></a>
+					<strong>entries <code>dictionary</code></strong></p>
+					<p>Describes the additional property grid entries of the plot. The defined property grid entries are added to a set of default properties that every element has. Please read the chapter &#39;<a href="#propertygrid-entries">propertygrid entries</a>&#39; for further information.</p>
+					<p><br/><a id="markdown-propertygrid-categories" name="propertygrid-categories"></a></p>
+					<h3 id="propertygrid-categories">Propertygrid Categories</h3>
+					<p><br/><a id="package-structure-extensions-propertygrid-categories-name" name="package-structure-extensions-propertygrid-categories-name"></a>
+					<strong>name <code>localizable string</code></strong></p>
+					<p>The name of the category that is displayed in the PiWeb Designer property grid.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid-categories-priority" name="package-structure-extensions-propertygrid-categories-priority"></a>
+					<strong>priority <code>number</code></strong></p>
+					<p>The priority determines where the category is placed relative to the other categories. </p>
+					<p><br/><a id="markdown-propertygrid-entries" name="propertygrid-entries"></a></p>
+					<h3 id="propertygrid-entries">Propertygrid Entries</h3>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-name" name="package-structure-extensions-propertygrid-entries-name"></a>
+					<strong>name <code>localizable string</code></strong></p>
+					<p>The name that will be displayed in the property tab of PiWeb Designer.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-description" name="package-structure-extensions-propertygrid-entries-description"></a>
+					<strong>description <code>localizable string</code></strong></p>
+					<p>The info text that will be displayed when hovering the property with the mouse.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-category" name="package-structure-extensions-propertygrid-entries-category"></a>
+					<strong>category <code>string</code></strong></p>
+					<p>The key of the entry in the <a href="#package-structure-extensions-propertygrid-categories"><code>categories</code></a> dictionary to which this property is associated. In case you want to use existing categories, like <code>General</code>, <code>Appearance</code> or <code>Layout</code>, you have to use the following keys: </p>
+					<table>
+						<thead>
+							<tr>
+								<th>Key</th>
+								<th>English name (en-US)</th>
+								<th>German name (de-DE)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong><code>General</code></strong></td>
+								<td>General</td>
+								<td>Allgemein</td>
+							</tr>
+							<tr>
+								<td><strong><code>Axis</code></strong></td>
+								<td>Axis</td>
+								<td>Achsen</td>
+							</tr>
+							<tr>
+								<td><strong><code>Appearance</code></strong></td>
+								<td>Appearance</td>
+								<td>Darstellung</td>
+							</tr>
+							<tr>
+								<td><strong><code>Layout</code></strong></td>
+								<td>Layout</td>
+								<td>Layout</td>
+							</tr>
+							<tr>
+								<td><strong><code>GaugeIntegration</code></strong></td>
+								<td>Measuring device integration</td>
+								<td>Messmittelanbindung</td>
+							</tr>
+							<tr>
+								<td><strong><code>Misc</code></strong></td>
+								<td>Misc</td>
+								<td>Sonstiges</td>
+							</tr>
+						</tbody>
+					</table>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-type" name="package-structure-extensions-propertygrid-entries-type"></a>
+					<strong>type <code>enumeration</code></strong></p>
+					<p>The datatype that determines which kind of editor is shown for the property:</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Type</th>
+								<th>Description</th>
+								<th>Editor</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong><code>string</code></strong></td>
+								<td>Unicode text</td>
+								<td><img src="../media/textbox.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>integer</code></strong></td>
+								<td>Integral number</td>
+								<td><img src="../media/integerupdown.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>double</code></strong></td>
+								<td>Floating point number</td>
+								<td><img src="../media/integerupdown.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>boolean</code></strong></td>
+								<td>Yes/No value</td>
+								<td><img src="../media/checkbox.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>enum</code></strong></td>
+								<td>Selection of an option</td>
+								<td><img src="../media/combobox.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>color</code></strong></td>
+								<td>Color with opacity</td>
+								<td><img src="../media/colorpicker.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>brush</code></strong></td>
+								<td>Color or gradient with opacity</td>
+								<td><img src="../media/brushpicker.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>pen</code></strong></td>
+								<td>Pen with color, thickness, dashstyle and opacity</td>
+								<td><img src="../media/penpicker.png" alt="alt text" title="combobox"></td>
+							</tr>
+							<tr>
+								<td><strong><code>font</code></strong></td>
+								<td>Font with family, color, size and style, as well as textdecorations</td>
+								<td><img src="../media/fontpicker.png" alt="alt text" title="combobox"></td>
+							</tr>
+						</tbody>
+					</table>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-default_value" name="package-structure-extensions-propertygrid-entries-default_value"></a>
+					<strong>default_value <code>any</code></strong></p>
+					<p>Each datatype accepts a different default value:</p>
+					<p><strong><code>string</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: &quot;value&quot;
+</code></pre>
+					<p>Any unicode string is accepted.</p>
+					<p><strong><code>integer</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: 1
+</code></pre>
+					<p>Integral numbers are accepted.</p>
+					<p><strong><code>double</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: 1.0
+</code></pre>
+					<p>Floating point or integral numbers are accepted.</p>
+					<p><strong><code>boolean</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: true | false
+</code></pre>
+					<p><code>true</code> and <code>false</code> are accepted.</p>
+					<p><strong><code>enum</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: &quot;value&quot;
+</code></pre>
+					<p>The keys of the <a href="#package-structure-extensions-propertygrid-entries-options"><code>options</code></a> property are accepted.</p>
+					<p><strong><code>color</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: &quot;#ff0000&quot;
+</code></pre>
+					<p>Strings in the form of <code>#rrggbb</code>.</p>
+					<p><strong><code>brush</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: {
+    &quot;type&quot;: &quot;solid&quot; | &quot;lineargradient&quot; | &quot;radialgradient&quot;,
+    &quot;color&quot;: &quot;#ff0000&quot;, 
+    &quot;color2&quot;: &quot;#0000ff&quot;, // only gradient brushes
+    &quot;opacity&quot; 1.0,       // [0..1] where 1 is opaque
+    &quot;angle&quot;: 0,          // Only for linear gradient
+    &quot;center&quot;: {          // Only for radial gradient
+        &quot;x&quot; : 0.5,       // [0..1] 0 = left, 1 = right
+        &quot;y&quot; : 0.5        // [0..1] 0 = top, 1 = bottom
+    }
+}
+</code></pre>
+					<p>Accepts an object of the specified structure. Some properties are only used for special brush types.</p>
+					<p><strong><code>pen</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: {
+    &quot;color&quot;: &quot;#ff0000&quot;,
+    &quot;thickness&quot; 0.3     // Millimeters
+}
+</code></pre>
+					<p>Only pens with solid color and thickness are accepted.</p>
+					<p><strong><code>font</code></strong></p>
+					<pre><code class="lang-json">&quot;default_value&quot;: {
+    &quot;color&quot;: &quot;#ff0000&quot;,
+    &quot;family&quot;: &quot;Arial&quot;,
+    &quot;size&quot;: 10,
+    &quot;bold&quot;: false,
+    &quot;italic&quot;: false,
+    &quot;underline&quot;: false,
+    &quot;strikethrough&quot;: false,
+}
+</code></pre>
+					<p>Accepts a font description object with the properties shown above.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-options" name="package-structure-extensions-propertygrid-entries-options"></a>
+					<strong>options <code>dictionary</code></strong></p>
+					<p>Determines the possible values of a property with type <code>enum</code>. The plot will get the key of the selected entry as value for the property. Please read the chapter &#39;<a href="#option-properties">option properties</a>&#39; for further information.</p>
+					<p><br/><a id="markdown-option-properties" name="option-properties"></a></p>
+					<h3 id="option-properties">Option Properties</h3>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-options-name" name="package-structure-extensions-propertygrid-entries-options-name"></a>
+					<strong>name <code>localizable string</code></strong></p>
+					<p>The name that is displayed in the dropdown.</p>
+					<p><br/><a id="package-structure-extensions-propertygrid-entries-options-description" name="package-structure-extensions-propertygrid-entries-options-description"></a>
+					<strong>description <code>localizable string</code></strong></p>
+					<p>The description that is displayed when hovering an option in the dropdown with the mouse.</p>
+				</div>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="index.html">Index</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="data.html">data</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="drawing.html">drawing</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="environment.html">environment</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="events.html">events</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="expressions.html">expressions</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="format.html">format</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="logger.html">logger</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="package.html">package</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="properties.html">properties</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="resources.html">resources</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="tooltips.html">tooltips</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
