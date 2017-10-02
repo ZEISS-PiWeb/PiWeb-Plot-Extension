@@ -76,61 +76,208 @@ declare module "internal/synchronization_scopes" {
 
 
 declare module "internal/tooltip_broker" {
-	export function getTooltipShapes(): Buffer;
+	export function getTooltips(): Buffer;
 }
 
 
 declare module "piweb/environment" {
+	/**
+	 * @module environment
+	 * @preferred
+	 *
+	 * <br/>
+	 *
+	 * ## Introduction
+	 *
+	 * The `piweb.environment` module provides information about the element and its properties, as well as global settings.
+	 * It also contains classes that are used by the functions of the `piweb.format` module.
+	 *
+	 * <br/>
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import environment = piweb.environment;
+	 * ```
+	 *
+	 * @see [format](format.html)
+	 */ /** */
 	import { Point, Size } from "piweb/drawing/geometry/basics";
 	export type LengthUnit = "mm" | "inch";
 	export type AngleUnit = "degreeDecimal" | "degreeMinuteSecond" | "radian";
+	/**
+	 * Base interface for region info.
+	 */
 	export interface RegionInfoDescription {
+	    /**
+	     * Gets the name or ISO 3166 two-letter country/region code.
+	     */
 	    readonly name: string;
 	}
+	/**
+	 * Interface for region info.
+	 */
 	export interface IRegionInfo extends RegionInfoDescription {
+	    /**
+	     * Gets the two-letter code defined in ISO 3166 for the country/region.
+	     */
 	    readonly twoLetterISORegionName: string;
+	    /**
+	     * Gets the three-letter code defined in ISO 3166 for the country/region.
+	     */
 	    readonly threeLetterISORegionName: string;
 	}
+	/**
+	 * Base interface for culture info.
+	 */
 	export interface CultureInfoDescription {
+	    /**
+	     * Gets the name of the culture in the format `languagecode2-country/regioncode2`.
+	     */
 	    readonly name: string;
 	}
+	/**
+	 * Interface for culture info.
+	 */
 	export interface ICultureInfo extends CultureInfoDescription {
+	    /**
+	     * Gets the ISO 639-1 two-letter code for the language of the culture.
+	     */
 	    readonly twoLetterISOLanguageName: string;
+	    /**
+	     * Gets the ISO 639-2 three-letter code for the language of the culture.
+	     */
 	    readonly threeLetterISOLanguageName: string;
 	}
+	/**
+	 * Interface for time zone info.
+	 */
 	export interface ITimeZoneInfo {
+	    /**
+	     * Gets the name of the timezone.
+	     */
 	    readonly name: string;
+	    /**
+	     * Gets the standard offset of the timezone in hours.
+	     */
 	    readonly baseUtcOffset: number;
+	    /**
+	     * Returns the offset of the timezone at the specified date in hours.
+	     * @param date The date at which the offset should be calculated. This takes daylight saving time etc. into account.
+	     */
 	    getUtcOffset(time: Date): number;
 	}
+	/**
+	 * Contains the identifiers of a specific culture. PiWeb can use these information to provide localization and correct formatting of numbers and dates.
+	 */
 	export class CultureInfo implements ICultureInfo {
+	    /**
+	     * Gets the culture in which the host application was started.
+	     */
 	    static readonly currentCulture: ICultureInfo;
+	    /**
+	     * Gets the invariant culture.
+	     */
 	    static readonly invariantCulture: ICultureInfo;
+	    /**
+	     * Gets the name of the culture in the format `languagecode2-country/regioncode2`.
+	     */
 	    readonly name: string;
+	    /**
+	     * Gets the ISO 639-1 two-letter code for the language of the culture.
+	     */
 	    readonly twoLetterISOLanguageName: string;
+	    /**
+	     * Gets the ISO 639-2 three-letter code for the language of the culture.
+	     */
 	    readonly threeLetterISOLanguageName: string;
+	    /**
+	     * Initializes a new instance of the [[CultureInfo]] class.
+	     * @param name The name of the culture.
+	     */
 	    constructor(name: string);
 	}
+	/**
+	 * Contains the identifiers of a specific country or region.
+	 */
 	export class RegionInfo implements IRegionInfo {
+	    /**
+	     * Gets the region in which the host application was started.
+	     */
 	    static readonly currentRegion: IRegionInfo;
+	    /**
+	     * Gets the name or ISO 3166 two-letter country/region code.
+	     */
 	    readonly name: string;
+	    /**
+	     * Gets the two-letter code defined in ISO 3166 for the country/region.
+	     */
 	    readonly twoLetterISORegionName: string;
+	    /**
+	     * Gets the three-letter code defined in ISO 3166 for the country/region.
+	     */
 	    readonly threeLetterISORegionName: string;
+	    /**
+	     * Initializes a new instance of the [[RegionInfo]] class.
+	     * @param name The name of the region.
+	     */
 	    constructor(name: string);
 	}
+	/**
+	 * Contains information about a specific timezone.
+	 */
 	export class TimeZoneInfo implements ITimeZoneInfo {
-	    static readonly LocalTimeZone: ITimeZoneInfo;
+	    /**
+	     * Gets the timezone in which the host application was started.
+	     */
+	    static readonly localTimeZone: ITimeZoneInfo;
+	    /**
+	     * Gets the name of the timezone.
+	     */
 	    readonly name: string;
+	    /**
+	     * Gets the standard offset of the timezone in hours.
+	     */
 	    readonly baseUtcOffset: number;
+	    /**
+	     * Initializes a new instance of the [[TimeZoneInfo]] class.
+	     * @param name The name of the time zone.
+	     */
 	    constructor(name: string);
+	    /**
+	     * Returns the offset of the timezone at the specified date in hours.
+	     * @param date The date at which the offset should be calculated. This takes daylight saving time etc. into account.
+	     */
 	    getUtcOffset(date: Date): any;
 	}
+	/**
+	 * If `true`, the plot is rendered by PiWeb Designer, otherwise it's rendered by PiWeb Monitor. Some very complex elements don't render
+	 * their complete content while in design mode, to guarantee a smooth and fluent editing in PiWeb Designer.
+	 */
 	export function isDesignMode(): boolean;
+	/**
+	 * Returns the current size of the element in **millimeters**.
+	 */
 	export function getSize(): Size;
+	/**
+	 * Returns the position of the element on the report page in **millimeters**.
+	 */
 	export function getLocation(): Point;
+	/**
+	 * In case you specified multiple toolbox elements in the `package.json` file, this is the interface to find out, which element the user picked.
+	 * The returned value is equal to the property name you used to identify the toolbox entry.
+	 */
 	export const toolboxItemName: string;
+	/**
+	 * Gets the name of the client that is hosting the custom plot.
+	 */
 	export const clientString: string;
+	/**
+	 * Gets the piweb version the custom plot is hosted by.
+	 */
 	export const clientVersion: string;
+	/**
+	 * Gets the semantic version of the custom plot API that is supported by the application the custom plot is hosted by.
+	 */
 	export const apiVersion: string;
 	export function getLengthUnit(): LengthUnit;
 	export function getAngleUnit(): AngleUnit;
@@ -159,40 +306,175 @@ declare module "piweb/environment" {
 
 
 declare module "piweb/events" {
+	/**
+	 * An enumeration of supported events
+	 */
 	export type PiWebEvents = "load" | "render" | "dataBindingChanged" | "dataChanged" | "prepare_render";
+	/**
+	 * Call this function to specify a callback for a specific event.
+	 * @param name The name of the event.
+	 * @param callback The callback function.
+	 */
 	export function on(name: PiWebEvents, callback: Function): void;
+	/**
+	 * @private
+	 */
 	export function emit(name: PiWebEvents): boolean;
 }
 
 
 declare module "piweb/expressions" {
-	export type SimpleExtensionDataType = string | number | Date | undefined;
-	export interface ExtensionDataTypeArray extends Array<SimpleExtensionDataType | ExtensionDataTypeArray> {
+	/**
+	 * The possible simple return types of an expression.
+	 */
+	export type SimpleExpressionData = string | number | Date | undefined;
+	/**
+	 * The possible array return types of an expression.
+	 */
+	export interface ExpressionDataArray extends Array<SimpleExpressionData | ExpressionDataArray> {
 	}
-	export type ExpressionDataType = SimpleExtensionDataType | ExtensionDataTypeArray;
+	/**
+	 * The cumulated possible return types of an expression.
+	 */
+	export type ExpressionDataType = SimpleExpressionData | ExpressionDataArray;
+	/**
+	 * Evaluates the specified expression and returns the result untyped.
+	 */
 	export function evaluate(expression: string): ExpressionDataType;
+	/**
+	 * Evaluates the specified expression and returns the result as `string` or `undefined`, in case the result can't be converted into a `string` representation.
+	 * @param expression The expression to evaluate.
+	 */
+	export function evaluateAsString(expression: string): string | undefined;
+	/**
+	 * Evaluates the specified expression and returns the result as `number` or `undefined`, in case the result can't be converted into a `number` representation.
+	 * @param expression The expression to evaluate.
+	 */
+	export function evaluateAsNumber(expression: string): number | undefined;
+	/**
+	 * Evaluates the specified expression and returns the result as `date` or `undefined`, in case the result can't be converted into a `date` representation.
+	 * @param expression The expression to evaluate.
+	 */
+	export function evaluateAsDate(expression: string): Date | undefined;
+	/**
+	 * Evaluates the specified expression and returns the result as `array` or `undefined`, in case the result wasn't an `array` of any kind.
+	 * @param expression The expression to evaluate.
+	 */
+	export function evaluateAsArray(expression: string): ExpressionDataArray | undefined;
 }
 
 
 declare module "piweb/format" {
+	/**
+	 * @module format
+	 * @preferred
+	 *
+	 * <br/>
+	 *
+	 * ## Introduction
+	 *
+	 * In many cases you'll want to create text output with numeric content, dates or time. On the other hand, you might want to parse numeric- or datetime values from files.
+	 * To ensure the correct formatting, you can use the `piweb.format` module.
+	 *
+	 * <br/>
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import drawing = piweb.format;
+	 * ```
+	 *
+	 */
+	/** file */
 	import { CultureInfoDescription } from "piweb/environment";
+	/**
+	 * When parsing a date without a specified time zone, the `DateKind` parameter determines which time zone the date has.
+	 *
+	 * **`assumeLocal`**
+	 *
+	 * The represented time will be interpreted as local time.
+	 *
+	 * **`assumeUTC`**
+	 *
+	 * The represented time will be interpreted as UTC.
+	 *
+	 */
 	export type DateKind = "assumeUtc" | "assumeLocal";
+	/**
+	 * Converts the specified value to its string representation using the specified format string and the culture specific format information.
+	 * @param value The number to format.
+	 * @param formatString The format string that tells how to format the number.
+	 * Please refer to the [.Net number format specification](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings)
+	 * for a complete list of possible format strings.
+	 * @param culture The culture to use for formatting. The function will use the invariant culture by default.
+	 */
 	export function formatNumber(value: number, formatString: string, culture?: CultureInfoDescription): string;
+	/**
+	 * Converts the specified string representation of a number in a specified culture specific format to its `number` equivalent. The function will
+	 * return NaN in case parsing wasn't possible.
+	 * @param str The string to parse.
+	 * @param culture The culture to use for parsing. The function will use the invariant culture by default.
+	 */
 	export function parseNumber(str: string, culture?: CultureInfoDescription): number;
+	/**
+	 * Converts the specified date to its string representation using the specified format string and the culture specific format information.
+	 * @param date The date to format.
+	 * @param offsetHours The number of hours about which to offset the date.
+	 * @param format The format string that tells how to format the date.
+	 * Please refer to the [.Net date and time format specification](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
+	 * for a complete list of possible format strings.
+	 * @param culture
+	 */
 	export function formatDate(date: Date, offsetHours?: number, format?: string, culture?: CultureInfoDescription): string;
+	/**
+	 * Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+	 * @param str The string to parse
+	 * @param culture The culture to use for parsing. The function will use the invariant culture by default.
+	 * @param dateKind The date kind to use for parsing.
+	 */
 	export function parseDate(str: string, culture?: CultureInfoDescription, dateKind?: DateKind): Date;
+	/**
+	 * Converts the specified string to its `Date` equivalent by using culture specific format information and formatting style.
+	 * @param str The string to parse
+	 * @param format The format string that tells how to interpret the date.
+	 * Please refer to the [.Net date and time format specification](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)
+	 * for a complete list of possible format strings.
+	 * @param culture The culture to use for parsing. The function will use the invariant culture by default.
+	 * @param dateKind The date kind to use for parsing.
+	 */
 	export function parseDateExact(str: string, format?: string, culture?: CultureInfoDescription, dateKind?: DateKind): Date;
 }
 
 
 declare module "piweb" {
+	/**
+	 * @module Index
+	 * @preferred
+	 *
+	 * <br/>
+	 *
+	 * ## Introduction
+	 *
+	 * The PiWeb custom plot API has a root module named `piweb` which encapsulates all child modules. The following child modules are available:
+	 *
+	 * - [**`data`**](data.html): Access the databinding of the plot element
+	 * - [**`drawing`**](drawing.html): Draw the content of the custom plot element
+	 * - [**`environment`**](environment.html): Access settings of the PiWeb host application
+	 * - [**`events`**](events.html): React to events emitted by the PiWeb host application
+	 * - [**`expressions`**](expressions.html): Evaluate system variable expressions
+	 * - [**`format`**](format.html): Read and write localized data
+	 * - [**`logger`**](logger.html): Write entries into the piweb log
+	 * - [**`properties`**](properties.html): Access the custom plot elements property grid
+	 * - [**`resources`**](resources.html): Access resources that are located in the extension package
+	 * - [**`tooltips`**](tooltips.html): Create tooltip content for the PiWeb Monitor info mode
+	
+	 */ /** */
 	import * as drawing from "piweb/drawing";
 	export { drawing };
 	import * as data from "piweb/data";
 	export { data };
 	import * as logger from 'piweb/logger';
 	export { logger };
-	import * as tooltips from 'piweb/tooltips/tooltip_shape_provider';
+	import * as tooltips from 'piweb/tooltips';
 	export { tooltips };
 	import * as resources from 'piweb/resources';
 	export { resources };
@@ -210,30 +492,109 @@ declare module "piweb" {
 
 
 declare module "piweb/logger" {
+	/**
+	 * Generates a log message with the `debug` log level.
+	 * @param format The format string that shall be logged.
+	 * @param param The parameters of the format string.
+	 */
 	export function debug(format: any, ...param: any[]): void;
+	/**
+	 * Generates a log message with the `info` log level.
+	 * @param format The format string that shall be logged.
+	 * @param param The parameters of the format string.
+	 */
 	export function info(format: any, ...param: any[]): void;
+	/**
+	 * Generates a log message with the `warning` log level.
+	 * @param format The format string that shall be logged.
+	 * @param param The parameters of the format string.
+	 */
 	export function warn(format: any, ...param: any[]): void;
+	/**
+	 * Generates a log message with the `error` log level.
+	 * @param format The format string that shall be logged.
+	 * @param param The parameters of the format string.
+	 */
 	export function error(format: any, ...param: any[]): void;
 }
 
 
 declare module "piweb/properties" {
+	/**
+	 * @module properties
+	 * @preferred
+	 *
+	 * <br/>
+	 *
+	 * ### Introduction
+	 *
+	 * The properties you define in the `package.json` file can be accessed with the `piweb.properties` module. To enable type checking, there is one function for each available datatype.
+	 *
+	 * <br/>
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import properties = piweb.properties;
+	 * ```
+	 */ /** */
 	import { Color, Brush, Pen, Font } from "piweb/drawing";
+	/**
+	 * Returns the value of the property with the name `id` as a boolean.
+	 * @param id The name of the property.
+	 */
 	export function getBooleanProperty(id: string): boolean;
+	/**
+	 * Returns the value of the property with the name `id` as a string.
+	 * @param id The name of the property.
+	 */
 	export function getStringProperty(id: string): string;
+	/**
+	 * Returns the value of the property with the name `id` as an integral number.
+	 * @param id The name of the property.
+	 */
 	export function getIntegerProperty(id: string): number;
+	/**
+	 * Returns the value of the property with the name `id` as a floating point number.
+	 * @param id The name of the property.
+	 */
 	export function getDoubleProperty(id: string): number;
+	/**
+	 * Returns the value of the property with the name `id` as a color.
+	 * @param id The name of the property.
+	 */
 	export function getColorProperty(id: string): Color;
+	/**
+	 * Returns the value of the property with the name `id` as a brush.
+	 * @param id The name of the property.
+	 */
 	export function getBrushProperty(id: string): Brush;
+	/**
+	 * Returns the value of the property with the name `id` as a pen.
+	 * @param id The name of the property.
+	 */
 	export function getPenProperty(id: string): Pen;
+	/**
+	 * Returns the value of the property with the name `id` as a font.
+	 * @param id The name of the property.
+	 */
 	export function getFontProperty(id: string): Font;
+	/**
+	 * Returns the value of the property with the name `id` as an enumerated string.
+	 * @param id The name of the property.
+	 */
 	export function getEnumProperty(id: string): string;
 }
 
 
 declare module "piweb/data/attributes" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
 	export type AttributeType = "string" | "integer" | "float" | "date" | "catalog";
+	/**
+	 * @private
+	 */
 	export const enum AttributeTypeId {
 	    String = 0,
 	    Integer = 1,
@@ -241,32 +602,105 @@ declare module "piweb/data/attributes" {
 	    Date = 3,
 	    Catalog = 4,
 	}
+	/**
+	 * @private
+	 */
 	export function mapAttributeType(attributeType: AttributeTypeId): AttributeType;
 	export type AttributeValue = string | number | Date;
+	/**
+	 * An attribute stores additional information about an arbitrary entity. Entities with attributes are parts, characteristics, measurements,
+	 * measured values and catalog entries. An attribute is identified by its key. To get information about the type and usage of an attribute,
+	 * use the Key to get the AttributeDefinition from the [[Configuration]].
+	 */
 	export class Attribute {
 	    constructor(key: number, type: AttributeType, value: AttributeValue);
+	    /**
+	     * An unsigned 16 bit integer that identifies the attributes definition.
+	     */
 	    key: number;
+	    /**
+	     * The datatype of the attributes value.
+	     */
 	    type: AttributeType;
+	    /**
+	     * The actual value of the attribute. Refer to the type to get the datatype.
+	     */
 	    value: AttributeValue;
 	}
+	/**
+	 * An attribute item has a collection of attributes. The collection contains only attributes that actually have a value, so the number
+	 * of attributes is usually lower than the number of attribute definitions that refer to the entity type of the attribute item.
+	 */
 	export interface IAttributeItem {
+	    /**
+	     * Gets a collection of attributes that are associated to this item.
+	     * @see [[Attribute]]
+	     */
 	    readonly attributes: AttributeCollection;
 	}
+	/**
+	 * Describes an accessible collection of attributes, that is attached to an item that implements [[IAttributeItem]]. The collection offers a wide range of helper
+	 * functions to allow a type safe access to the attributes values. You can iterate over the collection with a for ... of loop.
+	 */
 	export class AttributeCollection {
 	    readonly _attributes: Map<number, Attribute>;
 	    constructor(attributes: Iterable<Attribute>);
+	    /**
+	     * Returns an iterator over all attributes.
+	     */
 	    [Symbol.iterator](): Iterator<Attribute>;
+	    /**
+	     * Gets the number of attributes stored in the collection.
+	     */
 	    readonly length: number;
+	    /**
+	     * Gets an iterator over the available keys in the collection.
+	     */
 	    readonly keys: IterableIterator<number>;
+	    /**
+	     * Returns the attribute with the specified key, or `undefined` in case there is no attribute with this key.
+	     * @param key The key of the attribute.
+	     */
 	    getAttribute(key: number): Attribute | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key, or `undefined` in case there is no attribute with this key.
+	     * @param key The key of the attribute.
+	     */
 	    getValue(key: number): string | number | Date | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key as `string`, or `undefined` in case there is no attribute with this key.
+	     * @param key The key of the attribute.
+	     */
 	    getStringValue(key: number): string | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key as integral `number`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into an integral `number` representation.
+	     * @param key The key of the attribute.
+	     */
 	    getIntegerValue(key: number): number | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key as floating point `number`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into a floating point `number` representation.
+	     * @param key The key of the attribute.
+	     */
 	    getFloatValue(key: number): number | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key as `Date`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into a `Date` representation.
+	     * @param key The key of the attribute.
+	     */
 	    getDateValue(key: number): Date | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key as integral `number`, representing the key of a catalog entry, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into an integral `number` representation.
+	     * @param key The key of the attribute.
+	     */
 	    getCatalogIndex(key: number): number | undefined;
+	    /**
+	     * Returns the value of the attribute with the specified key as `number`, or `undefined` in case there is no attribute with this key or the attributes value can't be converted into a `number` representation.
+	     * @param key The key of the attribute.
+	     */
 	    getNumericValue(key: number): number | undefined;
 	}
+	/**
+	 * @private
+	 */
 	export function readAttributes(source: BufferReader): Attribute[];
 }
 
@@ -275,63 +709,248 @@ declare module "piweb/data/configuration" {
 	import { AttributeCollection, IAttributeItem, Attribute, AttributeType } from "piweb/data/attributes";
 	import { InspectionPlanItem } from "piweb/data/inspection";
 	import { MeasurementValue } from "piweb/data/measurements";
+	/**
+	 * Returns the database configuration from the PiWeb server.
+	 */
 	export function getConfiguration(): Configuration;
+	/**
+	 * [[include:configurationEntity.md]]
+	 */
 	export type ConfigurationEntity = "characteristic" | "part" | "measurement" | "measurementValue" | "catalog";
+	/**
+	 * Defines the datatype, entity and other parameters of an attribute with a specific K value.
+	 */
 	export class AttributeDefinition {
+	    /**
+	     * An unsigned short to identify the attribute.
+	     */
 	    key: number;
+	    /**
+	     * An unlocalized description text of the attribute.
+	     */
 	    description: string;
+	    /**
+	     * The datatype of the values of the attribute.
+	     */
 	    dataType: AttributeType;
+	    /**
+	     * The entity type this attribute belongs to.
+	     */
 	    entityType: ConfigurationEntity;
+	    /**
+	     * In case the `dataType` is `catalog`, this field contains the id of the [[Catalog]] that is used by this attribute.
+	     * You can pass the id or the whole attribute definition into a [[CatalogCollection]] to get the [[Catalog]].
+	     */
 	    catalogId: string | undefined;
+	    /**
+	     *
+	     * @param key An unsigned short to identify the attribute.
+	     * @param description An unlocalized description text of the attribute.
+	     * @param dataType The datatype of the values of the attribute.
+	     * @param entityType The entity type this attribute belongs to.
+	     * @param catalogId The id of the [[Catalog]] that is used by this attribute.
+	     */
 	    constructor(key: number, description: string, dataType: AttributeType, entityType: ConfigurationEntity, catalogId: string | undefined);
 	}
+	/**
+	 * The configuration contains all attribute definitions for parts, characteristics, measurements, measured values and catalogs. Additionally, it contains the catalogs that are configured in the piweb database.
+	 * @see [[AttributeDefinition]]
+	 * @see [[Catalog]]
+	 */
 	export class Configuration {
+	    /**
+	     * The set of attribute definitions referring to inspection plan parts.
+	     */
 	    partAttributes: Map<number, AttributeDefinition>;
+	    /**
+	     * The set of attribute definitions referring to inspection plan characteristics.
+	     */
 	    characteristicAttributes: Map<number, AttributeDefinition>;
+	    /**
+	     * The set of attribute definitions referring to measurements.
+	     */
 	    measurementAttributes: Map<number, AttributeDefinition>;
+	    /**
+	     * The set of attribute definitions referring to measured values.
+	     */
 	    measurementValueAttributes: Map<number, AttributeDefinition>;
+	    /**
+	     * The set of attribute definitions referring to catalog entries.
+	     */
 	    catalogAttributes: Map<number, AttributeDefinition>;
+	    /**
+	     * A map of all attribute definitions.
+	     */
 	    allAttributes: Map<number, AttributeDefinition>;
+	    /**
+	     * The catalogs that are configured in the PiWeb database.
+	     */
 	    catalogs: CatalogCollection;
+	    /**
+	     * @private
+	     */
 	    constructor(definitions: Iterable<AttributeDefinition>, catalogs: Iterable<Catalog>);
+	    /**
+	     * Returns the catalog entry that is identified by they catalog entry key of the specified attribute.
+	     * @param attribute The attribute with a catalog entry key as its value.
+	     */
 	    findCatalogEntry(attribute: Attribute): CatalogEntry | undefined;
+	    /**
+	     * Returns the catalog entry that is used by the specified measurement value.
+	     *
+	     * When using enumerated characteristics, every characteristic might use an individual catalog for its measurement value.
+	     * The measurement value is then the key of a catalog entry of this catalog.
+	     *
+	     * @param characteristic The measured characteristic.
+	     * @param measurementValue The measurement value.
+	     */
 	    findEnumeratedCatalogEntry(characteristic: InspectionPlanItem, measurementValue: MeasurementValue): CatalogEntry | undefined;
+	    /**
+	     * Returns the catalog that is associated to the specified attribute or enumerated characteristic.
+	     * @param attribute A catalog attribute, or an enumerated characteristic.
+	     */
 	    findCatalog(attribute: Attribute | InspectionPlanItem): Catalog | undefined;
+	    /**
+	     * Returns the attribute definition that is associated to the specified attribute.
+	     * @param attribute An attribute.
+	     */
 	    findDefinition(attribute: Attribute): AttributeDefinition | undefined;
 	}
+	/**
+	 * A catalog collection contains a set of catalogs, that can be accessed with an [[AttributeDefinition]], an [[InspectionPlanItem]] or a catalog id.
+	 * It's possible to iterate over the catalogs like the following:
+	 * ```TypeScript
+	 * for (let catalog of catalogs)
+	 * {
+	 * 		...
+	 * }
+	 * ```
+	 */
 	export class CatalogCollection {
 	    private readonly _idMap;
+	    /**
+	     * @private
+	     */
 	    constructor(catalogs: Iterable<Catalog>);
 	    [Symbol.iterator](): Iterator<Catalog>;
+	    /**
+	     * Gets the total number of catalogs stored in the collection.
+	     */
 	    readonly length: number;
+	    /**
+	     * Returns the catalog that is associated to the specified catalog attribute definition, enumerated characteristic or catalog id.
+	     * @param definition A catalog attribute definition, an enumerated characteristic or a catalog id.
+	     */
 	    find(definition: AttributeDefinition | InspectionPlanItem | string): Catalog | undefined;
 	}
+	/**
+	 * Describes a list of enumerated values in the PiWeb database.
+	 */
 	export class Catalog {
+	    /**
+	     * Gets the id of the catalog. It can be used to access a certain catalog in the [[CatalogCollection]].
+	     */
 	    catalogId: string;
+	    /**
+	     * Gets an unlocalized name that is used only for displaying purposes.
+	     */
 	    name: string;
+	    /**
+	     * Gets the list of keys that refer to the attribute definitions that correspond to this catalog.
+	     * @see [[AttributeDefinition]]
+	     */
 	    validAttributes: Iterable<number>;
+	    /**
+	     * Gets the set of catalog entries of which this catalog is composed.
+	     */
 	    entries: Map<number, CatalogEntry>;
+	    /**
+	     * @private
+	     */
 	    constructor(reference: string, name: string, validAttributes: Iterable<number>, entries: Iterable<CatalogEntry>);
+	    /**
+	     * @private
+	     */
 	    getCatalogGuid(): string;
 	}
+	/**
+	 * Describes an enumerated value of a [[Catalog]].
+	 */
 	export class CatalogEntry implements IAttributeItem {
+	    /**
+	     * Gets a 16 bit integer that identifies the catalog entry.
+	     */
 	    readonly key: number;
+	    /**
+	     * Gets the catalog attributes, often referred to as the values of the catalogs columns.
+	     */
 	    readonly attributes: AttributeCollection;
+	    /**
+	     * @private
+	     */
 	    constructor(key: number, attributes: Iterable<Attribute>);
+	    /**
+	     * @private
+	     */
 	    toString(): string;
+	    /**
+	     * @private
+	     */
 	    getInspectionString(): string;
 	}
 }
 
 
 declare module "piweb/data" {
+	/**
+	 * @module data
+	 * @preferred
+	 *
+	 * ## Introduction
+	 *
+	 * The `piweb.data` interface exposes methods to retrieve the inspection plan items, measurements, values and raw data that is bound to the custom plot element. Be aware that **the data can change**. Whenever this happens, the custom plot engine will emit the `dataChanged` event.
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import data = piweb.data;
+	 *
+	 * piweb.events.on("dataChanged", loadData);
+	 *
+	 * function loadData() {
+	 *     const configuration = data.getConfiguration();
+	 *     const inspectionPlan = data.getInspectionPlan();
+	 *     ...
+	 * }
+	 * ```
+	 */ /** */
+	/**
+	* @private
+	*/
 	export { IAttributeItem, Attribute, AttributeType, AttributeValue } from "piweb/data/attributes";
+	/**
+	 * @private
+	 */
 	export { getRawDataCollection, RawDataEntity, RawDataCollection, RawDataItem, getRawDataSources, setRawDataSources } from "piweb/data/raw_data";
+	/**
+	 * @private
+	 */
 	export { getInspectionPlanCollection, InspectionPlanCollection, InspectionPlanItem, InspectionPlanItemType } from "piweb/data/inspection";
+	/**
+	 * @private
+	 */
 	export { getMeasurementCollection, MeasurementCollection, Measurement, MeasurementValue } from "piweb/data/measurements";
+	/**
+	 * @private
+	 */
 	export { getConfiguration, Configuration, AttributeDefinition, ConfigurationEntity, CatalogCollection, Catalog, CatalogEntry } from "piweb/data/configuration";
+	/**
+	 * @private
+	 */
 	export { WellKnownKeys } from "piweb/data/wellknown_keys";
 	import * as path from "piweb/data/path";
+	/**
+	 * @private
+	 */
 	export { path };
 }
 
@@ -340,37 +959,181 @@ declare module "piweb/data/inspection" {
 	import { AttributeCollection, Attribute, IAttributeItem } from "piweb/data/attributes";
 	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
 	import { RawDataItem } from 'piweb/data/raw_data';
+	import { LimitType, LimitUsageReference } from 'piweb/environment';
+	/**
+	 * [[include:inspectionPlanItemType.md]]
+	 */
 	export type InspectionPlanItemType = "characteristic" | "part";
+	/**
+	 * Describes a part or a characteristic of the inspection plan.
+	 */
 	export class InspectionPlanItem implements IAttributeItem {
+	    /**
+	     * @private
+	     */
 	    readonly inspectionPlanItemId: string;
+	    /**
+	     * @private
+	     */
 	    readonly parentId?: string;
+	    /**
+	     * Gets the attributes of this inspection plan item.
+	     */
 	    readonly attributes: AttributeCollection;
+	    /**
+	     * The item type, which is either `part` or `characteristic`.
+	     */
 	    readonly type: InspectionPlanItemType;
+	    /**
+	     * The path of the item in the inspection plan structure.
+	     */
 	    readonly path: string;
+	    /**
+	     * Gets the number of characteristic elements in the path.
+	     */
 	    readonly characteristicDepth: number;
+	    /**
+	     * Gets the number of part elements in the path.
+	     */
 	    readonly partDepth: number;
+	    /**
+	     * Gets a value indicating whether the characteristic is an enumerated characteristic, which means that its measurement value represents the key of a catalog entry.
+	     */
 	    readonly isEnumerated: boolean;
+	    /**
+	     * Gets a value indicating whether the characteristic is a counting characteristic, which means that its measurement value represents a number of arbitrary entities.
+	     */
 	    readonly isCounted: boolean;
+	    /**
+	     * @private
+	     */
 	    readonly catalogId?: string;
+	    /**
+	     * Gets the name of the item, which is also the last part of the path.
+	     */
 	    readonly name: string;
+	    /**
+	     * Gets the tolerances as well as other limits of this item.
+	     */
+	    readonly limits: LimitCollection;
+	    /**
+	     * @private
+	     */
 	    constructor(id: string, parentId: string | undefined, type: InspectionPlanItemType, isEnumerated: boolean, catalogId: string | undefined, isCounted: boolean, path: string, partDepth: number, characteristicDepth: number, attributes: Iterable<Attribute>);
+	    /**
+	     * @private
+	     */
 	    getInspectionPlanGuid(): string;
 	}
+	/**
+	 * Describes a set of inspection plan items. It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:
+	 *
+	 * ```TypeScript
+	 * const inspectionPlanCollection = piweb.data.getInspectionPlanCollection();
+	 * for (let item of inspectionPlanCollection)
+	 * {
+	 *     ...
+	 * }
+	 * ```
+	 */
 	export class InspectionPlanCollection implements Iterable<InspectionPlanItem> {
+	    /**
+	     * @private
+	     */
 	    private readonly _idMap;
+	    /**
+	     * @private
+	     */
 	    private readonly _pathMap;
+	    /**
+	     * @private
+	     */
 	    constructor(items: Iterable<InspectionPlanItem>);
+	    /**
+	     * @private
+	     */
 	    [Symbol.iterator](): Iterator<InspectionPlanItem>;
+	    /**
+	     * Gets the total number of items stored in the collection.
+	     */
 	    readonly length: number;
+	    /**
+	     * Returns an iterator over all characteristics stored in the collection.
+	     */
 	    getCharacteristics(): IterableIterator<InspectionPlanItem>;
+	    /**
+	     * Returns an iterator over all parts stored in the collection.
+	     */
 	    getParts(): IterableIterator<InspectionPlanItem>;
+	    /**
+	     * Returns the inspection plan item that associated to the the specified entity or `undefined` if the collection contains no such inspection plan item. The following associations are assumed:
+	     *
+	     * | Entity                            | Association |
+	     * |----------------------------------|------------------------------------------------------|
+	     * | [[Measurement]] | The part to which the measurement is attached |
+	     * | [[MeasurementValue]] | The characteristic to which the measurement value is attached |
+	     * | [[RawDataItem]] | The part or characteristic to which the raw data is attached |
+	     * @param entity A measurement, measurement value or raw data item.
+	     */
 	    findByEntity(entity: Measurement | MeasurementValue | RawDataItem): InspectionPlanItem | undefined;
+	    /**
+	     *
+	     * Returns the inspection plan item that is identified by the specified path or `undefined` if the collection contains no such inspection plan item.
+	     * @param path An inspection plan path.
+	     */
 	    findByPath(path: string): InspectionPlanItem | undefined;
+	    /**
+	     * Returns the parent item of the specified inspection plan item or `undefined` if the item has no parent, or the collection doesn't contain it.
+	     * @param item The item whose parent is requested.
+	     */
 	    findParent(item: InspectionPlanItem): InspectionPlanItem | undefined;
+	    /**
+	     * Returns the parent part of the specified inspection plan item or `undefined` if the item has no parent, or the collection doesn't contain it.
+	     * @param item The item whose parent part is requested.
+	     */
 	    findParentPart(item: InspectionPlanItem): InspectionPlanItem | undefined;
+	    /**
+	     * Returns the child items of the specified inspection plan item or. Please be aware that only those children are returned, that are included in the binding of the element.
+	     * @param item The item whose children are requested.
+	     */
 	    findChildren(item: InspectionPlanItem): IterableIterator<InspectionPlanItem>;
+	    /**
+	     * @private
+	     */
+	    first(): InspectionPlanItem | undefined;
 	}
+	/**
+	 * Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer.
+	 */
 	export function getInspectionPlanCollection(): InspectionPlanCollection;
+	export class LimitCollection {
+	    readonly tolerance: LimitContext;
+	    readonly warning: LimitContext;
+	    readonly control: LimitContext;
+	    readonly scrap: LimitContext;
+	    constructor(tolerance: LimitContext, warning: LimitContext, control: LimitContext, scrap: LimitContext);
+	    getLimit(type: LimitType): LimitContext;
+	}
+	export class LimitContext {
+	    private readonly _limitReference;
+	    private readonly _limit;
+	    readonly nominalValue: number | undefined;
+	    readonly upperValueIsNatural: boolean;
+	    readonly lowerValueIsNatural: boolean;
+	    readonly lowerValue: number | undefined;
+	    readonly upperValue: number | undefined;
+	    constructor(nominalValue: number | undefined, limit: Limit, lowerValueIsNatural: boolean, upperValueIsNatural: boolean, limitReference: LimitUsageReference);
+	    contains(value: MeasurementValue | number | undefined, precision?: number): boolean;
+	    getlimitUsage(value: MeasurementValue | number, precision?: number): number | undefined;
+	    toDisplayString(): string;
+	}
+	export class Limit {
+	    readonly lower: number | undefined;
+	    readonly upper: number | undefined;
+	    readonly mid: number | undefined;
+	    constructor(lower: number | undefined, upper: number | undefined);
+	    containsValue(value: number, precision: number): boolean;
+	}
 }
 
 
@@ -378,42 +1141,153 @@ declare module "piweb/data/measurements" {
 	import { AttributeCollection, Attribute, IAttributeItem } from "piweb/data/attributes";
 	import { InspectionPlanItem } from 'piweb/data/inspection';
 	import { RawDataItem } from 'piweb/data/raw_data';
+	/**
+	 * A collection of [`Measurements`](#measurement). It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:
+	 *
+	 * ```TypeScript
+	 * const measurementCollection = piweb.data.getMeasurementCollection();
+	 * for (let measurement of measurementCollection)
+	 * {
+	 *     ...
+	 * }
+	 * ```
+	 */
 	export class MeasurementCollection {
 	    private readonly _idMap;
+	    /**
+	     * @private
+	     */
 	    constructor(measurements: Iterable<Measurement>);
+	    /**
+	     * @private
+	     */
 	    [Symbol.iterator](): Iterator<Measurement>;
+	    /**
+	     * Gets the number of measurements in the collection.
+	     */
 	    readonly length: number;
+	    /**
+	     * Returns the measurement that associated to the the specified raw data item or `undefined` if the collection contains no such measurement.
+	     * @param entity The raw data item from which the measurement should be returned.
+	     */
 	    findMeasurementByEntity(entity: RawDataItem): Measurement | undefined;
+	    /**
+	     * Returns the measurements that are associated to the the specified inspection plan part or `undefined` if the collection contains no such measurement.
+	     * @param entity The inspection plan part to search measurements for.
+	     */
 	    findMeasurementsByEntity(entity: InspectionPlanItem): Iterable<Measurement>;
+	    /**
+	     * Returns the measurement value that is associated to the specified [`RawDataItem`](#rawdataitem) or `undefined` if the collection contains no such measurement value.
+	     * @param entity The raw data item from which the measurement value should be returned.
+	     */
 	    findValueByEntity(entity: RawDataItem): MeasurementValue | undefined;
+	    /**
+	     * Returns the measurement values that are associated to the the specified inspection plan characteristic or `undefined` if the collection contains no such measurement.
+	     * @param entity The inspection plan characteristic to search values for.
+	     */
 	    findValuesByEntity(entity: InspectionPlanItem): Iterable<MeasurementValue>;
+	    /**
+	     * @private
+	     */
+	    first(): Measurement | undefined;
 	}
+	/**
+	 * Describes a measurement of an inspection plan part. A measurement is composed of measurement values that are associated to characteristics.
+	 * The characteristics are the children of the part to which the measurement is associated.
+	 */
 	export class Measurement implements IAttributeItem {
+	    /**
+	     * Gets the attributes of this measurement.
+	     */
 	    readonly attributes: AttributeCollection;
+	    /**
+	     * @private
+	     */
 	    readonly measurementId: string;
+	    /**
+	     * @private
+	     */
 	    readonly partId: string;
+	    /**
+	     * @private
+	     */
 	    readonly _values: Map<string, MeasurementValue>;
+	    /**
+	     * @private
+	     */
 	    constructor(id: string, partId: string, attributes: Iterable<Attribute>, values: Iterable<MeasurementValue>);
+	    /**
+	     * @private
+	     */
 	    getMeasurementGuid(): string;
+	    /**
+	     * @private
+	     */
 	    getPartGuid(): string;
+	    /**
+	     * Returns the measurement value that is associated to the specified characteristic or `undefined` if the measurement contains no such measurement value.
+	     * @param entity The inspection plan characteristic to search the value for.
+	     */
 	    findValueByEntity(entity: InspectionPlanItem): MeasurementValue | undefined;
+	    /**
+	     * Gets the number of measurement values associated to this measurement.
+	     */
 	    readonly valueCount: number;
+	    /**
+	     * Gets the values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
+	     */
 	    readonly allMeasurementValues: IterableIterator<MeasurementValue>;
+	    /**
+	     * @private
+	     */
+	    first(): MeasurementValue | undefined;
 	}
+	/**
+	 * Describes a measurement value of an inspection plan characteristic.
+	 */
 	export class MeasurementValue implements IAttributeItem {
+	    /**
+	     * Gets the attributes of this measurement value.
+	     */
 	    readonly attributes: AttributeCollection;
+	    /**
+	     * @private
+	     */
 	    readonly characteristicId: string;
+	    /**
+	     * Gets the measurement to which this measurement value belongs
+	     */
 	    measurement: Measurement;
+	    /**
+	     * @private
+	     */
 	    readonly measurementId: string;
+	    /**
+	     * @private
+	     */
 	    constructor(characteristicId: string, attributes: Iterable<Attribute>);
+	    /**
+	     * @private
+	     */
 	    getMeasurementGuid(): string;
+	    /**
+	     * @private
+	     */
 	    getCharacteristicGuid(): string;
 	}
+	/**
+	 * Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding.
+	 * You can change the databinding and the measurement selection in PiWeb Designer.
+	 */
 	export function getMeasurementCollection(): MeasurementCollection;
 }
 
 
 declare module "piweb/data/path" {
+	/**
+	 * @module data
+	 */
+	/** second comment block, needed for module merging, don't remove */
 	export { dirname, basename, extname, isAbsolute, join, parse, relative, format, normalize, sep } from "piweb/resources/path";
 	export { dirname as parentname } from "piweb/resources/path";
 	/**
@@ -433,39 +1307,158 @@ declare module "piweb/data/raw_data" {
 	import { HostBinary } from 'piweb/resources/host_binary';
 	import { InspectionPlanItem } from 'piweb/data/inspection';
 	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
+	/**
+	 * An enumeration to identify the entity to which a raw data item is attached.
+	 */
 	export type RawDataEntity = "part" | "characteristic" | "measurement" | "measurementValue";
+	/**
+	 * Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
+	 */
 	export class RawDataItem {
+	    /**
+	     * @private
+	     */
 	    inspectionPlanItemId?: string;
+	    /**
+	     * @private
+	     */
 	    measurementId?: string;
+	    /**
+	     * @private
+	     */
 	    _checkSumBytes: Buffer;
+	    /**
+	     * Gets the type of the entity this item is attached to.
+	     */
 	    entityType: RawDataEntity;
+	    /**
+	     * Gets the key of this item.
+	     */
 	    key: number;
+	    /**
+	     * Gets the filename.
+	     */
 	    name: string;
+	    /**
+	     * Gets the size of the data in bytes.
+	     */
 	    size: number;
+	    /**
+	     * Gets the mime type.
+	     */
 	    mimeType?: string;
+	    /**
+	     * Gets the date when the item has been uploaded to the piweb server.
+	     */
 	    created: Date;
+	    /**
+	     * Gets the date when the item has been modified on the piweb server.
+	     */
 	    lastModified: Date;
+	    /**
+	     * @private
+	     */
 	    getCheckSum(): string;
+	    /**
+	     * @private
+	     */
 	    getInspectionGuid(): string | undefined;
+	    /**
+	     * @private
+	     */
 	    getMeasurementGuid(): string | undefined;
+	    /**
+	     * Returns the data associated to the [[RawDataItem]]. The data is returned as a [[HostBuffer]], which can be converted to a [[Buffer]] using the `makeBuffer` function.
+	     */
 	    getDataBuffer(): Buffer | undefined;
+	    /**
+	     * Returns the data associated to the [[RawDataItem]]. The data is returned as a [[Buffer]].
+	     */
 	    getData(): HostBinary | undefined;
 	}
+	/**
+	 * Describes a list of raw data information with additional functions to access certain entries. You can iterate over the collection like the following:
+	 *
+	 *  * ```TypeScript
+	 * const rawDataCollection = piweb.data.getRawDataCollection();
+	 * for (let rawDataItem of rawDataCollection)
+	 * {
+	 *     ...
+	 * }
+	 * ```
+	 */
 	export class RawDataCollection {
+	    /**
+	     * @private
+	     */
 	    private readonly _items;
+	    /**
+	     * @private
+	     */
 	    constructor(items: Iterable<RawDataItem>);
+	    /**
+	     * @private
+	     */
+	    [Symbol.iterator](): Iterator<RawDataItem>;
+	    /**
+	     * Gets the total number of items in this collection.
+	     */
 	    readonly length: number;
+	    /**
+	     * Returns the items that match one or more of the specified filter strings.
+	     * @param wildcards One or more filter strings. Wildcards like '*' are allowed.
+	     */
 	    findByName(...wildcards: string[]): Iterable<RawDataItem>;
+	    /**
+	     * Returns the raw data items that are associated to the specified entity.
+	     * @param entity An instance of a raw data entity.
+	     */
 	    findByEntity(entity: InspectionPlanItem | Measurement | MeasurementValue): Iterable<RawDataItem>;
+	    /**
+	     * @private
+	     */
+	    first(): RawDataItem | undefined;
 	}
+	/**
+	 * Returns a list of all raw data entries that are bound to the custom plot via databinding. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.
+	 *
+	 * ```TypeScript
+	 * function getRawDataCollection() : RawDataCollection;
+	 * ```
+	 *
+	 * You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.
+	 *
+	 * ```TypeScript
+	 * function setRawDataSources( Iterable<RawDataEntity> sources ) : void;
+	 * function getRawDataSources() : Iterable<RawDataEntity>;
+	 * ```
+	 */
 	export function getRawDataCollection(): RawDataCollection;
+	/**
+	 * Sets the raw data entities from which the custom plot fetches the raw data. By default, the plot fetches raw data
+	 * from all entities, including measurement values. When the databinding of the custom plot element features a lot of characteristics
+	 * and measurements, the raw data fetching can have a large performance impact.
+	 * @param sources
+	 */
 	export function setRawDataSources(sources: Iterable<RawDataEntity>): void;
+	/**
+	 * Returns the raw data entities from which the custom plot fetches the raw data.
+	 */
 	export function getRawDataSources(): Iterable<RawDataEntity>;
 }
 
 
 declare module "piweb/data/wellknown_keys" {
+	/**
+	 * @module data
+	 */ /** */
+	/**
+	 * Describes a set of attribute keys that are known and/or interpreted by PiWeb for certain evaluations.
+	 */
 	export namespace WellKnownKeys {
+	    /**
+	     * Describes the known attribute keys for inspection plan parts.
+	     */
 	    namespace Part {
 	        const Number: number;
 	        const Description: number;
@@ -493,6 +1486,9 @@ declare module "piweb/data/wellknown_keys" {
 	        const Responsible: number;
 	        const Comment: number;
 	    }
+	    /**
+	     * Describes the known attribute keys for inspection plan characteristics.
+	     */
 	    namespace Characteristic {
 	        const Number: number;
 	        const Description: number;
@@ -562,6 +1558,9 @@ declare module "piweb/data/wellknown_keys" {
 	        const VariationChartLowerWarningLimit: number;
 	        const VariationChartUpperWarningLimit: number;
 	    }
+	    /**
+	     * Describes the known attribute keys for measurements.
+	     */
 	    namespace Measurement {
 	        const Time: number;
 	        const EventId: number;
@@ -585,6 +1584,9 @@ declare module "piweb/data/wellknown_keys" {
 	        const AggregationInterval: number;
 	        const AggregatedMeasurementCount: number;
 	    }
+	    /**
+	     * Describes the known attribute keys for catalogs.
+	     */
 	    namespace Catalog {
 	        const ColorSchemePositionKey: number;
 	        const StatusColorKey: number;
@@ -597,6 +1599,9 @@ declare module "piweb/data/wellknown_keys" {
 	        const DistributionAnalysisModeDescription: number;
 	        const DistributionAnalysisModeKey: number;
 	    }
+	    /**
+	     * Describes the known attribute keys for measurement values.
+	     */
 	    namespace Value {
 	        const MeasuredValue: number;
 	        const AggregatedMinimum: number;
@@ -618,6 +1623,10 @@ declare module "piweb/data/wellknown_keys" {
 
 
 declare module "piweb/drawing/drawing" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from 'internal/buffer_writer';
 	import { Serializable } from "internal/serializable";
 	import { PointDescription } from 'piweb/drawing/geometry/basics';
@@ -630,44 +1639,156 @@ declare module "piweb/drawing/drawing" {
 	import { ImageDrawingSettingsDescription } from "piweb/drawing/image/settings";
 	import { GeometryDrawingSettingsDescription } from "piweb/drawing/geometry/settings";
 	import { Bitmap } from "piweb/drawing/image/bitmap";
+	/**
+	 * Describes the content of a drawing with the help of various drawing commands.
+	 */
 	export interface DrawingContext {
+	    /**
+	     * Draws a line using from `start` to `end` using the pen which has been previously set with the [[setPen]] function.
+	     * In case you want to draw a larger number of lines, consider using the [[drawLines]] or [[drawGeometry]] function
+	     * to improve the drawing performance.
+	     */
 	    drawLine(start: PointDescription, end: PointDescription): void;
+	    /**
+	     * Draws multiple lines that are **not** connected using the pen which has been previously set with the [[setPen]] function.
+	     * The number of points provided as parameter `lines` must be even. Each two points describe a line. In case you want to draw
+	     * connected points, please consider using the function [[drawGeometry]] instead of using the [[drawLines]] function with
+	     * duplicate points.
+	     */
 	    drawLines(lines: PointDescription[]): void;
+	    /**
+	     * Draws a rectangle with of width `w` and height `h` at Point `x;y` and fills it with the brush which has been previously
+	     * set using the [[setBrush]] function, and strokes it using the pen which has been previously set
+	     * with the [[setPen]] function. In case you want to draw a larger number of rectangles, consider
+	     * using the [[drawGeometry]] function with a [[GeometryGroup]], containing
+	     * multiple [[RectangleGeometry]] objects to improve the drawing performance.
+	     */
 	    drawRectangle(x: number, y: number, w: number, h: number): void;
+	    /**
+	     * Draws an ellipse around the point `center` and fills it with the brush which has been previously set using the [[setBrush]]
+	     * function, and strokes it using the pen which has been previously set with the [[setPen]] function. In case you want to draw
+	     * a larger number of ellipses (e.g. points), consider using the [[drawGeometry]] function with a [[GeometryGroup]], containing
+	     * multiple [[EllipseGeometry]] objects to improve the drawing performance.
+	     */
 	    drawEllipse(center: PointDescription, radiusX: number, radiusY: number): void;
+	    /**
+	     * Draws the specified [[Geometry]] and fills it with the brush which has been previously set using the [[setBrush]] function,
+	     * and strokes it using the pen which has been previously set with the [[setPen]] function. In case you want to draw a larger
+	     * number of geometries, consider creating a [[GeometryGroup]], containing multiple [[Geometry]] objects to improve the drawing
+	     * performance. The geometry can be easily aligned with the `settings` parameter.
+	     */
 	    drawGeometry(geometry: GeometryDescription, settings?: GeometryDrawingSettingsDescription): void;
+	    /**
+	     * Draws the specified [[FormattedText]] at with the specified [[TextDrawingSettings]]. There are numerous properties which will
+	     * help you to adjust how the text is arranged and displayed. For more information, please read the chapters '[FormattedText]',
+	     * '[Font]' and '[TextDrawingSettings]'.
+	     */
 	    drawText(text: FormattedTextDescription | string, settings?: TextDrawingSettingsDescription): void;
+	    /**
+	     * Draws the specified [[Bitmap]] buffer with the specified [[ImageDrawingSettings]].
+	     */
 	    drawImage(image: Bitmap, settings?: ImageDrawingSettingsDescription): void;
+	    /**
+	     * Draws the specified [[Drawing]] into the current drawing context. To set the position and size of the drawing, use the
+	     * [[pushTransform]] function. The drawing can be easily aligned with the `settings` parameter.
+	     */
 	    drawDrawing(drawing: Drawing, settings?: GeometryDrawingSettingsDescription): void;
+	    /**
+	     * Sets the pen that will be used for all subsequent calls to [[drawLine]], [[drawLines]], [[drawRectangle]], [[drawEllipse]]
+	     * and [[drawGeometry]]. In case you don't want your rectangle, ellipse or geometry to be stroked, use the [[noPen]] function.
+	     */
 	    setPen(pen: PenDescription): void;
+	    /**
+	     * Removes the pen that has previously been set with the [[setPen]] function. All subsequent calls to [[drawLine]], [[drawLines]],
+	     * [[drawRectangle]], [[drawEllipse]] and [[drawGeometry]] will not be stroked.
+	     */
 	    noPen(): void;
+	    /**
+	     * Sets the brush that will be used for all subsequent calls to [[drawRectangle]], [[drawEllipse]] and [[drawGeometry]].
+	     * In case you don't want your rectangle, ellipse or geometry to be filled, use the [[noBrush]] function.
+	     */
 	    setBrush(brush: BrushDescription): void;
+	    /**
+	     * Removes the brush that has previously been set with the [[setBrush]] function. All subsequent calls to [[drawRectangle]],
+	     * [[drawEllipse]] and [[drawGeometry]] will not be filled.
+	     */
 	    noBrush(): void;
+	    /**
+	     * Multiplies the current transformation matrix with another [[Transform]]. To undo it, use the [[pop]] function.
+	     */
 	    pushTransform(transformation: TransformDescription): void;
+	    /**
+	     * Sets a new clip geometry. All subsequent drawing calls will only be rendered inside the fill area of the specified `geometry`.
+	     * Be aware that unfilled geometries like straight lines don't have any fill area, which means that all subsequent drawing calls
+	     * have no effect. To undo it, use the [[pop]] function.
+	     */
 	    pushClip(geometry: GeometryDescription): void;
+	    /**
+	     * Sets the opacity of all subsequent drawing calls. When drawing transparent objects, the transparency of the object is
+	     * multiplied with the specified `opacity`. To undo it, use the [[pop]] function.
+	     */
 	    pushOpacity(opacity: number): void;
+	    /**
+	     * Removes the most recent effect caused by [[pushTransform]], [[pushOpacity]] or [[pushClip]] from the stack. This function
+	     * will cause an error in case none of the specified commands has been executed before.
+	     */
 	    pop(): void;
+	    /**
+	     * Finalizes the drawing which this drawing context belongs to.
+	     */
 	    close(): void;
 	}
+	/**
+	 * Describes a bounding box of a drawing, including position and size.
+	 */
 	export interface DrawingMeasurements {
 	    x: number;
 	    y: number;
 	    width: number;
 	    height: number;
 	}
+	/**
+	 * Describes a two dimensional vector graphics image.
+	 */
 	export class Drawing implements Serializable {
 	    private _internals;
+	    /**
+	     * Initializes a new instance of the [[Drawing]] class.
+	     */
 	    constructor();
+	    /**
+	     * Returns a [[DrawingContext]] which can be used to create the content of the drawing.
+	     */
 	    open(): DrawingContext;
+	    /**
+	     * @private
+	     */
 	    serialize(writer: BufferWriter): void;
+	    /**
+	     * Returns the bounding box of the drawing.
+	     */
 	    measure(): DrawingMeasurements;
+	    /**
+	     * @private
+	     * even though it looks unused, this method is important because it will be called from the c# runtime
+	     */
 	    private getBytes();
+	    /**
+	     * @private
+	     */
 	    private getLength();
 	}
 }
 
 
 declare module "piweb/drawing/drawing_ids" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
+	/**
+	 * @private
+	 */
 	export const enum ContextOperation {
 	    NoOp = 0,
 	    DrawLine = 1,
@@ -686,6 +1807,9 @@ declare module "piweb/drawing/drawing_ids" {
 	    DrawDrawing = 14,
 	    Close = 255,
 	}
+	/**
+	 * @private
+	 */
 	export const enum GeometryId {
 	    Line = 1,
 	    Rectangle = 2,
@@ -695,36 +1819,57 @@ declare module "piweb/drawing/drawing_ids" {
 	    Group = 6,
 	    Custom = 7,
 	}
+	/**
+	 * @private
+	 */
 	export const enum BrushId {
 	    None = 0,
 	    SolidColor = 1,
 	    LinearGradient = 2,
 	    RadialGradient = 3,
 	}
+	/**
+	 * @private
+	 */
 	export const enum PenId {
 	    None = 0,
 	    Direct = 1,
 	}
+	/**
+	 * @private
+	 */
 	export const enum LineJoinId {
 	    Bevel = 0,
 	    Miter = 1,
 	    Round = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum LineCapId {
 	    Flat = 0,
 	    Round = 1,
 	    Square = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum GeometryCombineModeId {
 	    Union = 0,
 	    Intersect = 1,
 	    Xor = 2,
 	    Exclude = 3,
 	}
+	/**
+	 * @private
+	 */
 	export const enum FillRuleId {
 	    EvenOdd = 0,
 	    Nonzero = 1,
 	}
+	/**
+	 * @private
+	 */
 	export const enum TransformationId {
 	    Identity = 0,
 	    Translation = 1,
@@ -734,6 +1879,9 @@ declare module "piweb/drawing/drawing_ids" {
 	    Matrix = 5,
 	    Group = 6,
 	}
+	/**
+	 * @private
+	 */
 	export const enum PathSegmentId {
 	    Arc = 1,
 	    Bezier = 2,
@@ -743,18 +1891,30 @@ declare module "piweb/drawing/drawing_ids" {
 	    PolyLine = 6,
 	    PolyQuadraticBezier = 7,
 	}
+	/**
+	 * @private
+	 */
 	export const enum SweepDirectionId {
 	    Clockwise = 0,
 	    Counterclockwise = 1,
 	}
+	/**
+	 * @private
+	 */
 	export const enum ArcTypeId {
 	    Small = 0,
 	    Large = 1,
 	}
+	/**
+	 * @private
+	 */
 	export const enum FlowDirectionId {
 	    LeftToRight = 0,
 	    RightToLeft = 1,
 	}
+	/**
+	 * @private
+	 */
 	export const enum FontStretchId {
 	    UltraCondensed = 1,
 	    ExtraCondensed = 2,
@@ -766,6 +1926,9 @@ declare module "piweb/drawing/drawing_ids" {
 	    ExtraExpanded = 8,
 	    UltraExpanded = 9,
 	}
+	/**
+	 * @private
+	 */
 	export const enum FontWeightId {
 	    Thin = 100,
 	    ExtraLight = 200,
@@ -778,22 +1941,34 @@ declare module "piweb/drawing/drawing_ids" {
 	    Black = 900,
 	    ExtraBlack = 950,
 	}
+	/**
+	 * @private
+	 */
 	export const enum FontStyleId {
 	    Normal = 0,
 	    Oblique = 1,
 	    Italic = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum HorizontalTextAlignmentId {
 	    Left = 0,
 	    Right = 1,
 	    Center = 2,
 	    Justify = 3,
 	}
+	/**
+	 * @private
+	 */
 	export const enum VerticalTextAlignmentId {
 	    Top = 0,
 	    Bottom = 1,
 	    Center = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum VerticalTextAnchorId {
 	    Default = 0,
 	    Top = 1,
@@ -801,39 +1976,60 @@ declare module "piweb/drawing/drawing_ids" {
 	    Center = 3,
 	    BaseLine = 4,
 	}
+	/**
+	 * @private
+	 */
 	export const enum HorizontalTextAnchorId {
 	    Default = 0,
 	    Left = 1,
 	    Right = 2,
 	    Center = 3,
 	}
+	/**
+	 * @private
+	 */
 	export const enum VerticalImageAnchorId {
 	    Top = 0,
 	    Bottom = 1,
 	    Center = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum HorizontalImageAnchorId {
 	    Left = 0,
 	    Right = 1,
 	    Center = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum VerticalAnchorId {
 	    Origin = 0,
 	    Top = 1,
 	    Bottom = 2,
 	    Center = 3,
 	}
+	/**
+	 * @private
+	 */
 	export const enum HorizontalAnchorId {
 	    Origin = 0,
 	    Left = 1,
 	    Right = 2,
 	    Center = 3,
 	}
+	/**
+	 * @private
+	 */
 	export const enum TextDecorationId {
 	    None = 0,
 	    Underline = 1,
 	    StrikeThrough = 2,
 	}
+	/**
+	 * @private
+	 */
 	export const enum TextTrimmingId {
 	    None = 0,
 	    CharacterEllipsis = 1,
@@ -843,14 +2039,90 @@ declare module "piweb/drawing/drawing_ids" {
 
 
 declare module "piweb/drawing" {
-	export { Point, Rect, Size } from "piweb/drawing/geometry/basics";
+	/**
+	 * @module drawing
+	 * @preferred
+	 *
+	 * ## Introduction
+	 *
+	 * All necessary classes for drawing are encapsulated in the `piweb.drawing` module. The custom plot will be rendered whenever something changes, e.g. a property value, its size or position. When this happens,
+	 * the custom plot API will emit the `render` event, which has a [`DrawingContext`](#drawingcontext) object as its parameter.
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import drawing = piweb.drawing;
+	 *
+	 *
+	 * piweb.events.on("render", render);
+	 *
+	 * function render(context: drawing.DrawingContext) {
+	 *     ...
+	 * }
+	 * ```
+	 *
+	 * Be aware that all coordinates and values are interpreted as **millimeters**. PiWeb draws with a resolution of **96 DPI**, so one millimeter is equal to `96 / 25.4 ~ 3.58` pixels,
+	 * or one pixel is equal to `25.4 / 96 ~ 0.2646` millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.
+	 *
+	 * ### Interfaces
+	 *
+	 * Most drawing objects, like [[Color]], [[Brush]], [[Pen]], [[Font]] and [[Geometry]] implement an interface that is named like the implementing class, with an additional `Description` suffix (e.g. `ColorDescription`).
+	 * Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.
+	 *
+	 * Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is,
+	 * that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
+	 *
+	 * **Long version using constructors:**
+	 *
+	 * ```TypeScript
+	 * context.setPen(new piweb.drawing.Pen(
+	 *     new piweb.drawing.SolidColorBrush(
+	 *         new piweb.drawing.Color(255, 0, 0, 255),
+	 *         1.0),
+	 *     1.0,
+	 *     "flat",
+	 *     "flat",
+	 *     "bevel",
+	 *     new Array<number>(),
+	 *     0.0,
+	 *     "flat"
+	 * ));
+	 *
+	 * context.drawLine(
+	 *     new piweb.drawing.Point(0.0, 0.0), // from
+	 *     new piweb.drawing.Point(1.0, 1.0)  // to
+	 * );
+	 * ```
+	 *
+	 * **Short version using interfaces:**
+	 *
+	 * ```TypeScript
+	 * context.setPen({
+	 *     brush: {
+	 *         type: "solid",
+	 *         color: { r: 255, g: 0, b: 0 }
+	 *     },
+	 *     thickness: 1.0}
+	 * );
+	 *
+	 * context.drawLine(
+	 *     { x: 0.0, y: 0.0 },
+	 *     { x: 1.0, y: 1.0 }
+	 * );
+	 * ```
+	 *
+	 * As you might have noticed, you don't have to specify all parameters when using the interface version. For almost every value, there is a
+	 * defined **default value** which is used in case the actual value is not specified. The API reference in the following chapters will not always
+	 * list all possible parameter types. You'll notice that most types and functions can be configured in several more comfortable ways, as most functions
+	 * are defined to take interfaces as their parameters.
+	 */ /** */
+	export { Point, PointDescription, Rect, Size, SizeDescription } from "piweb/drawing/geometry/basics";
 	export { GeometryType, Geometry, GeometryDescription, LineGeometry, LineGeometryDescription, RectangleGeometry, RectangleGeometryDescription, EllipseGeometry, EllipseGeometryDescription, PathGeometry, CombinedGeometry, GeometryGroup } from "piweb/drawing/geometry/geometries";
 	export { PathFigure } from "piweb/drawing/geometry/path_figure";
 	export { PathSegmentType, PathSegment, LineSegment, PolyLineSegment, ArcSegment, BezierSegment, PolyBezierSegment, QuadraticBezierSegment, PolyQuadraticBezierSegment } from "piweb/drawing/geometry/path_segments";
 	export { FillRule, GeometryCombineMode } from "piweb/drawing/geometry/geometries";
 	export { SweepDirection } from "piweb/drawing/geometry/path_segments";
 	export { GeometryDrawingSettings, GeometryDrawingSettingsDescription, HorizontalAnchor, VerticalAnchor } from "piweb/drawing/geometry/settings";
-	export { BrushType, Brush, SolidColorBrush, LinearGradientBrush, RadialGradientBrush } from "piweb/drawing/material/brushes";
+	export { BrushType, Brush, BrushDescription, SolidColorBrush, LinearGradientBrush, RadialGradientBrush } from "piweb/drawing/material/brushes";
 	export { Color } from "piweb/drawing/material/color";
 	export { Pen, LineCap, LineJoin } from "piweb/drawing/material/pen";
 	export { FormattedText, FormattedTextDescription, FlowDirection, HorizontalTextAlignment, VerticalTextAlignment, TextTrimming, TextMeasurements } from "piweb/drawing/text/formatted_text";
@@ -864,6 +2136,10 @@ declare module "piweb/drawing" {
 
 
 declare module "piweb/drawing/geometry/basics" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
 	export interface PointObject {
@@ -876,211 +2152,670 @@ declare module "piweb/drawing/geometry/basics" {
 	    readonly height?: number;
 	}
 	export type SizeDescription = SizeObject | number[] | number;
+	/**
+	 * Describes a point.
+	 */
 	export class Point implements Serializable {
+	    /**
+	     * Gets or sets the horizontal position
+	     */
 	    x: number;
+	    /**
+	     * Gets or sets the vertical position
+	     */
 	    y: number;
+	    /**
+	     * Initializes a new instance of the [[Point]] class.
+	     * @param x The horizontal position.
+	     * @param y The vertical position.
+	     */
 	    constructor(x: number, y: number);
+	    /**
+	     * @private
+	     */
 	    static create(description?: PointDescription): Point;
+	    /**
+	     * Gets a point with the coordinates (0,0).
+	     */
 	    static readonly origin: Point;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a rectangle with a position and a size.
+	 */
 	export class Rect implements Serializable {
+	    /**
+	     * Gets or sets the horizontal position.
+	     */
 	    x: number;
+	    /**
+	     * Gets or sets the vertical position.
+	     */
 	    y: number;
+	    /**
+	     * Gets or sets the horizontal size.
+	     */
 	    width: number;
+	    /**
+	     * Gets or sets the vertical size.
+	     */
 	    height: number;
+	    /**
+	     * Initializes a new instance of the [[Rect]] class.
+	     * @param x The horizontal position.
+	     * @param y The vertical position.
+	     * @param width The horizontal dimension.
+	     * @param height The vertical dimension.
+	     */
 	    constructor(x: number, y: number, width: number, height: number);
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a two dimensional size.
+	 */
 	export class Size implements Serializable {
+	    /**
+	     * Gets or sets the horizontal size.
+	     */
 	    width: number;
+	    /**
+	     * Gets or sets the vertical size.
+	     */
 	    height: number;
+	    /**
+	     * Initializes a new instance of the [[Size]] class.
+	     * @param width The horizontal dimension.
+	     * @param height The vertical dimension.
+	     */
 	    constructor(width: number, height: number);
+	    /**
+	     * @private
+	     */
 	    static create(description?: SizeDescription): Size;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/geometry/geometries" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { Transform, TransformDescription } from 'piweb/drawing/transform/transforms';
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
 	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
 	import { PathFigure, PathFigureDescription } from "piweb/drawing/geometry/path_figure";
+	/**
+	 * Determines how two geometries are combined.
+	 *
+	 * **`union` (default)**
+	 *
+	 * <img style="height:36px" src="media://union.svg">
+	 *
+	 * The resulting geometry is the area that is overlapped by the first or second geometry or both.
+	 *
+	 * **`intersect`**
+	 *
+	 * <img style="height:36px" src="media://intersect.svg">
+	 *
+	 * The resulting geometry is the area that is overlapped by both geometries.
+	 *
+	 * **`xor`**
+	 *
+	 * <img style="height:36px" src="media://xor.svg">
+	 *
+	 * The resulting geometry is the area that is overlapped by the first or second geometry, but not both.
+	 *
+	 * **`exclude`**
+	 *
+	 * <img style="height:36px" src="media://exclude.svg">
+	 *
+	 * The second geometry is subtracted from the first.
+	 */
 	export type GeometryCombineMode = "union" | "intersect" | "xor" | "exclude";
+	/**
+	 * Determines how overlapping geometries are filled.
+	 *
+	 * **`evenOdd` (default)**
+	 *
+	 * <img style="height:36px" src="media://evenOdd.svg">
+	 *
+	 * Fills the area that is overlapped by an odd number of geometries. *
+	 *
+	 * **`nonZero`**
+	 *
+	 * <img style="height:36px" src="media://nonZero.svg">
+	 *
+	 * Fills the area that is overlapped by at least one geometry.  *
+	 */
 	export type FillRule = "evenOdd" | "nonzero";
+	/**
+	 * Determines the type of a geometry.
+	 */
 	export type GeometryType = "line" | "rectangle" | "ellipse" | "path" | "custom" | "combined" | "group";
+	/**
+	 * Can be used to initialize a [[LineGeometry]].
+	 */
 	export interface LineDescription {
 	    readonly start?: PointDescription;
 	    readonly end?: PointDescription;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[RectangleGeometry]].
+	 */
 	export interface RectangleDescription {
 	    readonly position?: PointDescription;
 	    readonly width?: number;
 	    readonly height?: number;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[EllipseGeometry]].
+	 */
 	export interface EllipseDescription {
 	    readonly position?: PointDescription;
 	    readonly radiusX?: number;
 	    readonly radiusY?: number;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[PathGeometry]].
+	 */
 	export interface PathDescription {
 	    readonly fillRule?: FillRule;
 	    readonly figures?: ArrayLike<PathFigureDescription>;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[CustomGeometry]].
+	 */
 	export interface CustomDescription {
 	    readonly pathString?: string;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[GeometryGroup]].
+	 */
 	export interface GeometryGroupDescription {
 	    readonly children?: ArrayLike<GeometryDescription>;
 	    readonly fillRule?: FillRule;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[CombinedGeometry]].
+	 */
 	export interface CombinedDescription {
 	    readonly geometry1?: GeometryDescription;
 	    readonly geometry2?: GeometryDescription;
 	    readonly combineMode?: GeometryCombineMode;
 	    readonly transform?: TransformDescription;
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface LineGeometryDescription extends LineDescription {
 	    readonly type: "line";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface RectangleGeometryDescription extends RectangleDescription {
 	    readonly type: "rectangle";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface EllipseGeometryDescription extends EllipseDescription {
 	    readonly type: "ellipse";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface PathGeometryDescription extends PathDescription {
 	    readonly type: "path";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface CustomGeometryDescription extends CustomDescription {
 	    readonly type: "custom";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface GeometryGroupGeometryDescription extends GeometryGroupDescription {
 	    readonly type: "group";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export interface CombinedGeometryDescription extends CombinedDescription {
 	    readonly type: "combined";
 	}
+	/**
+	 * Can be used to initialize a [[Geometry]].
+	 */
 	export type PureGeometryDescription = RectangleGeometryDescription | EllipseGeometryDescription | LineGeometryDescription | GeometryGroupGeometryDescription | PathGeometryDescription | CombinedGeometryDescription | CustomGeometryDescription;
+	/**
+	* Can be used to initialize a [[Geometry]].
+	*/
 	export type GeometryDescription = PureGeometryDescription | string | Geometry;
+	/**
+	 * Describes the final size and position of a geometry.
+	 */
 	export interface GeometryMeasurements {
+	    /**
+	     * Gets the horizontal position.
+	     */
 	    x: number;
+	    /**
+	     * Gets the vertical position.
+	     */
 	    y: number;
+	    /**
+	     * Gets the horizontal dimension.
+	     */
 	    width: number;
+	    /**
+	     * Gets the vertical dimension.
+	     */
 	    height: number;
 	}
+	/**
+	 * Geometries can be used for drawing and clipping. Multiple geometries can be combined using the [[GeometryGroup]] or [[CombinedGeometry]] classes.
+	 */
 	export abstract class Geometry implements Serializable {
+	    /**
+	     * Gets or sets a geometries transformation matrix. The default value is the identity transform.
+	     */
 	    transform: Transform;
+	    /**
+	    * Gets the geometry type.
+	    */
 	    readonly abstract type: GeometryType;
+	    /**
+	     * Initializes a new [[Geometry]] instance.
+	     * @protected
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static create(description?: GeometryDescription): Geometry;
+	    /**
+	     * Returns the bounding box of the geometry.
+	     */
 	    measure(): GeometryMeasurements;
+	    /**
+	     * Returns the bounding box of the specified geometry.
+	     * @param geometryDescription The geometry to measure.
+	     */
 	    static measure(geometryDescription: GeometryDescription): GeometryMeasurements;
+	    /**
+	     * @private
+	     */
 	    abstract serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a geometry that consists of a line.
+	 */
 	export class LineGeometry extends Geometry implements LineGeometryDescription {
+	    /**
+	     * Gets or sets the start point.
+	     */
 	    start: Point;
+	    /**
+	     * Gets or sets the end point
+	     */
 	    end: Point;
+	    /**
+	     * @private
+	     */
 	    readonly type: "line";
+	    /**
+	     * Initializes a new instance of the [[LineGeometry]] class.
+	     * @param start The start point.
+	     * @param end The end point.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(start: Point, end: Point, transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createLineGeometry(description?: LineDescription): LineGeometry;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a rectangular geometry.
+	 */
 	export class RectangleGeometry extends Geometry implements RectangleGeometryDescription {
+	    /**
+	     * Gets or sets the position.
+	     */
 	    position: Point;
+	    /**
+	     * Gets or sets the width.
+	     */
 	    width: number;
+	    /**
+	     * Gets or sets the height.
+	     */
 	    height: number;
+	    /**
+	     * @private
+	     */
 	    readonly type: "rectangle";
+	    /**
+	     * Initializes a new instance of the [[RectangleGeometry]] class.
+	     * @param position The position.
+	     * @param width The width.
+	     * @param height The height.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(position: Point, width: number, height: number, transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createRectangleGeometry(description?: RectangleDescription): RectangleGeometry;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes an elliptical geometry.
+	 */
 	export class EllipseGeometry extends Geometry implements EllipseGeometryDescription {
+	    /**
+	     * Gets or sets the center of the ellipse.
+	     */
 	    position: Point;
+	    /**
+	     * Gets or sets the radius in horizontal direction.
+	     */
 	    radiusX: number;
+	    /**
+	     * Gets or sets the readius in vertical direction.
+	     */
 	    radiusY: number;
+	    /**
+	     * @private
+	     */
 	    readonly type: "ellipse";
+	    /**
+	     * Initializes a new instance of the [[EllipseGeometry]] class.
+	     * @param center The center of the ellipse.
+	     * @param radiusX The radius in horizontal direction.
+	     * @param radiusY The radius in horizontal direction.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(center: Point, radiusX: number, radiusY: number, transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createEllipseGeometry(description?: EllipseDescription): EllipseGeometry;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a geometry, that is composed of multiple path figures
+	 * @see [[PathFigure]]
+	 */
 	export class PathGeometry extends Geometry implements PathGeometryDescription {
+	    /**
+	     * Gets or sets the fill rule.
+	     */
 	    fillRule: FillRule;
+	    /**
+	     * Gets or sets the path figures.
+	     */
 	    figures: PathFigure[];
+	    /**
+	     * @private
+	     */
 	    readonly type: "path";
+	    /**
+	     * Initializes a new instance of the [[PathGeometry]] class.
+	     * @param fillRule The fill rule.
+	     * @param figures The path figures.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(fillRule: FillRule, figures: PathFigure[], transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createPathGeometry(description?: PathDescription): PathGeometry;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a path geometry, that is defined by a markup string.
+	 *
+	 * Use the following markup to define the geometry:
+	 *
+	 * | Markup | Parameters | Class |
+	 * |--------|-------------| -----------|
+	 * | **`M p`**| **`p`** Start point| [`PathFigure`](#pathfigure) |
+	 * | **`A r a l s p `**| **`r`** Radius x,y<br>**`a`** Angle<br>**`l`** IsLargeArc (1 = true, 0 = false)<br>**`s`** Sweep direction (0 = clockwise, 1 = counterclockwise)<br>**`p`** End point| [`ArcSegment`](#arcsegment) |
+	 * | **`L p`**| **`p`** End point| [`LineSegment`](#linesegment) |
+	 * | **`C c1 c2 p`**| **`c1`** First control point<br>**`c2`** Second control point <br>**`p`** End point|[`CubicBezierSegment`](#cubicbeziersegment) |
+	 * | **`Q c p`**| **`c`** Control point<br>**`p`** End point| [`QuadraticBezierSegment`](#quadraticbeziersegment) |
+	 * | **`Z`**| Closes the current figure  |
+	 *
+	 * Points are written in the form of `x,y`, where `x` and `y` are either invariant floating point numbers (`0.0`) or integers.
+	 */
 	export class CustomGeometry extends Geometry implements CustomDescription {
+	    /**
+	     * Gets or sets the markup string
+	     */
 	    pathString: string;
+	    /**
+	     * @private
+	     */
 	    readonly type: "custom";
+	    /**
+	     * Initializes a new instance of the [[CustomGeometry]] class.
+	     * @param pathString The markup string.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(pathString: string, transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createCustomGeometry(description?: CustomDescription | string): CustomGeometry;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a collection of geometries, whose children are combined using a [[FillRule]].
+	 */
 	export class GeometryGroup extends Geometry implements GeometryGroupGeometryDescription {
+	    /**
+	     * Gets or sets the children of which the group is composed.
+	     */
 	    children: Geometry[];
+	    /**
+	     * Gets or sets the fillrule.
+	     */
 	    fillRule: FillRule;
+	    /**
+	     * @private
+	     */
 	    readonly type: "group";
+	    /**
+	     * Initializes a new instance of the [[GeometryGroup]] class.
+	     * @param children The children of which the group is composed.
+	     * @param fillRule The fillrule.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(children: Geometry[], fillRule: FillRule, transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createGeometryGroup(description?: GeometryGroupDescription): GeometryGroup;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a geometry that is the result of the combination of exactly two other geometries.
+	 * The geometries are combined using the [[GeometryCombineMode]].
+	 */
 	export class CombinedGeometry extends Geometry implements CombinedGeometryDescription {
+	    /**
+	     * Gets or sets the first geometry.
+	     */
 	    geometry1: Geometry;
+	    /**
+	     * Gets or sets the second geometry.
+	     */
 	    geometry2: Geometry;
+	    /**
+	     * Gets or sets the combine mode.
+	     */
 	    combineMode: GeometryCombineMode;
+	    /**
+	     * @private
+	     */
 	    readonly type: "combined";
+	    /**
+	     *
+	     * @param geometry1 The first geometry.
+	     * @param geometry2 The second geometry.
+	     * @param combineMode The combine mode.
+	     * @param transform The transformation matrix.
+	     */
 	    constructor(geometry1: Geometry, geometry2: Geometry, combineMode: GeometryCombineMode, transform?: Transform);
+	    /**
+	     * Returns the geometry that is defined by the specified geometry description.
+	     * @param description The geometry description.
+	     */
 	    static createCombinedGeometry(description?: CombinedDescription): CombinedGeometry;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/geometry/path_figure" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
 	import { PathSegment, PathSegmentDescription } from "piweb/drawing/geometry/path_segments";
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
+	/**
+	 * Can be used to initialize a [[PathFigure]].
+	 */
 	export interface PathFigureDescription {
 	    readonly startPoint?: PointDescription;
 	    readonly segments?: ArrayLike<PathSegmentDescription>;
 	    readonly isClosed?: boolean;
 	}
+	/**
+	 * Describes a component of a [[PathGeometry]]. Multiple path figures are combined using a [[FillRule]].
+	 * The path figures of a path geometry are **not** connected, so they appear as independent shapes.
+	 */
 	export class PathFigure implements Serializable, PathFigureDescription {
+	    /**
+	     * Gets or sets the start point.
+	     */
 	    startPoint: Point;
+	    /**
+	     * Gets or sets the path segments.
+	     */
 	    segments: PathSegment[];
+	    /**
+	     * Gets or sets a value indicating, whether this figure is closed.
+	     */
 	    isClosed: boolean;
+	    /**
+	     * Initializes a new instance of the [[PathFigure]] class.
+	     * @param startPoint The start point.
+	     * @param segments The path segments.
+	     * @param isClosed A value indicating, whether this figure is closed.
+	     */
 	    constructor(startPoint: Point, segments: PathSegment[], isClosed: boolean);
+	    /**
+	     * Returns the figure that is defined by the specified description.
+	     * @param description A path figure description.
+	     */
 	    static create(description: PathFigureDescription): PathFigure;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/geometry/path_segments" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
 	import { Point, PointDescription, Size, SizeDescription } from "piweb/drawing/geometry/basics";
+	/**
+	 * An enumeration to determine the type of a path segment.
+	 */
 	export type PathSegmentType = "arc" | "bezier" | "line" | "quadraticBezier" | "polyBezier" | "polyLine" | "polyQuadraticBezier";
+	/**
+	 * An enumeration to determine the sweep direction of an arc segment.
+	 * @see [[ArcSegment]]
+	 */
 	export type SweepDirection = "clockwise" | "counterclockwise";
 	export type ArcType = "small" | "large";
+	/**
+	 * Can be used to initialize a [[LineSegment]].
+	 */
 	export interface LineDescription {
 	    to?: PointDescription;
 	}
+	/**
+	 * Can be used to initialize a [[PolyLineSegment]].
+	 */
 	export interface PolyLineDescription {
 	    points?: PointDescription[];
 	}
+	/**
+	 * Can be used to initialize an [[ArcSegment]].
+	 */
 	export interface ArcDescription {
 	    to?: PointDescription;
 	    size?: SizeDescription;
@@ -1088,147 +2823,524 @@ declare module "piweb/drawing/geometry/path_segments" {
 	    arcType?: ArcType;
 	    sweepDirection?: SweepDirection;
 	}
+	/**
+	 * Can be used to initialize a [[BezierSegment]].
+	 */
 	export interface BezierDescription {
 	    control?: PointDescription;
 	    control2?: PointDescription;
 	    to?: PointDescription;
 	}
+	/**
+	 * Can be used to initialize a [[PolyBezierSegment]].
+	 */
 	export interface PolyBezierDescription {
 	    points?: PointDescription[];
 	}
+	/**
+	 * Can be used to initialize a [[QuadraticBezierSegment]].
+	 */
 	export interface QuadraticBezierDescription {
 	    control?: PointDescription;
 	    to?: PointDescription;
 	}
+	/**
+	 * Can be used to initialize a [[PolyQuadraticBezierSegment]].
+	 */
 	export interface PolyQuadraticBezierDescription {
 	    points?: PointDescription[];
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface LineSegmentDescription extends LineDescription {
 	    readonly type: "line";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface PolyLineSegmentDescription extends PolyLineDescription {
 	    readonly type: "polyLine";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface ArcSegmentDescription extends ArcDescription {
 	    readonly type: "arc";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface BezierSegmentDescription extends BezierDescription {
 	    readonly type: "bezier";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface PolyBezierSegmentDescription extends PolyBezierDescription {
 	    readonly type: "polyBezier";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface QuadraticBezierSegmentDescription extends QuadraticBezierDescription {
 	    readonly type: "quadraticBezier";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export interface PolyQuadraticBezierSegmentDescription extends PolyQuadraticBezierDescription {
 	    readonly type: "polyQuadraticBezier";
 	}
+	/**
+	 * Can be used to initialize a [[PathSegment]].
+	 */
 	export type PathSegmentDescription = LineSegmentDescription | PolyLineSegmentDescription | ArcSegmentDescription | BezierSegmentDescription | PolyBezierSegmentDescription | QuadraticBezierSegmentDescription | PolyQuadraticBezierSegmentDescription | PathSegment;
+	/**
+	 * Path segments define one or more points that describe a line or curve. One or more path segments are composed to a [[PathFigure]].
+	 */
 	export abstract class PathSegment implements Serializable {
+	    /**
+	     * @protected
+	     */
 	    constructor();
+	    /**
+	     * Returns the path segment that is defined by the specified description.
+	     * @param description path segment description.
+	     */
 	    static create(description?: PathSegmentDescription): PathSegment;
+	    /**
+	     * @private
+	     */
 	    readonly abstract type: PathSegmentType;
+	    /**
+	     * @private
+	     */
 	    abstract serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Creates a line between two points in a [[PathFigure]]. In case you want to use multiple line segments consecutively, consider using the [[PolyLineSegment]].
+	 */
 	export class LineSegment extends PathSegment implements LineSegmentDescription {
+	    /**
+	     * Gets or sets the endpoint of the segment.
+	     */
 	    to: Point;
+	    /**
+	     * Initializes a new instance of the [[LineSegment]] class.
+	     * @param to
+	     */
 	    constructor(to: Point);
+	    /**
+	     * @private
+	     */
 	    readonly type: "line";
+	    /**
+	     * Returns the line segment that is defined by the specified description.
+	     * @param description Line segment description.
+	     */
 	    static createLineSegment(description?: LineDescription): LineSegment;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a line strip, including the last point of the previous segment.
+	 */
 	export class PolyLineSegment extends PathSegment implements PolyLineSegmentDescription {
+	    /**
+	     * Gets or sets the collection of points that define this segment.
+	     */
 	    points: Point[];
+	    /**
+	     * Initializes a new instance of the [[PolyLineSegment]] class.
+	     * @param points The collection of points that define this segment.
+	     */
 	    constructor(points: Point[]);
+	    /**
+	     * @private
+	     */
 	    readonly type: "polyLine";
+	    /**
+	     * Returns the poly line segment that is defined by the specified description.
+	     * @param description Poly line segment description.
+	     */
 	    static createPolyLineSegment(description?: PolyLineDescription): PolyLineSegment;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes an elliptical arc between two points. To define an arc segment you have to specify two points and an ellipse. Usually, there are two possible ellipses of the same size through two points, and on these two ellipses, there are four different ellipse segments which go from the first to the second point. To define how the arc segment looks like, you have to specify additional parameters as shown in the following picture:
+	 *
+	 * <img class="framed"  style="width:256px; height:auto;" src="media://arcSegment.svg">
+	 *
+	 * | color | arcType | sweepDirection |
+	 * |-------|---------|----------------|
+	 * |<font color="#56abff">blue</font> | `small` | `counterclockwise`
+	 * |<font color="#ffab56">orange</font> | `small` | `clockwise`
+	 * |<font color="#67cc00">green</font> | `large` | `counterclockwise`
+	 * |<font color="#b40000">red</font> | `large` | `clockwise`
+	 */
 	export class ArcSegment extends PathSegment implements ArcSegmentDescription {
+	    /**
+	     * Gets or sets the endpoint of the arc.
+	     */
 	    to: Point;
+	    /**
+	     * Gets or sets the x and y radius of the underlying ellipse on which the arc segment is based on. In case the ellipse is too small to span an arc between the start point
+	     * and the end point, it will be scaled until it fits, preserving the aspect ratio of the ellipse.
+	     */
 	    size: Size;
+	    /**
+	     * Gets or sets the rotation angle of the ellipse in degrees.
+	     */
 	    angle: number;
+	    /**
+	     * Gets or sets the arc type. Since there are always two different arcs with the same radius and the same sweep direction between two points, this parameter can be used
+	     * to determine which one is used. Valid values are `small` and `large`.
+	     */
 	    arcType: ArcType;
+	    /**
+	     * Gets or sets the sweep direction. Since there are always two different arcs with the same radius and the same arc size between two points, this parameter can be used
+	     * to determine which one is used. Valid values are `clockwise` and `counterclockwise`.
+	     */
 	    sweepDirection: SweepDirection;
+	    /**
+	     * Initializes a new instance of the [[ArcSegment]] class.
+	     * @param to The endpoint of the arc.
+	     * @param size The arc size.
+	     * @param angle The rotation angle.
+	     * @param arcType The arc type.
+	     * @param sweepDirection The sweep direction.
+	     */
 	    constructor(to: Point, size: Size, angle: number, arcType: ArcType, sweepDirection: SweepDirection);
+	    /**
+	     * Returns the arc segment that is defined by the specified description.
+	     * @param description Arc segment description.
+	     */
 	    static createArcSegment(description?: ArcDescription): ArcSegment;
+	    /**
+	     * @private
+	     */
 	    readonly type: "arc";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a bezier segment, using the last point of the previous segment as start point. In case you want to use multiple bezier segments consecutively, consider using the [[PolyBezierSegment]].
+	 */
 	export class BezierSegment extends PathSegment implements BezierSegmentDescription {
+	    /**
+	     * Gets or sets the first control point of the bezier curve.
+	     */
 	    control: Point;
+	    /**
+	     * Gets or sets the second control point of the bezier curve.
+	     */
 	    control2: Point;
+	    /**
+	     * Gets or sets the end point of the bezier curve.
+	     */
 	    to: Point;
+	    /**
+	     * Initializes a new instance of the [[BezierSegment]] class.
+	     * @param control The first control point of the bezier curve.
+	     * @param control2 The second control point of the bezier curve.
+	     * @param to The end point of the bezier curve.
+	     */
 	    constructor(control: Point, control2: Point, to: Point);
+	    /**
+	     * Returns the bezier segment that is defined by the specified description.
+	     * @param description Bezier segment description.
+	     */
 	    static createBezierSegment(description?: BezierDescription): BezierSegment;
+	    /**
+	     * @private
+	     */
 	    readonly type: "bezier";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes multiple bezier segments, including the last point of the previous segment. The number of points provided must be a multiple of two, since a single quadratic bezier segment is defined by two points.
+	 */
 	export class PolyBezierSegment extends PathSegment implements PolyBezierSegmentDescription {
+	    /**
+	     * Gets or sets the collection of points that define this segment.
+	     */
 	    points: Point[];
+	    /**
+	     * Initializes a new instance of the [[PolyBezierSegment]] class.
+	     * @param points The collection of points that define this segment.
+	     */
 	    constructor(points: Point[]);
+	    /**
+	     * Returns the poly bezier segment that is defined by the specified description.
+	     * @param description Poly bezier segment description.
+	     */
 	    static createPolyBezierSegment(description?: PolyBezierDescription): PolyBezierSegment;
+	    /**
+	     * @private
+	     */
 	    readonly type: "polyBezier";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a quadratic bezier segment, using the last point of the previous segment as start point. In case you want to use multiple
+	 * quadratic bezier segments consecutively, consider using the [[PolyQuadraticBezierSegment]].
+	 */
 	export class QuadraticBezierSegment extends PathSegment implements QuadraticBezierSegmentDescription {
+	    /**
+	     * Gets or sets the control point of the bezier curve.
+	     */
 	    control: Point;
+	    /**
+	     * Gets or sets the endpoint of the bezier curve.
+	     */
 	    to: Point;
+	    /**
+	     * Initializes a new instance of the [[QuadraticBezierSegment]] class.
+	     * @param control The control point of the bezier curve.
+	     * @param to The endpoint of the bezier curve.
+	     */
 	    constructor(control: Point, to: Point);
+	    /**
+	     * Returns the quadratic bezier segment that is defined by the specified description.
+	     * @param description Quadratic bezier segment description.
+	     */
 	    static createQuadraticBezierSegment(description?: QuadraticBezierDescription): QuadraticBezierSegment;
+	    /**
+	     * @private
+	     */
 	    readonly type: "quadraticBezier";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes multiple bezier segments, including the last point of the previous segment. The number of points provided must be a
+	 * multiple of two, since a single quadratic bezier segment is defined by two points.
+	 */
 	export class PolyQuadraticBezierSegment extends PathSegment implements PolyQuadraticBezierSegmentDescription {
+	    /**
+	     * Gets or sets the collection of points that define this segment.
+	     */
 	    points: Point[];
+	    /**
+	     * Initializes a new instance of the [[PolyQuadraticBezierSegment]] class.
+	     * @param points The collection of points that define this segment.
+	     */
 	    constructor(points: Point[]);
+	    /**
+	     * Returns the poly quadratic bezier segment that is defined by the specified description.
+	     * @param description Poly quadratic bezier segment description.
+	     */
 	    static createPolyQuadraticBezierSegment(description?: PolyQuadraticBezierDescription): PolyQuadraticBezierSegment;
+	    /**
+	     * @private
+	     */
 	    readonly type: "polyQuadraticBezier";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/geometry/settings" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { Point, PointDescription } from 'piweb/drawing/geometry/basics';
 	import { Serializable } from "internal/serializable";
 	import { BufferWriter } from 'internal/buffer_writer';
+	/**
+	 * Determines how the geometry aligns to the position horizontally.
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryHorizontalOrigin.svg">
+	 *
+	 * **`origin` (default)**
+	 *
+	 * The image will be drawn with the position as its coordinate origin.
+	 * <br><br><br>
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryLeft.svg">
+	 *
+	 * **`left`**
+	 *
+	 * The image will be drawn with the position on the left side.
+	 * <br><br><br>
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryHorizontalCenter.svg">
+	 *
+	 * **`center`**
+	 *
+	 * The image will be drawn with the position at the center.
+	 * <br><br><br>
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryRight.svg">
+	 *
+	 * **`right`**
+	 *
+	 * The geometry will be drawn with the position on the right side.
+	 * <br><br><br>
+	 */
 	export type HorizontalAnchor = "origin" | "left" | "right" | "center";
+	/**
+	 * Determines how the geometry aligns to the position vertically.
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryVerticalOrigin.svg">
+	 *
+	 * **`origin` (default)**
+	 *
+	 * The image will be drawn with the position as its coordinate origin.
+	 *
+	 * <br><br><br>
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryTop.svg">
+	 *
+	 * **`top`**
+	 *
+	 * The image will be drawn with the position on the top.
+	 *
+	 * <br><br><br>
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryVerticalCenter.svg">
+	 *
+	 * **`center`**
+	 *
+	 * The image will be drawn with the position at the center.
+	 *
+	 * <br><br><br>
+	 *
+	 * <img style="float: left; height: 96px;margin-right:8px" src="media://anchorGeometryBottom.svg">
+	 *
+	 * **`bottom`**
+	 *
+	 * The geometry will be drawn with the position on the bottom.
+	 *
+	 * <br><br><br>
+	 */
 	export type VerticalAnchor = "origin" | "top" | "bottom" | "center";
+	/**
+	 * Can be used to initialize an instance of the [[GeometryDrawingSettings]] class.
+	 */
 	export interface GeometryDrawingSettingsDescription {
 	    readonly position?: PointDescription;
 	    readonly anchorX?: HorizontalAnchor;
 	    readonly anchorY?: VerticalAnchor;
 	}
+	/**
+	 * Describes how a geometry is arranged when it's drawn. When using anchors, PiWeb calculates a bounding box around the geometry and arranges it according to the anchors on the specified position.
+	 */
 	export class GeometryDrawingSettings implements Serializable, GeometryDrawingSettingsDescription {
+	    /**
+	     * Gets or sets the position to which the image aligns.
+	     */
 	    readonly position: Point;
+	    /**
+	     * Determines how the geometry aligns to the position horizontally.
+	     */
 	    readonly anchorX: HorizontalAnchor;
+	    /**
+	     * Determines how the geometry aligns to the position vertically.
+	     */
 	    readonly anchorY: VerticalAnchor;
+	    /**
+	     * Initializes a new instance of the [[GeometryDrawingSettings]] class.
+	     * @param position The position.
+	     * @param anchorX The horizontal anchor.
+	     * @param anchorY The vertical anchor.
+	     */
 	    constructor(position: Point, anchorX: HorizontalAnchor, anchorY: VerticalAnchor);
+	    /**
+	     * Returns the geometry drawing settings that are defined by the specified description.
+	     * @param description Geometry drawing setting description.
+	     */
 	    static create(description?: GeometryDrawingSettingsDescription): GeometryDrawingSettings;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/image/bitmap" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from 'internal/buffer_writer';
 	import { HostBinary } from 'piweb/resources';
 	import { Serializable } from "internal/serializable";
+	/**
+	 * Describes the size and resolution of a [[Bitmap]].
+	 */
 	export interface BitmapMeasurements {
+	    /**
+	     * The height of the image in millimeters.
+	     */
 	    height: number;
+	    /**
+	     * The width of the image in millimeters.
+	     */
 	    width: number;
+	    /**
+	     * The height of the image in pixels.
+	     */
 	    pixelHeight: number;
+	    /**
+	     * The width of the image in pixels.
+	     */
 	    pixelWidth: number;
+	    /**
+	     * The horizontal resolution of the image.
+	     */
 	    dpiX: number;
+	    /**
+	     * The vertical resolution of the image.
+	     */
 	    dpiY: number;
 	}
+	/**
+	 * Describes an image that can be drawn to a [[DrawingContext]].
+	 */
 	export class Bitmap implements Serializable {
+	    /**
+	     * @private
+	     */
 	    private _data;
+	    /**
+	     * Initializes a new instance of the [[Bitmap]] class with the specified data.
+	     * @param data A buffer that contains binary image data.
+	     */
 	    constructor(data: Buffer | HostBinary);
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
+	    /**
+	     * Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages output directory, which has been specified with the `outDir` parameter in the `tsconfig.json` file.
+	     * @param path The relative path to a bitmap file.
+	     */
 	    static loadFromResource(path: string): Bitmap;
+	    /**
+	     * Loads the size and resolution of the image.
+	     */
 	    measure(): {
 	        height: any;
 	        width: any;
@@ -1242,11 +3354,72 @@ declare module "piweb/drawing/image/bitmap" {
 
 
 declare module "piweb/drawing/image/settings" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { Point, PointDescription } from 'piweb/drawing/geometry/basics';
 	import { Serializable } from "internal/serializable";
 	import { BufferWriter } from 'internal/buffer_writer';
+	/**
+	 * Determines how the image aligns to the position horizontally.
+	 *
+	 * **`left` (default)**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://imageAnchorLeft.svg">
+	 *
+	 * The image will be drawn with the position on the left side.
+	 *
+	 * <br>
+	 *
+	 * **`center`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://imageAnchorHorizontalCenter.svg">
+	 *
+	 * The image will be drawn with the position at the center.
+	 *
+	 * <br>
+	 *
+	 * **`right`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://imageAnchorRight.svg">
+	 *
+	 * The image will be drawn with the position on the right side.
+	 *
+	 * <br>
+	 */
 	export type HorizontalImageAnchor = "left" | "right" | "center";
+	/**
+	 * Determines how the image aligns to the position vertically.
+	 *
+	 * **`top` (default)**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://imageAnchorTop.svg">
+	 *
+	 * The image will be drawn with the position on the top.
+	 *
+	 * <br>
+	 *
+	 * **`center`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://imageAnchorVerticalCenter.svg">
+	 *
+	 * The image will be drawn with the position at the center.
+	 *
+	 * <br>
+	 *
+	 * **`bottom`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://imageAnchorBottom.svg">
+	 *
+	 * The image will be drawn with the position on the bottom.
+	 *
+	 * <br>
+	 */
 	export type VerticalImageAnchor = "top" | "bottom" | "center";
+	/**
+	 * Can be used to initialize an instance of the [[ImageDrawingSettings]] class.
+	 */
 	export interface ImageDrawingSettingsDescription {
 	    readonly position?: PointDescription;
 	    readonly width?: number;
@@ -1254,14 +3427,54 @@ declare module "piweb/drawing/image/settings" {
 	    readonly anchorX?: HorizontalImageAnchor;
 	    readonly anchorY?: VerticalImageAnchor;
 	}
+	/**
+	 * Determines how an image is arranged. You can specify the stretch/aspect of the image with the `width` and `height` parameters like the following:
+	 *
+	 * | Result                                                                                            | Width | Height | Description |
+	 * |------------------------------------|-|-|-|
+	 * |<img style="height:64px;width:128px;" src="media://imageSizeByHeight.svg"> | `undefined` | `16`| The image will be drawn with a height of 16 millimeters and keep its aspect ratio.  |
+	 * |<img style="height:64px;width:128px;" src="media://imageSizeByWidth.svg"> | `16` | `undefined`| The image will be drawn with a width of 16 millimeters and keep its aspect ratio. Since the width of the image is greater than its height, the result is smaller. |
+	 * |<img style="height:64px;width:128px;" src="media://imageSizeByWidthAndHeight.svg"> | `16` | `16`| The image will be drawn with a width and height of 16 millimeters. Since this doesn't match the images original aspect ratio, it looks stretched. |
+	 * |<img style="height:64px;width:128px;" src="media://imageNatural.svg"> | `undefined` | `undefined`| The image will be drawn in its original size. This will usually lead to the most appealing result, because the image doesn't need to be stretched. |
+	 */
 	export class ImageDrawingSettings implements Serializable, ImageDrawingSettingsDescription {
+	    /**
+	     * Gets or sets the position to which the image aligns.
+	     */
 	    readonly position: Point;
+	    /**
+	     * Gets or sets the desired image width.
+	     */
 	    readonly width?: number;
+	    /**
+	     * Gets or sets the desired image height.
+	     */
 	    readonly height?: number;
+	    /**
+	     * Determines how the image aligns to the position horizontally.
+	     */
 	    readonly anchorX: HorizontalImageAnchor;
+	    /**
+	     * Determines how the image aligns to the position vertically.
+	     */
 	    readonly anchorY: VerticalImageAnchor;
+	    /**
+	     * Initializes a new instance of the [[ImageDrawingSettings]] class.
+	     * @param position The position.
+	     * @param width The width.
+	     * @param height The height.
+	     * @param anchorX The horizontal anchor.
+	     * @param anchorY The vertical anchor.
+	     */
 	    constructor(position: Point, width: number | undefined, height: number | undefined, anchorX: HorizontalImageAnchor, anchorY: VerticalImageAnchor);
+	    /**
+	     * Returns the image drawing settings that are defined by the specified description.
+	     * @param description Image drawing settings description.
+	     */
 	    static create(description?: ImageDrawingSettingsDescription): ImageDrawingSettings;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
@@ -1272,38 +3485,79 @@ declare module "piweb/drawing/material/brushes" {
 	import { Serializable } from "internal/serializable";
 	import { Color, ColorDescription } from "piweb/drawing/material/color";
 	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
+	/**
+	 * An enumeration to determine the type of a brush.
+	 */
 	export type BrushType = "solid" | "linear" | "radial";
+	/**
+	 * Can be used to initialize an instance of the [[SolidColorBrush]] class.
+	 */
 	export interface SolidDescription {
 	    readonly color?: ColorDescription;
 	    readonly opacity?: number;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[LinearGradientBrush]] class.
+	 */
 	export interface LinearDescription {
 	    readonly color?: ColorDescription;
 	    readonly color2?: ColorDescription;
 	    readonly angle?: number;
 	    readonly opacity?: number;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[RadialGradientBrush]] class.
+	 */
 	export interface RadialDescription {
 	    readonly color?: ColorDescription;
 	    readonly color2?: ColorDescription;
 	    readonly center?: PointDescription;
 	    readonly opacity?: number;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Brush]] class.
+	 */
 	export interface SolidBrushDescription extends SolidDescription {
 	    readonly type: BrushType;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Brush]] class.
+	 */
 	export interface LinearBrushDescription extends LinearDescription {
 	    readonly type: BrushType;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Brush]] class.
+	 */
 	export interface RadialBrushDescription extends RadialDescription {
 	    readonly type: BrushType;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Brush]] class.
+	 */
 	export type BrushDescription = SolidBrushDescription | LinearBrushDescription | RadialBrushDescription | Brush | Color | string;
+	/**
+	 * Describes how an arbitrary geometry is filled.
+	 */
 	export abstract class Brush implements Serializable {
+	    /**
+	     * Gets or sets the opacity of the brush.
+	     * Valid values are in the range of `[0..1]`, where `0` is completely translucent and `1` is opaque.
+	     */
 	    opacity: number;
+	    /**
+	     * @protected
+	     * @param opacity The opacity
+	     */
 	    constructor(opacity: number);
+	    /**
+	     * @private
+	     */
 	    readonly abstract type: BrushType;
 	    static create(description?: BrushDescription): Brush;
+	    /**
+	     * @private
+	     */
 	    abstract serialize(target: BufferWriter): void;
 	    static readonly aliceBlue: SolidColorBrush;
 	    static readonly antiqueWhite: SolidColorBrush;
@@ -1447,51 +3701,166 @@ declare module "piweb/drawing/material/brushes" {
 	    static readonly yellow: SolidColorBrush;
 	    static readonly yellowGreen: SolidColorBrush;
 	}
+	/**
+	 * Describes a brush that fills an area with a single color.
+	 */
 	export class SolidColorBrush extends Brush implements SolidBrushDescription {
 	    color: Color;
+	    /**
+	     * @private
+	     */
 	    readonly type: "solid";
+	    /**
+	     * Initializes a new instance of the [[SolidColorBrush]] class.
+	     * @param color
+	     * @param opacity
+	     */
 	    constructor(color: Color, opacity: number);
+	    /**
+	     * Returns the solid color brush that is defined by the specified description.
+	     * @param description Solid color brush description
+	     */
 	    static createSolidColorBrush(description?: SolidDescription | string): SolidColorBrush;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a brush that fills an area with a linear gradient.
+	 */
 	export class LinearGradientBrush extends Brush implements LinearBrushDescription {
+	    /**
+	     * Gets or sets the color at the start of the gradient.
+	     */
 	    color: Color;
+	    /**
+	     * Gets or sets the color at the end of the gradient.
+	     */
 	    color2: Color;
+	    /**
+	     * Gets or sets the angle in degrees about which the gradient is rotated around the center.
+	     */
 	    rotation: number;
+	    /**
+	     * @private
+	     */
 	    readonly type: "linear";
+	    /**
+	     * Initializes a new instance of the [[LinearGradientBrush]] class.
+	     * @param color The color at the start of the gradient.
+	     * @param color2 The color at the end of the gradient.
+	     * @param rotation The angle in degrees about which the gradient is rotated around the center.
+	     * @param opacity The opacity.
+	     */
 	    constructor(color: Color, color2: Color, rotation: number, opacity: number);
+	    /**
+	     * Returns the linear gradient brush that is defined by the specified description.
+	     * @param description Linear gradient brush description
+	     */
 	    static createLinearGradientBrush(description?: LinearDescription): LinearGradientBrush;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a brush that fills an area with a radial gradient.
+	 */
 	export class RadialGradientBrush extends Brush implements RadialBrushDescription {
+	    /**
+	     * Gets or sets the color at the center of the gradient.
+	     */
 	    color: Color;
+	    /**
+	     * Gets or sets the color at the outer border of the gradient.
+	     */
 	    color2: Color;
+	    /**
+	     * Gets or sets the relative center in coordinates from `[0..1]`.
+	     */
 	    center: Point;
+	    /**
+	     * @private
+	     */
 	    readonly type: "radial";
+	    /**
+	     * Initializes a new instance of the [[RadialGradientBrush]] class.
+	     * @param color1
+	     * @param color2
+	     * @param center
+	     * @param opacity
+	     */
 	    constructor(color1: Color, color2: Color, center: Point, opacity: number);
+	    /**
+	     * Returns the radial gradient brush that is defined by the specified description.
+	     * @param description Radial gradient brush description
+	     */
 	    static createRadialGradientBrush(description?: RadialDescription): RadialGradientBrush;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/material/color" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
+	/**
+	 * Describes a color with red, green, blue and alpha channel
+	 */
 	export interface ColorObject {
 	    r: number;
 	    g: number;
 	    b: number;
 	    a?: number;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Color]] class.
+	 */
 	export type ColorDescription = ColorObject | string;
+	/**
+	 * Describes a color with red, green, blue and alpha channel.
+	 */
 	export class Color implements Serializable, ColorObject {
+	    /**
+	     * Gets or sets the red channel in a range of `[0..255]`.
+	     */
 	    r: number;
+	    /**
+	     * Gets or sets the green channel in a range of `[0..255]`.
+	     */
 	    g: number;
+	    /**
+	     * Gets or sets the blue channel in a range of `[0..255]`.
+	     */
 	    b: number;
+	    /**
+	     * Gets or sets the alpha channel in a range of `[0..255]`, where `0` is completely translucent and `255` is opaque.
+	     */
 	    a: number;
+	    /**
+	     * Initializes a new instance of the [[Color]] class.
+	     * @param r The red channel
+	     * @param g The green channel
+	     * @param b The blue channel
+	     * @param a The alpha channel
+	     */
 	    constructor(r: number, g: number, b: number, a: number);
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
+	    /**
+	     * Returns the color that is defined by the specified color description.
+	     * @param description Color description.
+	     */
 	    static create(description?: ColorDescription): Color;
 	    static readonly aliceBlue: Color;
 	    static readonly antiqueWhite: Color;
@@ -1642,8 +4011,59 @@ declare module "piweb/drawing/material/pen" {
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
 	import { Brush, BrushDescription } from "piweb/drawing/material/brushes";
+	/**
+	 * Determines the geometry at the start and/or end of a line.
+	 *
+	 * **`flat`**
+	 *
+	 * <img style="float: left; width: 36px;margin-right:8px" src="media://penLineCapFlat.svg">
+	 *
+	 * No extra geometry is added.
+	 * <br><br>
+	 *
+	 * **`round`**
+	 *
+	 * <img style="float: left; width: 36px;margin-right:8px" src="media://penLineCapRound.svg">
+	 *
+	 * Adds a half circle with a diameter that is equal to the pens thickness.
+	 * <br><br>
+	 *
+	 * **`square`**
+	 *
+	 * <img style="float: left; width: 36px;margin-right:8px" src="media://penLineCapSquare.svg">
+	 *
+	 * Adds a half square with the side length of the pens thickness.
+	 *
+	 * <br>
+	 */
 	export type LineCap = "flat" | "round" | "square";
+	/**
+	 * Determines the geometry between two linear segments of a line.
+	 *
+	 * **`bevel`**
+	 *
+	 * <img style="float: left; width: 36px;margin-right:8px" src="media://penLineJoinBevel.svg">
+	 *
+	 * Adds a triangle that connects the two non-overlapping points of the lines.
+	 * <br><br><br>
+	 * **`miter`**
+	 *
+	 * <img style="float: left; width: 36px;margin-right:8px" src="media://penLineJoinMiter.svg">
+	 *
+	 * Extends the outlines of the two lines until they cut each other, and fills the enclosed area.
+	 * <br><br><br>
+	 * **`round`**
+	 *
+	 * <img style="float: left; width: 36px;margin-right:8px" src="media://penLineJoinRound.svg">
+	 *
+	 * Creates a circle around the cutting point with a diameter that is equal to the pens thickness.
+	 *
+	 * <br>
+	 */
 	export type LineJoin = "bevel" | "miter" | "round";
+	/**
+	 * Can be used to initialize an instance of the [[Pen]] class.
+	 */
 	export interface PenDescription {
 	    readonly brush?: BrushDescription;
 	    readonly thickness?: number;
@@ -1654,30 +4074,143 @@ declare module "piweb/drawing/material/pen" {
 	    readonly dashOffset?: number;
 	    readonly dashCap?: LineCap;
 	}
+	/**
+	 * Describes how lines are stroked.
+	 */
 	export class Pen implements Serializable, PenDescription {
+	    /**
+	     * Gets or sets the brush that is used to fill the outline procuded by the pen.
+	     */
 	    brush: Brush;
+	    /**
+	     * Gets or sets the thickness of stroke that is produced by the pen (in **millimeters**).
+	     */
 	    thickness: number;
+	    /**
+	     * Gets or sets the geometry added to the beginning of the stroke.
+	     */
 	    startCap: LineCap;
+	    /**
+	     * Gets or sets the geometry added to the end of the stroke.
+	     */
 	    endCap: LineCap;
+	    /**
+	     * Gets or sets the geometry added between to segments of the stroke.
+	     */
 	    lineJoin: LineJoin;
+	    /**
+	     * Gets or sets the definition of the dashes used to render the stroke. The default value is empty, which will render one solid line.
+	     * The length of the dashes and gaps specified here are multiplied with the thickness of the pen when it is drawn. So in
+	     * case you want dashes with a length of one millimeter on a pen with 0.1 mm thickness, you must specify a dash of length
+	     * 10 here.
+	     */
 	    dashStyle: number[];
+	    /**
+	     * Gets or sets the offset of the first dash. The stroke is solid to the specified offset. The specified offset is multiplied with the
+	     * pens thickness, just like the dash style. Be aware that a **positive** offset will move the dashes **against stroke direction**.
+	     */
 	    dashOffset: number;
+	    /**
+	     * Gets or sets the geometry added at the beginning and end of each dash.
+	     */
 	    dashCap: LineCap;
+	    /**
+	     * Initializes a new instance of the [[Pen]] class.
+	     * @param brush The brush.
+	     * @param thickness The thickness.
+	     * @param startCap The start cap.
+	     * @param endCap The end cap.
+	     * @param lineJoin The line join.
+	     * @param dashStyle The dash style.
+	     * @param dashOffset The dash offset.
+	     * @param dashCap The dash cap.
+	     */
 	    constructor(brush: Brush, thickness: number, startCap: LineCap, endCap: LineCap, lineJoin: LineJoin, dashStyle: number[], dashOffset: number, dashCap: LineCap);
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
+	    /**
+	     * Returns the pen that is defined by the specified description.
+	     * @param description A pen description.
+	     */
 	    static create(description?: PenDescription): Pen;
 	}
 }
 
 
 declare module "piweb/drawing/text/font" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { Serializable } from "internal/serializable";
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Brush, BrushDescription } from "piweb/drawing/material/brushes";
+	/**
+	 * The font weight is used to display letters bolder or thinner. Most fonts only support a subset of the following font weights.
+	 *
+	 * | Identifier | numeric value |
+	 * |------------|--------------------|
+	 * | **`thin`**|**100**|
+	 * | **`extraLight`**|**200**|
+	 * | **`light`**|**300**|
+	 * | **`normal`**|**400**|
+	 * | **`medium`**|**500**|
+	 * | **`semiBold`**|**600**|
+	 * | **`bold`**|**700**|
+	 * | **`extraBold`**|**800**|
+	 * | **`black`**|**900**|
+	 * | **`extraBlack`**|**950**|
+	 */
 	export type FontWeight = "thin" | "extraLight" | "light" | "normal" | "medium" | "semiBold" | "bold" | "extraBold" | "black" | "extraBlack";
+	/**
+	 * The font style can be used to display letters in a cursive way.
+	 *
+	 * **`normal` (default)**
+	 *
+	 * The text will be displayed as usual.
+	 *
+	 * **`italic`**
+	 *
+	 * Some fonts have a built in italic letter set, which can be used by specifying the italic font style.
+	 *
+	 * **`oblique`**
+	 *
+	 * For fonts which have no built in italic letter set, the oblique font style allows to apply a [[ShearTransform]] to the normal font to make it look cursive. The italic style will usually look more pleasing though.
+	 */
 	export type FontStyle = "normal" | "oblique" | "italic";
+	/**
+	 * Used to condense or expand the font horizontally.
+	 *
+	 * | Identifier | Changed width/height ratio |
+	 * |------------|--------------------|
+	 * | **`ultraCondensed`**|**50%** of the default width/height ratio|
+	 * | **`extraCondensed`**|**62.5%** of the default width/height ratio|
+	 * | **`condensed`**|**75%** of the default width/height ratio|
+	 * | **`semiCondensed`**|**87.5%** of the default width/height ratio|
+	 * | **`normal`**|**100%** of the default width/height ratio|
+	 * | **`semiExpanded`**|**112.5%** of the default width/height ratio|
+	 * | **`expanded`**|**125%** of the default width/height ratio|
+	 * | **`extraExpanded`**|**150%** of the default width/height ratio|
+	 * | **`ultraExpanded`**|**200%** of the default width/height ratio|
+	 */
 	export type FontStretch = "ultraCondensed" | "extraCondensed" | "condensed" | "semiCondensed" | "normal" | "semiExpanded" | "expanded" | "extraExpanded" | "ultraExpanded";
+	/**
+	 * An enumeration for text rendering features.
+	 *
+	 * **`underline`**
+	 *
+	 * Renders a horizontal line at the bottom of the text.
+	 *
+	 * **`strikeThrough`**
+	 *
+	 * Renders a horizontal line at the vertical center of the text.
+	 */
 	export type TextDecoration = "underline" | "strikeThrough";
+	/**
+	 * Can be used to initialize an instance of the [[Font]] class.
+	 */
 	export interface FontDescription {
 	    readonly fontFamily?: string;
 	    readonly fontWeight?: FontWeight;
@@ -1687,40 +4220,232 @@ declare module "piweb/drawing/text/font" {
 	    readonly foreground?: BrushDescription;
 	    readonly textDecorations?: ArrayLike<TextDecoration>;
 	}
+	/**
+	 * Describes how text is displayed
+	 */
 	export class Font implements Serializable, FontDescription {
+	    /**
+	     * Gets or sets the which font family will be used to display the text. Be aware that some font families don't support all characters.
+	     */
 	    fontFamily: string;
+	    /**
+	     * Gets or sets the the font weight.
+	     */
 	    fontWeight: FontWeight;
+	    /**
+	     * Gets or sets the the font style.
+	     */
 	    fontStyle: FontStyle;
+	    /**
+	     * Can be used to render the text stretched or dense.
+	     */
 	    fontStretch: FontStretch;
+	    /**
+	     * Gets or sets the font size in **millimeters**. PiWeb will automatically calculate the appropriate font size from the specified height.
+	     */
 	    size: number;
+	    /**
+	     * Gets or sets the brush which is used to fill the text.
+	     */
 	    foreground: Brush;
+	    /**
+	     * Gets or sets the text decorations.
+	     */
 	    textDecorations: TextDecoration[];
+	    /**
+	     * Initializes a new instance of the [[Font]] class.
+	     * @param fontFamily The font family.
+	     * @param fontWeight The font weight.
+	     * @param fontStyle The font style.
+	     * @param fontStretch The font stretch.
+	     * @param size The font size.
+	     * @param foreground The foreground.
+	     * @param textDecorations The text decorations.
+	     */
 	    constructor(fontFamily: string, fontWeight: FontWeight, fontStyle: FontStyle, fontStretch: FontStretch, size: number, foreground: Brush, textDecorations: ArrayLike<TextDecoration>);
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
+	    /**
+	     * Returns the font that is defined by the specified description.
+	     * @param description A font description.
+	     */
 	    static create(description?: FontDescription): Font;
+	    /**
+	     * Returns a list with the names of all available font families on the host system.
+	     */
 	    static getFontFamilies(): string[];
 	}
 }
 
 
 declare module "piweb/drawing/text/formatted_text" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Serializable } from "internal/serializable";
 	import { Font, FontDescription } from "piweb/drawing/text/font";
+	/**
+	 * Determines if the text is arranged from the left to the right or from the right to the left. While this seems to be redundant with the [[HorizontalTextAlignment]],
+	 * the effect is clear when the text exceeds the size of the boundaries, and especially when ellipsis are used.
+	 *
+	 * **`leftToRight` (default)**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://leftToRight.svg">
+	 *
+	 * Layouting starts at the left boundary.
+	 *
+	 * <br>
+	 *
+	 * **`rightToLeft`**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://rightToLeft.svg">
+	 *
+	 * Layouting starts at the right boundary.
+	 *
+	 * <br>
+	 */
 	export type FlowDirection = "leftToRight" | "rightToLeft";
+	/**
+	 * Determines how text is arranged inside the bounding box that is defined by width and height. In case no bounding box is defined, the horizontal text
+	 * alignment also determines the horizontal position of the text relative to the anchor.
+	 *
+	 * **`left` (default)**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://alignLeft.svg">
+	 *
+	 * Aligns text to the left boundary.
+	 *
+	 * <br>
+	 *
+	 * **`right`**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://alignRight.svg">
+	 *
+	 * Aligns text to the right boundary.
+	 *
+	 * <br>
+	 *
+	 * **`center`**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://alignCenter.svg">
+	 *
+	 * Aligns text centered between the left and the right boundaries.
+	 *
+	 * <br>
+	 *
+	 * **`justify`**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://alignJustify.svg">
+	 *
+	 * Increases the size of the whitespaces until the text fits between the left and right boundary.
+	 *
+	 * <br>
+	 */
 	export type HorizontalTextAlignment = "left" | "right" | "center" | "justify";
+	/**
+	 * Determines how text is arranged inside the bounding box that is defined by width and height. In case no bounding box is defined, the
+	 * text vertical alignment also determines the vertical position of the text relative to the anchor.
+	 *
+	 * **`top` (default)**
+	 *
+	 * <img style="float: left; height: 72px; margin-right:8px" src="media://verticalAlignTop.svg">
+	 *
+	 * Aligns the text on the top of the bounding box.
+	 *
+	 * <br><br>
+	 *
+	 * **`bottom`**
+	 *
+	 * <img style="float: left; height: 72px; margin-right:8px" src="media://verticalAlignBottom.svg">
+	 *
+	 * Aligns the text on the bottom of the bounding box.
+	 *
+	 * <br><br>
+	 *
+	 * **`center`**
+	 *
+	 * <img style="float: left; height: 72px; margin-right:8px" src="media://verticalAlignCenter.svg">
+	 *
+	 * Aligns the text centered in the bounding box.
+	 *
+	 * <br><br>
+	 */
 	export type VerticalTextAlignment = "top" | "bottom" | "center";
+	/**
+	 * Determines what happens when the text exceeds the size of the boundaries. In case no boundaries are defined, the text trimming has no effect.
+	 * When the length of a text reaches the `maxTextWidth`, a line break will be inserted in case the `maxTextHeight` allows another line of text.
+	 * If this is not the case, the text will be cut of, in the way the text trimming describes. A text like **'lorem ipsum'** would be formatted
+	 * like the following:
+	 *
+	 * **`none` (default)**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://textTrimmingNone.svg">
+	 *
+	 * The text will be trimmed at a whitespace if possible, otherwise in a word. No ellipsis are shown.
+	 *
+	 * <br>
+	 *
+	 * **`wordEllipsis`**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://textTrimmingWordEllipsis.svg">
+	 *
+	 * The text will be trimmed at a whitespace if possible, otherwise in a word, and ellipsis will be shown.
+	 *
+	 * <br>
+	 *
+	 * **`characterEllipsis`**
+	 *
+	 * <img style="float: left; height: 48px; margin-right:8px" src="media://textTrimmingCharacterEllipsis.svg">
+	 *
+	 * The text will be trimmed in a word, and ellipsis will be shown.
+	 *
+	 * <br>
+	 */
 	export type TextTrimming = "none" | "characterEllipsis" | "wordEllipses";
+	/**
+	 * Describes the final size and layout of a formatted text.
+	 */
 	export interface TextMeasurements {
+	    /**
+	     * The overall width, including the possible leading and trailing whitespace between the text and the boundaries.
+	     */
 	    width: number;
+	    /**
+	     * The overall height.
+	     */
 	    height: number;
+	    /**
+	     * The distance between the top of the first line and the baseline of the first line of text.
+	     */
 	    baseline: number;
+	    /**
+	     * The specified minimum width of the text.
+	     */
 	    minWidth: number;
+	    /**
+	     * The actual width of the text itself, excluding leading and trailing whitespace between the text and the boundaries.
+	     */
 	    textWidth: number;
+	    /**
+	     * The actual height of the text itself, excluding leading and trailing whitespace between the text and the boundaries.
+	     */
 	    textHeight: number;
+	    /**
+	     * The distance between the top of the bounding box and the baseline of the first line of text.
+	     */
 	    textBaseline: number;
+	    /**
+	     * The height of a single line of text.
+	     */
 	    textLineHeight: number;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[FormattedText]] class.
+	 */
 	export interface FormattedTextDescription {
 	    readonly text?: string;
 	    readonly font?: FontDescription;
@@ -1731,178 +4456,638 @@ declare module "piweb/drawing/text/formatted_text" {
 	    readonly verticalTextAlignment?: VerticalTextAlignment;
 	    readonly textTrimming?: TextTrimming;
 	}
+	/**
+	 * Describes a text block with a certain style and size, in which the text can be arranged.
+	 */
 	export class FormattedText implements Serializable, FormattedTextDescription {
+	    /**
+	     * Gets or sets the text to be formatted. The text can include line breaks.
+	     */
 	    text: string;
+	    /**
+	     * Gets or sets the font that is used to render the text.
+	     */
 	    font: Font;
+	    /**
+	     * Gets or sets the width of the boundaries and therefore, after how many millimeters the text is supposed to wrap.
+	     */
 	    width?: number;
+	    /**
+	     * Gets or sets the height of the boundaries and therefore, how many lines of text can be rendered. The specified text
+	     * will be wrapped until the specified `maxTextHeight` is reached. The last line will then either be cut off or rendered
+	     * will ellipsis, depending on the specified `textTrimming`.
+	     */
 	    height?: number;
+	    /**
+	     * Gets or sets the text flow, which can be different among certain cultures.
+	     */
 	    flowDirection: FlowDirection;
+	    /**
+	     * Determines how text is arranged horizontally inside the boundaries.
+	     */
 	    horizontalTextAlignment: HorizontalTextAlignment;
+	    /**
+	     * Determines how text is arranged vertically inside the boundaries.
+	     */
 	    verticalTextAlignment: VerticalTextAlignment;
+	    /**
+	     * Determines how text is treated, that doesn't fit into the specified boundaries.
+	     */
 	    textTrimming: TextTrimming;
+	    /**
+	     * Initializes a new instance of the [[FormattedText]] class.
+	     * @param text The text to be formatted.
+	     * @param font The font.
+	     * @param maxTextWidth The maximum text width.
+	     * @param maxTextHeight The maximum text height.
+	     * @param flowDirection The flow direction.
+	     * @param horizontalTextAlignment The horizontal text alignment.
+	     * @param verticalTextAlignment The vertical text alignment.
+	     * @param textTrimming The text trimming.
+	     */
 	    constructor(text: string, font: Font, maxTextWidth: number | undefined, maxTextHeight: number | undefined, flowDirection: FlowDirection, horizontalTextAlignment: HorizontalTextAlignment, verticalTextAlignment: VerticalTextAlignment, textTrimming: TextTrimming);
+	    /**
+	     * Returns the formatted text that is defined by the specified description.
+	     * @param description A formatted text description.
+	     */
 	    static create(description?: FormattedTextDescription | string): FormattedText;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
+	    /**
+	     * Measures the formatted text and returns a  [[TextMeasurements]] object that contains information about the final size and layout.
+	     */
 	    measure(): TextMeasurements;
+	    /**
+	     * Measures the specified formatted text and returns a  [[TextMeasurements]] object that contains information about the final size and layout.
+	     */
 	    static measure(formattedText: FormattedTextDescription): TextMeasurements;
 	}
 }
 
 
 declare module "piweb/drawing/text/settings" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { Point, PointDescription } from 'piweb/drawing/geometry/basics';
 	import { Serializable } from "internal/serializable";
 	import { BufferWriter } from 'internal/buffer_writer';
+	/**
+	 * Determines how the whole text is arranged horizontally relative to the text position.
+	 *
+	 * **`default` (default)**
+	 *
+	 * Arranges the text according the [[HorizontalTextAlignment]] and the specified size of the bounding box.
+	 *
+	 * **`left`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorLeft.svg">
+	 *
+	 * Places the anchor point on the left side of the bounding box.
+	 *
+	 * <br>
+	 *
+	 * **`right`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorRight.svg">
+	 *
+	 * Places the anchor point on the right side of the bounding box.
+	 *
+	 * <br>
+	 *
+	 * **`center`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorCenter.svg">
+	 *
+	 * Places the anchor at the center of the bounding box.
+	 *
+	 * <br>
+	 */
 	export type HorizontalTextAnchor = "default" | "left" | "right" | "center";
+	/**
+	 * Determines how the whole text is arranged vertically relative to the text position.
+	 *
+	 * **`top` (default)**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorTop.svg">
+	 *
+	 * Places the anchor point on the top of the bounding box.
+	 *
+	 * <br>
+	 *
+	 * **`bottom`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorBottom.svg">
+	 *
+	 * Places the anchor point on the bottom of the bounding box.
+	 *
+	 * <br>
+	 *
+	 * **`center`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorVerticalCenter.svg">
+	 *
+	 * Places the anchor at the center of the bounding box.
+	 *
+	 * <br>
+	 *
+	 * **`baseline`**
+	 *
+	 * <img style="float: left; height: 48px;margin-right:8px" src="media://anchorBaseline.svg">
+	 *
+	 * Places the anchor at the height of the baseline of the first line of text. The baseline anchor looks most natural when aligning text to certain positions, e.g. the lines of a scale.
+	 *
+	 * <br>
+	 */
 	export type VerticalTextAnchor = "default" | "top" | "bottom" | "center" | "baseline";
+	/**
+	 * Can be used to initialize an instance of the [[TextDrawingSettings]] class.
+	 */
 	export interface TextDrawingSettingsDescription {
 	    readonly position?: PointDescription;
 	    readonly anchorX?: HorizontalTextAnchor;
 	    readonly anchorY?: VerticalTextAnchor;
 	}
+	/**
+	 * Describes how text is aligned to a point.
+	 */
 	export class TextDrawingSettings implements Serializable, TextDrawingSettingsDescription {
+	    /**
+	     * Gets or sets the position at which the text should be placed.
+	     */
 	    position: Point;
+	    /**
+	     * Determines how the text is arranged horizontally relative to the position.
+	     */
 	    anchorX: HorizontalTextAnchor;
+	    /**
+	     * Determines how the text is arranged vertically relative to the position.
+	     */
 	    anchorY: VerticalTextAnchor;
+	    /**
+	     * Initializes a new instance of the [[TestDrawingSettings]] class.
+	     * @param position The position.
+	     * @param anchorX The horizontal anchor.
+	     * @param anchorY The vertical anchor.
+	     */
 	    constructor(position: Point, anchorX: HorizontalTextAnchor, anchorY: VerticalTextAnchor);
+	    /**
+	     * Returns the text drawing settings that are defined by the specified description.
+	     * @param description A text drawing settings description.
+	     */
 	    static create(description?: TextDrawingSettingsDescription): TextDrawingSettings;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
 declare module "piweb/drawing/transform/transforms" {
+	/**
+	 * @module drawing
+	 */
+	/** file */
 	import { BufferWriter } from "internal/buffer_writer";
 	import { Point, PointDescription } from "piweb/drawing/geometry/basics";
+	/**
+	 * Determines the type of a transform.
+	 */
 	export type TransformationType = "identity" | "translation" | "rotation" | "scaling" | "shear" | "group" | "matrix";
+	/**
+	 * Can be used to initialize an instance of the [[TranslationTransform]] class.
+	 */
 	export interface TranslationDescription {
 	    x?: number;
 	    y?: number;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[RotationTransform]] class.
+	 */
 	export interface RotationDescription {
 	    angle?: number;
 	    center?: PointDescription;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[ScalingTransform]] class.
+	 */
 	export interface ScalingDescription {
 	    scaleX?: number;
 	    scaleY?: number;
 	    center?: PointDescription;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[ShearTransform]] class.
+	 */
 	export interface ShearDescription {
 	    angleX?: number;
 	    angleY?: number;
 	    center?: PointDescription;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[MatrixTransform]] class.
+	 */
 	export interface MatrixDescription {
 	    matrix?: ArrayLike<number>;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[TransformGroup]] class.
+	 */
 	export interface TransformGroupDescription {
 	    children?: ArrayLike<TransformDescription>;
 	}
+	/**
+	 * Can be used to initialize an instance of the [[IdentityTransform]] class.
+	 */
 	export interface IdentityTransformDescription {
 	    type: "identity";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export interface TranslationTransformDescription extends TranslationDescription {
 	    type: "translation";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export interface RotationTransformDescription extends RotationDescription {
 	    type: "rotation";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export interface ScalingTransformDescription extends ScalingDescription {
 	    type: "scaling";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export interface ShearTransformDescription extends ShearDescription {
 	    type: "shear";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export interface MatrixTransformDescription extends MatrixDescription {
 	    type: "matrix";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export interface TransformGroupTransformDescription extends TransformGroupDescription {
 	    type: "group";
 	}
+	/**
+	 * Can be used to initialize an instance of the [[Transform]] class.
+	 */
 	export type TransformDescription = IdentityTransformDescription | TranslationTransformDescription | RotationTransformDescription | ScalingTransformDescription | ShearTransformDescription | MatrixTransformDescription | TransformGroupTransformDescription | Transform;
+	/**
+	 * Describes a transformation matrix that can be used to change the position, rotation and size of geometries.
+	 */
 	export abstract class Transform {
+	    /**
+	     * @private
+	     */
 	    readonly abstract type: TransformationType;
+	    /**
+	     * Returns the transformation that is defined by the specified description.
+	     * @param description A transformation description.
+	     */
 	    static create(description?: TransformDescription): Transform;
+	    /**
+	     * Returns the identity transform.
+	     */
 	    static readonly identity: IdentityTransform;
+	    /**
+	     * @private
+	     */
 	    abstract serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes the identity transform, which represents the identity matrix.
+	 */
 	export class IdentityTransform extends Transform implements IdentityTransformDescription {
+	    /**
+	     * Initializes a new instance of the [[IdentityTransform]] class.
+	     */
 	    constructor();
+	    /**
+	     * @private
+	     */
 	    readonly type: "identity";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * All transformation types are converted into a 3x3 matrix when they are applied. With the matrix transformation it's possible to define a transformation that is based on an arbitrary 3x3 matrix.
+	 *
+	 * | **m11**     | **m12**     | **0** |
+	 * |-------------|-------------|-------|
+	 * | **m21**     | **m22**     | **0** |
+	 * | **offsetX** | **offsetY** | **1** |
+	 */
 	export class MatrixTransform extends Transform implements MatrixTransformDescription {
+	    /**
+	     * Gets or sets the M11 value of the matrix.
+	     */
 	    m11: number;
+	    /**
+	     * Gets or sets the M12 value of the matrix.
+	     */
 	    m12: number;
+	    /**
+	     * Gets or sets the M21 value of the matrix.
+	     */
 	    m21: number;
+	    /**
+	     * Gets or sets the M22 value of the matrix.
+	     */
 	    m22: number;
+	    /**
+	     * Gets or sets the M31 value of the matrix.
+	     */
 	    offsetX: number;
+	    /**
+	     * Gets or sets the M32 value of the matrix.
+	     */
 	    offsetY: number;
 	    matrix: Float64Array;
+	    /**
+	     * Initializes a new instance of the [[MatrixTransform]] class.
+	     * @param m11 M11 value of the matrix.
+	     * @param m12 M12 value of the matrix.
+	     * @param m21 M21 value of the matrix.
+	     * @param m22 M22 value of the matrix.
+	     * @param offsetX M31 value of the matrix.
+	     * @param offsetY M32 value of the matrix.
+	     */
 	    constructor(m11: number, m12: number, m21: number, m22: number, offsetX: number, offsetY: number);
+	    /**
+	     * @private
+	     */
 	    readonly type: "matrix";
+	    /**
+	     * Returns the matrix transform that is defined by the specified description.
+	     * @param description A matrix transform description.
+	     */
 	    static createMatrixTransform(description?: MatrixDescription): MatrixTransform;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Rotates an object around a specific point.
+	 *
+	 * <img style="width:auto; height:128px;" src="media://rotateTransform.svg">
+	 */
 	export class RotationTransform extends Transform implements RotationTransformDescription {
+	    /**
+	     * Gets or sets the angle in degrees of clockwise rotation.
+	     */
 	    angle: number;
+	    /**
+	     * Gets or sets the rotation center.
+	     */
 	    center: Point;
+	    /**
+	     * Initializes a new instance of the [[RotationTransform]] class.
+	     * @param angle The angle in degrees of clockwise rotation.
+	     * @param center The rotation center.
+	     */
 	    constructor(angle: number, center: Point);
+	    /**
+	     * @private
+	     */
 	    readonly type: "rotation";
+	    /**
+	     * Returns the rotation transform that is defined by the specified description.
+	     * @param description A rotation transform description.
+	     */
 	    static createRotationTransform(description?: RotationDescription): RotationTransform;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Scales an object in horizontal and vertical direction.
+	 *
+	 * <img style="width:auto; height:128px;" src="media://scaleTransform.svg">
+	 */
 	export class ScalingTransform extends Transform implements ScalingTransformDescription {
+	    /**
+	     * Gets or sets the horizontal scaling factor.
+	     */
 	    scaleX: number;
+	    /**
+	     * Gets or sets the vertical scaling factor.
+	     */
 	    scaleY: number;
+	    /**
+	     * Gets or sets the center from which the scaling is calculated.
+	     */
 	    center: Point;
+	    /**
+	     * Initializes a new instance of the [[ScalingTransform]] class.
+	     * @param scaleX The horizontal scaling factor.
+	     * @param scaleY The vertical scaling factor.
+	     * @param center The center from which the scaling is calculated.
+	     */
 	    constructor(scaleX: number, scaleY: number, center: Point);
+	    /**
+	     * Returns the scaling transform that is defined by the specified description.
+	     * @param description A scaling transform description.
+	     */
 	    static createScalingTransform(description?: ScalingDescription): ScalingTransform;
+	    /**
+	     * @private
+	     */
 	    readonly type: "scaling";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes a transformation that can be used to create the illusion of perspective.
+	 *
+	 * <img style="width:auto; height:128px;" src="media://skewTransform.svg">
+	 */
 	export class ShearTransform extends Transform implements ShearTransformDescription {
+	    /**
+	     * Gets or sets the rotation angle of the x coordinates.
+	     */
 	    angleX: number;
+	    /**
+	     * Gets or sets the rotation angle of the y coordinates.
+	     */
 	    angleY: number;
+	    /**
+	     * Gets or sets the rotation center.
+	     */
 	    center: Point;
+	    /**
+	     * Initializes a new instance of the [[ShearTransform]] class.
+	     * @param angleX The rotation angle of the x coordinates.
+	     * @param angleY The rotation angle of the y coordinates.
+	     * @param center The rotation center.
+	     */
 	    constructor(angleX: number, angleY: number, center: Point);
+	    /**
+	     * Returns the shear transform that is defined by the specified description.
+	     * @param description A shear transform description.
+	     */
 	    static createShearTransform(description?: ShearDescription): ShearTransform;
+	    /**
+	     * @private
+	     */
 	    readonly type: "shear";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Describes an offset in horizontal and vertical direction.
+	 *
+	 * <img style="width:auto; height:128px;" src="media://translateTransform.svg">
+	 */
 	export class TranslationTransform extends Transform implements TranslationTransformDescription {
+	    /**
+	     * Gets or sets the horizontal offset.
+	     */
 	    x: number;
+	    /**
+	     * Gets or sets the vertical offset.
+	     */
 	    y: number;
+	    /**
+	     * Initializes a new instance of the [[TranslationTransform]] class.
+	     * @param x The horizontal offset.
+	     * @param y The vertical offset.
+	     */
 	    constructor(x: number, y: number);
+	    /**
+	     * Returns the translation transform that is defined by the specified description.
+	     * @param description A translation transform description.
+	     */
 	    static createTranslationTransform(description?: TranslationDescription): TranslationTransform;
+	    /**
+	     * @private
+	     */
 	    readonly type: "translation";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
+	/**
+	 * Combines multiple transformations into one by multiplying their matrices. As matrix multiplication is not commutative,
+	 * the order of the child matrices is important.
+	 */
 	export class TransformGroup extends Transform implements TransformGroupTransformDescription {
+	    /**
+	     * Gets or sets the transformations of which the group is composed.
+	     */
 	    children: Transform[];
+	    /**
+	     * Initializes a new instance of the [[TransformGroup]] class.
+	     * @param children The transformations of which the group is composed.
+	     */
 	    constructor(children: Transform[]);
+	    /**
+	     * returns the transform group that is defined by the specified description.
+	     * @param description A transform group description.
+	     */
 	    static createTransformGroup(description?: TransformGroupTransformDescription): TransformGroup;
+	    /**
+	     * @private
+	     */
 	    readonly type: "group";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
 }
 
 
+declare module "piweb/package" {
+	
+}
+
+
+declare module "piweb/package/package" {
+	
+}
+
+
 declare module "piweb/resources/host_binary" {
+	/**
+	 * @module resources
+	 */ /** */
+	/**
+	 * Describes a binary object that lives in the context of the PiWeb host application.
+	 */
 	export interface HostBinary {
+	    /**
+	     * Returns a buffer with the same data as the binary.
+	     */
 	    makeBuffer(): Buffer;
+	    /**
+	     * Gets the size of the binary object in bytes.
+	     */
 	    readonly size: number;
 	}
 }
 
 
 declare module "piweb/resources" {
+	/**
+	 * @module resources
+	 * @preferred
+	 *
+	 * ## Introduction
+	 *
+	 * The `piweb.resources` module can be used to access files that are located in the extension package. The returned data can be used to initialize images,
+	 * that can later be drawn to a drawing context, as shown in the example below:
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb'
+	 *
+	 * piweb.events.on("render", render);
+	 *
+	 * function render(context: piweb.drawing.DrawingContext) {
+	 *
+	 * 	const buffer = piweb.resources.readFileBufferSync("icon.png");
+	 * 	const image = new piweb.drawing.Bitmap(buffer);
+	 * 	context.drawImage(image);
+	 * }
+	 * ```
+	 *
+	 */
+	/** file */
 	import { HostBinary } from "piweb/resources/host_binary";
 	export { HostBinary };
 	import * as path from "piweb/resources/path";
 	export { path };
+	/**
+	 * Returns a buffer that contains the data of the file at the specified path.
+	 * @param path
+	 */
 	export function readFileBufferSync(path: string): Buffer;
+	/**
+	 * Returns a host binary that contains the data of the file at the specified path.
+	 * @param path
+	 */
 	export function readFileSync(path: string): HostBinary;
 }
 
@@ -2012,45 +5197,334 @@ declare module "piweb/resources/path" {
 }
 
 
-declare module "piweb/tooltips/tooltip_shape_provider" {
-	import { Geometry, Point } from 'piweb/drawing';
+declare module "piweb/tooltips" {
+	/**
+	 * @module tooltips
+	 * @preferred
+	 *
+	 * PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:
+	 *
+	 * <img src="media://infoMode.png">
+	 *
+	 * The custom plot API allows you to define your own tooltips, using the `onCreateTooltips` callback method of the tooltip provider:
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import tooltips = piweb.tooltips;
+	 *
+	 * piweb.events.on("render", render);
+	 *
+	 * function render(context: piweb.drawing.DrawingContext) {
+	 *
+	 * 	piweb.tooltips.activeTooltips.clear();
+	 *
+	 * 	piweb.tooltips.activeTooltips.add(
+	 * 		new piweb.tooltips.Tooltip("myTooltipText"),
+	 * 		new piweb.tooltips.PointMarker(new piweb.drawing.Point(0, 0), undefined, undefined),
+	 * 		undefined );
+	 *
+	 * 	...
+	 * }
+	 * ```
+	 *
+	 * Please note that you can define the tooltips at any place you want.
+	 *
+	 */ /** */
+	/**
+	 * @private
+	 */
+	export { activeTooltips, Tooltip, knownClassNames } from "piweb/tooltips/tooltip_collection";
+	/**
+	 * @private
+	 */
+	export { Marker, PointMarker, GeometryMarker } from "piweb/tooltips/markers";
+}
+
+
+declare module "piweb/tooltips/markers" {
+	/**
+	 * @module tooltips
+	 */
+	/** */
+	import { Brush, Geometry, GeometryDescription, Point, PointDescription, BrushDescription } from 'piweb/drawing';
 	import { BufferWriter } from 'internal/buffer_writer';
 	import { Serializable } from 'internal/serializable';
-	export enum TooltipShapeType {
-	    None = 0,
-	    Point = 1,
-	    Geometry = 2,
+	/**
+	 * Can be used to initialize an instance of the [[GeometryMarker]] class.
+	 */
+	export interface GeometryMarkerContent {
+	    readonly geometry?: GeometryDescription;
+	    readonly highlightFillBrush?: BrushDescription | undefined;
+	    readonly highlightBorderBrush?: BrushDescription | undefined;
 	}
-	export class TooltipShapeCollection implements Serializable {
-	    shapes: TooltipShape[];
-	    constructor(shapes: TooltipShape[]);
+	/**
+	 * Can be used to initialize an instance of the [[PointMarker]] class.
+	 */
+	export interface PointMarkerContent {
+	    readonly point?: PointDescription;
+	    readonly highlightFillBrush?: BrushDescription | undefined;
+	    readonly highlightBorderBrush?: BrushDescription | undefined;
+	}
+	/**
+	 * Can be used to initialize an instance of the [[Marker]] class.
+	 */
+	export interface GeometryMarkerDescription extends GeometryMarkerContent {
+	    readonly type: "geometry";
+	}
+	/**
+	 * Can be used to initialize an instance of the [[Marker]] class.
+	 */
+	export interface PointMarkerDescription extends PointMarkerContent {
+	    readonly type: "point";
+	}
+	/**
+	 * Can be used to initialize an instance of the [[Marker]] class.
+	 */
+	export type MarkerDescription = GeometryMarkerDescription | PointMarkerDescription;
+	/**
+	 * Describes a point or geometry that serves as the area of a tooltip.
+	 * It becomes visible when hovering it with the mouse while the info mode is active in PiWeb Monitor.
+	 */
+	export abstract class Marker implements Serializable {
+	    /**
+	     * Gets or sets the brush with which the area is filled.
+	     */
+	    readonly highlightFillBrush: Brush | undefined;
+	    /**
+	     * Gets or sets the pen with which the area is outlined.
+	     */
+	    readonly highlightBorderBrush: Brush | undefined;
+	    /**
+	     * @protected
+	     */
+	    constructor(highlightFill: Brush | undefined, highlightBorder: Brush | undefined);
+	    /**
+	     * Returns a tooltip marker from the specified point. Point tooltips scale with the zoom level in PiWeb Monitor.
+	     * @param point The point.
+	     */
+	    static fromPoint(point?: PointDescription): PointMarker;
+	    /**
+	     * Returns a tooltip marker from the specified geometry.
+	     * @param geometry The geometry.
+	     */
+	    static fromGeometry(geometry?: GeometryDescription): GeometryMarker;
+	    /**
+	     * Returns the tooltip marker that is defined by the specified description.
+	     * @param description A tooltip marker description.
+	     */
+	    static create(description?: MarkerDescription): PointMarker | GeometryMarker;
+	    /**
+	     * @private
+	     */
+	    abstract serialize(target: BufferWriter): void;
+	}
+	/**
+	 * Describes a tooltip marker with a geometry as its tooltip area.
+	 */
+	export class GeometryMarker extends Marker implements GeometryMarkerDescription {
+	    /**
+	     * Gets or sets the geometry that defines the tooltip area.
+	     */
+	    readonly geometry: Geometry;
+	    /**
+	     * Initializes a new instance of the [[GeometryMarker]] class.
+	     * @param geometry The geometry that defines the tooltip area.
+	     * @param highlightFill The brush with which the area is filled.
+	     * @param highlightBorder The pen with which the area is outlined.
+	     */
+	    constructor(geometry: Geometry, highlightFill: Brush | undefined, highlightBorder: Brush | undefined);
+	    /**
+	     * Returns the geometry tooltip marker that is defined by the specified description.
+	     * @param description A geometry tooltip marker description.
+	     */
+	    static createGeometryMarker(description?: GeometryMarkerDescription): GeometryMarker;
+	    /**
+	     * @private
+	     */
+	    readonly type: "geometry";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
-	export abstract class TooltipShape implements Serializable {
-	    text: string;
-	    characteristic: string | undefined;
-	    measurement: string | undefined;
-	    constructor(text: string, characteristic: string | undefined, measurement: string | undefined);
+	/**
+	 * Describes a tooltip marker with a point as its tooltip position.
+	 */
+	export class PointMarker extends Marker implements PointMarkerDescription {
+	    /**
+	     * Gets or sets the position of the tooltip.
+	     */
+	    readonly point: Point;
+	    /**
+	     * Initializes a new instance of the [[PointMarker]] class.
+	     * @param point The position of the tooltip.
+	     * @param fill The brush with which the area is filled.
+	     * @param border The pen with which the area is outlined.
+	     */
+	    constructor(point: Point, fill: Brush | undefined, border: Brush | undefined);
+	    /**
+	     * Returns the point tooltip marker that is defined by the specified description.
+	     * @param description A point tooltip marker description.
+	     */
+	    static createPointMarker(description?: PointMarkerDescription): PointMarker;
+	    /**
+	     * @private
+	     */
+	    readonly type: "point";
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
-	export class TooltipGeometryShape extends TooltipShape {
-	    shape: Geometry;
-	    constructor(shape: Geometry, text: string, characteristic: string | undefined, measurement: string | undefined);
+}
+
+
+declare module "piweb/tooltips/tooltip_collection" {
+	import { BufferWriter } from 'internal/buffer_writer';
+	import { Serializable } from 'internal/serializable';
+	import { InspectionPlanItem } from 'piweb/data/inspection';
+	import { Attribute } from 'piweb/data/attributes';
+	import { MeasurementValue } from 'piweb/data/measurements';
+	import { Marker } from 'piweb/tooltips/markers';
+	/**
+	 * Describes a set of tooltips.
+	 */
+	export class TooltipCollection implements Serializable {
+	    private _entries;
+	    /**
+	     * @private
+	     */
+	    constructor();
+	    /**
+	     * Gets the total number of items in this collection.
+	     */
+	    readonly length: number;
+	    /**
+	     * Adds a new item to the collection.
+	     * @param tooltip The content of the tooltip.
+	     * @param marker The geometry or position of the tooltip.
+	     * @param markedValue The measurement value that is associated to the tooltip. By specifying a value, PiWeb can connect the plot to other elements with lines.
+	     */
+	    add(tooltip: Tooltip, marker: Marker, markedValue?: MeasurementValue | undefined): void;
+	    /**
+	     * Removes all items from the list.
+	     */
+	    clear(): void;
+	    /**
+	     * @private
+	     */
+	    serialize(writer: BufferWriter): void;
+	}
+	/**
+	 * Represents the content of a tooltip.
+	 */
+	export class Tooltip implements Serializable {
+	    /**
+	     * @private
+	     */
+	    private readonly _contentLines;
+	    /**
+	     * Initializes a new instance of the [[Tooltip]] class.
+	     * @param content The primary content of the tooltip. When specifying a measurement value or an inspection plan item, PiWeb will generate a generic tooltip for the entity.
+	     */
+	    constructor(content?: string | MeasurementValue | InspectionPlanItem);
+	    /**
+	     * Adds a new line to the tooltip.
+	     * @param text The content of the tooltip line.
+	     */
+	    addText(text: string): void;
+	    /**
+	     * Adds a new collapsable line to the tooltip.
+	     * @param text The content of the tooltip line.
+	     * @param className The group to which the line belongs.
+	     */
+	    addCollapsableText(text: string, className: string): void;
+	    /**
+	     * Adds a fallback text line to the tooltip.
+	     * @param text Content of the fallback text line.
+	     */
+	    addFallbackText(text: string): void;
+	    /**
+	     * Generates a generic tooltip for the specified measurement value and adds the lines to the current tooltip.
+	     * @param value The measurement value.
+	     */
+	    addMeasurementValueInformations(value: MeasurementValue): void;
+	    /**
+	     * Generates a generic tooltip for the specified inspection plan item and adds the lines to the current tooltip.
+	     * @param value The inspection plan item.
+	     */
+	    addCharacteristicInformations(characteristic: InspectionPlanItem): void;
+	    /**
+	     * @private
+	     */
 	    serialize(target: BufferWriter): void;
 	}
-	export class TooltipPointShape extends TooltipShape {
-	    point: Point;
-	    constructor(point: Point, text: string, characteristic: string | undefined, measurement: string | undefined);
-	    serialize(target: BufferWriter): void;
+	export type TooltipItemType = "collapsable" | "fixed" | "fallback";
+	/**
+	 * The collection of tooltips that the custom plot provides. It's read by PiWeb whenever the info mode becomes active, e.g. when pressing the CTRL key.
+	 */
+	export const activeTooltips: TooltipCollection;
+	/**
+	 * @private
+	 */
+	export namespace knownClassNames {
+	    /**
+	     * Class of tooltip lines which represent quick navigation
+	     **/
+	    const navigation = "NAVIGATELINE";
+	    /**
+	     * Class of measurement tooltip lines
+	     **/
+	    const measurement = "Measurement";
+	    /**
+	     * Class of measurement value count tooltip lines
+	     **/
+	    const measurementValuesCount = "MeasurementValuesCount";
+	    /**
+	     * Class of characterisitc tooltip lines
+	     **/
+	    const characteristic = "Characteristic";
+	    /**
+	     * Class of audit function tooltip lines
+	     **/
+	    const auditFunction = "AuditFunction";
+	    /**
+	     * Class of tolerance limit tooltip lines
+	     **/
+	    const toleranceLimits = "Tolerance";
+	    /**
+	     * Class of warning limit tooltip lines
+	     **/
+	    const warningLimits = "Warning";
+	    /**
+	     * Class of control limit tooltip lines
+	     **/
+	    const controlLimits = "ControlLimits";
+	    /**
+	     * Class of scrap limit tooltip lines
+	     **/
+	    const scrapLimits = "ScrapLimits";
+	    /**
+	     * Class of actual value tooltip lines
+	     **/
+	    const actualValue = "ActualValue";
+	    /**
+	     * Class of nominal value tooltip lines
+	     **/
+	    const nominalValue = "NominalValue";
+	    /**
+	     * Class of tolerance Usage tooltip lines
+	     **/
+	    const toleranceUsage = "ToleranceUsage";
+	    /**
+	     * Class of CAD position tooltip lines
+	     **/
+	    const cadPosition = "CadPosition";
+	    /**
+	     * Returns the class of any given attribute.
+	     **/
+	    function getAttributeClassName(attribute: Attribute | number): string;
 	}
-	export type TooltipCallback = () => TooltipShapeCollection;
-	export interface ITooltipShapeProvider {
-	    onCreateTooltips: TooltipCallback | undefined;
-	}
-	export class TooltipShapeProvider {
-	    onCreateTooltips: TooltipCallback | undefined;
-	}
-	export const provider: ITooltipShapeProvider;
 }
 
 
@@ -2442,9 +5916,36 @@ declare module "iter" {
     }
 
     export interface Iter<T> extends Iterable<T> {
-        map<U>(transform: Transform<T, U>): Iter<U>;
+		/**
+		 * Applies a transformation function to each value in an iter. The returned iter contains the transformed values.
+		 * @param {transform} transform The transformation function to apply.
+		 * @example
+		 * const it = iter([1, 2, 3, 4]).map(x => x * 2);
+		 * // 'it' contains: 2, 4, 6, 8
+		 * @returns {iter_type}
+		 */
+		map<U>(transform: Transform<T, U>): Iter<U>;
+		/**
+		 * Filters an iter based on a predicate function. The returned iter contains only values for which the predicate function returns true.
+		 * @param {predicate} predicate The predicate function used to determine whether each value is in the returned iter.
+		 * @example
+		 * const it = iter([1, 2, 3, 4]).filter(x => x % 2 === 0);
+		 * // 'it' contains: 2, 4
+		 * @returns {iter_type}
+		 */
         filter(predicate: Predicate<T>): Iter<T>;
-        take(numberOrPredicate: (number | Predicate<T>)): Iter<T>;
+		/**
+		 * Takes a number of values from this iter, and discards all later values.
+		 * @param {number|predicate} numberOrPredicate If a number, then this is the number of values to take from the iter. If a predicate, then values are taken from the iter as long as the predicate returns true. As soon as it returns false, the returned iter ends.
+		 * @example
+		 * const it = iter(['a', 'b', 'c', 'd', 'e']).take(3);
+		 * // 'it' contains: 'a', 'b', 'c'
+		 * @example
+		 * const it = iter(1, 2, 3, 2, 4).take(x => x < 3);
+		 * // 'it' contains: 1, 2
+		 * @returns {iter_type}
+		 */
+		take(numberOrPredicate: (number | Predicate<T>)): Iter<T>;
         skip(numberOrPredicate: (number | Predicate<T>)): Iter<T>;
         do(process: Process<T>): Iter<T>;
         buffer(size: number): Iter<T[]>;
@@ -2463,32 +5964,282 @@ declare module "iter" {
         setIntersection(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
         setSymmetricDifference(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
         setDifference(other: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
-        interleave<U>(other: Iterable<U>): Iter<(T | U)>;
-
+		interleave<U>(other: Iterable<U>): Iter<(T | U)>;
+		
+		/**
+		 * Iterates through the values of this iter, invoking a processing function for each value.
+		 * @param {process} [process] The function to call for each value. If not specified, this function will still iterate through the values of this iter, causing any side effects.
+		 * @example
+		 * let result = 0;
+		 * iter([1, 2, 3]).forEach(x => { result += x; });
+		 * // result: 6
+		 */
         forEach(process: Process<T>): void;
-        count(): number;
+		/**
+		 * Determines the number of values in this iter. This function will iterate through the entire iter.
+		 * @example
+		 * const result = iter([1, 2, 3]).count();
+		 * // result: 3
+		 * @returns {number}
+		 */
+		count(): number;
+		/**
+		 * Determines whether an iter is empty.
+		 * @example
+		 * const result = iter([1, 2, 3]).isEmpty();
+		 * // result: false
+		 * @example
+		 * const result = iter().isEmpty();
+		 * // result: true
+		 * @returns {boolean}
+		 */
         isEmpty(): boolean;
-        first(): FindResult<T>;
-        last(): FindResult<T>;
-        at(index: number): FindResult<T>;
-        find(predicate: Predicate<T>): FindResult<T>;
-        every(predicate: Predicate<T>): boolean;
-        some(predicate: Predicate<T>): boolean;
-        min(comparer?: Comparer<T>): FindResult<T>;
-        max(comparer?: Comparer<T>): FindResult<T>;
-        minmax(comparer?: Comparer<T>): MinmaxResult<T>;
-        fold(combine: Combine<T, T>, seed?: T): T;
-        fold<U>(combine: Combine<T, U>, seed: U): U;
-        toArray(): T[];
-        toObject(nameSelector: Transform<T, string>): { [name: string]: T };
-        toObject<U>(nameSelector: Transform<T, string>, valueSelector: Transform<T, U>): { [name: string]: U };
-        toMap<K>(keySelector: Transform<T, K>): Map<K, T>;
-        toMap<K, V>(keySelector: Transform<T, K>, valueSelector: Transform<T, V>): Map<K, V>;
-        toSet(): Set<T>;
-        equal(other: Iterable<T>, equals?: Equals<T>): boolean;
-        findMismatch(other: Iterable<T>, equals?: Equals<T>): MismatchResult<T>;
+		/**
+		 * Returns the first value in this iter, along with its index. If this iter is empty, this function returns null. If this iter is not empty, the returned index is always 0.
+		 * @example
+		 * const result = iter(['bob', 'sue']).first();
+		 * // result: { value: 'bob', index: 0 }
+		 * @example
+		 * const result = iter().first();
+		 * // result: null
+		 * @returns {find_result}
+		 */
+		first(): FindResult<T> | null;
+		/**
+		 * Returns the first value in this iter. If this iter is empty, this function returns null.
+		 * @example
+		 * const result = iter(['bob', 'sue']).first();
+		 * // result: 'bob'
+		 * @example
+		 * const result = iter().first();
+		 * // result: null
+		 */
+		firstValue(): T | null;
+		/**
+		 * Returns the last value in this iter, along with its index. If this iter is empty, this function returns null.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).last();
+		 * // result: { value: 'sue', index: 2 }
+		 * @example
+		 * const result = iter().last();
+		 * // result: null
+		 * @returns {find_result}
+		 */
+		last(): FindResult<T> | null;
+		/**
+		 * Returns the last value in this iter. If this iter is empty, this function returns null.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).last();
+		 * // result: 'sue'
+		 * @example
+		 * const result = iter().last();
+		 * // result: null
+		 */
+		lastValue(): T | null;
+		/**
+		 * Returns a specified value from this iter, along with its index. If this iter is empty, this function returns null.
+		 * @param {number} index The index of the value to return.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).at(1);
+		 * // result: { value: 'beth', index: 1 }
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).at(100);
+		 * // result: null
+		 * @returns {find_result}
+		 */
+		at(index: number): FindResult<T> | null;
+		/**
+		 * Returns a specified value from this iter. If this iter is empty, this function returns null.
+		 * @param {number} index The index of the value to return.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).at(1);
+		 * // result: 'beth'
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).at(100);
+		 * // result: null
+		 */
+		valueAt(index: number): T | null;
+		/**
+		 * Returns the first value in this iter that satisfies a predicate, along with its index. If this iter is empty, this function returns null.
+		 * @param {predicate} predicate The function used to determine whether this is the value we're searching for.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).find(x => x[0] === 's');
+		 * // result: { value: 'sue', index: 2 }
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).find(x => x[0] === 'x');
+		 * // result: null
+		 * @returns {find_result}
+		 */
+		find(predicate: Predicate<T>): FindResult<T> | null;
+		/**
+		 * Determines whether the specified predicate returns true for every value in this iter.
+		 * @param {predicate} predicate The predicate to evaluate for each value in this iter.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).every(x => typeof x === 'string');
+		 * // result: true
+		 * @returns {boolean}
+		 */
+		every(predicate: Predicate<T>): boolean;
+		/**
+		 * Determines whether the specified predicate returns true for any value in this iter.
+		 * @param {predicate} predicate The predicate to evaluate for each value in this iter.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).some(x => x[0] === 's');
+		 * // result: true
+		 * @returns {boolean}
+		 */
+		some(predicate: Predicate<T>): boolean;
+		/**
+		 * Determines the minimum value in this iter. Returns the minimum value and its index. If this iter is empty, this function returns null.
+		 * @param {comparer} [comparer] A callback used to compare items. If not specified, this function uses the < and > operators to compare items.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).min();
+		 * // result: { value: 'beth', index: 1 }
+		 * @returns {find_result}
+		 */
+		min(comparer?: Comparer<T>): FindResult<T> | null;
+		/**
+		 * Determines the maximum value in this iter. Returns the maximum value and its index. If this iter is empty, this function returns null.
+		 * @param {comparer} [comparer] A callback used to compare items. If not specified, this function uses the < and > operators to compare items.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).max();
+		 * // result: { value: 'sue', index: 2 }
+		 * @returns {find_result}
+		 */
+		max(comparer?: Comparer<T>): FindResult<T> | null;
+		/**
+		 * Determines the minimum and maximum values in this iter. Returns the minimum value and index, and the maximum value and index. If this iter is empty, this function returns null.
+		 * @param {comparer} [comparer] A callback used to compare items. If not specified, this function uses the < and > operators to compare items.
+		 * @example
+		 * const result = iter(['bob', 'beth', 'sue']).minmax();
+		 * // result: { min: { value: 'beth', index: 1 }, max: { value: 'sue', index: 2 } }
+		 * @returns {minmax_result}
+		 */
+        minmax(comparer?: Comparer<T>): MinmaxResult<T> | null;
+		/**
+		 * Applies a combiner/accumulator function over this iter, and returns the final value of the combination.
+		 * @param {combine} combine The callback used to combine values.
+		 * @param {*} [seed] The initial value of the combination. If not specified, then the initial value of the combination is the first value of the iter.
+		 * @example
+		 * const result = iter([1, 2, 3, 4]).fold((x, y) => x + y);
+		 * // result: 10
+		 * @example
+		 * const result = iter([1, 2, 3, 4]).fold((x, y) => x + y, 13);
+		 * // result: 23
+		 * @returns {*}
+		 */
+		fold(combine: Combine<T, T>, seed?: T): T;
+		/**
+		 * Applies a combiner/accumulator function over this iter, and returns the final value of the combination.
+		 * @param {combine} combine The callback used to combine values.
+		 * @param {*} [seed] The initial value of the combination. If not specified, then the initial value of the combination is the first value of the iter.
+		 * @example
+		 * const result = iter([1, 2, 3, 4]).fold((x, y) => x + y);
+		 * // result: 10
+		 * @example
+		 * const result = iter([1, 2, 3, 4]).fold((x, y) => x + y, 13);
+		 * // result: 23
+		 * @returns {*}
+		 */
+		fold<U>(combine: Combine<T, U>, seed: U): U;
+		/**
+		 * Builds an array from the values in this iter.
+		 * @example
+		 * const result = iter.range(1).take(3).toArray();
+		 * // result: [1, 2, 3]
+		 * @returns {Array}
+		 */
+		toArray(): T[];
+		/**
+		 * Builds an object from the values in this iter.
+		 * @param {transformString} nameSelector A function used to get the property name from a value in this iter.
+		 * @param {transform} [valueSelector] A function used to get the property value from a value in this iter. If not specified, the iter values are used as the property values.
+		 * @example
+		 * const result = iter.range(1).take(3).toObject(x => 'val' + x);
+		 * // result: { val1: 1, val2: 2, val3: 3 }
+		 * @returns {object}
+		 */
+		toObject(nameSelector: Transform<T, string>): { [name: string]: T };
+		/**
+		 * Builds an object from the values in this iter.
+		 * @param {transformString} nameSelector A function used to get the property name from a value in this iter.
+		 * @param {transform} [valueSelector] A function used to get the property value from a value in this iter. If not specified, the iter values are used as the property values.
+		 * @example
+		 * const result = iter.range(1).take(3).toObject(x => 'val' + x);
+		 * // result: { val1: 1, val2: 2, val3: 3 }
+		 * @returns {object}
+		 */
+		toObject<U>(nameSelector: Transform<T, string>, valueSelector: Transform<T, U>): { [name: string]: U };
+		/**
+		 * Builds a map from the values in this iter.
+		 * @param {transform} keySelector A function used to get the map key from a value in this iter.
+		 * @param {transform} [valueSelector] A function used to get the map value from a value in this iter. If not specified, the iter values are used as the map values.
+		 * @example
+		 * const result = iter.range(1).take(3).toMap(x => 'val' + x);
+		 * // result: new Map([[val1, 1], [val2, 2], [val3, 3]])
+		 * @returns {Map}
+		 */
+		toMap<K>(keySelector: Transform<T, K>): Map<K, T>;
+		/**
+		 * Builds a map from the values in this iter.
+		 * @param {transform} keySelector A function used to get the map key from a value in this iter.
+		 * @param {transform} [valueSelector] A function used to get the map value from a value in this iter. If not specified, the iter values are used as the map values.
+		 * @example
+		 * const result = iter.range(1).take(3).toMap(x => 'val' + x);
+		 * // result: new Map([[val1, 1], [val2, 2], [val3, 3]])
+		 * @returns {Map}
+		 */
+		toMap<K, V>(keySelector: Transform<T, K>, valueSelector: Transform<T, V>): Map<K, V>;
+		/**
+		 * Builds a set from the values in this iter.
+		 * @example
+		 * const result = iter.range(1).take(3).toSet();
+		 * // result: new Set([1, 2, 3])
+		 * @returns {Set}
+		 */
+		toSet(): Set<T>;
+		/**
+		 * Determines whether this iter is equivalent to another iterable (that is, they are the same length and contain equivalent values in the same positions).
+		 * @param {iterable} otherIterable The other iterable.
+		 * @param {equals} [equals] A callback used to determine item equality. If not specified, this function uses "Object.is".
+		 * @example
+		 * const result = iter([1, 2]).equal([1, 2]);
+		 * // result: true
+		 * @example
+		 * const result = iter([1, 2]).equal([2, 2]);
+		 * // result: false
+		 * @returns {boolean}
+		 */
+		equal(other: Iterable<T>, equals?: Equals<T>): boolean;
+		/**
+		 * Finds the first mismatch between this iter and another iterable. Returns an object containing the value from this iter, the value from the other iter, and the index of the values. If one iterable ends before the other, that iterable's value returned as "undefined". If no mismatch is found, then this function returns null.
+		 * @param {iterable} otherIterable The other iterable.
+		 * @param {equals} [equals] A callback used to determine item equality. If not specified, this function uses "Object.is".
+		 * @example
+		 * const result = iter([1, 2]).findMismatch([2, 2]);
+		 * // result: { lhsValue: 1, rhsValue: 2, index: 0 }
+		 * @example
+		 * const result = iter([1, 2]).findMismatch([1, 2]);
+		 * // result: null
+		 * @returns {mismatch_result}
+		 */
+        findMismatch(other: Iterable<T>, equals?: Equals<T>): MismatchResult<T> | null;
     }
 
+	/**
+	 * Creates an iter from an iterable object or generator function. If no argument is passed, creates an empty iter.
+	 * @param {(Object|GeneratorFunction)} [fnOrObject] If undefined, the returned iter is empty. If an iterable object, the returned iter is a wrapper around that iterable. If a generator function, the returned iter is a wrapper around that function.
+	 * @example
+	 * const it = iter([3, 5, 7]);
+	 * // 'it' contains: 3, 5, 7
+	 * @example
+	 * const it = iter(function *() {
+	 *   yield 13;
+	 *   yield 17;
+	 * });
+	 * // 'it' contains: 13, 17
+	 * @returns {iter_type}
+	 */
     export function iter<T>(fnOrObject: (Iterable<T> | Generator<T>)): Iter<T>;
     export namespace iter {
         function values<T>(...items: T[]): Iter<T>;
