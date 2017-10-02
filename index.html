@@ -64,7 +64,7 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="piweb-custom-plot">PiWeb Custom Plot</h1>
 				<p><img style="display:block;margin:auto;" src="media/Logo.png" ></p>
-				<h1 id="quickstart">Quickstart</h1>
+				<h2 id="quickstart">Quickstart</h2>
 				<p>In order to create your first own custom plot, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As JavaScript is untyped, we suggest you to develop your extension using <strong>TypeScript</strong>.  </p>
 				<p>PiWeb searches for extensions in several locations. Ordered by their priority, these are:</p>
 				<ul>
@@ -74,9 +74,8 @@
 				</ul>
 				<p>The package structure looks like the following:</p>
 				<p><img class="framed" src="media/folder_structure.png"/></p>
-				<h2 id="1-create-the-folder-myextension-">1. Create the folder <code>MyExtension</code></h2>
+				<h3 id="1-create-the-folder-myextension-">1. Create the folder <code>MyExtension</code></h3>
 				<p>In case the <code>Extensions</code> folder doesn&#39;t exist, you must <strong>create</strong> it first. Now <strong>create your project folder</strong> in the extensions folder and name it <code>MyExtension</code>.</p>
-				<p><a id="markdown-2-create-the-file-packagejson" name="2-create-the-file-packagejson"></a></p>
 				<h3 id="2-create-the-file-package-json-">2. Create the file <code>package.json</code></h3>
 				<p>The package configuration static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter <a href="modules/package.html">package</a>. For now, use the minimum setup shown below.</p>
 				<pre><code class="lang-json">{
@@ -95,7 +94,7 @@
     }
 }
 </code></pre>
-				<h2 id="3-create-the-file-tsconfic-json-">3. Create the file <code>tsconfic.json</code></h2>
+				<h3 id="3-create-the-file-tsconfic-json-">3. Create the file <code>tsconfic.json</code></h3>
 				<p>It contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you&#39;ll be fine.</p>
 				<pre><code class="lang-json">{
     <span class="hljs-attr">"compilerOptions"</span>: {
@@ -111,9 +110,9 @@
     }
 }
 </code></pre>
-				<h2 id="4-create-the-folder-types-and-copy-the-file-piweb-d-ts-into-it">4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</h2>
+				<h3 id="4-create-the-folder-types-and-copy-the-file-piweb-d-ts-into-it">4. Create the folder <code>@types</code> and copy the file <code>piweb.d.ts</code> into it</h3>
 				<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong><a href="https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb.d.ts">here</a></strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
-				<h2 id="5-create-the-folder-src-and-create-the-file-index-ts-in-it">5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</h2>
+				<h3 id="5-create-the-folder-src-and-create-the-file-index-ts-in-it">5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</h3>
 				<p> This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter <a href="interfaces/drawing.drawingcontext.html">DrawingContext</a>.</p>
 				<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
 
