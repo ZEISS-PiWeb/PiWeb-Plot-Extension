@@ -452,20 +452,28 @@ declare module "piweb" {
 	 *
 	 * <br/>
 	 *
-	 * ## Introduction
+	 * ## Index
+	 *
+	 * ### Package definition
+	 *
+	 * For a complete description of the PiWeb custom-plot extension format, please refer to the [package](package.html) chapter.
+	 *
+	 * ### Modules
 	 *
 	 * The PiWeb custom plot API has a root module named `piweb` which encapsulates all child modules. The following child modules are available:
 	 *
-	 * - [**`data`**](data.html): Access the databinding of the plot element
-	 * - [**`drawing`**](drawing.html): Draw the content of the custom plot element
-	 * - [**`environment`**](environment.html): Access settings of the PiWeb host application
-	 * - [**`events`**](events.html): React to events emitted by the PiWeb host application
-	 * - [**`expressions`**](expressions.html): Evaluate system variable expressions
-	 * - [**`format`**](format.html): Read and write localized data
-	 * - [**`logger`**](logger.html): Write entries into the piweb log
-	 * - [**`properties`**](properties.html): Access the custom plot elements property grid
-	 * - [**`resources`**](resources.html): Access resources that are located in the extension package
-	 * - [**`tooltips`**](tooltips.html): Create tooltip content for the PiWeb Monitor info mode
+	 * | Module                  | Description                                |
+	 * |-------------------------|--------------------------------------------|
+	 * | [**`data`**](data.html) | Access the databinding of the plot element |
+	 * | [**`drawing`**](drawing.html) | Draw the content of the custom plot element|
+	 * | [**`environment`**](environment.html) | Access settings of the PiWeb host application|
+	 * | [**`events`**](events.html) | React to events emitted by the PiWeb host application|
+	 * | [**`expressions`**](expressions.html) | Evaluate system variable expressions|
+	 * | [**`format`**](format.html) | Read and write localized data|
+	 * | [**`logger`**](logger.html) | Write entries into the piweb log|
+	 * | [**`properties`**](properties.html) | Access the custom plot elements property grid |
+	 * | [**`resources`**](resources.html) | Access resources that are located in the extension package |
+	 * | [**`tooltips`**](tooltips.html) | Create tooltip content for the PiWeb Monitor info mode |
 	
 	 */ /** */
 	import * as drawing from "piweb/drawing";
@@ -526,15 +534,45 @@ declare module "piweb/properties" {
 	 *
 	 * <br/>
 	 *
-	 * ### Introduction
+	 * ## Introduction
 	 *
 	 * The properties you define in the `package.json` file can be accessed with the `piweb.properties` module. To enable type checking, there is one function for each available datatype.
+	 *
+	 * <br/>
+	 *
+	 * Definition of a property in the `package.json` file:
+	 *
+	 * <br/>
+	 *
+	 * ```
+	 * {
+	 * 	"name": "myplot",
+	 * 	...
+	 * 	"piweb_extension": {
+	 * 		...
+	 * 		"propertygrid": {
+	 * 			"entries": {
+	 * 				"myproperty": {
+	 * 					"name": "My Property",
+	 * 					"type": "boolean"
+	 * 				}
+	 * 			}
+	 * 		}
+	 * 	}
+	 * }
+	 * ```
+	 *
+	 * <br/>
+	 *
+	 * Access the property in your script:
 	 *
 	 * <br/>
 	 *
 	 * ```TypeScript
 	 * import * as piweb from 'piweb';
 	 * import properties = piweb.properties;
+	 *
+	 * properties.getBooleanProperty('myPropertyName')
 	 * ```
 	 */ /** */
 	import { Color, Brush, Pen, Font } from "piweb/drawing";
@@ -564,6 +602,11 @@ declare module "piweb/properties" {
 	 */
 	export function getColorProperty(id: string): Color;
 	/**
+	 * Returns the value of the property with the name `id` as an array of colors.
+	 * @param id The name of the property.
+	 */
+	export function getColorSchemeProperty(id: string): Color[];
+	/**
 	 * Returns the value of the property with the name `id` as a brush.
 	 * @param id The name of the property.
 	 */
@@ -591,6 +634,7 @@ declare module "piweb/data/attributes" {
 	 * @module data
 	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
+	import { Iter } from 'iter';
 	export type AttributeType = "string" | "integer" | "float" | "date" | "catalog";
 	/**
 	 * @private
@@ -649,6 +693,10 @@ declare module "piweb/data/attributes" {
 	     * Returns an iterator over all attributes.
 	     */
 	    [Symbol.iterator](): Iterator<Attribute>;
+	    /**
+	     * Returns an iter over all attributes.
+	     */
+	    iter(): Iter<Attribute>;
 	    /**
 	     * Gets the number of attributes stored in the collection.
 	     */
@@ -709,6 +757,7 @@ declare module "piweb/data/configuration" {
 	import { AttributeCollection, IAttributeItem, Attribute, AttributeType } from "piweb/data/attributes";
 	import { InspectionPlanItem } from "piweb/data/inspection";
 	import { MeasurementValue } from "piweb/data/measurements";
+	import { Iter } from 'iter';
 	/**
 	 * Returns the database configuration from the PiWeb server.
 	 */
@@ -834,6 +883,10 @@ declare module "piweb/data/configuration" {
 	    constructor(catalogs: Iterable<Catalog>);
 	    [Symbol.iterator](): Iterator<Catalog>;
 	    /**
+	     * Returns an iter over all catalogs.
+	     */
+	    iter(): Iter<Catalog>;
+	    /**
 	     * Gets the total number of catalogs stored in the collection.
 	     */
 	    readonly length: number;
@@ -934,7 +987,7 @@ declare module "piweb/data" {
 	/**
 	 * @private
 	 */
-	export { getInspectionPlanCollection, InspectionPlanCollection, InspectionPlanItem, InspectionPlanItemType } from "piweb/data/inspection";
+	export { getInspectionPlanCollection, InspectionPlanCollection, InspectionPlanItem, InspectionPlanItemType, Limit, LimitCollection, LimitContext } from "piweb/data/inspection";
 	/**
 	 * @private
 	 */
@@ -960,6 +1013,7 @@ declare module "piweb/data/inspection" {
 	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
 	import { RawDataItem } from 'piweb/data/raw_data';
 	import { LimitType, LimitUsageReference } from 'piweb/environment';
+	import { Iter } from 'iter';
 	/**
 	 * [[include:inspectionPlanItemType.md]]
 	 */
@@ -1054,17 +1108,21 @@ declare module "piweb/data/inspection" {
 	     */
 	    [Symbol.iterator](): Iterator<InspectionPlanItem>;
 	    /**
+	     * Returns an iter over all inspection plan items.
+	     */
+	    iter(): Iter<InspectionPlanItem>;
+	    /**
 	     * Gets the total number of items stored in the collection.
 	     */
 	    readonly length: number;
 	    /**
 	     * Returns an iterator over all characteristics stored in the collection.
 	     */
-	    getCharacteristics(): IterableIterator<InspectionPlanItem>;
+	    getCharacteristics(): Iter<InspectionPlanItem>;
 	    /**
 	     * Returns an iterator over all parts stored in the collection.
 	     */
-	    getParts(): IterableIterator<InspectionPlanItem>;
+	    getParts(): Iter<InspectionPlanItem>;
 	    /**
 	     * Returns the inspection plan item that associated to the the specified entity or `undefined` if the collection contains no such inspection plan item. The following associations are assumed:
 	     *
@@ -1096,7 +1154,7 @@ declare module "piweb/data/inspection" {
 	     * Returns the child items of the specified inspection plan item or. Please be aware that only those children are returned, that are included in the binding of the element.
 	     * @param item The item whose children are requested.
 	     */
-	    findChildren(item: InspectionPlanItem): IterableIterator<InspectionPlanItem>;
+	    findChildren(item: InspectionPlanItem): Iter<InspectionPlanItem>;
 	    /**
 	     * @private
 	     */
@@ -1141,6 +1199,7 @@ declare module "piweb/data/measurements" {
 	import { AttributeCollection, Attribute, IAttributeItem } from "piweb/data/attributes";
 	import { InspectionPlanItem } from 'piweb/data/inspection';
 	import { RawDataItem } from 'piweb/data/raw_data';
+	import { Iter } from 'iter';
 	/**
 	 * A collection of [`Measurements`](#measurement). It offers a wide range of functions to improve its accessibility. You can iterate over the collection like the following:
 	 *
@@ -1162,6 +1221,10 @@ declare module "piweb/data/measurements" {
 	     * @private
 	     */
 	    [Symbol.iterator](): Iterator<Measurement>;
+	    /**
+	     * Returns an iter over all measurements.
+	     */
+	    iter(): Iter<Measurement>;
 	    /**
 	     * Gets the number of measurements in the collection.
 	     */
@@ -1236,7 +1299,7 @@ declare module "piweb/data/measurements" {
 	    /**
 	     * Gets the values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
 	     */
-	    readonly allMeasurementValues: IterableIterator<MeasurementValue>;
+	    readonly allMeasurementValues: Iter<MeasurementValue>;
 	    /**
 	     * @private
 	     */
@@ -1307,6 +1370,7 @@ declare module "piweb/data/raw_data" {
 	import { HostBinary } from 'piweb/resources/host_binary';
 	import { InspectionPlanItem } from 'piweb/data/inspection';
 	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
+	import { Iter } from 'iter';
 	/**
 	 * An enumeration to identify the entity to which a raw data item is attached.
 	 */
@@ -1400,6 +1464,10 @@ declare module "piweb/data/raw_data" {
 	     * @private
 	     */
 	    [Symbol.iterator](): Iterator<RawDataItem>;
+	    /**
+	     * Returns an iter over all raw data items.
+	     */
+	    iter(): Iter<RawDataItem>;
 	    /**
 	     * Gets the total number of items in this collection.
 	     */
@@ -2063,57 +2131,61 @@ declare module "piweb/drawing" {
 	 * Be aware that all coordinates and values are interpreted as **millimeters**. PiWeb draws with a resolution of **96 DPI**, so one millimeter is equal to `96 / 25.4 ~ 3.58` pixels,
 	 * or one pixel is equal to `25.4 / 96 ~ 0.2646` millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.
 	 *
-	 * ### Interfaces
+	 * ### Description objects
 	 *
-	 * Most drawing objects, like [[Color]], [[Brush]], [[Pen]], [[Font]] and [[Geometry]] implement an interface that is named like the implementing class, with an additional `Description` suffix (e.g. `ColorDescription`).
-	 * Classes that implement such a description interface have a `create` method, that takes a description interface as parameter.
-	 *
-	 * Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is,
-	 * that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:
-	 *
-	 * **Long version using constructors:**
+	 * Most drawing classes implement a description interface named similar to the class. For example, the class [[Pen]] implements [[PenDescription]]. Description interfaces only
+	 * consist of properties, so that they can be represented by object literals:
 	 *
 	 * ```TypeScript
-	 * context.setPen(new piweb.drawing.Pen(
-	 *     new piweb.drawing.SolidColorBrush(
-	 *         new piweb.drawing.Color(255, 0, 0, 255),
-	 *         1.0),
-	 *     1.0,
-	 *     "flat",
-	 *     "flat",
-	 *     "bevel",
-	 *     new Array<number>(),
-	 *     0.0,
-	 *     "flat"
-	 * ));
+	 * const penDescription = {
+	 * 		brush: {
+	 * 			type: 'solid',
+	 * 			color: {r: 255, g: 0, b: 0}
+	 * 		},
+	 * 		thickness: 1.0
+	 * };
 	 *
-	 * context.drawLine(
-	 *     new piweb.drawing.Point(0.0, 0.0), // from
-	 *     new piweb.drawing.Point(1.0, 1.0)  // to
-	 * );
+	 * context.setPen( penDescription );
 	 * ```
 	 *
-	 * **Short version using interfaces:**
+	 * Most of the properties are even optional and thus don't have to be specified. Unspecified properties will assume a default value. It's often easier and much better readable to
+	 * use an object literal compared to the constructor of the corresponding class:
 	 *
 	 * ```TypeScript
-	 * context.setPen({
-	 *     brush: {
-	 *         type: "solid",
-	 *         color: { r: 255, g: 0, b: 0 }
-	 *     },
-	 *     thickness: 1.0}
-	 * );
-	 *
-	 * context.drawLine(
-	 *     { x: 0.0, y: 0.0 },
-	 *     { x: 1.0, y: 1.0 }
-	 * );
+	 * const pen = new piweb.drawing.Pen(
+	 * 		new piweb.drawing.SolidColorBrush(
+	 * 			new piweb.drawing.Color(255, 0, 0, 255),
+	 * 			1.0
+	 * 		),
+	 * 		1.0,
+	 * 		'flat',
+	 * 		'flat',
+	 * 		'bevel',
+	 * 		new Array<number>(),
+	 * 		0.0,
+	 * 		'flat'
+	 * 	);
 	 * ```
 	 *
-	 * As you might have noticed, you don't have to specify all parameters when using the interface version. For almost every value, there is a
-	 * defined **default value** which is used in case the actual value is not specified. The API reference in the following chapters will not always
-	 * list all possible parameter types. You'll notice that most types and functions can be configured in several more comfortable ways, as most functions
-	 * are defined to take interfaces as their parameters.
+	 * Most functions directly accept literal objects. If nevertheless an instance of a class is required, it can be aquired by calling the static `create` method of the class. When
+	 * doint this on an abstract class like [[Brush]], an additional type parameter is required. You can also call the factory method on the derived class, e.g.
+	 * `SolidColorBrush.createSolidColorBrush`.
+	 *
+	 * ```TypeScript
+	 * const pen = piweb.drawing.Pen.create({
+	 * 		brush: {
+	 * 			type: 'solid',
+	 * 			color: {r: 255, g: 0, b: 0}
+	 * 		},
+	 * 		thickness: 1.0
+	 * });
+	 * ```
+	 *
+	 * This should be preferred to using constructors.
+	 *
+	 * **Tips:**
+	 * * Colors and brushes can usually be specified as `string` (e.g. `'red'` or `'#FF0000'`).
+	 * * Positions can usually be specified as arrays (`[1.0, 1.0]`) or as objects (`{x: 1.0, y: 1.0}`) or even as number, if both coordinates have the same value.
 	 */ /** */
 	export { Point, PointDescription, Rect, Size, SizeDescription } from "piweb/drawing/geometry/basics";
 	export { GeometryType, Geometry, GeometryDescription, LineGeometry, LineGeometryDescription, RectangleGeometry, RectangleGeometryDescription, EllipseGeometry, EllipseGeometryDescription, PathGeometry, CombinedGeometry, GeometryGroup } from "piweb/drawing/geometry/geometries";
@@ -2123,7 +2195,7 @@ declare module "piweb/drawing" {
 	export { SweepDirection } from "piweb/drawing/geometry/path_segments";
 	export { GeometryDrawingSettings, GeometryDrawingSettingsDescription, HorizontalAnchor, VerticalAnchor } from "piweb/drawing/geometry/settings";
 	export { BrushType, Brush, BrushDescription, SolidColorBrush, LinearGradientBrush, RadialGradientBrush } from "piweb/drawing/material/brushes";
-	export { Color } from "piweb/drawing/material/color";
+	export { Color, ColorObject, ColorDescription } from "piweb/drawing/material/color";
 	export { Pen, LineCap, LineJoin } from "piweb/drawing/material/pen";
 	export { FormattedText, FormattedTextDescription, FlowDirection, HorizontalTextAlignment, VerticalTextAlignment, TextTrimming, TextMeasurements } from "piweb/drawing/text/formatted_text";
 	export { Font, FontDescription, FontStretch, FontStyle, FontWeight, TextDecoration } from "piweb/drawing/text/font";
@@ -5202,7 +5274,11 @@ declare module "piweb/tooltips" {
 	 * @module tooltips
 	 * @preferred
 	 *
-	 * PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is displayed at this point or region of the plot:
+	 * ## Introduction
+	 *
+	 * PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
+	 * is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
+	 * displayed at this point or region of the plot:
 	 *
 	 * <img src="media://infoMode.png">
 	 *
@@ -5899,9 +5975,9 @@ declare module "iter" {
         (): Iterator<T>;
     }
 
-    export interface FindResult<T> {
-        value: T;
-        index: number;
+    export interface IndexValue<T> {
+		index: number;
+		value: T;
     }
 
     export interface MismatchResult<T> {
@@ -5911,8 +5987,8 @@ declare module "iter" {
     }
 
     export interface MinmaxResult<T> {
-        min: FindResult<T>;
-        max: FindResult<T>;
+        min: T;
+        max: T;
     }
 
     export interface Iter<T> extends Iterable<T> {
@@ -5967,6 +6043,14 @@ declare module "iter" {
 		interleave<U>(other: Iterable<U>): Iter<(T | U)>;
 		
 		/**
+		 * Returns an index-value-pair for each value in this iter.
+		 * @example
+		 * const it = iter(['a', 'b', 'c']).enumerate();
+		 * // 'it' contains: {index: 0, value: 'a'}, {index: 1, value: 'b'}, {index: 2, value: 'c'}
+		 */
+		enumerate(): Iter<IndexValue<T>>;
+
+		/**
 		 * Iterates through the values of this iter, invoking a processing function for each value.
 		 * @param {process} [process] The function to call for each value. If not specified, this function will still iterate through the values of this iter, causing any side effects.
 		 * @example
@@ -5995,82 +6079,47 @@ declare module "iter" {
 		 */
         isEmpty(): boolean;
 		/**
-		 * Returns the first value in this iter, along with its index. If this iter is empty, this function returns null. If this iter is not empty, the returned index is always 0.
-		 * @example
-		 * const result = iter(['bob', 'sue']).first();
-		 * // result: { value: 'bob', index: 0 }
-		 * @example
-		 * const result = iter().first();
-		 * // result: null
-		 * @returns {find_result}
-		 */
-		first(): FindResult<T> | null;
-		/**
-		 * Returns the first value in this iter. If this iter is empty, this function returns null.
+		 * Returns the first value in this iter. If this iter is empty, this function returns undefined.
 		 * @example
 		 * const result = iter(['bob', 'sue']).first();
 		 * // result: 'bob'
 		 * @example
 		 * const result = iter().first();
-		 * // result: null
+		 * // result: undefined
 		 */
-		firstValue(): T | null;
+		first(predicate?: Predicate<T> | undefined): T | undefined;
 		/**
-		 * Returns the last value in this iter, along with its index. If this iter is empty, this function returns null.
-		 * @example
-		 * const result = iter(['bob', 'beth', 'sue']).last();
-		 * // result: { value: 'sue', index: 2 }
-		 * @example
-		 * const result = iter().last();
-		 * // result: null
-		 * @returns {find_result}
-		 */
-		last(): FindResult<T> | null;
-		/**
-		 * Returns the last value in this iter. If this iter is empty, this function returns null.
+		 * Returns the last value in this iter. If this iter is empty, this function returns undefined.
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).last();
 		 * // result: 'sue'
 		 * @example
 		 * const result = iter().last();
-		 * // result: null
+		 * // result: undefined
 		 */
-		lastValue(): T | null;
+		last(): T | undefined;
 		/**
-		 * Returns a specified value from this iter, along with its index. If this iter is empty, this function returns null.
-		 * @param {number} index The index of the value to return.
-		 * @example
-		 * const result = iter(['bob', 'beth', 'sue']).at(1);
-		 * // result: { value: 'beth', index: 1 }
-		 * @example
-		 * const result = iter(['bob', 'beth', 'sue']).at(100);
-		 * // result: null
-		 * @returns {find_result}
-		 */
-		at(index: number): FindResult<T> | null;
-		/**
-		 * Returns a specified value from this iter. If this iter is empty, this function returns null.
+		 * Returns a specified value from this iter. If this iter is empty, this function returns undefined.
 		 * @param {number} index The index of the value to return.
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).at(1);
 		 * // result: 'beth'
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).at(100);
-		 * // result: null
+		 * // result: undefined
 		 */
-		valueAt(index: number): T | null;
+		at(index: number): T | undefined;
 		/**
-		 * Returns the first value in this iter that satisfies a predicate, along with its index. If this iter is empty, this function returns null.
+		 * Returns the first value in this iter that satisfies a predicate. If this iter is empty, this function returns undefined.
 		 * @param {predicate} predicate The function used to determine whether this is the value we're searching for.
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).find(x => x[0] === 's');
 		 * // result: { value: 'sue', index: 2 }
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).find(x => x[0] === 'x');
-		 * // result: null
-		 * @returns {find_result}
+		 * // result: undefined
 		 */
-		find(predicate: Predicate<T>): FindResult<T> | null;
+		find(predicate: Predicate<T>): T | undefined;
 		/**
 		 * Determines whether the specified predicate returns true for every value in this iter.
 		 * @param {predicate} predicate The predicate to evaluate for each value in this iter.
@@ -6090,32 +6139,29 @@ declare module "iter" {
 		 */
 		some(predicate: Predicate<T>): boolean;
 		/**
-		 * Determines the minimum value in this iter. Returns the minimum value and its index. If this iter is empty, this function returns null.
+		 * Determines the minimum value in this iter. Returns the minimum value. If this iter is empty, this function returns undefined.
 		 * @param {comparer} [comparer] A callback used to compare items. If not specified, this function uses the < and > operators to compare items.
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).min();
-		 * // result: { value: 'beth', index: 1 }
-		 * @returns {find_result}
+		 * // result: 'beth'
 		 */
-		min(comparer?: Comparer<T>): FindResult<T> | null;
+		min(comparer?: Comparer<T>): T | undefined;
 		/**
-		 * Determines the maximum value in this iter. Returns the maximum value and its index. If this iter is empty, this function returns null.
+		 * Determines the maximum value in this iter. Returns the maximum value. If this iter is empty, this function returns undefined.
 		 * @param {comparer} [comparer] A callback used to compare items. If not specified, this function uses the < and > operators to compare items.
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).max();
-		 * // result: { value: 'sue', index: 2 }
-		 * @returns {find_result}
+		 * // result: 'sue'
 		 */
-		max(comparer?: Comparer<T>): FindResult<T> | null;
+		max(comparer?: Comparer<T>): T | undefined;
 		/**
-		 * Determines the minimum and maximum values in this iter. Returns the minimum value and index, and the maximum value and index. If this iter is empty, this function returns null.
+		 * Returns the minimum value and the maximum value. If this iter is empty, this function returns undefined.
 		 * @param {comparer} [comparer] A callback used to compare items. If not specified, this function uses the < and > operators to compare items.
 		 * @example
 		 * const result = iter(['bob', 'beth', 'sue']).minmax();
-		 * // result: { min: { value: 'beth', index: 1 }, max: { value: 'sue', index: 2 } }
-		 * @returns {minmax_result}
+		 * // result: { min: 'beth', max: 'sue' }
 		 */
-        minmax(comparer?: Comparer<T>): MinmaxResult<T> | null;
+        minmax(comparer?: Comparer<T>): MinmaxResult<T> | undefined;
 		/**
 		 * Applies a combiner/accumulator function over this iter, and returns the final value of the combination.
 		 * @param {combine} combine The callback used to combine values.
@@ -6212,7 +6258,7 @@ declare module "iter" {
 		 */
 		equal(other: Iterable<T>, equals?: Equals<T>): boolean;
 		/**
-		 * Finds the first mismatch between this iter and another iterable. Returns an object containing the value from this iter, the value from the other iter, and the index of the values. If one iterable ends before the other, that iterable's value returned as "undefined". If no mismatch is found, then this function returns null.
+		 * Finds the first mismatch between this iter and another iterable. Returns an object containing the value from this iter, the value from the other iter, and the index of the values. If one iterable ends before the other, that iterable's value returned as "undefined". If no mismatch is found, then this function returns undefined.
 		 * @param {iterable} otherIterable The other iterable.
 		 * @param {equals} [equals] A callback used to determine item equality. If not specified, this function uses "Object.is".
 		 * @example
@@ -6220,10 +6266,10 @@ declare module "iter" {
 		 * // result: { lhsValue: 1, rhsValue: 2, index: 0 }
 		 * @example
 		 * const result = iter([1, 2]).findMismatch([1, 2]);
-		 * // result: null
+		 * // result: undefined
 		 * @returns {mismatch_result}
 		 */
-        findMismatch(other: Iterable<T>, equals?: Equals<T>): MismatchResult<T> | null;
+        findMismatch(other: Iterable<T>, equals?: Equals<T>): MismatchResult<T> | undefined;
     }
 
 	/**
@@ -6258,5 +6304,5 @@ declare module "iter" {
         function setSymmetricDifference<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
         function setDifference<T>(lhs: Iterable<T>, rhs: Iterable<T>, comparer?: Comparer<T>): Iter<T>;
         function interleave<T, U>(lhs: Iterable<T>, rhs: Iterable<U>): Iter<(T | U)>;
-    }
+	}
 }
