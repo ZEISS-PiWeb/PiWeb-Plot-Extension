@@ -72,8 +72,30 @@
 							<h2 id="introduction">Introduction</h2>
 							<p>The properties you define in the <code>package.json</code> file can be accessed with the <code>piweb.properties</code> module. To enable type checking, there is one function for each available datatype.</p>
 							<p><br/></p>
+							<p>Definition of a property in the <code>package.json</code> file:</p>
+							<p><br/></p>
+							<pre><code>{
+    <span class="hljs-string">"name"</span>: <span class="hljs-string">"myplot"</span>,
+    ...
+    <span class="hljs-string">"piweb_extension"</span>: {
+        ...
+        <span class="hljs-string">"propertygrid"</span>: {
+            <span class="hljs-string">"entries"</span>: {
+                <span class="hljs-string">"myproperty"</span>: {
+                    <span class="hljs-string">"name"</span>: <span class="hljs-string">"My Property"</span>,
+                    <span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span>
+                }
+            }
+        }
+    }
+}
+</code></pre><p><br/></p>
+							<p>Access the property in your script:</p>
+							<p><br/></p>
 							<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> properties = piweb.properties;
+
+properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 </code></pre>
 						</dd>
 					</dl>
@@ -115,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;PropertiesProvider&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in properties.ts:24</li>
+							<li>Defined in properties.ts:54</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -134,7 +156,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:30</li>
+									<li>Defined in properties.ts:60</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -165,7 +187,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:84</li>
+									<li>Defined in properties.ts:114</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -196,7 +218,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:62</li>
+									<li>Defined in properties.ts:92</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -227,7 +249,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:70</li>
+									<li>Defined in properties.ts:100</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -258,7 +280,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:54</li>
+									<li>Defined in properties.ts:84</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -289,7 +311,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:108</li>
+									<li>Defined in properties.ts:138</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -320,7 +342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:100</li>
+									<li>Defined in properties.ts:130</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -351,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:46</li>
+									<li>Defined in properties.ts:76</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -382,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:92</li>
+									<li>Defined in properties.ts:122</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -413,7 +435,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:38</li>
+									<li>Defined in properties.ts:68</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
