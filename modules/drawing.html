@@ -81,48 +81,52 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 </code></pre>
 					<p>Be aware that all coordinates and values are interpreted as <strong>millimeters</strong>. PiWeb draws with a resolution of <strong>96 DPI</strong>, so one millimeter is equal to <code>96 / 25.4 ~ 3.58</code> pixels,
 					or one pixel is equal to <code>25.4 / 96 ~ 0.2646</code> millimeters. PiWeb will take care, that everything you draw is aligned to display coordinates, so nothing will look blurry.</p>
-					<h3 id="interfaces">Interfaces</h3>
-					<p>Most drawing objects, like <a href="../classes/drawing.color.html">Color</a>, <a href="../classes/drawing.brush.html">Brush</a>, <a href="../classes/drawing.pen.html">Pen</a>, <a href="../classes/drawing.font.html">Font</a> and <a href="../classes/drawing.geometry.html">Geometry</a> implement an interface that is named like the implementing class, with an additional <code>Description</code> suffix (e.g. <code>ColorDescription</code>).
-					Classes that implement such a description interface have a <code>create</code> method, that takes a description interface as parameter.</p>
-					<p>Constructors in JavaScript and TypeScript cannot be overloaded, which means that you have to specify a value for every parameter. The advantage of interfaces in typescript is,
-					that they can be represented by anonymous objects with nullable properties. This leads to shorter and better readable code:</p>
-					<p><strong>Long version using constructors:</strong></p>
-					<pre><code class="lang-TypeScript">context.setPen(<span class="hljs-keyword">new</span> piweb.drawing.Pen(
-    <span class="hljs-keyword">new</span> piweb.drawing.SolidColorBrush(
-        <span class="hljs-keyword">new</span> piweb.drawing.Color(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>),
-        <span class="hljs-number">1.0</span>),
-    <span class="hljs-number">1.0</span>,
-    <span class="hljs-string">"flat"</span>,
-    <span class="hljs-string">"flat"</span>,
-    <span class="hljs-string">"bevel"</span>,
-    <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(),
-    <span class="hljs-number">0.0</span>,
-    <span class="hljs-string">"flat"</span>
-));
+					<h3 id="description-objects">Description objects</h3>
+					<p>Most drawing classes implement a description interface named similar to the class. For example, the class <a href="../classes/drawing.pen.html">Pen</a> implements <a href="../interfaces/drawing.pendescription.html">PenDescription</a>. Description interfaces only
+					consist of properties, so that they can be represented by object literals:</p>
+					<pre><code class="lang-TypeScript"><span class="hljs-keyword">const</span> penDescription = {
+        brush: {
+            <span class="hljs-keyword">type</span>: <span class="hljs-string">'solid'</span>,
+            color: {r: <span class="hljs-number">255</span>, g: <span class="hljs-number">0</span>, b: <span class="hljs-number">0</span>}
+        },
+        thickness: <span class="hljs-number">1.0</span>
+};
 
-context.drawLine(
-    <span class="hljs-keyword">new</span> piweb.drawing.Point(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>), <span class="hljs-comment">// from</span>
-    <span class="hljs-keyword">new</span> piweb.drawing.Point(<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>)  <span class="hljs-comment">// to</span>
-);
+context.setPen( penDescription );
 </code></pre>
-					<p><strong>Short version using interfaces:</strong></p>
-					<pre><code class="lang-TypeScript">context.setPen({
-    brush: {
-        <span class="hljs-keyword">type</span>: <span class="hljs-string">"solid"</span>,
-        color: { r: <span class="hljs-number">255</span>, g: <span class="hljs-number">0</span>, b: <span class="hljs-number">0</span> }
-    },
-    thickness: <span class="hljs-number">1.0</span>}
-);
-
-context.drawLine(
-    { x: <span class="hljs-number">0.0</span>, y: <span class="hljs-number">0.0</span> },
-    { x: <span class="hljs-number">1.0</span>, y: <span class="hljs-number">1.0</span> }
-);
+					<p>Most of the properties are even optional and thus don&#39;t have to be specified. Unspecified properties will assume a default value. It&#39;s often easier and much better readable to
+					use an object literal compared to the constructor of the corresponding class:</p>
+					<pre><code class="lang-TypeScript"><span class="hljs-keyword">const</span> pen = <span class="hljs-keyword">new</span> piweb.drawing.Pen(
+        <span class="hljs-keyword">new</span> piweb.drawing.SolidColorBrush(
+            <span class="hljs-keyword">new</span> piweb.drawing.Color(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">255</span>),
+            <span class="hljs-number">1.0</span>
+        ),
+        <span class="hljs-number">1.0</span>,
+        <span class="hljs-string">'flat'</span>,
+        <span class="hljs-string">'flat'</span>,
+        <span class="hljs-string">'bevel'</span>,
+        <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">number</span>&gt;(),
+        <span class="hljs-number">0.0</span>,
+        <span class="hljs-string">'flat'</span>
+    );
 </code></pre>
-					<p>As you might have noticed, you don&#39;t have to specify all parameters when using the interface version. For almost every value, there is a
-						defined <strong>default value</strong> which is used in case the actual value is not specified. The API reference in the following chapters will not always
-						list all possible parameter types. You&#39;ll notice that most types and functions can be configured in several more comfortable ways, as most functions
-					are defined to take interfaces as their parameters.</p>
+					<p>Most functions directly accept literal objects. If nevertheless an instance of a class is required, it can be aquired by calling the static <code>create</code> method of the class. When
+						doint this on an abstract class like <a href="../classes/drawing.brush.html">Brush</a>, an additional type parameter is required. You can also call the factory method on the derived class, e.g.
+					<code>SolidColorBrush.createSolidColorBrush</code>.</p>
+					<pre><code class="lang-TypeScript"><span class="hljs-keyword">const</span> pen = piweb.drawing.Pen.create({
+        brush: {
+            <span class="hljs-keyword">type</span>: <span class="hljs-string">'solid'</span>,
+            color: {r: <span class="hljs-number">255</span>, g: <span class="hljs-number">0</span>, b: <span class="hljs-number">0</span>}
+        },
+        thickness: <span class="hljs-number">1.0</span>
+});
+</code></pre>
+					<p>This should be preferred to using constructors.</p>
+					<p><strong>Tips:</strong></p>
+					<ul>
+						<li>Colors and brushes can usually be specified as <code>string</code> (e.g. <code>&#39;red&#39;</code> or <code>&#39;#FF0000&#39;</code>).</li>
+						<li>Positions can usually be specified as arrays (<code>[1.0, 1.0]</code>) or as objects (<code>{x: 1.0, y: 1.0}</code>) or even as number, if both coordinates have the same value.</li>
+					</ul>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
