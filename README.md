@@ -22,7 +22,7 @@ In case the `Extensions` folder doesn't exist, you must create it first. Now cre
 
 ### 2. Create the file `package.json`
 
-The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [Package Definition](#package-definition). For now, use the minimum setup shown below.
+The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [package](http://zeiss-piweb.github.io/PiWeb-Customplot/modules/package) in the manual. For now, use the minimum setup shown below.
 
 ```json
 {
@@ -69,7 +69,7 @@ These are the type definitions of the PiWeb custom plot interface. It will enabl
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
- This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [`DrawingContext`](#drawingcontext).
+ This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [drawing](http://zeiss-piweb.github.io/PiWeb-Customplot/modules/drawing) in the manual.
 
 ```TypeScript
 import * as piweb from 'piweb';
