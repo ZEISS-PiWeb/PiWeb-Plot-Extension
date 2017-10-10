@@ -16,7 +16,7 @@ The package structure looks like the following:
 
 <img class="framed" src="gfx/folder_structure.png"/>
 
-> You can download the result of the quickstart guide [here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/raw/master/MyExtension.zip).
+**Hint:** You can download the result of the quickstart guide [here](https://github.com/ZEISS-PiWeb/PiWeb-Customplot/raw/master/MyExtension.zip).
 
 ### 1. Create the folder `MyExtension` 
 
