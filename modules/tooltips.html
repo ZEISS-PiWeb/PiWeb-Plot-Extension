@@ -66,30 +66,27 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<h2 id="introduction">Introduction</h2>
-					<p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
-						is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
-					displayed at this point or region of the plot:</p>
-					<p><img src="../media/infomode.png"></p>
-					<p>The custom plot API allows you to define your own tooltips, using the <code>onCreateTooltips</code> callback method of the tooltip provider:</p>
-					<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+					<dl class="tsd-comment-tags">
+						<dt>preferred</dt>
+						<dd><h2 id="introduction">Introduction</h2>
+							<p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
+								is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
+							displayed at this point or region of the plot:</p>
+							<p><img src="../media/infomode.png"></p>
+							<p>The custom plot API allows you add your own tooltips to a plot:</p>
+							<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> tooltips = piweb.tooltips;
 
 piweb.events.on(<span class="hljs-string">"render"</span>, render);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params">context: piweb.drawing.DrawingContext</span>) </span>{
-
-    piweb.tooltips.activeTooltips.clear();
-
-    piweb.tooltips.activeTooltips.add(
-        <span class="hljs-keyword">new</span> piweb.tooltips.Tooltip(<span class="hljs-string">"myTooltipText"</span>),
-        <span class="hljs-keyword">new</span> piweb.tooltips.PointMarker(<span class="hljs-keyword">new</span> piweb.drawing.Point(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>), <span class="hljs-literal">undefined</span>, <span class="hljs-literal">undefined</span>),
-        <span class="hljs-literal">undefined</span> );
+        piweb.tooltips.placeTooltip(context, [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], <span class="hljs-keyword">new</span> Tooltip(<span class="hljs-string">"myTooltipText"</span>));
 
     ...
 }
 </code></pre>
-					<p>Please note that you can define the tooltips at any place you want.</p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -105,7 +102,6 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-not-exported">
 							<h3>Enumerations</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="../enums/tooltips.markertypeid.html" class="tsd-kind-icon">Marker<wbr>Type<wbr>Id</a></li>
 								<li class="tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="../enums/tooltips.tooltipitemid.html" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Id</a></li>
 								<li class="tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="../enums/tooltips.tooltipitemtypeid.html" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Type<wbr>Id</a></li>
 							</ul>
@@ -114,105 +110,52 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="../classes/tooltips.characteristictooltipitem.html" class="tsd-kind-icon">Characteristic<wbr>Tooltip<wbr>Item</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/tooltips.geometrymarker.html" class="tsd-kind-icon">Geometry<wbr>Marker</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/tooltips.marker.html" class="tsd-kind-icon">Marker</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported"><a href="../classes/tooltips.markerentry.html" class="tsd-kind-icon">Marker<wbr>Entry</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="../classes/tooltips.measurementvaluetooltipitem.html" class="tsd-kind-icon">Measurement<wbr>Value<wbr>Tooltip<wbr>Item</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/tooltips.pointmarker.html" class="tsd-kind-icon">Point<wbr>Marker</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="../classes/tooltips.texttooltipitem.html" class="tsd-kind-icon">Text<wbr>Tooltip<wbr>Item</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/tooltips.tooltip.html" class="tsd-kind-icon">Tooltip</a></li>
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/tooltips.tooltipcollection.html" class="tsd-kind-icon">Tooltip<wbr>Collection</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/tooltips.geometrymarkercontent.html" class="tsd-kind-icon">Geometry<wbr>Marker<wbr>Content</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/tooltips.geometrymarkerdescription.html" class="tsd-kind-icon">Geometry<wbr>Marker<wbr>Description</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/tooltips.pointmarkercontent.html" class="tsd-kind-icon">Point<wbr>Marker<wbr>Content</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/tooltips.pointmarkerdescription.html" class="tsd-kind-icon">Point<wbr>Marker<wbr>Description</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="tooltips.html#markerdescription" class="tsd-kind-icon">Marker<wbr>Description</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="tooltips.html#tooltipitem" class="tsd-kind-icon">Tooltip<wbr>Item</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="tooltips.html#tooltipitemtype" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="tooltips.html#tooltipitemtype" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="tooltips.html#activetooltips" class="tsd-kind-icon">active<wbr>Tooltips</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-not-exported">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="tooltips.html#mapitemtype" class="tsd-kind-icon">map<wbr>Item<wbr>Type</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="tooltips.html#placetooltip" class="tsd-kind-icon">place<wbr>Tooltip</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="markerdescription" class="tsd-anchor"></a>
-					<h3>Marker<wbr>Description</h3>
-					<div class="tsd-signature tsd-kind-icon">Marker<wbr>Description<span class="tsd-signature-symbol">:</span> <a href="../interfaces/tooltips.geometrymarkerdescription.html" class="tsd-signature-type">GeometryMarkerDescription</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/tooltips.pointmarkerdescription.html" class="tsd-signature-type">PointMarkerDescription</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in tooltips/markers.ts:59</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Can be used to initialize an instance of the <a href="../classes/tooltips.marker.html">Marker</a> class.</p>
-						</div>
-					</div>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="tooltipitem" class="tsd-anchor"></a>
 					<h3>Tooltip<wbr>Item</h3>
 					<div class="tsd-signature tsd-kind-icon">Tooltip<wbr>Item<span class="tsd-signature-symbol">:</span> <a href="../classes/tooltips.texttooltipitem.html" class="tsd-signature-type">TextTooltipItem</a><span class="tsd-signature-symbol"> | </span><a href="../classes/tooltips.characteristictooltipitem.html" class="tsd-signature-type">CharacteristicTooltipItem</a><span class="tsd-signature-symbol"> | </span><a href="../classes/tooltips.measurementvaluetooltipitem.html" class="tsd-signature-type">MeasurementValueTooltipItem</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in tooltips/tooltip_collection.ts:194</li>
+							<li>Defined in tooltips.ts:152</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="tooltipitemtype" class="tsd-anchor"></a>
 					<h3>Tooltip<wbr>Item<wbr>Type</h3>
 					<div class="tsd-signature tsd-kind-icon">Tooltip<wbr>Item<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"collapsable"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"fixed"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"fallback"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in tooltips/tooltip_collection.ts:196</li>
+							<li>Defined in tooltips.ts:154</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="activetooltips" class="tsd-anchor"></a>
-					<h3>active<wbr>Tooltips</h3>
-					<div class="tsd-signature tsd-kind-icon">active<wbr>Tooltips<span class="tsd-signature-symbol">:</span> <a href="../classes/tooltips.tooltipcollection.html" class="tsd-signature-type">TooltipCollection</a><span class="tsd-signature-symbol"> =&nbsp;new TooltipCollection()</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in tooltips/tooltip_collection.ts:229</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The collection of tooltips that the custom plot provides. It&#39;s read by PiWeb whenever the info mode becomes active, e.g. when pressing the CTRL key.</p>
-						</div>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-not-exported">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 					<a name="mapitemtype" class="tsd-anchor"></a>
@@ -224,7 +167,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in tooltips/tooltip_collection.ts:211</li>
+									<li>Defined in tooltips.ts:169</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -241,6 +184,40 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">TooltipItemTypeId.Fallback</span>
 							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="placetooltip" class="tsd-anchor"></a>
+					<h3>place<wbr>Tooltip</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">place<wbr>Tooltip<span class="tsd-signature-symbol">(</span>drawingContext<span class="tsd-signature-symbol">: </span><a href="../interfaces/drawing.drawingcontext.html" class="tsd-signature-type">DrawingContext</a>, position<span class="tsd-signature-symbol">: </span><a href="drawing.html#pointdescription" class="tsd-signature-type">PointDescription</a>, tooltip<span class="tsd-signature-symbol">: </span><a href="../classes/tooltips.tooltip.html" class="tsd-signature-type">Tooltip</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in tooltips.ts:43</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Places a simple tooltip on the plot.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>drawingContext: <a href="../interfaces/drawing.drawingcontext.html" class="tsd-signature-type">DrawingContext</a></h5>
+								</li>
+								<li>
+									<h5>position: <a href="drawing.html#pointdescription" class="tsd-signature-type">PointDescription</a></h5>
+								</li>
+								<li>
+									<h5>tooltip: <a href="../classes/tooltips.tooltip.html" class="tsd-signature-type">Tooltip</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -298,9 +275,6 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
-						<a href="../enums/tooltips.markertypeid.html" class="tsd-kind-icon">Marker<wbr>Type<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="../enums/tooltips.tooltipitemid.html" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Id</a>
 					</li>
 					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
@@ -309,20 +283,8 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="../classes/tooltips.characteristictooltipitem.html" class="tsd-kind-icon">Characteristic<wbr>Tooltip<wbr>Item</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/tooltips.geometrymarker.html" class="tsd-kind-icon">Geometry<wbr>Marker</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/tooltips.marker.html" class="tsd-kind-icon">Marker</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../classes/tooltips.markerentry.html" class="tsd-kind-icon">Marker<wbr>Entry</a>
-					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="../classes/tooltips.measurementvaluetooltipitem.html" class="tsd-kind-icon">Measurement<wbr>Value<wbr>Tooltip<wbr>Item</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/tooltips.pointmarker.html" class="tsd-kind-icon">Point<wbr>Marker</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="../classes/tooltips.texttooltipitem.html" class="tsd-kind-icon">Text<wbr>Tooltip<wbr>Item</a>
@@ -330,35 +292,17 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/tooltips.tooltip.html" class="tsd-kind-icon">Tooltip</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/tooltips.tooltipcollection.html" class="tsd-kind-icon">Tooltip<wbr>Collection</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/tooltips.geometrymarkercontent.html" class="tsd-kind-icon">Geometry<wbr>Marker<wbr>Content</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/tooltips.geometrymarkerdescription.html" class="tsd-kind-icon">Geometry<wbr>Marker<wbr>Description</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/tooltips.pointmarkercontent.html" class="tsd-kind-icon">Point<wbr>Marker<wbr>Content</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/tooltips.pointmarkerdescription.html" class="tsd-kind-icon">Point<wbr>Marker<wbr>Description</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="tooltips.html#markerdescription" class="tsd-kind-icon">Marker<wbr>Description</a>
-					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="tooltips.html#tooltipitem" class="tsd-kind-icon">Tooltip<wbr>Item</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="tooltips.html#tooltipitemtype" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
-						<a href="tooltips.html#activetooltips" class="tsd-kind-icon">active<wbr>Tooltips</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="tooltips.html#mapitemtype" class="tsd-kind-icon">map<wbr>Item<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="tooltips.html#placetooltip" class="tsd-kind-icon">place<wbr>Tooltip</a>
 					</li>
 				</ul>
 			</nav>
