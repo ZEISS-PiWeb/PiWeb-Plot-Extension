@@ -41,8 +41,7 @@ declare module "internal/buffer_writer" {
 
 
 declare module "internal/drawing_broker" {
-	import { Drawing } from "piweb/drawing";
-	export function execOnRender(plotContext: any): Drawing;
+	export function execOnRender(plotContext: any): Buffer;
 }
 
 
@@ -76,7 +75,10 @@ declare module "internal/synchronization_scopes" {
 
 
 declare module "internal/tooltip_broker" {
-	export function getTooltips(): Buffer;
+	export let drawingHighlights: {
+	    buffer: Buffer;
+	};
+	export function getDrawingTooltips(): Buffer;
 }
 
 
@@ -629,6 +631,154 @@ declare module "piweb/properties" {
 }
 
 
+declare module "piweb/tooltips" {
+	/**
+	 * @module tooltips
+	 * @preferred
+	 *
+	 * ## Introduction
+	 *
+	 * PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
+	 * is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
+	 * displayed at this point or region of the plot:
+	 *
+	 * <img src="media://infomode.png">
+	 *
+	 * The custom plot API allows you add your own tooltips to a plot:
+	 *
+	 * ```TypeScript
+	 * import * as piweb from 'piweb';
+	 * import tooltips = piweb.tooltips;
+	 *
+	 * piweb.events.on("render", render);
+	 *
+	 * function render(context: piweb.drawing.DrawingContext) {
+	 * 		piweb.tooltips.placeTooltip(context, [0,0], new Tooltip("myTooltipText"));
+	 *
+	 * 	...
+	 * }
+	 * ```
+	 *
+	 */ /** */
+	import { BufferWriter } from 'internal/buffer_writer';
+	import { Serializable } from 'internal/serializable';
+	import { InspectionPlanItem } from 'piweb/data/inspection';
+	import { Attribute } from 'piweb/data/attributes';
+	import { MeasurementValue } from 'piweb/data/measurements';
+	import { DrawingContext } from 'piweb/drawing/drawing';
+	import { PointDescription } from 'piweb/drawing/geometry/basics';
+	/**
+	 * Places a simple tooltip on the plot.
+	 */
+	export function placeTooltip(drawingContext: DrawingContext, position: PointDescription, tooltip: Tooltip): void;
+	/**
+	 * Represents the content of a tooltip overlay.
+	 */
+	export class Tooltip implements Serializable {
+	    /**
+	     * @private
+	     */
+	    private readonly _contentLines;
+	    /**
+	     * Initializes a new instance of the [[Tooltip]] class.
+	     * @param content The primary content of the tooltip. When specifying a measurement value or an inspection plan item, PiWeb will generate a generic tooltip for the entity.
+	     */
+	    constructor(content?: string | MeasurementValue | InspectionPlanItem);
+	    /**
+	     * Adds a new line to the tooltip.
+	     * @param text The content of the tooltip line.
+	     */
+	    addText(text: string): void;
+	    /**
+	     * Adds a new collapsable line to the tooltip.
+	     * @param text The content of the tooltip line.
+	     * @param className The group to which the line belongs.
+	     */
+	    addCollapsableText(text: string, className: string): void;
+	    /**
+	     * Adds a fallback text line to the tooltip.
+	     * @param text Content of the fallback text line.
+	     */
+	    addFallbackText(text: string): void;
+	    /**
+	     * Generates a generic tooltip for the specified measurement value and adds the lines to the current tooltip.
+	     * @param value The measurement value.
+	     */
+	    addMeasurementValueInformations(value: MeasurementValue): void;
+	    /**
+	     * Generates a generic tooltip for the specified inspection plan item and adds the lines to the current tooltip.
+	     * @param value The inspection plan item.
+	     */
+	    addCharacteristicInformations(characteristic: InspectionPlanItem): void;
+	    /**
+	     * @private
+	     */
+	    serialize(target: BufferWriter): void;
+	}
+	/**
+	 * @private
+	 */
+	export namespace knownClassNames {
+	    /**
+	     * Class of tooltip lines which represent quick navigation
+	     **/
+	    const navigation = "NAVIGATELINE";
+	    /**
+	     * Class of measurement tooltip lines
+	     **/
+	    const measurement = "Measurement";
+	    /**
+	     * Class of measurement value count tooltip lines
+	     **/
+	    const measurementValuesCount = "MeasurementValuesCount";
+	    /**
+	     * Class of characterisitc tooltip lines
+	     **/
+	    const characteristic = "Characteristic";
+	    /**
+	     * Class of audit function tooltip lines
+	     **/
+	    const auditFunction = "AuditFunction";
+	    /**
+	     * Class of tolerance limit tooltip lines
+	     **/
+	    const toleranceLimits = "Tolerance";
+	    /**
+	     * Class of warning limit tooltip lines
+	     **/
+	    const warningLimits = "Warning";
+	    /**
+	     * Class of control limit tooltip lines
+	     **/
+	    const controlLimits = "ControlLimits";
+	    /**
+	     * Class of scrap limit tooltip lines
+	     **/
+	    const scrapLimits = "ScrapLimits";
+	    /**
+	     * Class of actual value tooltip lines
+	     **/
+	    const actualValue = "ActualValue";
+	    /**
+	     * Class of nominal value tooltip lines
+	     **/
+	    const nominalValue = "NominalValue";
+	    /**
+	     * Class of tolerance Usage tooltip lines
+	     **/
+	    const toleranceUsage = "ToleranceUsage";
+	    /**
+	     * Class of CAD position tooltip lines
+	     **/
+	    const cadPosition = "CadPosition";
+	    /**
+	     * Returns the class of any given attribute.
+	     **/
+	    function getAttributeClassName(attribute: Attribute | number): string;
+	}
+}
+
+
 declare module "piweb/data/attributes" {
 	/**
 	 * @module data
@@ -704,7 +854,7 @@ declare module "piweb/data/attributes" {
 	    /**
 	     * Gets an iterator over the available keys in the collection.
 	     */
-	    readonly keys: IterableIterator<number>;
+	    readonly keys: Iter<number>;
 	    /**
 	     * Returns the attribute with the specified key, or `undefined` in case there is no attribute with this key.
 	     * @param key The key of the attribute.
@@ -1238,7 +1388,7 @@ declare module "piweb/data/measurements" {
 	     * Returns the measurements that are associated to the the specified inspection plan part or `undefined` if the collection contains no such measurement.
 	     * @param entity The inspection plan part to search measurements for.
 	     */
-	    findMeasurementsByEntity(entity: InspectionPlanItem): Iterable<Measurement>;
+	    findMeasurementsByEntity(entity: InspectionPlanItem): Iter<Measurement>;
 	    /**
 	     * Returns the measurement value that is associated to the specified [`RawDataItem`](#rawdataitem) or `undefined` if the collection contains no such measurement value.
 	     * @param entity The raw data item from which the measurement value should be returned.
@@ -1248,7 +1398,7 @@ declare module "piweb/data/measurements" {
 	     * Returns the measurement values that are associated to the the specified inspection plan characteristic or `undefined` if the collection contains no such measurement.
 	     * @param entity The inspection plan characteristic to search values for.
 	     */
-	    findValuesByEntity(entity: InspectionPlanItem): Iterable<MeasurementValue>;
+	    findValuesByEntity(entity: InspectionPlanItem): Iter<MeasurementValue>;
 	    /**
 	     * @private
 	     */
@@ -1297,7 +1447,7 @@ declare module "piweb/data/measurements" {
 	     */
 	    readonly valueCount: number;
 	    /**
-	     * Gets the values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
+	     * Returns an iter over all values that are associated to this measurement. In case you fetched the measurements without values, the set is empty.
 	     */
 	    readonly allMeasurementValues: Iter<MeasurementValue>;
 	    /**
@@ -1707,6 +1857,7 @@ declare module "piweb/drawing/drawing" {
 	import { ImageDrawingSettingsDescription } from "piweb/drawing/image/settings";
 	import { GeometryDrawingSettingsDescription } from "piweb/drawing/geometry/settings";
 	import { Bitmap } from "piweb/drawing/image/bitmap";
+	import { Highlight } from "piweb/drawing/highlight/highlight";
 	/**
 	 * Describes the content of a drawing with the help of various drawing commands.
 	 */
@@ -1802,6 +1953,12 @@ declare module "piweb/drawing/drawing" {
 	     */
 	    pop(): void;
 	    /**
+	     * Places a highlight on the plot. The final position and alignment will be determined by the current transformation stack.
+	     * Highlights associated with measurement values will be shown if the associated measurement is activated by interactive elements in a report.
+	     * Highlights can also be associated with tooltips can be selected by the user and will be displayed in PiWeb Monitor.
+	     */
+	    placeHighlight(highlight: Highlight, settings?: GeometryDrawingSettingsDescription): void;
+	    /**
 	     * Finalizes the drawing which this drawing context belongs to.
 	     */
 	    close(): void;
@@ -1833,18 +1990,21 @@ declare module "piweb/drawing/drawing" {
 	     */
 	    serialize(writer: BufferWriter): void;
 	    /**
+	     * @private
+	     */
+	    serializeHighlights(writer: BufferWriter): void;
+	    /**
 	     * Returns the bounding box of the drawing.
 	     */
 	    measure(): DrawingMeasurements;
 	    /**
 	     * @private
-	     * even though it looks unused, this method is important because it will be called from the c# runtime
 	     */
-	    private getBytes();
+	    getDrawingBuffer(): Buffer;
 	    /**
 	     * @private
 	     */
-	    private getLength();
+	    getHighlightBuffer(): Buffer;
 	}
 }
 
@@ -2204,6 +2364,7 @@ declare module "piweb/drawing" {
 	export { ImageDrawingSettings, ImageDrawingSettingsDescription, HorizontalImageAnchor, VerticalImageAnchor } from "piweb/drawing/image/settings";
 	export { TransformationType, Transform, TransformDescription, IdentityTransform, IdentityTransformDescription, MatrixTransform, MatrixTransformDescription, RotationTransform, RotationTransformDescription, ScalingTransform, ScalingTransformDescription, ShearTransform, ShearTransformDescription, TranslationTransform, TranslationTransformDescription, TransformGroup } from "piweb/drawing/transform/transforms";
 	export { Drawing, DrawingContext, DrawingMeasurements } from "piweb/drawing/drawing";
+	export { Highlight, HighlightDescription } from "piweb/drawing/highlight/highlight";
 }
 
 
@@ -3347,6 +3508,60 @@ declare module "piweb/drawing/geometry/settings" {
 	     * @private
 	     */
 	    serialize(target: BufferWriter): void;
+	}
+}
+
+
+declare module "piweb/drawing/highlight/highlight" {
+	import { Geometry, GeometryDescription } from "piweb/drawing/geometry/geometries";
+	import { Brush, BrushDescription } from "piweb/drawing/material/brushes";
+	import { Tooltip } from "piweb/tooltips";
+	import { MeasurementValue } from "piweb/data/measurements";
+	import { InspectionPlanItem } from "piweb/data/inspection";
+	import { BufferWriter } from 'internal/buffer_writer';
+	export interface HighlightDescription {
+	    readonly geometry?: GeometryDescription | undefined;
+	    readonly tooltip?: Tooltip | undefined;
+	    readonly measurementValue?: MeasurementValue | undefined;
+	    readonly activeBorderBrush?: BrushDescription | undefined;
+	    readonly activeBackgroundBrush?: BrushDescription | undefined;
+	}
+	/**
+	 * A highlight marks sections or points of a plot.
+	 * Highlights associated with measurement values will be shown in a plot if the associated measurement is activated by interactive elements in a report.
+	 * Highlights associated with tooltips can be selected by the user and will be displayed in PiWeb Monitor.
+	 */
+	export class Highlight implements HighlightDescription {
+	    geometry: Geometry | undefined;
+	    tooltip: Tooltip | undefined;
+	    measurementValue: MeasurementValue | undefined;
+	    activeBorderBrush: Brush | undefined;
+	    activeBackgroundBrush: Brush | undefined;
+	    constructor(tooltip?: Tooltip | undefined, measurementValue?: MeasurementValue | undefined, geometry?: Geometry | undefined, activeBorderBrush?: Brush | undefined, activeBackgroundBrush?: Brush);
+	    /**
+	     * Returns the highlight that is defined by the specified description.
+	     * @param description A highlight description.
+	     */
+	    static create(description?: HighlightDescription): Highlight;
+	    /**
+	     * Returns a standard highlight which contains a standard tooltip wihtout geometry for a measurment value.
+	     * @param value A measurement value.
+	     */
+	    static createFromMeasurementValue(value: MeasurementValue): Highlight;
+	    /**
+	     * Returns a standard highlight which contains a standard tooltip wihtout geometry for a characteristic.
+	     * @param item A characteristic.
+	     */
+	    static createFromInspectionPlanItem(item: InspectionPlanItem): Highlight;
+	    /**
+	     * Returns a standard highlight which contains a standard tooltip wihtout geometry for a characteristic.
+	     * @param item A characteristic.
+	     */
+	    static createFromText(content: string): Highlight;
+	    /**
+	     * @private
+	     */
+	    serialize(writer: BufferWriter): void;
 	}
 }
 
@@ -5266,341 +5481,6 @@ declare module "piweb/resources/path" {
 	 * The platform-specific file delimiter. ';' or ':'.
 	 */
 	export const delimiter: string;
-}
-
-
-declare module "piweb/tooltips" {
-	/**
-	 * @module tooltips
-	 * @preferred
-	 *
-	 * ## Introduction
-	 *
-	 * PiWeb Monitor has a feature we call `info mode`. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
-	 * is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
-	 * displayed at this point or region of the plot:
-	 *
-	 * <img src="media://infoMode.png">
-	 *
-	 * The custom plot API allows you to define your own tooltips, using the `onCreateTooltips` callback method of the tooltip provider:
-	 *
-	 * ```TypeScript
-	 * import * as piweb from 'piweb';
-	 * import tooltips = piweb.tooltips;
-	 *
-	 * piweb.events.on("render", render);
-	 *
-	 * function render(context: piweb.drawing.DrawingContext) {
-	 *
-	 * 	piweb.tooltips.activeTooltips.clear();
-	 *
-	 * 	piweb.tooltips.activeTooltips.add(
-	 * 		new piweb.tooltips.Tooltip("myTooltipText"),
-	 * 		new piweb.tooltips.PointMarker(new piweb.drawing.Point(0, 0), undefined, undefined),
-	 * 		undefined );
-	 *
-	 * 	...
-	 * }
-	 * ```
-	 *
-	 * Please note that you can define the tooltips at any place you want.
-	 *
-	 */ /** */
-	/**
-	 * @private
-	 */
-	export { activeTooltips, Tooltip, knownClassNames } from "piweb/tooltips/tooltip_collection";
-	/**
-	 * @private
-	 */
-	export { Marker, PointMarker, GeometryMarker } from "piweb/tooltips/markers";
-}
-
-
-declare module "piweb/tooltips/markers" {
-	/**
-	 * @module tooltips
-	 */
-	/** */
-	import { Brush, Geometry, GeometryDescription, Point, PointDescription, BrushDescription } from 'piweb/drawing';
-	import { BufferWriter } from 'internal/buffer_writer';
-	import { Serializable } from 'internal/serializable';
-	/**
-	 * Can be used to initialize an instance of the [[GeometryMarker]] class.
-	 */
-	export interface GeometryMarkerContent {
-	    readonly geometry?: GeometryDescription;
-	    readonly highlightFillBrush?: BrushDescription | undefined;
-	    readonly highlightBorderBrush?: BrushDescription | undefined;
-	}
-	/**
-	 * Can be used to initialize an instance of the [[PointMarker]] class.
-	 */
-	export interface PointMarkerContent {
-	    readonly point?: PointDescription;
-	    readonly highlightFillBrush?: BrushDescription | undefined;
-	    readonly highlightBorderBrush?: BrushDescription | undefined;
-	}
-	/**
-	 * Can be used to initialize an instance of the [[Marker]] class.
-	 */
-	export interface GeometryMarkerDescription extends GeometryMarkerContent {
-	    readonly type: "geometry";
-	}
-	/**
-	 * Can be used to initialize an instance of the [[Marker]] class.
-	 */
-	export interface PointMarkerDescription extends PointMarkerContent {
-	    readonly type: "point";
-	}
-	/**
-	 * Can be used to initialize an instance of the [[Marker]] class.
-	 */
-	export type MarkerDescription = GeometryMarkerDescription | PointMarkerDescription;
-	/**
-	 * Describes a point or geometry that serves as the area of a tooltip.
-	 * It becomes visible when hovering it with the mouse while the info mode is active in PiWeb Monitor.
-	 */
-	export abstract class Marker implements Serializable {
-	    /**
-	     * Gets or sets the brush with which the area is filled.
-	     */
-	    readonly highlightFillBrush: Brush | undefined;
-	    /**
-	     * Gets or sets the pen with which the area is outlined.
-	     */
-	    readonly highlightBorderBrush: Brush | undefined;
-	    /**
-	     * @protected
-	     */
-	    constructor(highlightFill: Brush | undefined, highlightBorder: Brush | undefined);
-	    /**
-	     * Returns a tooltip marker from the specified point. Point tooltips scale with the zoom level in PiWeb Monitor.
-	     * @param point The point.
-	     */
-	    static fromPoint(point?: PointDescription): PointMarker;
-	    /**
-	     * Returns a tooltip marker from the specified geometry.
-	     * @param geometry The geometry.
-	     */
-	    static fromGeometry(geometry?: GeometryDescription): GeometryMarker;
-	    /**
-	     * Returns the tooltip marker that is defined by the specified description.
-	     * @param description A tooltip marker description.
-	     */
-	    static create(description?: MarkerDescription): PointMarker | GeometryMarker;
-	    /**
-	     * @private
-	     */
-	    abstract serialize(target: BufferWriter): void;
-	}
-	/**
-	 * Describes a tooltip marker with a geometry as its tooltip area.
-	 */
-	export class GeometryMarker extends Marker implements GeometryMarkerDescription {
-	    /**
-	     * Gets or sets the geometry that defines the tooltip area.
-	     */
-	    readonly geometry: Geometry;
-	    /**
-	     * Initializes a new instance of the [[GeometryMarker]] class.
-	     * @param geometry The geometry that defines the tooltip area.
-	     * @param highlightFill The brush with which the area is filled.
-	     * @param highlightBorder The pen with which the area is outlined.
-	     */
-	    constructor(geometry: Geometry, highlightFill: Brush | undefined, highlightBorder: Brush | undefined);
-	    /**
-	     * Returns the geometry tooltip marker that is defined by the specified description.
-	     * @param description A geometry tooltip marker description.
-	     */
-	    static createGeometryMarker(description?: GeometryMarkerDescription): GeometryMarker;
-	    /**
-	     * @private
-	     */
-	    readonly type: "geometry";
-	    /**
-	     * @private
-	     */
-	    serialize(target: BufferWriter): void;
-	}
-	/**
-	 * Describes a tooltip marker with a point as its tooltip position.
-	 */
-	export class PointMarker extends Marker implements PointMarkerDescription {
-	    /**
-	     * Gets or sets the position of the tooltip.
-	     */
-	    readonly point: Point;
-	    /**
-	     * Initializes a new instance of the [[PointMarker]] class.
-	     * @param point The position of the tooltip.
-	     * @param fill The brush with which the area is filled.
-	     * @param border The pen with which the area is outlined.
-	     */
-	    constructor(point: Point, fill: Brush | undefined, border: Brush | undefined);
-	    /**
-	     * Returns the point tooltip marker that is defined by the specified description.
-	     * @param description A point tooltip marker description.
-	     */
-	    static createPointMarker(description?: PointMarkerDescription): PointMarker;
-	    /**
-	     * @private
-	     */
-	    readonly type: "point";
-	    /**
-	     * @private
-	     */
-	    serialize(target: BufferWriter): void;
-	}
-}
-
-
-declare module "piweb/tooltips/tooltip_collection" {
-	import { BufferWriter } from 'internal/buffer_writer';
-	import { Serializable } from 'internal/serializable';
-	import { InspectionPlanItem } from 'piweb/data/inspection';
-	import { Attribute } from 'piweb/data/attributes';
-	import { MeasurementValue } from 'piweb/data/measurements';
-	import { Marker } from 'piweb/tooltips/markers';
-	/**
-	 * Describes a set of tooltips.
-	 */
-	export class TooltipCollection implements Serializable {
-	    private _entries;
-	    /**
-	     * @private
-	     */
-	    constructor();
-	    /**
-	     * Gets the total number of items in this collection.
-	     */
-	    readonly length: number;
-	    /**
-	     * Adds a new item to the collection.
-	     * @param tooltip The content of the tooltip.
-	     * @param marker The geometry or position of the tooltip.
-	     * @param markedValue The measurement value that is associated to the tooltip. By specifying a value, PiWeb can connect the plot to other elements with lines.
-	     */
-	    add(tooltip: Tooltip, marker: Marker, markedValue?: MeasurementValue | undefined): void;
-	    /**
-	     * Removes all items from the list.
-	     */
-	    clear(): void;
-	    /**
-	     * @private
-	     */
-	    serialize(writer: BufferWriter): void;
-	}
-	/**
-	 * Represents the content of a tooltip.
-	 */
-	export class Tooltip implements Serializable {
-	    /**
-	     * @private
-	     */
-	    private readonly _contentLines;
-	    /**
-	     * Initializes a new instance of the [[Tooltip]] class.
-	     * @param content The primary content of the tooltip. When specifying a measurement value or an inspection plan item, PiWeb will generate a generic tooltip for the entity.
-	     */
-	    constructor(content?: string | MeasurementValue | InspectionPlanItem);
-	    /**
-	     * Adds a new line to the tooltip.
-	     * @param text The content of the tooltip line.
-	     */
-	    addText(text: string): void;
-	    /**
-	     * Adds a new collapsable line to the tooltip.
-	     * @param text The content of the tooltip line.
-	     * @param className The group to which the line belongs.
-	     */
-	    addCollapsableText(text: string, className: string): void;
-	    /**
-	     * Adds a fallback text line to the tooltip.
-	     * @param text Content of the fallback text line.
-	     */
-	    addFallbackText(text: string): void;
-	    /**
-	     * Generates a generic tooltip for the specified measurement value and adds the lines to the current tooltip.
-	     * @param value The measurement value.
-	     */
-	    addMeasurementValueInformations(value: MeasurementValue): void;
-	    /**
-	     * Generates a generic tooltip for the specified inspection plan item and adds the lines to the current tooltip.
-	     * @param value The inspection plan item.
-	     */
-	    addCharacteristicInformations(characteristic: InspectionPlanItem): void;
-	    /**
-	     * @private
-	     */
-	    serialize(target: BufferWriter): void;
-	}
-	export type TooltipItemType = "collapsable" | "fixed" | "fallback";
-	/**
-	 * The collection of tooltips that the custom plot provides. It's read by PiWeb whenever the info mode becomes active, e.g. when pressing the CTRL key.
-	 */
-	export const activeTooltips: TooltipCollection;
-	/**
-	 * @private
-	 */
-	export namespace knownClassNames {
-	    /**
-	     * Class of tooltip lines which represent quick navigation
-	     **/
-	    const navigation = "NAVIGATELINE";
-	    /**
-	     * Class of measurement tooltip lines
-	     **/
-	    const measurement = "Measurement";
-	    /**
-	     * Class of measurement value count tooltip lines
-	     **/
-	    const measurementValuesCount = "MeasurementValuesCount";
-	    /**
-	     * Class of characterisitc tooltip lines
-	     **/
-	    const characteristic = "Characteristic";
-	    /**
-	     * Class of audit function tooltip lines
-	     **/
-	    const auditFunction = "AuditFunction";
-	    /**
-	     * Class of tolerance limit tooltip lines
-	     **/
-	    const toleranceLimits = "Tolerance";
-	    /**
-	     * Class of warning limit tooltip lines
-	     **/
-	    const warningLimits = "Warning";
-	    /**
-	     * Class of control limit tooltip lines
-	     **/
-	    const controlLimits = "ControlLimits";
-	    /**
-	     * Class of scrap limit tooltip lines
-	     **/
-	    const scrapLimits = "ScrapLimits";
-	    /**
-	     * Class of actual value tooltip lines
-	     **/
-	    const actualValue = "ActualValue";
-	    /**
-	     * Class of nominal value tooltip lines
-	     **/
-	    const nominalValue = "NominalValue";
-	    /**
-	     * Class of tolerance Usage tooltip lines
-	     **/
-	    const toleranceUsage = "ToleranceUsage";
-	    /**
-	     * Class of CAD position tooltip lines
-	     **/
-	    const cadPosition = "CadPosition";
-	    /**
-	     * Returns the class of any given attribute.
-	     **/
-	    function getAttributeClassName(attribute: Attribute | number): string;
-	}
 }
 
 
