@@ -78,14 +78,14 @@
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 
 piweb.events.on(<span class="hljs-string">"load"</span>, load);
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">load</span>(<span class="hljs-params"> parameter: <span class="hljs-built_in">any</span> </span>)
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">load</span>(<span class="hljs-params"> </span>)
 </span>{
     <span class="hljs-comment">//1. The plot is loaded, e.g. when adding the element to the report.</span>
     piweb.logger.debug(<span class="hljs-string">`'load' called`</span>)
 }
 
 piweb.events.on(<span class="hljs-string">"dataChanged"</span>, dataChanged);
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataChanged</span>(<span class="hljs-params"> parameter: <span class="hljs-built_in">any</span> </span>)
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataChanged</span>(<span class="hljs-params"> </span>)
 </span>{
     <span class="hljs-comment">//2. The data of the databinding has been fetched.</span>
     piweb.logger.debug(<span class="hljs-string">`'dataChanged' called`</span>)
@@ -99,7 +99,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 }
 
 piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindingChanged);
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataBindingChanged</span>(<span class="hljs-params"> parameter: <span class="hljs-built_in">any</span> </span>)
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataBindingChanged</span>(<span class="hljs-params"> </span>)
 </span>{
     <span class="hljs-comment">//4. The databinding was modified. Subsequently, 'dataChanged' and 'render' will be called.</span>
     piweb.logger.debug(<span class="hljs-string">`'dataBindingChanged' called`</span>)
