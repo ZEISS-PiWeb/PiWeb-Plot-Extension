@@ -72,6 +72,39 @@
 							<h2 id="introduction">Introduction</h2>
 							<p>The <code>piweb.events</code> module encapsulates the events with the associated callbacks that are triggered by the PiWeb host application. The callback functions serve as
 							entry points for almost everything that happens in a custom plot, like drawing and data processing.</p>
+							<p><br/></p>
+							<pre><code class="lang-TypeScript"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+
+piweb.events.on(<span class="hljs-string">"load"</span>, load);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">load</span>(<span class="hljs-params"> parameter: <span class="hljs-built_in">any</span> </span>)
+</span>{
+    <span class="hljs-comment">//1. The plot is loaded, e.g. when adding the element to the report.</span>
+    piweb.logger.debug(<span class="hljs-string">`'load' called`</span>)
+}
+
+piweb.events.on(<span class="hljs-string">"dataChanged"</span>, dataChanged);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataChanged</span>(<span class="hljs-params"> parameter: <span class="hljs-built_in">any</span> </span>)
+</span>{
+    <span class="hljs-comment">//2. The data of the databinding has been fetched.</span>
+    piweb.logger.debug(<span class="hljs-string">`'dataChanged' called`</span>)
+}
+
+piweb.events.on(<span class="hljs-string">"render"</span>, render);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">render</span>(<span class="hljs-params"> context: piweb.drawing.DrawingContext </span>)
+</span>{
+    <span class="hljs-comment">//3. The plot is rendered. This happens whenever anything on the page changes.</span>
+    piweb.logger.debug(<span class="hljs-string">`'render' called`</span>)
+}
+
+piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindingChanged);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataBindingChanged</span>(<span class="hljs-params"> parameter: <span class="hljs-built_in">any</span> </span>)
+</span>{
+    <span class="hljs-comment">//4. The databinding was modified. Subsequently, 'dataChanged' and 'render' will be called.</span>
+    piweb.logger.debug(<span class="hljs-string">`'dataBindingChanged' called`</span>)
+}
+</code></pre>
 						</dd>
 						<dt>see</dt>
 						<dd><p><a href="drawing.html">drawing</a></p>
@@ -122,7 +155,7 @@
 					<div class="tsd-signature tsd-kind-icon">Pi<wbr>Web<wbr>Events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"load"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"render"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"dataBindingChanged"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"dataChanged"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"prepareRender"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in events.ts:39</li>
+							<li>Defined in events.ts:75</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -140,7 +173,7 @@
 					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <a href="../classes/events.eventcontext.html" class="tsd-signature-type">EventContext</a><span class="tsd-signature-symbol"> =&nbsp;new EventContext()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in events.ts:34</li>
+							<li>Defined in events.ts:70</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,7 +192,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in events.ts:81</li>
+									<li>Defined in events.ts:117</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -184,7 +217,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in events.ts:46</li>
+									<li>Defined in events.ts:82</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
