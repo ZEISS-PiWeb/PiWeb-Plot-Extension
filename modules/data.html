@@ -125,6 +125,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/data.iattributeitem.html" class="tsd-kind-icon">IAttribute<wbr>Item</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/data.parsedpath.html" class="tsd-kind-icon">Parsed<wbr>Path</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -158,7 +159,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="data.html#createlimitcollection" class="tsd-kind-icon">create<wbr>Limit<wbr>Collection</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="data.html#createlimitcontext" class="tsd-kind-icon">create<wbr>Limit<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#createrawdataidentity" class="tsd-kind-icon">create<wbr>Raw<wbr>Data<wbr>Identity</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="data.html#escapepathelement" class="tsd-kind-icon">escape<wbr>Path<wbr>Element</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="data.html#escapeentityname" class="tsd-kind-icon">escape<wbr>Entity<wbr>Name</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#getcatalogs" class="tsd-kind-icon">get<wbr>Catalogs</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="data.html#getconfiguration" class="tsd-kind-icon">get<wbr>Configuration</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="data.html#getinspectionplancollection" class="tsd-kind-icon">get<wbr>Inspection<wbr>Plan<wbr>Collection</a></li>
@@ -170,6 +171,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private"><a href="data.html#mapattributetype" class="tsd-kind-icon">map<wbr>Attribute<wbr>Type</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#mapentitytype" class="tsd-kind-icon">map<wbr>Entity<wbr>Type</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#mapinspectionplanitemtype" class="tsd-kind-icon">map<wbr>Inspection<wbr>Plan<wbr>Item<wbr>Type</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="data.html#parse" class="tsd-kind-icon">parse</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#readattribute" class="tsd-kind-icon">read<wbr>Attribute</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#readattributedefinition" class="tsd-kind-icon">read<wbr>Attribute<wbr>Definition</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported"><a href="data.html#readattributedefinitions" class="tsd-kind-icon">read<wbr>Attribute<wbr>Definitions</a></li>
@@ -276,7 +278,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;DataImageProvider&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/measurements.ts:20</li>
+							<li>Defined in data/inspection.ts:24</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -284,18 +286,6 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 					<a name="provider-1" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> provider</h3>
-					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;RawDataProvider&#x27;)</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in data/raw_data.ts:21</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
-					<a name="provider-2" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> provider</h3>
 					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;DataImageProvider&#x27;)</span></div>
 					<aside class="tsd-sources">
@@ -307,12 +297,24 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+					<a name="provider-2" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> provider</h3>
+					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;RawDataProvider&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/raw_data.ts:21</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 					<a name="provider-3" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> provider</h3>
 					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;DataImageProvider&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:24</li>
+							<li>Defined in data/measurements.ts:20</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -559,22 +561,30 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="escapepathelement" class="tsd-anchor"></a>
-					<h3>escape<wbr>Path<wbr>Element</h3>
+					<a name="escapeentityname" class="tsd-anchor"></a>
+					<h3>escape<wbr>Entity<wbr>Name</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">escape<wbr>Path<wbr>Element<span class="tsd-signature-symbol">(</span>pathElement<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">escape<wbr>Entity<wbr>Name<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/path.ts:27</li>
+									<li>Defined in data/path.ts:68</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Escapes inspection plan entity names which would be invalid as a path element.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>pathElement: <span class="tsd-signature-type">string</span></h5>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>inspection plan entity name to escape.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -846,6 +856,37 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="data.html#inspectionplanitemtype" class="tsd-signature-type">InspectionPlanItemType</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="parse" class="tsd-anchor"></a>
+					<h3>parse</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>pathString<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/data.parsedpath.html" class="tsd-signature-type">ParsedPath</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in data/path.ts:51</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns an object from a path string - the opposite of format().</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>pathString: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>path to evaluate.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/data.parsedpath.html" class="tsd-signature-type">ParsedPath</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -1176,7 +1217,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/path.ts:41</li>
+									<li>Defined in data/path.ts:82</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1205,7 +1246,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/path.ts:18</li>
+									<li>Defined in data/path.ts:37</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1376,6 +1417,9 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/data.iattributeitem.html" class="tsd-kind-icon">IAttribute<wbr>Item</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/data.parsedpath.html" class="tsd-kind-icon">Parsed<wbr>Path</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="data.html#attributetype" class="tsd-kind-icon">Attribute<wbr>Type</a>
 					</li>
@@ -1431,7 +1475,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 						<a href="data.html#createrawdataidentity" class="tsd-kind-icon">create<wbr>Raw<wbr>Data<wbr>Identity</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="data.html#escapepathelement" class="tsd-kind-icon">escape<wbr>Path<wbr>Element</a>
+						<a href="data.html#escapeentityname" class="tsd-kind-icon">escape<wbr>Entity<wbr>Name</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="data.html#getcatalogs" class="tsd-kind-icon">get<wbr>Catalogs</a>
@@ -1465,6 +1509,9 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="data.html#mapinspectionplanitemtype" class="tsd-kind-icon">map<wbr>Inspection<wbr>Plan<wbr>Item<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="data.html#parse" class="tsd-kind-icon">parse</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="data.html#readattribute" class="tsd-kind-icon">read<wbr>Attribute</a>
