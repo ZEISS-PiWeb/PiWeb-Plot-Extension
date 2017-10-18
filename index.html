@@ -81,10 +81,10 @@
 				<p>The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter <a href="modules/package.html">package</a>. For now, use the minimum setup shown below.</p>
 				<pre><code class="lang-json">{
     <span class="hljs-attr">"name"</span>: <span class="hljs-string">"myextension"</span>,
-    <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.2.0"</span>,
+    <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.1.0"</span>,
     <span class="hljs-attr">"main"</span>: <span class="hljs-string">"lib"</span>,
     <span class="hljs-attr">"engines"</span>: {
-        <span class="hljs-attr">"piweb"</span>: <span class="hljs-string">"0.2.x"</span>
+        <span class="hljs-attr">"piweb"</span>: <span class="hljs-string">"^1.0"</span>
     },
     <span class="hljs-attr">"piweb_actions"</span>: {
         <span class="hljs-attr">"load"</span>: <span class="hljs-string">"compile_typescript"</span>
