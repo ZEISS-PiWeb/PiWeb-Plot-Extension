@@ -147,6 +147,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="environment.html#getangleunit" class="tsd-kind-icon">get<wbr>Angle<wbr>Unit</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="environment.html#getdecimalplaces" class="tsd-kind-icon">get<wbr>Decimal<wbr>Places</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="environment.html#getlengthunit" class="tsd-kind-icon">get<wbr>Length<wbr>Unit</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="environment.html#getlimitsconfiguration" class="tsd-kind-icon">get<wbr>Limits<wbr>Configuration</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="environment.html#getlocation" class="tsd-kind-icon">get<wbr>Location</a></li>
@@ -190,7 +191,7 @@
 					<div class="tsd-signature tsd-kind-icon">Limit<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"tolerance"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"warning"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"control"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"scrap"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in environment.ts:447</li>
+							<li>Defined in environment.ts:462</li>
 						</ul>
 					</aside>
 				</section>
@@ -200,7 +201,7 @@
 					<div class="tsd-signature tsd-kind-icon">Limit<wbr>Usage<wbr>Reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"nominal"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"middleOfTolerance"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in environment.ts:419</li>
+							<li>Defined in environment.ts:434</li>
 						</ul>
 					</aside>
 				</section>
@@ -230,7 +231,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Gets the semantic version of the custom plot API that is supported by the application the custom plot is hosted by.</p>
+							<p>Gets the semantic version of the custom plot API that is used to host the plot.</p>
 						</div>
 					</div>
 				</section>
@@ -240,7 +241,7 @@
 					<div class="tsd-signature tsd-kind-icon">cached<wbr>Limits<wbr>Configuration<span class="tsd-signature-symbol">:</span> <a href="../classes/environment.limitsconfiguration.html" class="tsd-signature-type">LimitsConfiguration</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in environment.ts:546</li>
+							<li>Defined in environment.ts:561</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -252,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">cached<wbr>Limits<wbr>Configuration<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in environment.ts:551</li>
+							<li>Defined in environment.ts:566</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -269,7 +270,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Gets the name of the client that is hosting the custom plot.</p>
+							<p>Gets the name of the hosting PiWeb client.</p>
 						</div>
 					</div>
 				</section>
@@ -284,7 +285,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Gets the piweb version the custom plot is hosted by.</p>
+							<p>Gets the version of the hosting PiWeb client.</p>
 						</div>
 					</div>
 				</section>
@@ -335,8 +336,8 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>In case you specified multiple toolbox elements in the <code>package.json</code> file, this is the interface to find out, which element the user picked.
-							The returned value is equal to the property name you used to identify the toolbox entry.</p>
+							<p>If the extensions defined multiple toolbox entries in the <code>package.json</code> manifest file, this property can be used to find out which entry the user picked.
+							The returned value is the property name used as toolbox entry id in the manifest.</p>
 						</div>
 					</div>
 				</section>
@@ -353,10 +354,38 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in environment.ts:414</li>
+									<li>Defined in environment.ts:420</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns prefered display unit of angles. This can be configured in the settings menu of Piweb Designer and PiWeb Monitor.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="environment.html#angleunit" class="tsd-signature-type">AngleUnit</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="getdecimalplaces" class="tsd-anchor"></a>
+					<h3>get<wbr>Decimal<wbr>Places</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Decimal<wbr>Places<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in environment.ts:429</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns prefered number of decimal places of displayed values. This can be configured in the settings menu of Piweb Designer and PiWeb Monitor.
+									Use this only as a fallback value in case no prefered number of decimal places is configured for the displayed characteristic by attribute K2022.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -370,9 +399,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in environment.ts:409</li>
+									<li>Defined in environment.ts:412</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns prefered display unit of length. This can be configured in the settings menu of Piweb Designer and PiWeb Monitor.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="environment.html#lengthunit" class="tsd-signature-type">LengthUnit</a></h4>
 						</li>
 					</ul>
@@ -387,7 +421,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in environment.ts:554</li>
+									<li>Defined in environment.ts:569</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/environment.limitsconfiguration.html" class="tsd-signature-type">LimitsConfiguration</a></h4>
@@ -521,7 +555,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in environment.ts:462</li>
+									<li>Defined in environment.ts:477</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -546,7 +580,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in environment.ts:432</li>
+									<li>Defined in environment.ts:447</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -571,7 +605,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in environment.ts:585</li>
+									<li>Defined in environment.ts:600</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -732,6 +766,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="environment.html#getangleunit" class="tsd-kind-icon">get<wbr>Angle<wbr>Unit</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="environment.html#getdecimalplaces" class="tsd-kind-icon">get<wbr>Decimal<wbr>Places</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="environment.html#getlengthunit" class="tsd-kind-icon">get<wbr>Length<wbr>Unit</a>
