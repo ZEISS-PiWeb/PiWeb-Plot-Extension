@@ -66,15 +66,15 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>preferred</dt>
-						<dd><h2 id="introduction">Introduction</h2>
-							<p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
-								is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
-							displayed at this point or region of the plot:</p>
-							<p><img src="../media/infomode.png"></p>
-							<p>The custom plot API allows you add your own tooltips to a plot:</p>
-							<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
+					<div class="lead">
+						<h2 id="introduction">Introduction</h2>
+					</div>
+					<p>PiWeb Monitor has a feature we call <code>info mode</code>. While the info mode is active, or while the CTRL key is pressed, the point or geometry that is next to the mouse cursor
+						is highlighted and can be clicked to show a tooltip for the point or geometry. Tooltips usually contain information about the measurement or characteristic that is
+					displayed at this point or region of the plot:</p>
+					<p><img src="../media/infomode.png"></p>
+					<p>The custom plot API allows you add your own tooltips to a plot:</p>
+					<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> tooltips = piweb.tooltips;
 
 piweb.events.on(<span class="hljs-string">"render"</span>, render);
@@ -85,8 +85,6 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
     ...
 }
 </code></pre>
-						</dd>
-					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -140,7 +138,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 					<div class="tsd-signature tsd-kind-icon">Tooltip<wbr>Item<span class="tsd-signature-symbol">:</span> <a href="../classes/tooltips.texttooltipitem.html" class="tsd-signature-type">TextTooltipItem</a><span class="tsd-signature-symbol"> | </span><a href="../classes/tooltips.characteristictooltipitem.html" class="tsd-signature-type">CharacteristicTooltipItem</a><span class="tsd-signature-symbol"> | </span><a href="../classes/tooltips.measurementvaluetooltipitem.html" class="tsd-signature-type">MeasurementValueTooltipItem</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in tooltips.ts:152</li>
+							<li>Defined in tooltips.ts:151</li>
 						</ul>
 					</aside>
 				</section>
@@ -150,7 +148,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 					<div class="tsd-signature tsd-kind-icon">Tooltip<wbr>Item<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"collapsable"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"fixed"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"fallback"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in tooltips.ts:154</li>
+							<li>Defined in tooltips.ts:153</li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +165,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in tooltips.ts:169</li>
+									<li>Defined in tooltips.ts:168</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -197,7 +195,7 @@ piweb.events.on(<span class="hljs-string">"render"</span>, render);
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in tooltips.ts:43</li>
+									<li>Defined in tooltips.ts:42</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

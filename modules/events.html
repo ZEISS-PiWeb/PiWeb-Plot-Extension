@@ -66,14 +66,12 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>preferred</dt>
-						<dd><p><br/></p>
-							<h2 id="introduction">Introduction</h2>
-							<p>The <code>piweb.events</code> module encapsulates the events with the associated callbacks that are triggered by the PiWeb host application. The callback functions serve as
-							entry points for almost everything that happens in a custom plot, like drawing and data processing.</p>
-							<p><br/></p>
-							<pre><code class="lang-TypeScript"><span class="hljs-meta">'use strict'</span>;
+					<div class="lead">
+						<h2 id="introduction">Introduction</h2>
+					</div>
+					<p>The <code>piweb.events</code> module encapsulates the events with the associated callbacks that are triggered by the PiWeb host application. The callback functions serve as
+					entry points for almost everything that happens in a custom plot, like drawing and data processing.</p>
+					<pre><code class="lang-TypeScript"><span class="hljs-meta">'use strict'</span>;
 
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 
@@ -105,7 +103,7 @@ piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindi
     piweb.logger.debug(<span class="hljs-string">`'dataBindingChanged' called`</span>)
 }
 </code></pre>
-						</dd>
+					<dl class="tsd-comment-tags">
 						<dt>see</dt>
 						<dd><p><a href="drawing.html">drawing</a></p>
 						</dd>
@@ -155,7 +153,7 @@ piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindi
 					<div class="tsd-signature tsd-kind-icon">Pi<wbr>Web<wbr>Events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"load"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"render"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"dataBindingChanged"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"dataChanged"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"prepareRender"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in events.ts:75</li>
+							<li>Defined in events.ts:71</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -173,7 +171,7 @@ piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindi
 					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <a href="../classes/events.eventcontext.html" class="tsd-signature-type">EventContext</a><span class="tsd-signature-symbol"> =&nbsp;new EventContext()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in events.ts:70</li>
+							<li>Defined in events.ts:66</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -192,7 +190,7 @@ piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindi
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in events.ts:117</li>
+									<li>Defined in events.ts:113</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +215,7 @@ piweb.events.on(<span class="hljs-string">"dataBindingChanged"</span>, dataBindi
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in events.ts:82</li>
+									<li>Defined in events.ts:78</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

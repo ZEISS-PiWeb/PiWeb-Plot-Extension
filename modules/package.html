@@ -66,10 +66,10 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<h1 id="package-definition">Package Definition</h1>
+					<h2 id="package-definition">Package Definition</h2>
 					<p>In the quickstart we already created a very simple package definition in the file <strong>package.json</strong>. Although it&#39;s sufficient to get us started, there are a lot more settings to be discovered.</p>
 					<p><br/><a id="markdown-localization" name="localization"></a></p>
-					<h2 id="localization">Localization</h2>
+					<h3 id="localization">Localization</h3>
 					<p>Every text that appears in the user interface of PiWeb can be localized. Simply replace the plain text with a localization dictionary:</p>
 					<pre><code class="lang-json">{
     <span class="hljs-attr">"piweb_extension"</span>: {        
@@ -89,7 +89,7 @@
 </code></pre>
 					<p>As you can see, the localized version contains an entry for the invariant culture, which is also used as a fallback value in case the required culture is not translated. Later in this chapter, all localizable properties are marked as <code>localizable string</code> properties.</p>
 					<p><br/><a id="markdown-dictionaries" name="dictionaries"></a></p>
-					<h2 id="dictionaries">Dictionaries</h2>
+					<h3 id="dictionaries">Dictionaries</h3>
 					<p>Some properties are marked as <code>dictionary</code>, which means they are accepting an object with custom keys and a defined value. In the example below, the <code>items</code> property accepts a dictionary, and <code>myFirstItem</code> as well as <code>mySecondItem</code> are user defined entries in this dictionary.</p>
 					<pre><code class="lang-json">{
     <span class="hljs-attr">"items"</span>: {        
@@ -105,12 +105,12 @@
 }
 </code></pre>
 					<p><br/><a id="markdown-enumerations" name="enumerations"></a></p>
-					<h2 id="enumerations">Enumerations</h2>
+					<h3 id="enumerations">Enumerations</h3>
 					<p>The <code>enumeration</code> datatype indicates that only certain <strong>strings</strong> are accepted. The set of accepted strings is listed in the description of the property.</p>
 					<p><br/><a id="markdown-package-format" name="package-format"></a></p>
-					<h2 id="package-format">Package Format</h2>
+					<h3 id="package-format">Package Format</h3>
 					<p><br/><a id="markdown-structure" name="structure"></a></p>
-					<h3 id="structure">Structure</h3>
+					<h4 id="structure">Structure</h4>
 					<ul>
 						<li><a href="#package-structure-name">name <code>string</code></a></li>
 						<li><a href="#package-structure-version">version <code>string</code></a></li>
@@ -173,7 +173,7 @@
 						</li>
 					</ul>
 					<p><br/><a id="markdown-top-level-properties" name="top-level-properties"></a></p>
-					<h3 id="top-level-properties">Top Level Properties</h3>
+					<h4 id="top-level-properties">Top Level Properties</h4>
 					<p><br/><a id="package-structure-name" name="package-structure-name"></a>
 					<strong>name <code>string</code></strong></p>
 					<p>Custom string that is used to identify the package internally. Must be composed from lower case characters, digits and a set of special characters:
@@ -194,17 +194,17 @@
 					<strong>piweb_extension <code>object</code></strong></p>
 					<p>Defines the content of the extension. Please read the chapter &#39;<a href="#piweb-extensions">PiWeb extensions</a>&#39; for further information.</p>
 					<p><br/><a id="markdown-engines" name="engines"></a></p>
-					<h3 id="engines">Engines</h3>
+					<h4 id="engines">Engines</h4>
 					<p><br/><a id="package-structure-engines-piweb" name="package-structure-engines-piweb"></a>
 					<strong>piweb <code>string</code></strong></p>
 					<p>A valid semantic version string containing three numbers, separated by dots. It identifies the toolset that PiWeb will use to execute the extension. For more information about semantic versioning, visit the <a href="http://semver.org/">project website</a>.</p>
 					<p><br/><a id="markdown-piweb-actions" name="piweb-actions"></a></p>
-					<h3 id="piweb-actions">PiWeb Actions</h3>
+					<h4 id="piweb-actions">PiWeb Actions</h4>
 					<p><br/><a id="package-structure-actions-load" name="package-structure-actions-load"></a>
 					<strong>load <code>string</code></strong></p>
 					<p>A string describing actions, that will be executed when the package loads. Currently, the only recognized value is <code>compile_typescript</code>, which will trigger the typescript compiler.</p>
 					<p><br/><a id="markdown-piweb-extensions" name="piweb-extensions"></a></p>
-					<h3 id="piweb-extensions">PiWeb Extensions</h3>
+					<h4 id="piweb-extensions">PiWeb Extensions</h4>
 					<p><br/><a id="package-structure-extensions-type" name="package-structure-extensions-type"></a>
 					<strong>type <code>enumeration</code></strong></p>
 					<p>Identifies the extension type. Currently, the only accepted value is <code>plot</code>, which identifies a PiWeb plot extension.</p>
@@ -227,7 +227,7 @@
 					<strong>propertygrid <code>object</code></strong></p>
 					<p>Determines the properties of the plot that can be adjusted by the user in PiWeb Designer. Please read the chapter &#39;<a href="#propertygrid-properties">propertygrid properties</a>&#39; for further information.</p>
 					<p><br/><a id="markdown-toolbox-properties" name="toolbox-properties"></a></p>
-					<h3 id="toolbox-properties">Toolbox Properties</h3>
+					<h4 id="toolbox-properties">Toolbox Properties</h4>
 					<p><br/><a id="package-structure-extensions-toolbox-categories" name="package-structure-extensions-toolbox-categories"></a>
 					<strong>categories <code>dictionary</code></strong></p>
 					<p>Describes additional categories for the element toolbox in PiWeb Designer. Please read the chapter &#39;<a href="#toolbox-categories">toolbox categories</a>&#39; for further information.</p>
@@ -235,7 +235,7 @@
 					<strong>items <code>dictionary</code></strong></p>
 					<p>Describes the entries for the element toolbox in PiWeb Designer. Please read the chapter &#39;<a href="#toolbox-elements">toolbox elements</a>&#39; for further information.</p>
 					<p><br/><a id="markdown-toolbox-categories" name="toolbox-categories"></a></p>
-					<h3 id="toolbox-categories">Toolbox Categories</h3>
+					<h4 id="toolbox-categories">Toolbox Categories</h4>
 					<p><br/><a id="package-structure-extensions-toolbox-categories-name" name="package-structure-extensions-toolbox-categories-name"></a>
 					<strong>name <code>localizable string</code></strong></p>
 					<p>The name of the category that is displayed on top of it in PiWeb Designer.</p>
@@ -243,7 +243,7 @@
 					<strong>priority <code>number</code></strong></p>
 					<p>The priority determines where the category is placed relative to the existing categories. </p>
 					<p><br/><a id="markdown-toolbox-elements" name="toolbox-elements"></a></p>
-					<h3 id="toolbox-elements">Toolbox Elements</h3>
+					<h4 id="toolbox-elements">Toolbox Elements</h4>
 					<p><br/><a id="package-structure-extensions-toolbox-items-name" name="package-structure-extensions-toolbox-items-name"></a>
 					<strong>name <code>localizable string</code></strong></p>
 					<p>Sets the display name of the element in the PiWeb Designer toolbox.</p>
@@ -326,7 +326,7 @@
 					<strong>element_size <code>object</code></strong></p>
 					<p>Describes the initial size of the element when created on the report. Please read the chapter &#39;<a href="#element-size">element size</a>&#39; for further information.</p>
 					<p><br/><a id="markdown-element-size" name="element-size"></a></p>
-					<h3 id="element-size">Element Size</h3>
+					<h4 id="element-size">Element Size</h4>
 					<p><br/><a id="package-structure-extensions-toolbox-items-element_size-width" name="package-structure-extensions-toolbox-items-element_size-width"></a>
 					<strong>width <code>number</code></strong></p>
 					<p>The initial element width on the report in <strong>millimeters</strong>.</p>
@@ -334,7 +334,7 @@
 					<strong>height <code>number</code></strong>               </p>
 					<p>The initial element height on the report in <strong>millimeters</strong>.</p>
 					<p><br/><a id="markdown-propertygrid-properties" name="propertygrid-properties"></a></p>
-					<h3 id="propertygrid-properties">Propertygrid Properties</h3>
+					<h4 id="propertygrid-properties">Propertygrid Properties</h4>
 					<p><br/><a id="package-structure-extensions-propertygrid-categories" name="package-structure-extensions-propertygrid-categories"></a>
 					<strong>categories <code>dictionary</code></strong></p>
 					<p>Describes the categories of the PiWeb Designer that are used by the custom plot. Please read the chapter &#39;<a href="#propertygrid-categories">propertygrid categories</a>&#39; for further information.</p>
@@ -342,7 +342,7 @@
 					<strong>entries <code>dictionary</code></strong></p>
 					<p>Describes the additional property grid entries of the plot. The defined property grid entries are added to a set of default properties that every element has. Please read the chapter &#39;<a href="#propertygrid-entries">propertygrid entries</a>&#39; for further information.</p>
 					<p><br/><a id="markdown-propertygrid-categories" name="propertygrid-categories"></a></p>
-					<h3 id="propertygrid-categories">Propertygrid Categories</h3>
+					<h4 id="propertygrid-categories">Propertygrid Categories</h4>
 					<p><br/><a id="package-structure-extensions-propertygrid-categories-name" name="package-structure-extensions-propertygrid-categories-name"></a>
 					<strong>name <code>localizable string</code></strong></p>
 					<p>The name of the category that is displayed in the PiWeb Designer property grid.</p>
@@ -350,7 +350,7 @@
 					<strong>priority <code>number</code></strong></p>
 					<p>The priority determines where the category is placed relative to the other categories. </p>
 					<p><br/><a id="markdown-propertygrid-entries" name="propertygrid-entries"></a></p>
-					<h3 id="propertygrid-entries">Propertygrid Entries</h3>
+					<h4 id="propertygrid-entries">Propertygrid Entries</h4>
 					<p><br/><a id="package-structure-extensions-propertygrid-entries-name" name="package-structure-extensions-propertygrid-entries-name"></a>
 					<strong>name <code>localizable string</code></strong></p>
 					<p>The name that will be displayed in the property tab of PiWeb Designer.</p>
@@ -529,7 +529,7 @@
 					<strong>options <code>dictionary</code></strong></p>
 					<p>Determines the possible values of a property with type <code>enum</code>. The plot will get the key of the selected entry as value for the property. Please read the chapter &#39;<a href="#option-properties">option properties</a>&#39; for further information.</p>
 					<p><br/><a id="markdown-option-properties" name="option-properties"></a></p>
-					<h3 id="option-properties">Option Properties</h3>
+					<h4 id="option-properties">Option Properties</h4>
 					<p><br/><a id="package-structure-extensions-propertygrid-entries-options-name" name="package-structure-extensions-propertygrid-entries-options-name"></a>
 					<strong>name <code>localizable string</code></strong></p>
 					<p>The name that is displayed in the dropdown.</p>
