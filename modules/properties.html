@@ -73,25 +73,41 @@
 					<p>Definition of a property in the <code>package.json</code> file:</p>
 					<pre><code>{
     <span class="hljs-string">"name"</span>: <span class="hljs-string">"myplot"</span>,
-    ...
+     ...
     <span class="hljs-string">"piweb_extension"</span>: {
-        ...
+         ...
         <span class="hljs-string">"propertygrid"</span>: {
+            <span class="hljs-string">"categories"</span>: {
+                <span class="hljs-string">"general"</span>: {
+                    <span class="hljs-string">"name"</span>: <span class="hljs-string">"General"</span>,
+                    <span class="hljs-string">"priority"</span>: <span class="hljs-number">0</span>
+                }
+            },
             <span class="hljs-string">"entries"</span>: {
                 <span class="hljs-string">"myproperty"</span>: {
-                    <span class="hljs-string">"name"</span>: <span class="hljs-string">"My Property"</span>,
-                    <span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span>
+                    <span class="hljs-string">"name"</span>: <span class="hljs-string">"Do it right"</span>,
+                    <span class="hljs-string">"description"</span>: <span class="hljs-string">"Determines whether to do it right"</span>,
+                    <span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span>,
+                    <span class="hljs-string">"default_value"</span>: <span class="hljs-literal">false</span>,
+                    <span class="hljs-string">"category"</span>: <span class="hljs-string">"general"</span>
                 }
-            }
+         }
         }
     }
 }
-</code></pre><p>Access the property in your script:</p>
+</code></pre><p>For a complete reference of the package format, including the definition of properties, please read the chapter &#39;<a href="package.html#package-structure-extensions-propertygrid">package definition</a>&#39;.</p>
+					<hr>
+					<p>Access the property in your script:</p>
 					<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> properties = piweb.properties;
 
 properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 </code></pre>
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p><a href="package.html#package-structure-extensions-propertygrid">package definition</a></p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -130,7 +146,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 					<div class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.binding(&#x27;PropertiesProvider&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in properties.ts:44</li>
+							<li>Defined in properties.ts:60</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -149,7 +165,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:50</li>
+									<li>Defined in properties.ts:66</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -180,7 +196,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:104</li>
+									<li>Defined in properties.ts:120</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -211,7 +227,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:82</li>
+									<li>Defined in properties.ts:98</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -242,7 +258,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:90</li>
+									<li>Defined in properties.ts:106</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -273,7 +289,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:74</li>
+									<li>Defined in properties.ts:90</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -304,7 +320,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:128</li>
+									<li>Defined in properties.ts:144</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -335,7 +351,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:120</li>
+									<li>Defined in properties.ts:136</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -366,7 +382,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:66</li>
+									<li>Defined in properties.ts:82</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -397,7 +413,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:112</li>
+									<li>Defined in properties.ts:128</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -428,7 +444,7 @@ properties.getBooleanProperty(<span class="hljs-string">'myPropertyName'</span>)
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in properties.ts:58</li>
+									<li>Defined in properties.ts:74</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
