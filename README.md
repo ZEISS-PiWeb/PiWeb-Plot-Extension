@@ -29,10 +29,10 @@ The package configuration contains static parameters of your extension, such as 
 ```json
 {
     "name": "myextension",
-    "version": "0.2.0",
+    "version": "1.0.0",
     "main": "lib",
     "engines": {
-        "piweb": "0.2.x"
+        "piweb": "1.0.x"
     },
     "piweb_actions": {
         "load": "compile_typescript"
