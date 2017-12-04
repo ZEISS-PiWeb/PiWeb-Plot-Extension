@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>data | PiWeb Customplot API Reference</title>
+	<title>data | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">PiWeb Customplot API Reference</a>
+					<a href="../index.html" class="title">PiWeb Plot Extension API Reference</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -67,7 +67,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<h2 id="introduction">Introduction</h2>
-					<p>The <code>piweb.data</code> interface exposes methods to retrieve the inspection plan items, measurements, values and raw data that is bound to the custom plot element. Be aware that <strong>the data can change</strong>. Whenever this happens, the custom plot engine will emit the <code>dataChanged</code> event.</p>
+					<p>The <code>piweb.data</code> interface exposes methods to retrieve the inspection plan items, measurements, values and raw data that is bound to the plot extension element. Be aware that <strong>the data can change</strong>. Whenever this happens, the plot extension engine will emit the <code>dataChanged</code> event.</p>
 					<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>;
 <span class="hljs-keyword">import</span> data = piweb.data;
 
@@ -647,7 +647,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns all inspection plan items that are bound to the custom plot element with databinding. You can change the databinding in PiWeb Designer.</p>
+									<p>Returns all inspection plan items that are bound to the plot extension element with databinding. You can change the databinding in PiWeb Designer.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/data.inspectionplancollection.html" class="tsd-signature-type">InspectionPlanCollection</a></h4>
@@ -669,7 +669,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns all measurements that are associated to the parts that are bound to the custom plot element with databinding.
+									<p>Returns all measurements that are associated to the parts that are bound to the plot extension element with databinding.
 									You can change the databinding and the measurement selection in PiWeb Designer.</p>
 								</div>
 							</div>
@@ -692,7 +692,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns a list of all raw data entries that are bound to the custom plot via databinding. Since the raw data files are possibly quite large, they are not copied by the custom plot engine.</p>
+									<p>Returns a list of all raw data entries that are bound to the plot extension via databinding. Since the raw data files are possibly quite large, they are not copied by the plot extension engine.</p>
 								</div>
 								<pre><code class="lang-TypeScript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRawDataCollection</span>(<span class="hljs-params"></span>) : <span class="hljs-title">RawDataCollection</span></span>;
 </code></pre>
@@ -720,7 +720,7 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns the raw data entities from which the custom plot fetches the raw data.</p>
+									<p>Returns the raw data entities from which the plot extension fetches the raw data.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.html#rawdataentity" class="tsd-signature-type">RawDataEntity</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1284,8 +1284,8 @@ piweb.events.on(<span class="hljs-string">"dataChanged"</span>, loadData);
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets the raw data entities from which the custom plot fetches the raw data. By default, the plot fetches raw data
-										from all entities, including measurement values. When the databinding of the custom plot element features a lot of characteristics
+									<p>Sets the raw data entities from which the plot extension fetches the raw data. By default, the plot fetches raw data
+										from all entities, including measurement values. When the databinding of the plot extension element features a lot of characteristics
 									and measurements, the raw data fetching can have a large performance impact.</p>
 								</div>
 							</div>

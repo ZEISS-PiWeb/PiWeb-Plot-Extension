@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PiWeb Customplot API Reference</title>
+	<title>PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">PiWeb Customplot API Reference</a>
+					<a href="index.html" class="title">PiWeb Plot Extension API Reference</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> PiWeb Customplot API Reference</h1>
+			<h1> PiWeb Plot Extension API Reference</h1>
 		</div>
 	</div>
 </header>
@@ -62,10 +62,10 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="piweb-custom-plot">PiWeb Custom Plot</h1>
+				<h1 id="piweb-plot-extension">PiWeb Plot Extension</h1>
 				<p><img style="display:block;margin:auto;" src="media/Logo.png" ></p>
 				<h2 id="quickstart">Quickstart</h2>
-				<p>In order to create your first own custom plot, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As JavaScript is untyped, we suggest you to develop your extension using <strong>TypeScript</strong>.  </p>
+				<p>In order to create your first own plot extension, you should be familiar with <strong>JavaScript</strong> and <strong>Json</strong>. As JavaScript is untyped, we suggest you to develop your extension using <strong>TypeScript</strong>.  </p>
 				<p>PiWeb searches for extensions in several locations. Ordered by their priority, these are:</p>
 				<ul>
 					<li>In the application data directory <code>%APPDATA%\Zeiss\PiWeb\Extensions</code>  </li>
@@ -74,7 +74,7 @@
 				</ul>
 				<p>The package structure looks like the following:</p>
 				<p><img class="framed" src="media/folder_structure.png"/></p>
-				<p><strong>Hint:</strong> You can download the result of the quickstart guide <a href="https://github.com/ZEISS-PiWeb/PiWeb-Customplot/raw/master/MyExtension.zip">here</a>.</p>
+				<p><strong>Hint:</strong> You can download the result of the quickstart guide <a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension.zip">here</a>.</p>
 				<h3 id="1-create-the-folder-myextension-">1. Create the folder <code>MyExtension</code></h3>
 				<p>In case the <code>Extensions</code> folder doesn&#39;t exist, you must <strong>create</strong> it first. Place it in one of the folders listed above. Now <strong>create your project folder</strong> in the extensions folder and name it <code>MyExtension</code>.</p>
 				<h3 id="2-create-the-file-package-json-">2. Create the file <code>package.json</code></h3>
@@ -112,7 +112,7 @@
 }
 </code></pre>
 				<h3 id="4-create-the-folder-types-and-copy-the-file-piweb-1-0-d-ts-into-it">4. Create the folder <code>@types</code> and copy the file <code>piweb-1-0.d.ts</code> into it</h3>
-				<p>These are the type definitions of the PiWeb custom plot interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong><a href="https://github.com/ZEISS-PiWeb/PiWeb-Customplot/blob/master/piweb-1-0.d.ts">here</a></strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
+				<p>These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file <strong><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/blob/master/piweb-1-0.d.ts">here</a></strong>. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file.</p>
 				<h3 id="5-create-the-folder-src-and-create-the-file-index-ts-in-it">5. Create the folder <code>src</code> and create the file <code>index.ts</code> in it</h3>
 				<p> This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter <a href="interfaces/drawing.drawingcontext.html">DrawingContext</a>.</p>
 				<pre><code class="lang-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> piweb <span class="hljs-keyword">from</span> <span class="hljs-string">'piweb'</span>
