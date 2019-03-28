@@ -32,7 +32,7 @@ The package configuration contains static parameters of your extension, such as 
     "version": "1.0.0",
     "main": "lib",
     "engines": {
-        "piweb": "1.0.x"
+        "piweb": "~1.0"
     },
     "piweb_actions": {
         "load": "compile_typescript"
