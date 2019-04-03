@@ -1,10 +1,14 @@
 # PiWeb Plot Extension
 
-<img style="display:block;margin:auto;" src="media://Logo.png" >
+<img style="display: block; margin: auto;" src="gfx/Logo.png" >
+
+## Reference Manual
+
+A comprehensive manual can be found [here](http://zeiss-piweb.github.io/PiWeb-Plot-Extension). Examples can be found in the sample report 'Plot Extensions' that is shipped with PiWeb Monitor 6.6. The source packages of these examples are attached to the reports inspection plan for convenience.
 
 ## Quickstart
 
-In order to create your first own plot extension, you should be familiar with **JavaScript** and **Json**. As JavaScript is untyped, we suggest you to develop your extension using **TypeScript**.  
+In order to create your first own plot extension, you should be familiar with __JavaScript__ and __Json__. As JavaScript is untyped, we suggest you to develop your extension using __TypeScript__.  
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
@@ -14,22 +18,22 @@ PiWeb searches for extensions in several locations. Ordered by their priority, t
 
 The package structure looks like the following:
 
-<img class="framed" src="media://folder_structure.png"/>
+<img class="framed" src="gfx/folder_structure.png"/>
 
 **Hint:** You can download the result of the quickstart guide [here](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension.zip).
 
 ### 1. Create the folder `MyExtension` 
 
-In case the `Extensions` folder doesn't exist, you must **create** it first. Place it in one of the folders listed above. Now **create your project folder** in the extensions folder and name it `MyExtension`.
+In case the `Extensions` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `MyExtension`.
 
 ### 2. Create the file `package.json`
 
-The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [package](modules/package.html). For now, use the minimum setup shown below.
+The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [package](http://zeiss-piweb.github.io/PiWeb-Plot-Extension/modules/package) in the manual. For now, use the minimum setup shown below.
 
 ```json
 {
     "name": "myextension",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "main": "lib",
     "engines": {
         "piweb": "^1.0"
@@ -76,7 +80,7 @@ These are the type definitions of the PiWeb plot extension interface. It will en
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
- This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [[DrawingContext]].
+ This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [drawing](http://zeiss-piweb.github.io/PiWeb-Plot-Extension/modules/drawing) in the manual.
 
 ```TypeScript
 import * as piweb from 'piweb'
@@ -90,6 +94,10 @@ function renderPlot(drawingContext: piweb.drawing.DrawingContext) {
 }
 ```
 
-When we save all files and start PiWeb Designer, we should find our extension in the **General** category of the toolbox:
+When we save all files and start the PiWeb Designer, we should find our extension in the **General** section of the toolbox:
 
-<img src="media://toolbox_start.png">
+<img class="framed" src="gfx/toolbox_start.png">
+
+### 6. Explore
+
+For further information, please read the [reference manual](http://zeiss-piweb.github.io/PiWeb-Plot-Extension).
