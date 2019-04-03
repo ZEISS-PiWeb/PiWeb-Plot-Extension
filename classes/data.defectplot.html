@@ -115,7 +115,7 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<wbr>Plot<span class="tsd-signature-symbol">(</span>measurementId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, characteristicId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, referenceSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, referenceVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="data.plotproperty.html" class="tsd-signature-type">PlotProperty</a><span class="tsd-signature-symbol">&gt;</span>, defects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<wbr>Plot<span class="tsd-signature-symbol">(</span>measurementId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, characteristicId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, referenceSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, referenceVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, defects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -148,7 +148,7 @@
 									<h5>tolerance: <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 								<li>
-									<h5>properties: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="data.plotproperty.html" class="tsd-signature-type">PlotProperty</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>properties: <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></h5>
 								</li>
 								<li>
 									<h5>defects: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></h5>
@@ -206,12 +206,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="defects" class="tsd-anchor"></a>
 					<h3>defects</h3>
-					<div class="tsd-signature tsd-kind-icon">defects<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">defects<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:182</li>
+							<li>Defined in data/defect.ts:193</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The defects that are listed in this plot.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="measurementid" class="tsd-anchor"></a>
@@ -228,12 +233,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="properties" class="tsd-anchor"></a>
 					<h3>properties</h3>
-					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="data.plotproperty.html" class="tsd-signature-type">PlotProperty</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:181</li>
+							<li>Defined in data/defect.ts:188</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of custom key value pairs of this plot.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="referencesize" class="tsd-anchor"></a>
@@ -271,9 +281,14 @@
 					<div class="tsd-signature tsd-kind-icon">tolerance<span class="tsd-signature-symbol">:</span> <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:180</li>
+							<li>Defined in data/defect.ts:183</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Global tolerance for all defects in this plot.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>

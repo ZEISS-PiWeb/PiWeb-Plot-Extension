@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LineSegment | PiWeb Plot Extension API Reference</title>
+	<title>BitmapDataLayout | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/drawing.html">drawing</a>
 				</li>
 				<li>
-					<a href="drawing.linesegment.html">LineSegment</a>
+					<a href="drawing.bitmapdatalayout.html">BitmapDataLayout</a>
 				</li>
 			</ul>
-			<h1>Class LineSegment</h1>
+			<h1>Class BitmapDataLayout</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Creates a line between two points in a <a href="drawing.pathfigure.html">PathFigure</a>. In case you want to use multiple line segments consecutively, consider using the <a href="drawing.polylinesegment.html">PolyLineSegment</a>.</p>
+						<p>Determines the type and format of data that is stored in the image buffer.</p>
 					</div>
 				</div>
 			</section>
@@ -78,12 +78,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="drawing.pathsegment.html" class="tsd-signature-type">PathSegment</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">LineSegment</span>
-							</li>
-						</ul>
+						<span class="target">BitmapDataLayout</span>
 					</li>
 				</ul>
 			</section>
@@ -91,7 +86,6 @@
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
 					<li><span class="tsd-signature-type">Serializable</span></li>
-					<li><a href="../interfaces/drawing.linesegmentdescription.html" class="tsd-signature-type">LineSegmentDescription</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -101,27 +95,25 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="drawing.linesegment.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.linesegment.html#to" class="tsd-kind-icon">to</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#dpix" class="tsd-kind-icon">dpiX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#dpiy" class="tsd-kind-icon">dpiY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#pixelformat" class="tsd-kind-icon">pixel<wbr>Format</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#pixelheight" class="tsd-kind-icon">pixel<wbr>Height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#pixelwidth" class="tsd-kind-icon">pixel<wbr>Width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="drawing.bitmapdatalayout.html#stride" class="tsd-kind-icon">stride</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Accessors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite tsd-is-private"><a href="drawing.linesegment.html#type" class="tsd-kind-icon">type</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-private"><a href="drawing.linesegment.html#serialize" class="tsd-kind-icon">serialize</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="drawing.linesegment.html#create" class="tsd-kind-icon">create</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="drawing.linesegment.html#createlinesegment" class="tsd-kind-icon">create<wbr>Line<wbr>Segment</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="drawing.bitmapdatalayout.html#serialize" class="tsd-kind-icon">serialize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="drawing.bitmapdatalayout.html#getbytesperpixel" class="tsd-kind-icon">get<wbr>Bytes<wbr>Per<wbr>Pixel</a></li>
 							</ul>
 						</section>
 					</div>
@@ -129,36 +121,46 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Line<wbr>Segment<span class="tsd-signature-symbol">(</span>to<span class="tsd-signature-symbol">: </span><a href="drawing.point.html" class="tsd-signature-type">Point</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="drawing.linesegment.html" class="tsd-signature-type">LineSegment</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Bitmap<wbr>Data<wbr>Layout<span class="tsd-signature-symbol">(</span>pixelFormat<span class="tsd-signature-symbol">: </span><a href="../modules/drawing.html#pixelformat-1" class="tsd-signature-type">PixelFormat</a>, pixelWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, pixelHeight<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, dpiX<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, dpiY<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, stride<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="drawing.bitmapdatalayout.html" class="tsd-signature-type">BitmapDataLayout</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="drawing.pathsegment.html">PathSegment</a>.<a href="drawing.pathsegment.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in drawing/geometry/path_segments.ts:282</li>
+									<li>Defined in drawing/image/bitmap.ts:117</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Initializes a new instance of the <a href="drawing.linesegment.html">LineSegment</a> class.</p>
+									<p>Initializes a new instance of the <a href="drawing.bitmapdatalayout.html">BitmapDataLayout</a> class.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>to: <a href="drawing.point.html" class="tsd-signature-type">Point</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-										</div>
-									</div>
+									<h5>pixelFormat: <a href="../modules/drawing.html#pixelformat-1" class="tsd-signature-type">PixelFormat</a></h5>
+								</li>
+								<li>
+									<h5>pixelWidth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>pixelHeight: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> dpiX: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> dpiY: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stride: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="drawing.linesegment.html" class="tsd-signature-type">LineSegment</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="drawing.bitmapdatalayout.html" class="tsd-signature-type">BitmapDataLayout</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -166,59 +168,110 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="to" class="tsd-anchor"></a>
-					<h3>to</h3>
-					<div class="tsd-signature tsd-kind-icon">to<span class="tsd-signature-symbol">:</span> <a href="drawing.point.html" class="tsd-signature-type">Point</a></div>
+					<a name="dpix" class="tsd-anchor"></a>
+					<h3>dpiX</h3>
+					<div class="tsd-signature tsd-kind-icon">dpiX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
-						<p>Implementation of <a href="../interfaces/drawing.linesegmentdescription.html">LineSegmentDescription</a>.<a href="../interfaces/drawing.linesegmentdescription.html#to">to</a></p>
 						<ul>
-							<li>Defined in drawing/geometry/path_segments.ts:282</li>
+							<li>Defined in drawing/image/bitmap.ts:113</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Gets or sets the endpoint of the segment.</p>
+							<p>Gets or sets the dots per inch in x-direction.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="dpiy" class="tsd-anchor"></a>
+					<h3>dpiY</h3>
+					<div class="tsd-signature tsd-kind-icon">dpiY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in drawing/image/bitmap.ts:117</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets or sets the dots per inch in Y-direction.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="pixelformat" class="tsd-anchor"></a>
+					<h3>pixel<wbr>Format</h3>
+					<div class="tsd-signature tsd-kind-icon">pixel<wbr>Format<span class="tsd-signature-symbol">:</span> <a href="../modules/drawing.html#pixelformat-1" class="tsd-signature-type">PixelFormat</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in drawing/image/bitmap.ts:92</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets or sets the pixel format.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="pixelheight" class="tsd-anchor"></a>
+					<h3>pixel<wbr>Height</h3>
+					<div class="tsd-signature tsd-kind-icon">pixel<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in drawing/image/bitmap.ts:102</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets or sets the pixel height.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="pixelwidth" class="tsd-anchor"></a>
+					<h3>pixel<wbr>Width</h3>
+					<div class="tsd-signature tsd-kind-icon">pixel<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in drawing/image/bitmap.ts:97</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets or sets the pixel width.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="stride" class="tsd-anchor"></a>
+					<h3>stride</h3>
+					<div class="tsd-signature tsd-kind-icon">stride<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in drawing/image/bitmap.ts:108</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Gets or sets the byte-length of an image line.
+							This is usually equal to pixelWidth * bytesPerPixel.</p>
 						</div>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
-					<a name="type" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> type</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"line"</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Overrides <a href="drawing.pathsegment.html">PathSegment</a>.<a href="drawing.pathsegment.html#type">type</a></p>
-								<ul>
-									<li>Defined in drawing/geometry/path_segments.ts:297</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">"line"</span></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="serialize" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> serialize</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon">serialize<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BufferWriter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="drawing.pathsegment.html">PathSegment</a>.<a href="drawing.pathsegment.html#serialize">serialize</a></p>
 								<ul>
-									<li>Defined in drawing/geometry/path_segments.ts:318</li>
+									<li>Defined in drawing/image/bitmap.ts:149</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,66 +286,28 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="create" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>description<span class="tsd-signature-symbol">?: </span><a href="../modules/drawing.html#pathsegmentdescription" class="tsd-signature-type">PathSegmentDescription</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="drawing.pathsegment.html" class="tsd-signature-type">PathSegment</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="drawing.pathsegment.html">PathSegment</a>.<a href="drawing.pathsegment.html#create">create</a></p>
-								<ul>
-									<li>Defined in drawing/geometry/path_segments.ts:205</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns the path segment that is defined by the specified description.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <a href="../modules/drawing.html#pathsegmentdescription" class="tsd-signature-type">PathSegmentDescription</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>path segment description.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="drawing.pathsegment.html" class="tsd-signature-type">PathSegment</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="createlinesegment" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> create<wbr>Line<wbr>Segment</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Line<wbr>Segment<span class="tsd-signature-symbol">(</span>description<span class="tsd-signature-symbol">?: </span><a href="../interfaces/drawing.linedescription.html" class="tsd-signature-type">LineDescription</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="drawing.linesegment.html" class="tsd-signature-type">LineSegment</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+					<a name="getbytesperpixel" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Bytes<wbr>Per<wbr>Pixel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Bytes<wbr>Per<wbr>Pixel<span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><a href="../modules/drawing.html#pixelformat-1" class="tsd-signature-type">PixelFormat</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in drawing/geometry/path_segments.ts:306</li>
+									<li>Defined in drawing/image/bitmap.ts:135</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns the line segment that is defined by the specified description.</p>
-								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <a href="../interfaces/drawing.linedescription.html" class="tsd-signature-type">LineDescription</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Line segment description.</p>
-									</div>
+									<h5>format: <a href="../modules/drawing.html#pixelformat-1" class="tsd-signature-type">PixelFormat</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="drawing.linesegment.html" class="tsd-signature-type">LineSegment</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -347,25 +362,34 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="drawing.linesegment.html" class="tsd-kind-icon">Line<wbr>Segment</a>
+						<a href="drawing.bitmapdatalayout.html" class="tsd-kind-icon">Bitmap<wbr>Data<wbr>Layout</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="drawing.linesegment.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="drawing.bitmapdatalayout.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="drawing.linesegment.html#to" class="tsd-kind-icon">to</a>
+								<a href="drawing.bitmapdatalayout.html#dpix" class="tsd-kind-icon">dpiX</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
-								<a href="drawing.linesegment.html#type" class="tsd-kind-icon">type</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="drawing.bitmapdatalayout.html#dpiy" class="tsd-kind-icon">dpiY</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
-								<a href="drawing.linesegment.html#serialize" class="tsd-kind-icon">serialize</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="drawing.bitmapdatalayout.html#pixelformat" class="tsd-kind-icon">pixel<wbr>Format</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="drawing.linesegment.html#create" class="tsd-kind-icon">create</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="drawing.bitmapdatalayout.html#pixelheight" class="tsd-kind-icon">pixel<wbr>Height</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="drawing.linesegment.html#createlinesegment" class="tsd-kind-icon">create<wbr>Line<wbr>Segment</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="drawing.bitmapdatalayout.html#pixelwidth" class="tsd-kind-icon">pixel<wbr>Width</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="drawing.bitmapdatalayout.html#stride" class="tsd-kind-icon">stride</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="drawing.bitmapdatalayout.html#serialize" class="tsd-kind-icon">serialize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-static">
+								<a href="drawing.bitmapdatalayout.html#getbytesperpixel" class="tsd-kind-icon">get<wbr>Bytes<wbr>Per<wbr>Pixel</a>
 							</li>
 						</ul>
 					</li>
