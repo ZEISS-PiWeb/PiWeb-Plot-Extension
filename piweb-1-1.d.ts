@@ -1148,7 +1148,7 @@ declare module "piweb/data/configuration" {
 declare module "piweb/data/defect" {
 	import { MeasurementValue, Measurement } from "piweb/data/measurements";
 	import { Iter } from 'iter';
-	import { Vector, PlotTolerance, PlotProperty } from 'piweb/data/plot';
+	import { Vector, PlotTolerance, PlotPropertyCollection } from 'piweb/data/plot';
 	import { InspectionPlanItem } from 'piweb/data/inspection';
 	/**
 	 * Sets a value indicating whether this plot needs to fetch defects.
@@ -1176,13 +1176,13 @@ declare module "piweb/data/defect" {
 	    /**
 	     * @private
 	     */
-	    constructor(plot: DefectPlot, index: number, position: Vector, size: Vector, tolerance: PlotTolerance | undefined, properties: Map<string, PlotProperty>, voxels: Iterable<Voxel>);
+	    constructor(plot: DefectPlot, index: number, position: Vector, size: Vector, tolerance: PlotTolerance | undefined, properties: PlotPropertyCollection, voxels: Iterable<Voxel>);
 	    /**
 	     * The plot to which this defect is attached. Can be used to obtain the reference system and global tolerances, etc..
 	     */
 	    plot: DefectPlot;
 	    /**
-	     * The index of the voxel in the list of voxels of the defect plot.
+	     * The index of the defect in the list of defects of the defect plot.
 	     */
 	    index: number;
 	    /**
@@ -1194,23 +1194,23 @@ declare module "piweb/data/defect" {
 	     */
 	    size: Vector;
 	    /**
-	     * The tolerance for this defect. If `undefined`, there's still a tolerance property on the [[DefectPlot]].
+	     * The tolerance for this defect. If it is `undefined`, there's still a tolerance property on the [[DefectPlot]].
 	     */
 	    tolerance: PlotTolerance | undefined;
 	    /**
-	     * The list of custom key value pairs of this defect
+	     * The list of custom key value pairs of this defect.
 	     */
-	    properties: Map<string, PlotProperty>;
+	    properties: PlotPropertyCollection;
 	    /**
 	     * The voxels that define this defect.
 	     */
-	    voxels: Iterable<Voxel>;
+	    voxels: Iter<Voxel>;
 	}
 	/**
 	 * A container of defects that is the result or part of the result of a single evaluation run or scan.
 	 */
 	export class DefectPlot {
-	    constructor(measurementId: string, characteristicId: string, referenceSize: Vector, referenceVoxelSize: Vector, actualSize: Vector, actualVoxelSize: Vector, tolerance: PlotTolerance | undefined, properties: Map<string, PlotProperty>, defects: Iterable<Defect>);
+	    constructor(measurementId: string, characteristicId: string, referenceSize: Vector, referenceVoxelSize: Vector, actualSize: Vector, actualVoxelSize: Vector, tolerance: PlotTolerance | undefined, properties: PlotPropertyCollection, defects: Iterable<Defect>);
 	    /**
 	     * @private
 	     */
@@ -1235,14 +1235,23 @@ declare module "piweb/data/defect" {
 	     * The voxel size in real-world units, e.g. mm.
 	     */
 	    actualVoxelSize: Vector;
+	    /**
+	     * Global tolerance for all defects in this plot.
+	     */
 	    tolerance: PlotTolerance | undefined;
-	    properties: Map<string, PlotProperty>;
-	    defects: Iterable<Defect>;
+	    /**
+	     * The list of custom key value pairs of this plot.
+	     */
+	    properties: PlotPropertyCollection;
+	    /**
+	     * The defects that are listed in this plot.
+	     */
+	    defects: Iter<Defect>;
 	}
 	/**
-	 * Accessibility layer for a range of defect plots.
+	 * Acts as an accessibility layer for a range of defect plots.
 	 */
-	export class DefectPlotCollection implements Iterable<DefectPlot> {
+	export class DefectCollection implements Iterable<Defect> {
 	    /**
 	     * @private
 	     */
@@ -1258,29 +1267,33 @@ declare module "piweb/data/defect" {
 	    /**
 	     * @private
 	     */
-	    private readonly _items;
+	    private readonly _plots;
 	    /**
 	     * @private
 	     */
-	    constructor(items: ReadonlyArray<DefectPlot>);
+	    private readonly _defects;
 	    /**
 	     * @private
 	     */
-	    [Symbol.iterator](): Iterator<DefectPlot>;
+	    constructor(plots: ReadonlyArray<DefectPlot>);
 	    /**
-	     * Returns an iter over all inspection plan items.
+	     * @private
 	     */
-	    iter(): Iter<DefectPlot>;
+	    [Symbol.iterator](): Iterator<Defect>;
 	    /**
-	     * Gets the total number of items stored in the collection.
+	     * Returns an iter over all plots.
+	     */
+	    iter(): Iter<Defect>;
+	    /**
+	     * Gets the total number of plots stored in the collection.
 	     */
 	    readonly length: number;
 	    /**
-	     * Returns an iterator over all characteristics stored in the collection.
+	     * Returns an iterator over all plots stored in the collection.
 	     */
-	    getDefects(): Iter<Defect>;
+	    getPlots(): Iter<DefectPlot>;
 	    /**
-	     * Returns the defect plots that are associated with the the specified entity. The following associations are assumed:
+	     * Returns the defect plots that are associated with the specified entity. The following associations are assumed:
 	     *
 	     * | Entity                            | Association |
 	     * |----------------------------------|------------------------------------------------------|
@@ -1291,7 +1304,7 @@ declare module "piweb/data/defect" {
 	     */
 	    findPlotsByEntity(entity: Measurement | MeasurementValue | InspectionPlanItem): Iter<DefectPlot>;
 	    /**
-	     * Returns the defects that associated with the the specified entity. The following associations are assumed:
+	     * Returns the defects that associated with the specified entity. The following associations are assumed:
 	     *
 	     * | Entity                            | Association |
 	     * |----------------------------------|------------------------------------------------------|
@@ -1304,12 +1317,14 @@ declare module "piweb/data/defect" {
 	    /**
 	     * @private
 	     */
-	    first(): DefectPlot | undefined;
+	    first(): Defect | undefined;
 	}
 	/**
 	 * Returns all defect plots that are bound to the plot extension element with databinding. You can change the databinding in PiWeb Designer.
+	 * The defects are grouped by the measurement value they are associated to. Such a group or bundle is called [[DefectPlot]]. You can iterate
+	 * either the bundles or the defects directly by calling the [[getDefects]] method of the collection.
 	 */
-	export function getDefectPlotCollection(): DefectPlotCollection;
+	export function getDefectCollection(): DefectCollection;
 }
 
 
@@ -1358,11 +1373,15 @@ declare module "piweb/data" {
 	/**
 	 * @private
 	 */
-	export { PlotProperty, PlotPropertyType, PlotTolerance, LinearPlotTolerance, RadialPlotTolerance, RectangularPlotTolerance, SpatialPlotTolerance, PlotToleranceType, Vector } from "piweb/data/plot";
+	export { PlotProperty, PlotPropertyType, PlotPropertyCollection, PlotTolerance, LinearPlotTolerance, RadialPlotTolerance, RectangularPlotTolerance, SpatialPlotTolerance, PlotToleranceType, Vector } from "piweb/data/plot";
 	/**
 	 * @private
 	 */
-	export { getDefectPlotCollection, Defect, DefectPlot, DefectPlotCollection, Voxel, setFetchDefects } from "piweb/data/defect";
+	export { getDefectCollection, Defect, DefectPlot, DefectCollection, Voxel, setFetchDefects } from "piweb/data/defect";
+	/**
+	 * @private
+	 */
+	export { getVolumeCollection, Volume, setVolumeSources, getVolumeSources, VolumeDirection, VolumeVector, VolumeCollection } from "piweb/data/volume";
 	/**
 	 * @private
 	 */
@@ -1771,6 +1790,7 @@ declare module "piweb/data/plot" {
 	 * @module data
 	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
+	import { Iter } from 'iter';
 	/**
 	* A vector is a tuple of three numbers that can act as position, size and direction.
 	*/
@@ -1855,15 +1875,15 @@ declare module "piweb/data/plot" {
 	/**
 	 * The supported datatypes for plot properties.
 	 */
-	export type PlotPropertyType = "string" | "int" | "double" | "datetime" | "timespan";
+	export type PlotPropertyType = "string" | "integer" | "float" | "date" | "timespan";
 	/**
 	 * @private
 	 */
 	export const enum PlotPropertyTypeId {
 	    String = 0,
-	    Int = 1,
-	    Double = 2,
-	    DateTime = 3,
+	    Integer = 1,
+	    Float = 2,
+	    Date = 3,
 	    TimeSpan = 4,
 	}
 	/**
@@ -1881,13 +1901,80 @@ declare module "piweb/data/plot" {
 	    type: PlotPropertyType;
 	}
 	/**
+	 * Describes an accessible collection of properties. The collection offers a wide range of helper
+	 * functions to allow a type safe access to the properties values. You can iterate over the collection with a for ... of loop.
+	 */
+	export class PlotPropertyCollection {
+	    /**
+	     * @private
+	     */
+	    readonly _properties: Map<string, PlotProperty>;
+	    constructor(properties: Iterable<PlotProperty>);
+	    /**
+	     * Returns an iterator over all properties.
+	     */
+	    [Symbol.iterator](): Iterator<PlotProperty>;
+	    /**
+	     * Returns an iter over all properties.
+	     */
+	    iter(): Iter<PlotProperty>;
+	    /**
+	     * Gets the number of properties stored in the collection.
+	     */
+	    readonly length: number;
+	    /**
+	     * Gets an iterator over the available name in the collection.
+	     */
+	    readonly names: Iter<string>;
+	    /**
+	     * Returns the property with the specified name, or `undefined` in case there is no property with this key.
+	     * @param name The name of the property.
+	     */
+	    getPlotProperty(name: string): PlotProperty | undefined;
+	    /**
+	     * Returns the value of the property with the specified key, or `undefined` in case there is no property with this key.
+	     * @param key The key of the property.
+	     */
+	    getValue(key: string): string | number | Date | undefined;
+	    /**
+	     * Returns the value of the property with the specified key as `string`, or `undefined` in case there is no property with this key.
+	     * @param name The key of the property.
+	     */
+	    getStringValue(name: string): string | undefined;
+	    /**
+	     * Returns the value of the property with the specified key as integral `number`, or `undefined` in case there is no property with this key or the properties value can't be converted into an integral `number` representation.
+	     * @param name The key of the property.
+	     */
+	    getIntegerValue(name: string): number | undefined;
+	    /**
+	     * Returns the value of the property with the specified key as floating point `number`, or `undefined` in case there is no property with this key or the properties value can't be converted into a floating point `number` representation.
+	     * @param name The key of the property.
+	     */
+	    getFloatValue(name: string): number | undefined;
+	    /**
+	     * Returns the value of the property with the specified key as `Date`, or `undefined` in case there is no property with this key or the properties value can't be converted into a `Date` representation.
+	     * @param name The key of the property.
+	     */
+	    getDateValue(name: string): Date | undefined;
+	    /**
+	     * Returns the value of the property with the specified key as `number`, which are the total milliseconds of the timespan, or `undefined` in case there is no property with this key or the properties value can't be converted into a `number` representation.
+	     * @param name The key of the property.
+	     */
+	    getTimespanValue(name: string): number | undefined;
+	    /**
+	     * Returns the value of the property with the specified key as `number`, or `undefined` in case there is no property with this key or the properties value can't be converted into a `number` representation.
+	     * @param key The key of the property.
+	     */
+	    getNumericValue(name: string): number | undefined;
+	}
+	/**
 	 * @private
 	 */
 	export function readPlotProperty(source: BufferReader): PlotProperty;
 	/**
 	 * @private
 	 */
-	export function readPlotProperties(source: BufferReader): Map<string, PlotProperty>;
+	export function readPlotProperties(source: BufferReader): PlotPropertyCollection;
 }
 
 
@@ -1900,6 +1987,10 @@ declare module "piweb/data/raw_data" {
 	 * An enumeration to identify the entity to which a raw data item is attached.
 	 */
 	export type RawDataEntity = "part" | "characteristic" | "measurement" | "measurementValue";
+	/**
+	 * @private
+	 */
+	export function mapEntityType(entityType: number): RawDataEntity;
 	/**
 	 * Describes the information about a single raw data entry on the server. When fetching the raw data items, only these information are fetched from the server, not the data itself.
 	 */
@@ -1944,6 +2035,7 @@ declare module "piweb/data/raw_data" {
 	     * Gets the date when the item has been modified on the piweb server.
 	     */
 	    lastModified: Date;
+	    constructor(entityType: RawDataEntity, inspectionPlanItemId: string | undefined, measurementId: string | undefined, checkSumBytes: Buffer, key: number, name: string, size: number, mimetype: string | undefined, created: Date, lastModified: Date);
 	    /**
 	     * @private
 	     */
@@ -2028,6 +2120,16 @@ declare module "piweb/data/raw_data" {
 	 */
 	export function getRawDataCollection(): RawDataCollection;
 	/**
+	 * @private
+	 */
+	export enum RawDataSourceIds {
+	    None = 0,
+	    Parts = 1,
+	    Characteristics = 2,
+	    Measurements = 4,
+	    MeasurementValues = 8,
+	}
+	/**
 	 * Sets the raw data entities from which the plot extension fetches the raw data. By default, the plot fetches raw data
 	 * from all entities, including measurement values. When the databinding of the plot extension element features a lot of characteristics
 	 * and measurements, the raw data fetching can have a large performance impact.
@@ -2038,6 +2140,179 @@ declare module "piweb/data/raw_data" {
 	 * Returns the raw data entities from which the plot extension fetches the raw data.
 	 */
 	export function getRawDataSources(): Iterable<RawDataEntity>;
+}
+
+
+declare module "piweb/data/volume" {
+	import { HostBinary } from 'piweb/resources/host_binary';
+	import { RawDataEntity } from 'piweb/data/raw_data';
+	import { InspectionPlanItem } from 'piweb/data/inspection';
+	import { Measurement, MeasurementValue } from 'piweb/data/measurements';
+	import { Iter } from 'iter';
+	import { PlotPropertyCollection } from 'piweb/data/plot';
+	/**
+	 * Known volume directions / planes
+	 */
+	export type VolumeDirection = "x" | "y" | "z";
+	/**
+	 * Describes a vector in the context of volumes, which can be accessed with a [[VolumeDirection]].
+	 */
+	export class VolumeVector {
+	    /**
+	     * X-Direction
+	     */
+	    x: number;
+	    /**
+	     * Y-Direction
+	     */
+	    y: number;
+	    /**
+	     * Z-Direction
+	     */
+	    z: number;
+	    /**
+	     * @private
+	     */
+	    constructor(x: number, y: number, z: number);
+	    /**
+	     * Returns the value of the vector in the specified direction.
+	     * @param direction the volume direction.
+	     */
+	    get(direction: VolumeDirection): number;
+	    /**
+	     * Sets the value of the vector in the specified direction.
+	     * @param direction the volume direction.
+	     */
+	    set(direction: VolumeDirection, value: number): void;
+	}
+	/**
+	 * Describes the information about a single volume.
+	 */
+	export class Volume {
+	    /**
+	     * The entity type to which the volume is attached.
+	     */
+	    entity: RawDataEntity;
+	    /**
+	     * Gets the key of this item.
+	     */
+	    key: number;
+	    /**
+	     * @private
+	     */
+	    measurementId?: string;
+	    /**
+	     * @private
+	     */
+	    inspectionPlanItemId?: string;
+	    /**
+	     * Gets the filename.
+	     */
+	    name: string;
+	    /**
+	     * Gets the size of the volume in voxels.
+	     */
+	    size: VolumeVector;
+	    /**
+	     * Gets the size of a single voxel of the volume in mm.
+	     */
+	    resolution: VolumeVector;
+	    /**
+	     * Gets a collection of user data that is attached to this volume.
+	     */
+	    properties: PlotPropertyCollection;
+	    /**
+	     * @private
+	     */
+	    constructor(entity: RawDataEntity, inspectionPlanItemId: string | undefined, measurementId: string | undefined, key: number, name: string, size: VolumeVector, resolution: VolumeVector, properties: PlotPropertyCollection);
+	    /**
+	     * @private
+	     */
+	    getInspectionGuid(): string | undefined;
+	    /**
+	     * @private
+	     */
+	    getMeasurementGuid(): string | undefined;
+	    /**
+	     * Returns the slice with the specified index in the specified direction as [[Buffer]].
+	     */
+	    getSliceBuffer(direction: VolumeDirection, index: number): Buffer | undefined;
+	    /**
+	     * Returns the slice with the specified index in the specified direction as [[HostBinary]].
+	     */
+	    getSlice(direction: VolumeDirection, index: number): HostBinary | undefined;
+	}
+	/**
+	 * Describes a list of volumes with additional functions to access certain entries. You can iterate over the collection like the following:
+	 *
+	 * ```TypeScript
+	 * const volumeCollection = piweb.data.getVolumeCollection();
+	 * for (let volume of volumeCollection)
+	 * {
+	 *     ...
+	 * }
+	 * ```
+	 */
+	export class VolumeCollection {
+	    /**
+	     * @private
+	     */
+	    private readonly _items;
+	    /**
+	     * @private
+	     */
+	    constructor(items: Iterable<Volume>);
+	    /**
+	     * @private
+	     */
+	    [Symbol.iterator](): Iterator<Volume>;
+	    /**
+	     * Returns an iter over all volume items.
+	     */
+	    iter(): Iter<Volume>;
+	    /**
+	     * Gets the total number of items in this collection.
+	     */
+	    readonly length: number;
+	    /**
+	     * Returns the items that match one or more of the specified filter strings.
+	     * @param wildcards One or more filter strings. Wildcards like '*' are allowed.
+	     */
+	    findByName(...wildcards: string[]): Iter<Volume>;
+	    /**
+	     * Returns the volume items that are associated to the specified entity.
+	     * @param entity An instance of a volume entity.
+	     */
+	    findByEntity(entity: InspectionPlanItem | Measurement | MeasurementValue): Iter<Volume>;
+	    /**
+	     * @private
+	     */
+	    first(): Volume | undefined;
+	}
+	/**
+	 * Returns a list of all volumes that are bound to the plot extension via databinding. Since the volumes are possibly very large, they are not copied by the plot extension engine.
+	 *
+	 * ```TypeScript
+	 * function getVolumeCollection() : VolumeCollection;
+	 * ```
+	 *
+	 * You can specify the entity from which you wish to get the volume, e.g. measured values or characteristics. The default behavior is to return no volumes.
+	 *
+	 * ```TypeScript
+	 * function setVolumeSources( Iterable<RawDataEntity> sources ) : void;
+	 * function getVolumeSources() : Iterable<RawDataEntity>;
+	 * ```
+	 */
+	export function getVolumeCollection(): VolumeCollection;
+	/**
+	 * Sets the raw data entities from which the plot extension fetches the volumes.
+	 * @param sources
+	 */
+	export function setVolumeSources(sources: Iterable<RawDataEntity>): void;
+	/**
+	 * Returns the raw data entities from which the plot extension fetches the volumes.
+	 */
+	export function getVolumeSources(): Iterable<RawDataEntity>;
 }
 
 
@@ -2279,7 +2554,7 @@ declare module "piweb/drawing/drawing" {
 	     */
 	    drawText(text: FormattedTextDescription | string, settings?: TextDrawingSettingsDescription): void;
 	    /**
-	     * Draws the specified [[Bitmap]] buffer with the specified [[ImageDrawingSettings]].
+	     * Draws the specified [[Bitmap]] buffer that is stored with the specified [[ImageDataLayout]] with the specified [[ImageDrawingSettings]].
 	     */
 	    drawImage(image: Bitmap, settings?: ImageDrawingSettingsDescription): void;
 	    /**
@@ -2735,7 +3010,7 @@ declare module "piweb/drawing" {
 	export { FormattedText, FormattedTextDescription, FlowDirection, HorizontalTextAlignment, VerticalTextAlignment, TextTrimming, TextMeasurements } from "piweb/drawing/text/formatted_text";
 	export { Font, FontDescription, FontStretch, FontStyle, FontWeight, TextDecoration } from "piweb/drawing/text/font";
 	export { TextDrawingSettings, TextDrawingSettingsDescription, HorizontalTextAnchor, VerticalTextAnchor } from "piweb/drawing/text/settings";
-	export { Bitmap, BitmapMeasurements } from "piweb/drawing/image/bitmap";
+	export { Bitmap, BitmapMeasurements, BitmapDataLayout } from "piweb/drawing/image/bitmap";
 	export { ImageDrawingSettings, ImageDrawingSettingsDescription, HorizontalImageAnchor, VerticalImageAnchor } from "piweb/drawing/image/settings";
 	export { TransformationType, Transform, TransformDescription, IdentityTransform, IdentityTransformDescription, MatrixTransform, MatrixTransformDescription, RotationTransform, RotationTransformDescription, ScalingTransform, ScalingTransformDescription, ShearTransform, ShearTransformDescription, TranslationTransform, TranslationTransformDescription, TransformGroup } from "piweb/drawing/transform/transforms";
 	export { Drawing, DrawingContext, DrawingMeasurements } from "piweb/drawing/drawing";
@@ -3983,6 +4258,60 @@ declare module "piweb/drawing/image/bitmap" {
 	    dpiY: number;
 	}
 	/**
+	 * The list of known pixel formats of PiWeb
+	 */
+	export type PixelFormat = "rgb24" | "bgr24" | "bgra32" | "pbgra32" | "gray8";
+	/**
+	 * @private
+	 */
+	export const enum PixelFormatId {
+	    RGB24 = 0,
+	    BGR24 = 1,
+	    BGRA32 = 2,
+	    PBGRA32 = 3,
+	    GRAY8 = 4,
+	}
+	/**
+	 * Determines the type and format of data that is stored in the image buffer.
+	 */
+	export class BitmapDataLayout implements Serializable {
+	    /**
+	     * Gets or sets the pixel format.
+	     */
+	    readonly pixelFormat: PixelFormat;
+	    /**
+	     * Gets or sets the pixel width.
+	     */
+	    readonly pixelWidth: number;
+	    /**
+	     * Gets or sets the pixel height.
+	     */
+	    readonly pixelHeight: number;
+	    /**
+	     * Gets or sets the byte-length of an image line.
+	     * This is usually equal to pixelWidth * bytesPerPixel.
+	     */
+	    readonly stride: number;
+	    /**
+	     * Gets or sets the dots per inch in x-direction.
+	     */
+	    readonly dpiX: number;
+	    /**
+	     * Gets or sets the dots per inch in Y-direction.
+	     */
+	    readonly dpiY: number;
+	    /**
+	     * Initializes a new instance of the [[BitmapDataLayout]] class.
+	     * @param format The pixel format.
+	     */
+	    constructor(pixelFormat: PixelFormat, pixelWidth: number, pixelHeight: number, dpiX?: number, dpiY?: number, stride?: number);
+	    static getBytesPerPixel(format: PixelFormat): number;
+	    /**
+	     * @private
+	     */
+	    serialize(target: BufferWriter): void;
+	}
+	/**
 	 * Describes an image that can be drawn to a [[DrawingContext]].
 	 */
 	export class Bitmap implements Serializable {
@@ -3990,11 +4319,13 @@ declare module "piweb/drawing/image/bitmap" {
 	     * @private
 	     */
 	    private _data;
+	    private _layout?;
 	    /**
 	     * Initializes a new instance of the [[Bitmap]] class with the specified data.
-	     * @param data A buffer that contains binary image data.
+	     * @param data A buffer that contains binary image data. This can either be a binary png- or jpeg-image, or a raw pixel buffer.
+	     * @param layout In case the data buffer contains raw pixel data, it's necessary to specify the data layout of the buffer.
 	     */
-	    constructor(data: Buffer | HostBinary);
+	    constructor(data: Buffer | HostBinary, layout?: BitmapDataLayout);
 	    /**
 	     * @private
 	     */
@@ -4007,14 +4338,7 @@ declare module "piweb/drawing/image/bitmap" {
 	    /**
 	     * Loads the size and resolution of the image.
 	     */
-	    measure(): {
-	        height: any;
-	        width: any;
-	        pixelHeight: any;
-	        pixelWidth: any;
-	        dpiX: any;
-	        dpiY: any;
-	    };
+	    measure(): BitmapMeasurements;
 	}
 }
 
@@ -4138,6 +4462,66 @@ declare module "piweb/drawing/image/settings" {
 	     * @param description Image drawing settings description.
 	     */
 	    static create(description?: ImageDrawingSettingsDescription): ImageDrawingSettings;
+	    /**
+	     * @private
+	     */
+	    serialize(target: BufferWriter): void;
+	}
+	/**
+	 * The list of known pixel formats of PiWeb
+	 */
+	export type PixelFormat = "rgb24" | "bgr24" | "rgba32" | "bgra32" | "gray8";
+	/**
+	 * @private
+	 */
+	export const enum PixelFormatId {
+	    RGB24 = 0,
+	    BGR24 = 1,
+	    RGBA32 = 2,
+	    BGRA32 = 3,
+	    GRAY8 = 4,
+	}
+	export interface ImageDataLayoutDescription {
+	    pixelFormat: PixelFormat;
+	    pixelWidth: number;
+	    pixelHeight: number;
+	    dpiX?: number;
+	    dpiY?: number;
+	}
+	/**
+	 * Determines the type and format of data that is stored in the image buffer.
+	 */
+	export class ImageDataLayout implements Serializable, ImageDataLayoutDescription {
+	    /**
+	     * Gets or sets the pixel format.
+	     */
+	    readonly pixelFormat: PixelFormat;
+	    /**
+	     * Gets or sets the line size.
+	     */
+	    readonly pixelWidth: number;
+	    /**
+	     * Gets or sets the line size.
+	     */
+	    readonly pixelHeight: number;
+	    /**
+	     * Gets or sets the resolution in x-direction.
+	     */
+	    readonly dpiX: number;
+	    /**
+	     * Gets or sets the resolution in y-direction.
+	     */
+	    readonly dpiY: number;
+	    /**
+	     * Initializes a new instance of the [[ImageDataLayout]] class.
+	     * @param format The pixel format (only needed for data type 'pixels').
+	     */
+	    constructor(format: PixelFormat, pixelWidth: number, pixelHeight: number, dpiX: number | undefined, dpiY: number | undefined);
+	    /**
+	     * Returns the image data layout that are defined by the specified description.
+	     * @param description Image data layout description.
+	     */
+	    static create(description: ImageDataLayoutDescription): ImageDataLayout;
 	    /**
 	     * @private
 	     */
