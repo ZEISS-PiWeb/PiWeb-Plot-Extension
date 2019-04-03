@@ -1,10 +1,10 @@
 # PiWeb Plot Extension
 
-<img style="display: block; margin: auto;" src="gfx/Logo.png" >
+<img style="display:block;margin:auto;" src="media://Logo.png" >
 
 ## Quickstart
 
-In order to create your first own plot extension, you should be familiar with __JavaScript__ and __Json__. As JavaScript is untyped, we suggest you to develop your extension using __TypeScript__.  
+In order to create your first own plot extension, you should be familiar with **JavaScript** and **Json**. As JavaScript is untyped, we suggest you to develop your extension using **TypeScript**.  
 
 PiWeb searches for extensions in several locations. Ordered by their priority, these are:
 
@@ -14,25 +14,25 @@ PiWeb searches for extensions in several locations. Ordered by their priority, t
 
 The package structure looks like the following:
 
-<img class="framed" src="gfx/folder_structure.png"/>
+<img class="framed" src="media://folder_structure.png"/>
 
 **Hint:** You can download the result of the quickstart guide [here](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension.zip).
 
 ### 1. Create the folder `MyExtension` 
 
-In case the `Extensions` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `MyExtension`.
+In case the `Extensions` folder doesn't exist, you must **create** it first. Place it in one of the folders listed above. Now **create your project folder** in the extensions folder and name it `MyExtension`.
 
 ### 2. Create the file `package.json`
 
-The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [package](http://zeiss-piweb.github.io/PiWeb-Plot-Extension/modules/package) in the manual. For now, use the minimum setup shown below.
+The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter [package](modules/package.html). For now, use the minimum setup shown below.
 
 ```json
 {
     "name": "myextension",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "main": "lib",
     "engines": {
-        "piweb": "~1.0"
+        "piweb": "^1.0"
     },
     "piweb_actions": {
         "load": "compile_typescript"
@@ -67,11 +67,16 @@ It contains necessary information for the typescript compiler, like input and ou
 
 ### 4. Create the folder `@types` and copy the file `piweb-1-0.d.ts` into it
 
-These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/blob/master/piweb-1-0.d.ts)**. The folder `@types` was defined as the type root in the `tsconfig.json` file.
+These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/blob/master/piweb-1-0.d.ts)**. The folder `@types` was defined as the type root in the `tsconfig.json` file. Please note, that versions above 1.0 only work with newer PiWeb versions.
+
+| Extension API | PiWeb Version |
+|---------------|---------------|
+| 1.0 | 6.6 |
+| 1.1 | 7.2 |
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
- This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [drawing](http://zeiss-piweb.github.io/PiWeb-Plot-Extension/modules/drawing) in the manual.
+ This is where your extension is actually rendered. In the example below, we use the drawing API to render an orange rectangle that fills the whole area of the plot. A complete reference of the drawing functions can be found in the chapter [[DrawingContext]].
 
 ```TypeScript
 import * as piweb from 'piweb'
@@ -85,10 +90,6 @@ function renderPlot(drawingContext: piweb.drawing.DrawingContext) {
 }
 ```
 
-When we save all files and start the PiWeb Designer, we should find our extension in the **General** section of the toolbox:
+When we save all files and start PiWeb Designer, we should find our extension in the **General** category of the toolbox:
 
-<img class="framed" src="gfx/toolbox_start.png">
-
-### 6. Explore
-
-For further information, please read the [reference manual](http://zeiss-piweb.github.io/PiWeb-Plot-Extension).
+<img src="media://toolbox_start.png">
