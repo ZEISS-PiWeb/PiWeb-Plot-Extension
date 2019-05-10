@@ -1153,10 +1153,12 @@ declare module "piweb/data/defect" {
 	/**
 	 * Sets a value indicating whether this plot needs to fetch defects.
 	 * @param value
+	 * @version 1.1
 	 */
 	export function setFetchDefects(value: boolean): void;
 	/**
 	 * Represents a single voxel of a defect.
+	 * @version 1.1
 	 */
 	export class Voxel {
 	    constructor(position: Vector, size: Vector);
@@ -1171,6 +1173,7 @@ declare module "piweb/data/defect" {
 	}
 	/**
 	 * Represents a defect
+	 * @version 1.1
 	 */
 	export class Defect {
 	    /**
@@ -1208,6 +1211,7 @@ declare module "piweb/data/defect" {
 	}
 	/**
 	 * A container of defects that is the result or part of the result of a single evaluation run or scan.
+	 * @version 1.1
 	 */
 	export class DefectPlot {
 	    constructor(measurementId: string, characteristicId: string, referenceSize: Vector, referenceVoxelSize: Vector, actualSize: Vector, actualVoxelSize: Vector, tolerance: PlotTolerance | undefined, properties: PlotPropertyCollection, defects: Iterable<Defect>);
@@ -1250,6 +1254,7 @@ declare module "piweb/data/defect" {
 	}
 	/**
 	 * Acts as an accessibility layer for a range of defect plots.
+	 * @version 1.1
 	 */
 	export class DefectCollection implements Iterable<Defect> {
 	    /**
@@ -1281,11 +1286,11 @@ declare module "piweb/data/defect" {
 	     */
 	    [Symbol.iterator](): Iterator<Defect>;
 	    /**
-	     * Returns an iter over all plots.
+	     * Returns an iter over all defects.
 	     */
 	    iter(): Iter<Defect>;
 	    /**
-	     * Gets the total number of plots stored in the collection.
+	     * Gets the total number of defects stored in the collection.
 	     */
 	    readonly length: number;
 	    /**
@@ -1322,7 +1327,8 @@ declare module "piweb/data/defect" {
 	/**
 	 * Returns all defect plots that are bound to the plot extension element with databinding. You can change the databinding in PiWeb Designer.
 	 * The defects are grouped by the measurement value they are associated to. Such a group or bundle is called [[DefectPlot]]. You can iterate
-	 * either the bundles or the defects directly by calling the [[getDefects]] method of the collection.
+	 * either the defects or the plots by calling the [[getPlots]] method of the collection.
+	 * @version 1.1
 	 */
 	export function getDefectCollection(): DefectCollection;
 }
@@ -2152,10 +2158,12 @@ declare module "piweb/data/volume" {
 	import { PlotPropertyCollection } from 'piweb/data/plot';
 	/**
 	 * Known volume directions / planes
+	 * @version 1.1
 	 */
 	export type VolumeDirection = "x" | "y" | "z";
 	/**
 	 * Describes a vector in the context of volumes, which can be accessed with a [[VolumeDirection]].
+	 * @version 1.1
 	 */
 	export class VolumeVector {
 	    /**
@@ -2187,6 +2195,7 @@ declare module "piweb/data/volume" {
 	}
 	/**
 	 * Describes the information about a single volume.
+	 * @version 1.1
 	 */
 	export class Volume {
 	    /**
@@ -2252,6 +2261,7 @@ declare module "piweb/data/volume" {
 	 *     ...
 	 * }
 	 * ```
+	 * @version 1.1
 	 */
 	export class VolumeCollection {
 	    /**
@@ -2302,15 +2312,18 @@ declare module "piweb/data/volume" {
 	 * function setVolumeSources( Iterable<RawDataEntity> sources ) : void;
 	 * function getVolumeSources() : Iterable<RawDataEntity>;
 	 * ```
+	 * @version 1.1
 	 */
 	export function getVolumeCollection(): VolumeCollection;
 	/**
 	 * Sets the raw data entities from which the plot extension fetches the volumes.
 	 * @param sources
+	 * @version 1.1
 	 */
 	export function setVolumeSources(sources: Iterable<RawDataEntity>): void;
 	/**
 	 * Returns the raw data entities from which the plot extension fetches the volumes.
+	 * @version 1.1
 	 */
 	export function getVolumeSources(): Iterable<RawDataEntity>;
 }
@@ -4273,6 +4286,7 @@ declare module "piweb/drawing/image/bitmap" {
 	}
 	/**
 	 * Determines the type and format of data that is stored in the image buffer.
+	 * @version 1.1
 	 */
 	export class BitmapDataLayout implements Serializable {
 	    /**
@@ -4305,6 +4319,9 @@ declare module "piweb/drawing/image/bitmap" {
 	     * @param format The pixel format.
 	     */
 	    constructor(pixelFormat: PixelFormat, pixelWidth: number, pixelHeight: number, dpiX?: number, dpiY?: number, stride?: number);
+	    /**
+	     * @private
+	     */
 	    static getBytesPerPixel(format: PixelFormat): number;
 	    /**
 	     * @private
@@ -4333,8 +4350,9 @@ declare module "piweb/drawing/image/bitmap" {
 	    /**
 	     * Loads a bitmap that is stored in the extension package. The specified path must be relative to the packages output directory, which has been specified with the `outDir` parameter in the `tsconfig.json` file.
 	     * @param path The relative path to a bitmap file.
+	     * @param layout In case the file contains raw pixel data, it's necessary to specify the data layout of the file.
 	     */
-	    static loadFromResource(path: string): Bitmap;
+	    static loadFromResource(path: string, layout?: BitmapDataLayout): Bitmap;
 	    /**
 	     * Loads the size and resolution of the image.
 	     */
@@ -4462,66 +4480,6 @@ declare module "piweb/drawing/image/settings" {
 	     * @param description Image drawing settings description.
 	     */
 	    static create(description?: ImageDrawingSettingsDescription): ImageDrawingSettings;
-	    /**
-	     * @private
-	     */
-	    serialize(target: BufferWriter): void;
-	}
-	/**
-	 * The list of known pixel formats of PiWeb
-	 */
-	export type PixelFormat = "rgb24" | "bgr24" | "rgba32" | "bgra32" | "gray8";
-	/**
-	 * @private
-	 */
-	export const enum PixelFormatId {
-	    RGB24 = 0,
-	    BGR24 = 1,
-	    RGBA32 = 2,
-	    BGRA32 = 3,
-	    GRAY8 = 4,
-	}
-	export interface ImageDataLayoutDescription {
-	    pixelFormat: PixelFormat;
-	    pixelWidth: number;
-	    pixelHeight: number;
-	    dpiX?: number;
-	    dpiY?: number;
-	}
-	/**
-	 * Determines the type and format of data that is stored in the image buffer.
-	 */
-	export class ImageDataLayout implements Serializable, ImageDataLayoutDescription {
-	    /**
-	     * Gets or sets the pixel format.
-	     */
-	    readonly pixelFormat: PixelFormat;
-	    /**
-	     * Gets or sets the line size.
-	     */
-	    readonly pixelWidth: number;
-	    /**
-	     * Gets or sets the line size.
-	     */
-	    readonly pixelHeight: number;
-	    /**
-	     * Gets or sets the resolution in x-direction.
-	     */
-	    readonly dpiX: number;
-	    /**
-	     * Gets or sets the resolution in y-direction.
-	     */
-	    readonly dpiY: number;
-	    /**
-	     * Initializes a new instance of the [[ImageDataLayout]] class.
-	     * @param format The pixel format (only needed for data type 'pixels').
-	     */
-	    constructor(format: PixelFormat, pixelWidth: number, pixelHeight: number, dpiX: number | undefined, dpiY: number | undefined);
-	    /**
-	     * Returns the image data layout that are defined by the specified description.
-	     * @param description Image data layout description.
-	     */
-	    static create(description: ImageDataLayoutDescription): ImageDataLayout;
 	    /**
 	     * @private
 	     */
