@@ -20,7 +20,12 @@ The package structure looks like the following:
 
 <img class="framed" src="gfx/folder_structure.png"/>
 
-**Hint:** You can download the result of the quickstart guide [here](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension.zip).
+**Hint:** You can download the result of the quickstart guide here:
+
+| PiWeb Version         | Download                          |
+|-----------------------|-----------------------------------|
+| 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.0.zip ) |
+| 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.1.zip)|
 
 ### 1. Create the folder `MyExtension` 
 
@@ -71,12 +76,14 @@ It contains necessary information for the typescript compiler, like input and ou
 
 ### 4. Create the folder `@types` and copy the file `piweb-1-0.d.ts` into it
 
-These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. You can find this file **[here](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/blob/master/piweb-1-0.d.ts)**. The folder `@types` was defined as the type root in the `tsconfig.json` file. Please note, that versions above 1.0 only work with newer PiWeb versions.
+These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. The folder `@types` was defined as the type root in the `tsconfig.json` file. Please note, that versions above 1.0 only work with newer PiWeb versions.
 
-| Extension API | PiWeb Version |
-|---------------|---------------|
-| 1.0 | 6.6 |
-| 1.1 | 7.2 |
+**Hint:** You can download the type definition file here:
+
+| PiWeb Version         | Download                          |
+|-----------------------|-----------------------------------|
+| 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-0.d.ts) |
+| 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-1.d.ts)|
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
