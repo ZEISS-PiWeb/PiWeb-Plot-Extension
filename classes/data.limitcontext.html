@@ -67,6 +67,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A wrapper around a <a href="data.limit.html">Limit</a> object with additional functions to determines status and limit usage.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -79,10 +86,10 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="data.limitcontext.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="data.limitcontext.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -111,21 +118,23 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
 					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Limit<wbr>Context<span class="tsd-signature-symbol">(</span>nominalValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, limit<span class="tsd-signature-symbol">: </span><a href="data.limit.html" class="tsd-signature-type">Limit</a>, lowerValueIsNatural<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, upperValueIsNatural<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, limitReference<span class="tsd-signature-symbol">: </span><a href="../modules/environment.html#limitusagereference" class="tsd-signature-type">LimitUsageReference</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.limitcontext.html" class="tsd-signature-type">LimitContext</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:439</li>
+									<li>Defined in data/inspection.ts:481</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -157,9 +166,14 @@
 					<div class="tsd-signature tsd-kind-icon">lower<wbr>Value<wbr>IsNatural<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:431</li>
+							<li>Defined in data/inspection.ts:467</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Determines whether the lower boundary of a limit is natural.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="nominalvalue" class="tsd-anchor"></a>
@@ -167,9 +181,14 @@
 					<div class="tsd-signature tsd-kind-icon">nominal<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:429</li>
+							<li>Defined in data/inspection.ts:457</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The nominal value, usually determined by attribute K2110.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="uppervalueisnatural" class="tsd-anchor"></a>
@@ -177,9 +196,14 @@
 					<div class="tsd-signature tsd-kind-icon">upper<wbr>Value<wbr>IsNatural<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:430</li>
+							<li>Defined in data/inspection.ts:462</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Determines whether the upper boundary of a limit is natural.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -194,9 +218,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:433</li>
+									<li>Defined in data/inspection.ts:472</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the lower limit.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -211,9 +240,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:437</li>
+									<li>Defined in data/inspection.ts:479</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the upper limit.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -231,16 +265,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:449</li>
+									<li>Defined in data/inspection.ts:499</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns true if the interval contains the specified value.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>value: <a href="data.measurementvalue.html" class="tsd-signature-type">MeasurementValue</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The value to be checked.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> precision: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.000001</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The epsilon for floating point comparison, e.g. 0.00001.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -257,16 +302,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:462</li>
+									<li>Defined in data/inspection.ts:517</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculates the normalized limit usage for a given limit.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>value: <a href="data.measurementvalue.html" class="tsd-signature-type">MeasurementValue</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The value to be checked.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> precision: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.000001</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The epsilon for floating point comparison, e.g. 0.00001.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span>
@@ -286,9 +342,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:479</li>
+									<li>Defined in data/inspection.ts:537</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a string in the format [lower; upper].</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
@@ -354,7 +415,7 @@
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
 						<a href="data.limitcontext.html" class="tsd-kind-icon">Limit<wbr>Context</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
 								<a href="data.limitcontext.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">

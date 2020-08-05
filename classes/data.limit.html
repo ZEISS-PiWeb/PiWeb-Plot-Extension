@@ -67,6 +67,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Represents a limit, e.g. tolerance or warning limit.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -97,6 +104,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.limit.html#containsvalue" class="tsd-kind-icon">contains<wbr>Value</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.limit.html#isunbounded" class="tsd-kind-icon">is<wbr>Unbounded</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,7 +122,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:627</li>
+									<li>Defined in data/inspection.ts:714</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -139,7 +147,7 @@
 					<div class="tsd-signature tsd-kind-icon">lower<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:625</li>
+							<li>Defined in data/inspection.ts:712</li>
 						</ul>
 					</aside>
 				</section>
@@ -149,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">mid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:627</li>
+							<li>Defined in data/inspection.ts:714</li>
 						</ul>
 					</aside>
 				</section>
@@ -159,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">upper<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/inspection.ts:626</li>
+							<li>Defined in data/inspection.ts:713</li>
 						</ul>
 					</aside>
 				</section>
@@ -176,18 +184,56 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/inspection.ts:643</li>
+									<li>Defined in data/inspection.ts:735</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns true if the interval contains the specified value.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The value to be checked.</p>
+									</div>
 								</li>
 								<li>
 									<h5>precision: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The epsilon for floating point comparison, e.g. 0.00001.</p>
+									</div>
 								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="isunbounded" class="tsd-anchor"></a>
+					<h3>is<wbr>Unbounded</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Unbounded<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in data/inspection.ts:745</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns true if the interval is unbounded, which means there is neither an upper boundary nor a lower boundary defined.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>1.2</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
@@ -267,6 +313,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="data.limit.html#containsvalue" class="tsd-kind-icon">contains<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="data.limit.html#isunbounded" class="tsd-kind-icon">is<wbr>Unbounded</a>
 							</li>
 						</ul>
 					</li>
