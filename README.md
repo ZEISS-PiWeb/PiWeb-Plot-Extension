@@ -54,7 +54,7 @@ The package configuration contains static parameters of your extension, such as 
 ```
 
 
-### 3. Create the file `tsconfic.json`
+### 3. Create the file `tsconfig.json`
 
 It contains necessary information for the typescript compiler, like input and output directories and compiler switches. Just copy the code below and you'll be fine.
 
@@ -84,6 +84,7 @@ These are the type definitions of the PiWeb plot extension interface. It will en
 |-----------------------|-----------------------------------|
 | 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-0.d.ts) |
 | 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-1.d.ts)|
+| 7.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-2.d.ts)|
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
