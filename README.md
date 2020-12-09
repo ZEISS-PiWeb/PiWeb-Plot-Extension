@@ -74,7 +74,7 @@ It contains necessary information for the typescript compiler, like input and ou
 }
 ```
 
-### 4. Create the folder `@types` and copy the file `piweb-1-0.d.ts` into it
+### 4. Create the folder `@types` and copy the file `piweb-1-x.d.ts` into it
 
 These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. The folder `@types` was defined as the type root in the `tsconfig.json` file. Please note, that versions above 1.0 only work with newer PiWeb versions.
 
@@ -85,6 +85,7 @@ These are the type definitions of the PiWeb plot extension interface. It will en
 | 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-0.d.ts) |
 | 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-1.d.ts)|
 | 7.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-2.d.ts)|
+| 7.8 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-3.d.ts)|
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
