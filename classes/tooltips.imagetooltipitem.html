@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LimitTypeId | PiWeb Plot Extension API Reference</title>
+	<title>ImageTooltipItem | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/environment.html">environment</a>
+					<a href="../modules/tooltips.html">tooltips</a>
 				</li>
 				<li>
-					<a href="environment.limittypeid.html">LimitTypeId</a>
+					<a href="tooltips.imagetooltipitem.html">ImageTooltipItem</a>
 				</li>
 			</ul>
-			<h1>Enumeration LimitTypeId</h1>
+			<h1>Class ImageTooltipItem</h1>
 		</div>
 	</div>
 </header>
@@ -71,63 +71,122 @@
 				<div class="tsd-comment tsd-typography">
 				</div>
 			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ImageTooltipItem</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">Serializable</span></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Enumeration members</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported"><a href="environment.limittypeid.html#control" class="tsd-kind-icon">Control</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported"><a href="environment.limittypeid.html#scrap" class="tsd-kind-icon">Scrap</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported"><a href="environment.limittypeid.html#tolerance" class="tsd-kind-icon">Tolerance</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported"><a href="environment.limittypeid.html#warning" class="tsd-kind-icon">Warning</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported"><a href="tooltips.imagetooltipitem.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="tooltips.imagetooltipitem.html#image" class="tsd-kind-icon">image</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-not-exported"><a href="tooltips.imagetooltipitem.html#name" class="tsd-kind-icon">name</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="tooltips.imagetooltipitem.html#serialize" class="tsd-kind-icon">serialize</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-					<a name="control" class="tsd-anchor"></a>
-					<h3>Control</h3>
-					<div class="tsd-signature tsd-kind-icon">Control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;2</span></div>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Image<wbr>Tooltip<wbr>Item<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, image<span class="tsd-signature-symbol">: </span><a href="drawing.bitmap.html" class="tsd-signature-type">Bitmap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="tooltips.imagetooltipitem.html" class="tsd-signature-type">ImageTooltipItem</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in tooltips.ts:402</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>image: <a href="drawing.bitmap.html" class="tsd-signature-type">Bitmap</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="tooltips.imagetooltipitem.html" class="tsd-signature-type">ImageTooltipItem</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+					<a name="image" class="tsd-anchor"></a>
+					<h3>image</h3>
+					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <a href="drawing.bitmap.html" class="tsd-signature-type">Bitmap</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in environment.ts:477</li>
+							<li>Defined in tooltips.ts:402</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-					<a name="scrap" class="tsd-anchor"></a>
-					<h3>Scrap</h3>
-					<div class="tsd-signature tsd-kind-icon">Scrap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;3</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in environment.ts:478</li>
+							<li>Defined in tooltips.ts:401</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-					<a name="tolerance" class="tsd-anchor"></a>
-					<h3>Tolerance</h3>
-					<div class="tsd-signature tsd-kind-icon">Tolerance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;0</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in environment.ts:475</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-					<a name="warning" class="tsd-anchor"></a>
-					<h3>Warning</h3>
-					<div class="tsd-signature tsd-kind-icon">Warning<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;1</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in environment.ts:476</li>
-						</ul>
-					</aside>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+					<a name="serialize" class="tsd-anchor"></a>
+					<h3>serialize</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">serialize<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BufferWriter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in tooltips.ts:411</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>target: <span class="tsd-signature-type">BufferWriter</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -146,7 +205,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/drawing.html">drawing</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/environment.html">environment</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -173,34 +232,81 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/tips.html">tips</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/tooltips.html">tooltips</a>
+						<ul>
+							<li class=" tsd-kind-module tsd-parent-kind-external-module tsd-is-private">
+								<a href="../modules/tooltips.knownclassnames.html">known<wbr>Class<wbr>Names</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="../enums/tooltips.tooltipitemid.html" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="../enums/tooltips.tooltipitemtypeid.html" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Type<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.characteristictooltipitem.html" class="tsd-kind-icon">Characteristic<wbr>Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.defecttooltipitem.html" class="tsd-kind-icon">Defect<wbr>Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.drawingtooltipitem.html" class="tsd-kind-icon">Drawing<wbr>Tooltip<wbr>Item</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
-						<a href="environment.limittypeid.html" class="tsd-kind-icon">Limit<wbr>Type<wbr>Id</a>
+					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.imagetooltipitem.html" class="tsd-kind-icon">Image<wbr>Tooltip<wbr>Item</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-								<a href="environment.limittypeid.html#control" class="tsd-kind-icon">Control</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-not-exported">
+								<a href="tooltips.imagetooltipitem.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-								<a href="environment.limittypeid.html#scrap" class="tsd-kind-icon">Scrap</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+								<a href="tooltips.imagetooltipitem.html#image" class="tsd-kind-icon">image</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-								<a href="environment.limittypeid.html#tolerance" class="tsd-kind-icon">Tolerance</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-not-exported">
+								<a href="tooltips.imagetooltipitem.html#name" class="tsd-kind-icon">name</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum tsd-is-not-exported">
-								<a href="environment.limittypeid.html#warning" class="tsd-kind-icon">Warning</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+								<a href="tooltips.imagetooltipitem.html#serialize" class="tsd-kind-icon">serialize</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.measurementtooltipitem.html" class="tsd-kind-icon">Measurement<wbr>Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.measurementvaluetooltipitem.html" class="tsd-kind-icon">Measurement<wbr>Value<wbr>Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.parttooltipitem.html" class="tsd-kind-icon">Part<wbr>Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="tooltips.texttooltipitem.html" class="tsd-kind-icon">Text<wbr>Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="tooltips.tooltip.html" class="tsd-kind-icon">Tooltip</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/tooltips.html#tooltipitem" class="tsd-kind-icon">Tooltip<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/tooltips.html#tooltipitemtype" class="tsd-kind-icon">Tooltip<wbr>Item<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
+						<a href="../modules/tooltips.html#mapitemtype" class="tsd-kind-icon">map<wbr>Item<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/tooltips.html#placetooltip" class="tsd-kind-icon">place<wbr>Tooltip</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
