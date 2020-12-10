@@ -136,6 +136,18 @@
 </code></pre>
 					<h3 id="2-precompile">2. Precompile</h3>
 					<p>Open a console in your packages root directory and run the command <code>tsc</code>. In case the command is unknown, you&#39;ll have to install typescript first. Your computer might need to restart after the installation, to add tsc to your path variable.</p>
+					<h2 id="minimize-host-method-invocations">Minimize host method invocations</h2>
+					<p>The plot engine interacts with its host via interfaces. Whenever the script invokes a method of such an interface, there&#39;s a very little delay. While the performance impact of a hand full of calls will be barely measurable, a lot of it will slow your plot down significantly. Methods that perform a host invocation are marked with the <code>host</code> tag throughout the documentation. Most prominently, this is...</p>
+					<ul>
+						<li>fetching data</li>
+						<li>logging</li>
+						<li>measuring text, geometries and bitmaps</li>
+						<li>accessing designer properties</li>
+						<li>formatting and parsing</li>
+						<li>accessing environment variables</li>
+					</ul>
+					<p>On the other hand, some important functionality will be handled with a single batch call. Data is usually transferred in a single binary blob, as well as your whole drawing.
+					To optimize your plots performance, try to remove unnecessary logging calls and make sure that immutable values, such as the size of your plot, is only fetched once per draw call.</p>
 				</div>
 			</section>
 		</div>
