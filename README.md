@@ -26,6 +26,9 @@ The package structure looks like the following:
 |-----------------------|-----------------------------------|
 | 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.0.zip ) |
 | 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.1.zip)|
+| 7.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.2.zip)|
+| 7.8 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.3.zip)|
+| 8.0 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.4.zip)|
 
 ### 1. Create the folder `MyExtension` 
 
@@ -86,6 +89,7 @@ These are the type definitions of the PiWeb plot extension interface. It will en
 | 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-1.d.ts)|
 | 7.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-2.d.ts)|
 | 7.8 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-3.d.ts)|
+| 8.0 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-4.d.ts)|
 
 ### 5. Create the folder `src` and create the file `index.ts` in it
 
