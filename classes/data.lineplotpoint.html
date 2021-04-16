@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Defect | PiWeb Plot Extension API Reference</title>
+	<title>LinePlotPoint | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/data.html">data</a>
 				</li>
 				<li>
-					<a href="data.defect.html">Defect</a>
+					<a href="data.lineplotpoint.html">LinePlotPoint</a>
 				</li>
 			</ul>
-			<h1>Class Defect</h1>
+			<h1>Class LinePlotPoint</h1>
 		</div>
 	</div>
 </header>
@@ -70,11 +70,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Represents a defect</p>
+						<p>Represents a point in a line plot.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>version</dt>
-						<dd><p>1.1</p>
+						<dd><p>1.4</p>
 						</dd>
 					</dl>
 				</div>
@@ -83,7 +83,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Defect</span>
+						<a href="data.plotpoint.html" class="tsd-signature-type">PlotPoint</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">LinePlotPoint</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -94,19 +99,17 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="data.defect.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-private"><a href="data.lineplotpoint.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#index" class="tsd-kind-icon">index</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#plot" class="tsd-kind-icon">plot</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#position" class="tsd-kind-icon">position</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#properties" class="tsd-kind-icon">properties</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#size" class="tsd-kind-icon">size</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#tolerance" class="tsd-kind-icon">tolerance</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#voxels" class="tsd-kind-icon">voxels</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.lineplotpoint.html#deviation" class="tsd-kind-icon">deviation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.lineplotpoint.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="data.lineplotpoint.html#properties" class="tsd-kind-icon">properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="data.lineplotpoint.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="data.lineplotpoint.html#tolerance" class="tsd-kind-icon">tolerance</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,17 +117,18 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<span class="tsd-signature-symbol">(</span>plot<span class="tsd-signature-symbol">: </span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, position<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, size<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, voxels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.voxel.html" class="tsd-signature-type">Voxel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defect.html" class="tsd-signature-type">Defect</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Line<wbr>Plot<wbr>Point<span class="tsd-signature-symbol">(</span>tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PlotPointState.None</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Outlier</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Overlap</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.TiltedForce</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.TiltedAcceleration</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.EvaluationRange</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Duplicate</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.IgnoreGroove1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.IgnoreGroove2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.AirScanning</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Virtual</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Gap</span>, position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, deviation<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.lineplotpoint.html" class="tsd-signature-type">LinePlotPoint</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="data.plotpoint.html">PlotPoint</a>.<a href="data.plotpoint.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in data/defect.ts:68</li>
+									<li>Defined in data/plot/point.ts:254</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -132,28 +136,22 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>plot: <a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></h5>
-								</li>
-								<li>
-									<h5>index: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>position: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-								<li>
-									<h5>size: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-								<li>
 									<h5>tolerance: <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 								<li>
 									<h5>properties: <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></h5>
 								</li>
 								<li>
-									<h5>voxels: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.voxel.html" class="tsd-signature-type">Voxel</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>state: <span class="tsd-signature-type">PlotPointState.None</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Outlier</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Overlap</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.TiltedForce</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.TiltedAcceleration</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.EvaluationRange</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Duplicate</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.IgnoreGroove1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.IgnoreGroove2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.AirScanning</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Virtual</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Gap</span></h5>
+								</li>
+								<li>
+									<h5>position: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>deviation: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="data.defect.html" class="tsd-signature-type">Defect</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="data.lineplotpoint.html" class="tsd-signature-type">LinePlotPoint</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -161,107 +159,80 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="index" class="tsd-anchor"></a>
-					<h3>index</h3>
-					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="deviation" class="tsd-anchor"></a>
+					<h3>deviation</h3>
+					<div class="tsd-signature tsd-kind-icon">deviation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:91</li>
+							<li>Defined in data/plot/point.ts:280</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The index of the defect in the list of defects of the defect plot.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="plot" class="tsd-anchor"></a>
-					<h3>plot</h3>
-					<div class="tsd-signature tsd-kind-icon">plot<span class="tsd-signature-symbol">:</span> <a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in data/defect.ts:86</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The plot to which this defect is attached. Can be used to obtain the reference system and global tolerances, etc..</p>
+							<p>Deviation.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="position" class="tsd-anchor"></a>
 					<h3>position</h3>
-					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
+					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:96</li>
+							<li>Defined in data/plot/point.ts:275</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The corner of the defects bounding box that is closest to the origin.</p>
+							<p>Position relative to the position of the <code>geometry</code>.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="properties" class="tsd-anchor"></a>
 					<h3>properties</h3>
 					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="data.plotpoint.html">PlotPoint</a>.<a href="data.plotpoint.html#properties">properties</a></p>
 						<ul>
-							<li>Defined in data/defect.ts:111</li>
+							<li>Defined in data/plot/point.ts:97</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The list of custom key value pairs of this defect.</p>
+							<p>The properties of this point.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="size" class="tsd-anchor"></a>
-					<h3>size</h3>
-					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="state" class="tsd-anchor"></a>
+					<h3>state</h3>
+					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PlotPointState.None</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Outlier</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Overlap</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.TiltedForce</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.TiltedAcceleration</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.EvaluationRange</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Duplicate</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.IgnoreGroove1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.IgnoreGroove2</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.AirScanning</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Virtual</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">PlotPointState.Gap</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="data.plotpoint.html">PlotPoint</a>.<a href="data.plotpoint.html#state">state</a></p>
 						<ul>
-							<li>Defined in data/defect.ts:101</li>
+							<li>Defined in data/plot/point.ts:102</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The size of the defects bounding box.</p>
+							<p>The state of this point.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tolerance" class="tsd-anchor"></a>
 					<h3>tolerance</h3>
 					<div class="tsd-signature tsd-kind-icon">tolerance<span class="tsd-signature-symbol">:</span> <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="data.plotpoint.html">PlotPoint</a>.<a href="data.plotpoint.html#tolerance">tolerance</a></p>
 						<ul>
-							<li>Defined in data/defect.ts:106</li>
+							<li>Defined in data/plot/point.ts:92</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The tolerance for this defect. If it is <code>undefined</code>, there&#39;s still a tolerance property on the <a href="data.defectplot.html">DefectPlot</a>.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="voxels" class="tsd-anchor"></a>
-					<h3>voxels</h3>
-					<div class="tsd-signature tsd-kind-icon">voxels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.voxel.html" class="tsd-signature-type">Voxel</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in data/defect.ts:116</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The voxels that define this defect.</p>
+							<p>The tolerance of this particular point. Fallback to the plot tolerance in case it&#39;s <code>undefined</code>.</p>
 						</div>
 					</div>
 				</section>
@@ -324,31 +295,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="data.defect.html" class="tsd-kind-icon">Defect</a>
+						<a href="data.lineplotpoint.html" class="tsd-kind-icon">Line<wbr>Plot<wbr>Point</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-								<a href="data.defect.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-private">
+								<a href="data.lineplotpoint.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#index" class="tsd-kind-icon">index</a>
+								<a href="data.lineplotpoint.html#deviation" class="tsd-kind-icon">deviation</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#plot" class="tsd-kind-icon">plot</a>
+								<a href="data.lineplotpoint.html#position" class="tsd-kind-icon">position</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#position" class="tsd-kind-icon">position</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="data.lineplotpoint.html#properties" class="tsd-kind-icon">properties</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#properties" class="tsd-kind-icon">properties</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="data.lineplotpoint.html#state" class="tsd-kind-icon">state</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#size" class="tsd-kind-icon">size</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#tolerance" class="tsd-kind-icon">tolerance</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#voxels" class="tsd-kind-icon">voxels</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="data.lineplotpoint.html#tolerance" class="tsd-kind-icon">tolerance</a>
 							</li>
 						</ul>
 					</li>

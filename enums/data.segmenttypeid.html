@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PlotPropertyTypeId | PiWeb Plot Extension API Reference</title>
+	<title>SegmentTypeId | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/data.html">data</a>
 				</li>
 				<li>
-					<a href="data.plotpropertytypeid.html">PlotPropertyTypeId</a>
+					<a href="data.segmenttypeid.html">SegmentTypeId</a>
 				</li>
 			</ul>
-			<h1>Enumeration PlotPropertyTypeId</h1>
+			<h1>Enumeration SegmentTypeId</h1>
 		</div>
 	</div>
 </header>
@@ -78,11 +78,20 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpropertytypeid.html#date" class="tsd-kind-icon">Date</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpropertytypeid.html#float" class="tsd-kind-icon">Float</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpropertytypeid.html#integer" class="tsd-kind-icon">Integer</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpropertytypeid.html#string" class="tsd-kind-icon">String</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpropertytypeid.html#timespan" class="tsd-kind-icon">Time<wbr>Span</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#actualmeasureprofile" class="tsd-kind-icon">Actual<wbr>Measure<wbr>Profile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#actualprofile" class="tsd-kind-icon">Actual<wbr>Profile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#actualreferenceprofile" class="tsd-kind-icon">Actual<wbr>Reference<wbr>Profile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#axis" class="tsd-kind-icon">Axis</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#bendingcircle" class="tsd-kind-icon">Bending<wbr>Circle</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#circle" class="tsd-kind-icon">Circle</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#helix" class="tsd-kind-icon">Helix</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#line" class="tsd-kind-icon">Line</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#maxgappoint" class="tsd-kind-icon">Max<wbr>Gap<wbr>Point</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#nominalmeasureprofile" class="tsd-kind-icon">Nominal<wbr>Measure<wbr>Profile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#nominalprofile" class="tsd-kind-icon">Nominal<wbr>Profile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#nominalreferenceprofile" class="tsd-kind-icon">Nominal<wbr>Reference<wbr>Profile</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#none" class="tsd-kind-icon">None</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.segmenttypeid.html#touchingpoint" class="tsd-kind-icon">Touching<wbr>Point</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,52 +100,142 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Enumeration members</h2>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="date" class="tsd-anchor"></a>
-					<h3>Date</h3>
-					<div class="tsd-signature tsd-kind-icon">Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;3</span></div>
+					<a name="actualmeasureprofile" class="tsd-anchor"></a>
+					<h3>Actual<wbr>Measure<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">Actual<wbr>Measure<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;11</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/property.ts:20</li>
+							<li>Defined in data/plot/segment.ts:36</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="float" class="tsd-anchor"></a>
-					<h3>Float</h3>
-					<div class="tsd-signature tsd-kind-icon">Float<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;2</span></div>
+					<a name="actualprofile" class="tsd-anchor"></a>
+					<h3>Actual<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">Actual<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;13</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/property.ts:19</li>
+							<li>Defined in data/plot/segment.ts:38</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="integer" class="tsd-anchor"></a>
-					<h3>Integer</h3>
-					<div class="tsd-signature tsd-kind-icon">Integer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;1</span></div>
+					<a name="actualreferenceprofile" class="tsd-anchor"></a>
+					<h3>Actual<wbr>Reference<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">Actual<wbr>Reference<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;10</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/property.ts:18</li>
+							<li>Defined in data/plot/segment.ts:35</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="string" class="tsd-anchor"></a>
-					<h3>String</h3>
-					<div class="tsd-signature tsd-kind-icon">String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+					<a name="axis" class="tsd-anchor"></a>
+					<h3>Axis</h3>
+					<div class="tsd-signature tsd-kind-icon">Axis<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;7</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/property.ts:17</li>
+							<li>Defined in data/plot/segment.ts:32</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="timespan" class="tsd-anchor"></a>
-					<h3>Time<wbr>Span</h3>
-					<div class="tsd-signature tsd-kind-icon">Time<wbr>Span<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;4</span></div>
+					<a name="bendingcircle" class="tsd-anchor"></a>
+					<h3>Bending<wbr>Circle</h3>
+					<div class="tsd-signature tsd-kind-icon">Bending<wbr>Circle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;6</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/property.ts:21</li>
+							<li>Defined in data/plot/segment.ts:31</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="circle" class="tsd-anchor"></a>
+					<h3>Circle</h3>
+					<div class="tsd-signature tsd-kind-icon">Circle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;1</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:26</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="helix" class="tsd-anchor"></a>
+					<h3>Helix</h3>
+					<div class="tsd-signature tsd-kind-icon">Helix<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;3</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:28</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="line" class="tsd-anchor"></a>
+					<h3>Line</h3>
+					<div class="tsd-signature tsd-kind-icon">Line<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;2</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:27</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="maxgappoint" class="tsd-anchor"></a>
+					<h3>Max<wbr>Gap<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">Max<wbr>Gap<wbr>Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;5</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:30</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="nominalmeasureprofile" class="tsd-anchor"></a>
+					<h3>Nominal<wbr>Measure<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">Nominal<wbr>Measure<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;9</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:34</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="nominalprofile" class="tsd-anchor"></a>
+					<h3>Nominal<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">Nominal<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;12</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:37</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="nominalreferenceprofile" class="tsd-anchor"></a>
+					<h3>Nominal<wbr>Reference<wbr>Profile</h3>
+					<div class="tsd-signature tsd-kind-icon">Nominal<wbr>Reference<wbr>Profile<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;8</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="none" class="tsd-anchor"></a>
+					<h3>None</h3>
+					<div class="tsd-signature tsd-kind-icon">None<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:25</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="touchingpoint" class="tsd-anchor"></a>
+					<h3>Touching<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">Touching<wbr>Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;4</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/segment.ts:29</li>
 						</ul>
 					</aside>
 				</section>
@@ -199,22 +298,49 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-enum tsd-parent-kind-external-module tsd-is-private">
-						<a href="data.plotpropertytypeid.html" class="tsd-kind-icon">Plot<wbr>Property<wbr>Type<wbr>Id</a>
+						<a href="data.segmenttypeid.html" class="tsd-kind-icon">Segment<wbr>Type<wbr>Id</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="data.plotpropertytypeid.html#date" class="tsd-kind-icon">Date</a>
+								<a href="data.segmenttypeid.html#actualmeasureprofile" class="tsd-kind-icon">Actual<wbr>Measure<wbr>Profile</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="data.plotpropertytypeid.html#float" class="tsd-kind-icon">Float</a>
+								<a href="data.segmenttypeid.html#actualprofile" class="tsd-kind-icon">Actual<wbr>Profile</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="data.plotpropertytypeid.html#integer" class="tsd-kind-icon">Integer</a>
+								<a href="data.segmenttypeid.html#actualreferenceprofile" class="tsd-kind-icon">Actual<wbr>Reference<wbr>Profile</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="data.plotpropertytypeid.html#string" class="tsd-kind-icon">String</a>
+								<a href="data.segmenttypeid.html#axis" class="tsd-kind-icon">Axis</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="data.plotpropertytypeid.html#timespan" class="tsd-kind-icon">Time<wbr>Span</a>
+								<a href="data.segmenttypeid.html#bendingcircle" class="tsd-kind-icon">Bending<wbr>Circle</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#circle" class="tsd-kind-icon">Circle</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#helix" class="tsd-kind-icon">Helix</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#line" class="tsd-kind-icon">Line</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#maxgappoint" class="tsd-kind-icon">Max<wbr>Gap<wbr>Point</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#nominalmeasureprofile" class="tsd-kind-icon">Nominal<wbr>Measure<wbr>Profile</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#nominalprofile" class="tsd-kind-icon">Nominal<wbr>Profile</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#nominalreferenceprofile" class="tsd-kind-icon">Nominal<wbr>Reference<wbr>Profile</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#none" class="tsd-kind-icon">None</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.segmenttypeid.html#touchingpoint" class="tsd-kind-icon">Touching<wbr>Point</a>
 							</li>
 						</ul>
 					</li>

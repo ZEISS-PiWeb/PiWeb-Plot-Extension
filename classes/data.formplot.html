@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vector | PiWeb Plot Extension API Reference</title>
+	<title>Formplot | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/data.html">data</a>
 				</li>
 				<li>
-					<a href="data.vector.html">Vector</a>
+					<a href="data.formplot.html">Formplot</a>
 				</li>
 			</ul>
-			<h1>Class Vector</h1>
+			<h1>Class Formplot</h1>
 		</div>
 	</div>
 </header>
@@ -70,15 +70,21 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A vector is a tuple of three numbers that can act as position, size and direction.</p>
+						<p>Represents a formplot. The plot type can be determined from the <a href="data.formplot.html#type">Formplot.type</a> property. Depending on the type,
+						the plot contains different point formats and geometry information.</p>
 					</div>
+					<dl class="tsd-comment-tags">
+						<dt>version</dt>
+						<dd><p>1.4</p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Vector</span>
+						<span class="target">Formplot</span>
 					</li>
 				</ul>
 			</section>
@@ -89,15 +95,20 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="data.vector.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="data.formplot.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.vector.html#x" class="tsd-kind-icon">x</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.vector.html#y" class="tsd-kind-icon">y</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.vector.html#z" class="tsd-kind-icon">z</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.formplot.html#actual" class="tsd-kind-icon">actual</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="data.formplot.html#characteristicid" class="tsd-kind-icon">characteristic<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="data.formplot.html#measurementid" class="tsd-kind-icon">measurement<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.formplot.html#nominal" class="tsd-kind-icon">nominal</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.formplot.html#properties" class="tsd-kind-icon">properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.formplot.html#segments" class="tsd-kind-icon">segments</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.formplot.html#tolerance" class="tsd-kind-icon">tolerance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.formplot.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,28 +120,43 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Vector<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, z<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Formplot<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><a href="../modules/data.html#formplottype" class="tsd-signature-type">FormplotType</a>, measurementId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, characteristicId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, nominal<span class="tsd-signature-symbol">: </span><a href="data.plotgeometry.html" class="tsd-signature-type">PlotGeometry</a>, actual<span class="tsd-signature-symbol">: </span><a href="data.plotgeometry.html" class="tsd-signature-type">PlotGeometry</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, segments<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.segment.html" class="tsd-signature-type">Segment</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/plot/vector.ts:10</li>
+									<li>Defined in data/plot.ts:79</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<h5>type: <a href="../modules/data.html#formplottype" class="tsd-signature-type">FormplotType</a></h5>
 								</li>
 								<li>
-									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<h5>measurementId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 								<li>
-									<h5>z: <span class="tsd-signature-type">number</span></h5>
+									<h5>characteristicId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+								</li>
+								<li>
+									<h5>nominal: <a href="data.plotgeometry.html" class="tsd-signature-type">PlotGeometry</a></h5>
+								</li>
+								<li>
+									<h5>actual: <a href="data.plotgeometry.html" class="tsd-signature-type">PlotGeometry</a></h5>
+								</li>
+								<li>
+									<h5>tolerance: <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+								</li>
+								<li>
+									<h5>properties: <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></h5>
+								</li>
+								<li>
+									<h5>segments: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.segment.html" class="tsd-signature-type">Segment</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="data.vector.html" class="tsd-signature-type">Vector</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="data.formplot.html" class="tsd-signature-type">Formplot</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -138,47 +164,116 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="x" class="tsd-anchor"></a>
-					<h3>x</h3>
-					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="actual" class="tsd-anchor"></a>
+					<h3>actual</h3>
+					<div class="tsd-signature tsd-kind-icon">actual<span class="tsd-signature-symbol">:</span> <a href="data.plotgeometry.html" class="tsd-signature-type">PlotGeometry</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/vector.ts:20</li>
+							<li>Defined in data/plot.ts:124</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>X-Coordinate.</p>
+							<p>Actual geometry of this plot.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="characteristicid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> characteristic<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">characteristic<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot.ts:114</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="measurementid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> measurement<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">measurement<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot.ts:109</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="nominal" class="tsd-anchor"></a>
+					<h3>nominal</h3>
+					<div class="tsd-signature tsd-kind-icon">nominal<span class="tsd-signature-symbol">:</span> <a href="data.plotgeometry.html" class="tsd-signature-type">PlotGeometry</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot.ts:119</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Nominal geometry of this plot.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="y" class="tsd-anchor"></a>
-					<h3>y</h3>
-					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="properties" class="tsd-anchor"></a>
+					<h3>properties</h3>
+					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/vector.ts:25</li>
+							<li>Defined in data/plot.ts:134</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Y-Coordinate.</p>
+							<p>The list of custom key value pairs of this plot.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="z" class="tsd-anchor"></a>
-					<h3>z</h3>
-					<div class="tsd-signature tsd-kind-icon">z<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="segments" class="tsd-anchor"></a>
+					<h3>segments</h3>
+					<div class="tsd-signature tsd-kind-icon">segments<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.segment.html" class="tsd-signature-type">Segment</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/plot/vector.ts:30</li>
+							<li>Defined in data/plot.ts:139</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Z-Coordinate.</p>
+							<p>The segments that are listed in this plot.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="tolerance" class="tsd-anchor"></a>
+					<h3>tolerance</h3>
+					<div class="tsd-signature tsd-kind-icon">tolerance<span class="tsd-signature-symbol">:</span> <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot.ts:129</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Global tolerance for all defects in this plot.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../modules/data.html#formplottype" class="tsd-signature-type">FormplotType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot.ts:104</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The formplot type.</p>
 						</div>
 					</div>
 				</section>
@@ -241,19 +336,34 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="data.vector.html" class="tsd-kind-icon">Vector</a>
+						<a href="data.formplot.html" class="tsd-kind-icon">Formplot</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="data.vector.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="data.formplot.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.vector.html#x" class="tsd-kind-icon">x</a>
+								<a href="data.formplot.html#actual" class="tsd-kind-icon">actual</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="data.formplot.html#characteristicid" class="tsd-kind-icon">characteristic<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="data.formplot.html#measurementid" class="tsd-kind-icon">measurement<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.vector.html#y" class="tsd-kind-icon">y</a>
+								<a href="data.formplot.html#nominal" class="tsd-kind-icon">nominal</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.vector.html#z" class="tsd-kind-icon">z</a>
+								<a href="data.formplot.html#properties" class="tsd-kind-icon">properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.formplot.html#segments" class="tsd-kind-icon">segments</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.formplot.html#tolerance" class="tsd-kind-icon">tolerance</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.formplot.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>

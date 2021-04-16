@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LineDescription | PiWeb Plot Extension API Reference</title>
+	<title>ElementSystem | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/drawing.html">drawing</a>
+					<a href="../modules/data.html">data</a>
 				</li>
 				<li>
-					<a href="drawing.linedescription-1.html">LineDescription</a>
+					<a href="data.elementsystem.html">ElementSystem</a>
 				</li>
 			</ul>
-			<h1>Interface LineDescription</h1>
+			<h1>Class ElementSystem</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Can be used to initialize a <a href="../classes/drawing.linegeometry.html">LineGeometry</a>.</p>
+						<p>Describes the transformation of the plot points.</p>
 					</div>
 				</div>
 			</section>
@@ -78,12 +78,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LineDescription</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="drawing.linegeometrydescription.html" class="tsd-signature-type">LineGeometryDescription</a>
-							</li>
-						</ul>
+						<span class="target">ElementSystem</span>
 					</li>
 				</ul>
 			</section>
@@ -91,48 +86,122 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="data.elementsystem.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="drawing.linedescription-1.html#end" class="tsd-kind-icon">end</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="drawing.linedescription-1.html#start" class="tsd-kind-icon">start</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="drawing.linedescription-1.html#transform" class="tsd-kind-icon">transform</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.elementsystem.html#axis1" class="tsd-kind-icon">axis1</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.elementsystem.html#axis2" class="tsd-kind-icon">axis2</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.elementsystem.html#axis3" class="tsd-kind-icon">axis3</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.elementsystem.html#origin" class="tsd-kind-icon">origin</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Element<wbr>System<span class="tsd-signature-symbol">(</span>axis1<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, axis2<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, axis3<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, origin<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.elementsystem.html" class="tsd-signature-type">ElementSystem</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in data/plot/geometry.ts:60</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>axis1: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>axis2: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>axis3: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>origin: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="data.elementsystem.html" class="tsd-signature-type">ElementSystem</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="end" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> end</h3>
-					<div class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">:</span> <a href="../modules/drawing.html#pointdescription" class="tsd-signature-type">PointDescription</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="axis1" class="tsd-anchor"></a>
+					<h3>axis1</h3>
+					<div class="tsd-signature tsd-kind-icon">axis1<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in drawing/geometry/geometries.ts:117</li>
+							<li>Defined in data/plot/geometry.ts:75</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>First column of the 4x3 element system</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="start" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> start</h3>
-					<div class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">:</span> <a href="../modules/drawing.html#pointdescription" class="tsd-signature-type">PointDescription</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="axis2" class="tsd-anchor"></a>
+					<h3>axis2</h3>
+					<div class="tsd-signature tsd-kind-icon">axis2<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in drawing/geometry/geometries.ts:116</li>
+							<li>Defined in data/plot/geometry.ts:80</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Second column of the 4x3 element system</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="transform" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> transform</h3>
-					<div class="tsd-signature tsd-kind-icon">transform<span class="tsd-signature-symbol">:</span> <a href="../modules/drawing.html#transformdescription" class="tsd-signature-type">TransformDescription</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="axis3" class="tsd-anchor"></a>
+					<h3>axis3</h3>
+					<div class="tsd-signature tsd-kind-icon">axis3<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in drawing/geometry/geometries.ts:118</li>
+							<li>Defined in data/plot/geometry.ts:85</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Third column of the 4x3 element system</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="origin" class="tsd-anchor"></a>
+					<h3>origin</h3>
+					<div class="tsd-signature tsd-kind-icon">origin<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/geometry.ts:90</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Fourth column of the 4x3 element system</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -145,10 +214,15 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/index.html">Index</a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/data.html">data</a>
-					</li>
 					<li class="current tsd-kind-external-module">
+						<a href="../modules/data.html">data</a>
+						<ul>
+							<li class=" tsd-kind-module tsd-parent-kind-external-module">
+								<a href="../modules/data.wellknownkeys.html">Well<wbr>Known<wbr>Keys</a>
+							</li>
+						</ul>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/drawing.html">drawing</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -187,17 +261,23 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="drawing.linedescription-1.html" class="tsd-kind-icon">Line<wbr>Description</a>
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="data.elementsystem.html" class="tsd-kind-icon">Element<wbr>System</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="drawing.linedescription-1.html#end" class="tsd-kind-icon">end</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
+								<a href="data.elementsystem.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="drawing.linedescription-1.html#start" class="tsd-kind-icon">start</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.elementsystem.html#axis1" class="tsd-kind-icon">axis1</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="drawing.linedescription-1.html#transform" class="tsd-kind-icon">transform</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.elementsystem.html#axis2" class="tsd-kind-icon">axis2</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.elementsystem.html#axis3" class="tsd-kind-icon">axis3</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.elementsystem.html#origin" class="tsd-kind-icon">origin</a>
 							</li>
 						</ul>
 					</li>

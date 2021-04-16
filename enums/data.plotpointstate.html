@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Defect | PiWeb Plot Extension API Reference</title>
+	<title>PlotPointState | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/data.html">data</a>
 				</li>
 				<li>
-					<a href="data.defect.html">Defect</a>
+					<a href="data.plotpointstate.html">PlotPointState</a>
 				</li>
 			</ul>
-			<h1>Class Defect</h1>
+			<h1>Enumeration PlotPointState</h1>
 		</div>
 	</div>
 </header>
@@ -70,198 +70,218 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Represents a defect</p>
+						<p>Known states of points. These are flags and can appear combined.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>version</dt>
-						<dd><p>1.1</p>
+						<dd><p>1.4</p>
 						</dd>
 					</dl>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">Defect</span>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="data.defect.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#index" class="tsd-kind-icon">index</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#plot" class="tsd-kind-icon">plot</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#position" class="tsd-kind-icon">position</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#properties" class="tsd-kind-icon">properties</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#size" class="tsd-kind-icon">size</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#tolerance" class="tsd-kind-icon">tolerance</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defect.html#voxels" class="tsd-kind-icon">voxels</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#airscanning" class="tsd-kind-icon">Air<wbr>Scanning</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#duplicate" class="tsd-kind-icon">Duplicate</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#evaluationrange" class="tsd-kind-icon">Evaluation<wbr>Range</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#gap" class="tsd-kind-icon">Gap</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#ignoregroove1" class="tsd-kind-icon">Ignore<wbr>Groove1</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#ignoregroove2" class="tsd-kind-icon">Ignore<wbr>Groove2</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#none" class="tsd-kind-icon">None</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#outlier" class="tsd-kind-icon">Outlier</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#overlap" class="tsd-kind-icon">Overlap</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#tiltedacceleration" class="tsd-kind-icon">Tilted<wbr>Acceleration</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#tiltedforce" class="tsd-kind-icon">Tilted<wbr>Force</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="data.plotpointstate.html#virtual" class="tsd-kind-icon">Virtual</a></li>
 							</ul>
 						</section>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<span class="tsd-signature-symbol">(</span>plot<span class="tsd-signature-symbol">: </span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, position<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, size<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, voxels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.voxel.html" class="tsd-signature-type">Voxel</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defect.html" class="tsd-signature-type">Defect</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in data/defect.ts:68</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>plot: <a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></h5>
-								</li>
-								<li>
-									<h5>index: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>position: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-								<li>
-									<h5>size: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-								<li>
-									<h5>tolerance: <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-								</li>
-								<li>
-									<h5>properties: <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></h5>
-								</li>
-								<li>
-									<h5>voxels: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.voxel.html" class="tsd-signature-type">Voxel</a><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="data.defect.html" class="tsd-signature-type">Defect</a></h4>
-						</li>
-					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="index" class="tsd-anchor"></a>
-					<h3>index</h3>
-					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="airscanning" class="tsd-anchor"></a>
+					<h3>Air<wbr>Scanning</h3>
+					<div class="tsd-signature tsd-kind-icon">Air<wbr>Scanning<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;256</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:91</li>
+							<li>Defined in data/plot/point.ts:65</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The index of the defect in the list of defects of the defect plot.</p>
+							<p>Der Taster hatte keinen Kontakt zum Material.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="plot" class="tsd-anchor"></a>
-					<h3>plot</h3>
-					<div class="tsd-signature tsd-kind-icon">plot<span class="tsd-signature-symbol">:</span> <a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="duplicate" class="tsd-anchor"></a>
+					<h3>Duplicate</h3>
+					<div class="tsd-signature tsd-kind-icon">Duplicate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;32</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:86</li>
+							<li>Defined in data/plot/point.ts:50</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The plot to which this defect is attached. Can be used to obtain the reference system and global tolerances, etc..</p>
+							<p>Point is a duplicate of another point.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="position" class="tsd-anchor"></a>
-					<h3>position</h3>
-					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="evaluationrange" class="tsd-anchor"></a>
+					<h3>Evaluation<wbr>Range</h3>
+					<div class="tsd-signature tsd-kind-icon">Evaluation<wbr>Range<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;16</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:96</li>
+							<li>Defined in data/plot/point.ts:45</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The corner of the defects bounding box that is closest to the origin.</p>
+							<p>Point lies out of the evaluation range.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="properties" class="tsd-anchor"></a>
-					<h3>properties</h3>
-					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="gap" class="tsd-anchor"></a>
+					<h3>Gap</h3>
+					<div class="tsd-signature tsd-kind-icon">Gap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;1024</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:111</li>
+							<li>Defined in data/plot/point.ts:75</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The list of custom key value pairs of this defect.</p>
+							<p>Point marks the beginning or end of a gap.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="size" class="tsd-anchor"></a>
-					<h3>size</h3>
-					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="ignoregroove1" class="tsd-anchor"></a>
+					<h3>Ignore<wbr>Groove1</h3>
+					<div class="tsd-signature tsd-kind-icon">Ignore<wbr>Groove1<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;64</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:101</li>
+							<li>Defined in data/plot/point.ts:55</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The size of the defects bounding box.</p>
+							<p>Point has been tagged by the controllers groove masking.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="tolerance" class="tsd-anchor"></a>
-					<h3>tolerance</h3>
-					<div class="tsd-signature tsd-kind-icon">tolerance<span class="tsd-signature-symbol">:</span> <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="ignoregroove2" class="tsd-anchor"></a>
+					<h3>Ignore<wbr>Groove2</h3>
+					<div class="tsd-signature tsd-kind-icon">Ignore<wbr>Groove2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;128</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:106</li>
+							<li>Defined in data/plot/point.ts:60</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The tolerance for this defect. If it is <code>undefined</code>, there&#39;s still a tolerance property on the <a href="data.defectplot.html">DefectPlot</a>.</p>
+							<p>Point has been tagged by the controllers groove masking.</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="voxels" class="tsd-anchor"></a>
-					<h3>voxels</h3>
-					<div class="tsd-signature tsd-kind-icon">voxels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.voxel.html" class="tsd-signature-type">Voxel</a><span class="tsd-signature-symbol">&gt;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="none" class="tsd-anchor"></a>
+					<h3>None</h3>
+					<div class="tsd-signature tsd-kind-icon">None<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:116</li>
+							<li>Defined in data/plot/point.ts:20</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The voxels that define this defect.</p>
+							<p>No state.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="outlier" class="tsd-anchor"></a>
+					<h3>Outlier</h3>
+					<div class="tsd-signature tsd-kind-icon">Outlier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;1</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/point.ts:25</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An outlier point.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="overlap" class="tsd-anchor"></a>
+					<h3>Overlap</h3>
+					<div class="tsd-signature tsd-kind-icon">Overlap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;2</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/point.ts:30</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A point overlapping another point.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="tiltedacceleration" class="tsd-anchor"></a>
+					<h3>Tilted<wbr>Acceleration</h3>
+					<div class="tsd-signature tsd-kind-icon">Tilted<wbr>Acceleration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;8</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/point.ts:40</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Tagged because of a tilted acceleration.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="tiltedforce" class="tsd-anchor"></a>
+					<h3>Tilted<wbr>Force</h3>
+					<div class="tsd-signature tsd-kind-icon">Tilted<wbr>Force<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;4</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/point.ts:35</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Tagged because of a tilted force.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="virtual" class="tsd-anchor"></a>
+					<h3>Virtual</h3>
+					<div class="tsd-signature tsd-kind-icon">Virtual<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;512</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/plot/point.ts:70</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A calculated point.</p>
 						</div>
 					</div>
 				</section>
@@ -323,32 +343,44 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="data.defect.html" class="tsd-kind-icon">Defect</a>
+					<li class="current tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="data.plotpointstate.html" class="tsd-kind-icon">Plot<wbr>Point<wbr>State</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-								<a href="data.defect.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#airscanning" class="tsd-kind-icon">Air<wbr>Scanning</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#index" class="tsd-kind-icon">index</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#duplicate" class="tsd-kind-icon">Duplicate</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#plot" class="tsd-kind-icon">plot</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#evaluationrange" class="tsd-kind-icon">Evaluation<wbr>Range</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#position" class="tsd-kind-icon">position</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#gap" class="tsd-kind-icon">Gap</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#properties" class="tsd-kind-icon">properties</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#ignoregroove1" class="tsd-kind-icon">Ignore<wbr>Groove1</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#size" class="tsd-kind-icon">size</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#ignoregroove2" class="tsd-kind-icon">Ignore<wbr>Groove2</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#tolerance" class="tsd-kind-icon">tolerance</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#none" class="tsd-kind-icon">None</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="data.defect.html#voxels" class="tsd-kind-icon">voxels</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#outlier" class="tsd-kind-icon">Outlier</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#overlap" class="tsd-kind-icon">Overlap</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#tiltedacceleration" class="tsd-kind-icon">Tilted<wbr>Acceleration</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#tiltedforce" class="tsd-kind-icon">Tilted<wbr>Force</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="data.plotpointstate.html#virtual" class="tsd-kind-icon">Virtual</a>
 							</li>
 						</ul>
 					</li>

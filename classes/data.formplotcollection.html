@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DefectCollection | PiWeb Plot Extension API Reference</title>
+	<title>FormplotCollection | PiWeb Plot Extension API Reference</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/data.html">data</a>
 				</li>
 				<li>
-					<a href="data.defectcollection.html">DefectCollection</a>
+					<a href="data.formplotcollection.html">FormplotCollection</a>
 				</li>
 			</ul>
-			<h1>Class DefectCollection</h1>
+			<h1>Class FormplotCollection</h1>
 		</div>
 	</div>
 </header>
@@ -70,11 +70,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Acts as an accessibility layer for a range of defect plots.</p>
+						<p>Acts as an accessibility layer for a range of formplots.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>version</dt>
-						<dd><p>1.1</p>
+						<dd><p>1.4</p>
 						</dd>
 					</dl>
 				</div>
@@ -83,14 +83,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DefectCollection</span>
+						<span class="target">FormplotCollection</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<li><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -100,24 +100,22 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="data.defectcollection.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-private"><a href="data.formplotcollection.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="data.defectcollection.html#length" class="tsd-kind-icon">length</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="data.formplotcollection.html#length" class="tsd-kind-icon">length</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="data.defectcollection.html#___iterator" class="tsd-kind-icon">__@iterator</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.defectcollection.html#finddefectsbyentity" class="tsd-kind-icon">find<wbr>Defects<wbr>ByEntity</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.defectcollection.html#findplotsbyentity" class="tsd-kind-icon">find<wbr>Plots<wbr>ByEntity</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="data.defectcollection.html#first" class="tsd-kind-icon">first</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.defectcollection.html#getplots" class="tsd-kind-icon">get<wbr>Plots</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.defectcollection.html#iter" class="tsd-kind-icon">iter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="data.formplotcollection.html#___iterator" class="tsd-kind-icon">__@iterator</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.formplotcollection.html#findplotsbyentity" class="tsd-kind-icon">find<wbr>Plots<wbr>ByEntity</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="data.formplotcollection.html#first" class="tsd-kind-icon">first</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="data.formplotcollection.html#iter" class="tsd-kind-icon">iter</a></li>
 							</ul>
 						</section>
 					</div>
@@ -129,13 +127,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<wbr>Collection<span class="tsd-signature-symbol">(</span>plots<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defectcollection.html" class="tsd-signature-type">DefectCollection</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Formplot<wbr>Collection<span class="tsd-signature-symbol">(</span>plots<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.formplotcollection.html" class="tsd-signature-type">FormplotCollection</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:280</li>
+									<li>Defined in data/plot.ts:166</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -143,10 +141,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>plots: <span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>plots: <span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="data.defectcollection.html" class="tsd-signature-type">DefectCollection</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="data.formplotcollection.html" class="tsd-signature-type">FormplotCollection</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -163,12 +161,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:318</li>
+									<li>Defined in data/plot.ts:208</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Gets the total number of defects stored in the collection.</p>
+									<p>Gets the total number of plots stored in the collection.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -182,71 +180,18 @@
 					<a name="___iterator" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> __@iterator</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">__@iterator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterator</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">__@iterator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterator</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:304</li>
+									<li>Defined in data/plot.ts:194</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iterator</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="finddefectsbyentity" class="tsd-anchor"></a>
-					<h3>find<wbr>Defects<wbr>ByEntity</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>Defects<wbr>ByEntity<span class="tsd-signature-symbol">(</span>entity<span class="tsd-signature-symbol">: </span><a href="data.measurement.html" class="tsd-signature-type">Measurement</a><span class="tsd-signature-symbol"> | </span><a href="data.measurementvalue.html" class="tsd-signature-type">MeasurementValue</a><span class="tsd-signature-symbol"> | </span><a href="data.inspectionplanitem.html" class="tsd-signature-type">InspectionPlanItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in data/defect.ts:361</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns the defects that associated with the specified entity. The following associations are assumed:</p>
-								</div>
-								<table>
-									<thead>
-										<tr>
-											<th>Entity</th>
-											<th>Association</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><a href="data.measurement.html">Measurement</a></td>
-											<td>The measurement of the measurement value to which the defects are attached</td>
-										</tr>
-										<tr>
-											<td><a href="data.measurementvalue.html">MeasurementValue</a></td>
-											<td>The measurement value to which the defects are attached</td>
-										</tr>
-										<tr>
-											<td><a href="data.inspectionplanitem.html">InspectionPlanItem</a></td>
-											<td>The characteristic of the value to which the defects are attached</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>entity: <a href="data.measurement.html" class="tsd-signature-type">Measurement</a><span class="tsd-signature-symbol"> | </span><a href="data.measurementvalue.html" class="tsd-signature-type">MeasurementValue</a><span class="tsd-signature-symbol"> | </span><a href="data.inspectionplanitem.html" class="tsd-signature-type">InspectionPlanItem</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>A measurement, measurement value or inspection plan item.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iterator</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -254,18 +199,18 @@
 					<a name="findplotsbyentity" class="tsd-anchor"></a>
 					<h3>find<wbr>Plots<wbr>ByEntity</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>Plots<wbr>ByEntity<span class="tsd-signature-symbol">(</span>entity<span class="tsd-signature-symbol">: </span><a href="data.measurement.html" class="tsd-signature-type">Measurement</a><span class="tsd-signature-symbol"> | </span><a href="data.measurementvalue.html" class="tsd-signature-type">MeasurementValue</a><span class="tsd-signature-symbol"> | </span><a href="data.inspectionplanitem.html" class="tsd-signature-type">InspectionPlanItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Plots<wbr>ByEntity<span class="tsd-signature-symbol">(</span>entity<span class="tsd-signature-symbol">: </span><a href="data.measurement.html" class="tsd-signature-type">Measurement</a><span class="tsd-signature-symbol"> | </span><a href="data.measurementvalue.html" class="tsd-signature-type">MeasurementValue</a><span class="tsd-signature-symbol"> | </span><a href="data.inspectionplanitem.html" class="tsd-signature-type">InspectionPlanItem</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:339</li>
+									<li>Defined in data/plot.ts:222</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns the defect plots that are associated with the specified entity. The following associations are assumed:</p>
+									<p>Returns the plots that are associated with the specified entity. The following associations are assumed:</p>
 								</div>
 								<table>
 									<thead>
@@ -299,7 +244,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -307,18 +252,18 @@
 					<a name="first" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> first</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">first<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">first<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:376</li>
+									<li>Defined in data/plot.ts:237</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="data.defect.html" class="tsd-signature-type">Defect</a>
+							<h4 class="tsd-returns-title">Returns <a href="data.formplot.html" class="tsd-signature-type">Formplot</a>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">undefined</span>
 							</h4>
@@ -326,46 +271,24 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getplots" class="tsd-anchor"></a>
-					<h3>get<wbr>Plots</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Plots<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in data/defect.ts:325</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns an iterator over all plots stored in the collection.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="iter" class="tsd-anchor"></a>
 					<h3>iter</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">iter<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">iter<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:311</li>
+									<li>Defined in data/plot.ts:201</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns an iter over all defects.</p>
+									<p>Returns an iter over all plots.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.formplot.html" class="tsd-signature-type">Formplot</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -428,31 +351,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="data.defectcollection.html" class="tsd-kind-icon">Defect<wbr>Collection</a>
+						<a href="data.formplotcollection.html" class="tsd-kind-icon">Formplot<wbr>Collection</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-private">
-								<a href="data.defectcollection.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="data.formplotcollection.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="data.defectcollection.html#length" class="tsd-kind-icon">length</a>
+								<a href="data.formplotcollection.html#length" class="tsd-kind-icon">length</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="data.defectcollection.html#___iterator" class="tsd-kind-icon">__@iterator</a>
+								<a href="data.formplotcollection.html#___iterator" class="tsd-kind-icon">__@iterator</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="data.defectcollection.html#finddefectsbyentity" class="tsd-kind-icon">find<wbr>Defects<wbr>ByEntity</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="data.defectcollection.html#findplotsbyentity" class="tsd-kind-icon">find<wbr>Plots<wbr>ByEntity</a>
+								<a href="data.formplotcollection.html#findplotsbyentity" class="tsd-kind-icon">find<wbr>Plots<wbr>ByEntity</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="data.defectcollection.html#first" class="tsd-kind-icon">first</a>
+								<a href="data.formplotcollection.html#first" class="tsd-kind-icon">first</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="data.defectcollection.html#getplots" class="tsd-kind-icon">get<wbr>Plots</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="data.defectcollection.html#iter" class="tsd-kind-icon">iter</a>
+								<a href="data.formplotcollection.html#iter" class="tsd-kind-icon">iter</a>
 							</li>
 						</ul>
 					</li>

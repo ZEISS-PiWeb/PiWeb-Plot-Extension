@@ -109,6 +109,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defectplot.html#referencesize" class="tsd-kind-icon">reference<wbr>Size</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defectplot.html#referencevoxelsize" class="tsd-kind-icon">reference<wbr>Voxel<wbr>Size</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defectplot.html#tolerance" class="tsd-kind-icon">tolerance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="data.defectplot.html#transformation" class="tsd-kind-icon">transformation</a></li>
 							</ul>
 						</section>
 					</div>
@@ -120,13 +121,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<wbr>Plot<span class="tsd-signature-symbol">(</span>measurementId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, characteristicId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, referenceSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, referenceVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, defects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Defect<wbr>Plot<span class="tsd-signature-symbol">(</span>measurementId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, characteristicId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, transformation<span class="tsd-signature-symbol">: </span><a href="data.elementsystem.html" class="tsd-signature-type">ElementSystem</a>, referenceSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, referenceVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, actualVoxelSize<span class="tsd-signature-symbol">: </span><a href="data.vector.html" class="tsd-signature-type">Vector</a>, tolerance<span class="tsd-signature-symbol">: </span><a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, properties<span class="tsd-signature-symbol">: </span><a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a>, defects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="data.defectplot.html" class="tsd-signature-type">DefectPlot</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in data/defect.ts:141</li>
+									<li>Defined in data/defect.ts:144</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -136,6 +137,9 @@
 								</li>
 								<li>
 									<h5>characteristicId: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>transformation: <a href="data.elementsystem.html" class="tsd-signature-type">ElementSystem</a></h5>
 								</li>
 								<li>
 									<h5>referenceSize: <a href="data.vector.html" class="tsd-signature-type">Vector</a></h5>
@@ -172,7 +176,7 @@
 					<div class="tsd-signature tsd-kind-icon">actual<wbr>Size<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:178</li>
+							<li>Defined in data/defect.ts:199</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,7 +191,7 @@
 					<div class="tsd-signature tsd-kind-icon">actual<wbr>Voxel<wbr>Size<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:183</li>
+							<li>Defined in data/defect.ts:204</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">characteristic<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:163</li>
+							<li>Defined in data/defect.ts:178</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -214,7 +218,7 @@
 					<div class="tsd-signature tsd-kind-icon">defects<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Iter</span><span class="tsd-signature-symbol">&lt;</span><a href="data.defect.html" class="tsd-signature-type">Defect</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:198</li>
+							<li>Defined in data/defect.ts:219</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -229,7 +233,7 @@
 					<div class="tsd-signature tsd-kind-icon">measurement<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:158</li>
+							<li>Defined in data/defect.ts:173</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -241,7 +245,7 @@
 					<div class="tsd-signature tsd-kind-icon">properties<span class="tsd-signature-symbol">:</span> <a href="data.plotpropertycollection.html" class="tsd-signature-type">PlotPropertyCollection</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:193</li>
+							<li>Defined in data/defect.ts:214</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +260,7 @@
 					<div class="tsd-signature tsd-kind-icon">reference<wbr>Size<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:168</li>
+							<li>Defined in data/defect.ts:189</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -271,7 +275,7 @@
 					<div class="tsd-signature tsd-kind-icon">reference<wbr>Voxel<wbr>Size<span class="tsd-signature-symbol">:</span> <a href="data.vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:173</li>
+							<li>Defined in data/defect.ts:194</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -286,13 +290,33 @@
 					<div class="tsd-signature tsd-kind-icon">tolerance<span class="tsd-signature-symbol">:</span> <a href="data.plottolerance.html" class="tsd-signature-type">PlotTolerance</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in data/defect.ts:188</li>
+							<li>Defined in data/defect.ts:209</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Global tolerance for all defects in this plot.</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="transformation" class="tsd-anchor"></a>
+					<h3>transformation</h3>
+					<div class="tsd-signature tsd-kind-icon">transformation<span class="tsd-signature-symbol">:</span> <a href="data.elementsystem.html" class="tsd-signature-type">ElementSystem</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in data/defect.ts:184</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The transformation from of the voxel coordinates.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>version</dt>
+							<dd><p>1.4</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 			</section>
@@ -385,6 +409,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="data.defectplot.html#tolerance" class="tsd-kind-icon">tolerance</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="data.defectplot.html#transformation" class="tsd-kind-icon">transformation</a>
 							</li>
 						</ul>
 					</li>
