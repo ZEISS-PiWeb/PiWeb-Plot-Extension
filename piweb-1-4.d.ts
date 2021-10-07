@@ -1252,6 +1252,7 @@ declare module "piweb/data/defect" {
 	 * Sets a value indicating whether this plot needs to fetch defects.
 	 * @param value
 	 * @version 1.1
+	 * @deprecated Use the property `fetch_defects` in the [`package.json`](package.html#package-structure-extensions-fetch-defects) instead.
 	 * @host
 	 */
 	export function setFetchDefects(value: boolean): void;
@@ -2254,12 +2255,8 @@ declare module "piweb/data/raw_data" {
 	 * function getRawDataCollection() : RawDataCollection;
 	 * ```
 	 *
-	 * You can specify the entity from which you wish to get the raw data, e.g. measured values or characteristics. The default behavior is to return all raw data, which can be quite slow, especially when the plot is bound to many measurement values.
+	 * You can specify the entity from which you wish to get the raw data in the package definition.
 	 *
-	 * ```TypeScript
-	 * function setRawDataSources( Iterable<RawDataEntity> sources ) : void;
-	 * function getRawDataSources() : Iterable<RawDataEntity>;
-	 * ```
 	 * @host
 	 */
 	export function getRawDataCollection(): RawDataCollection;
@@ -2278,6 +2275,7 @@ declare module "piweb/data/raw_data" {
 	 * from all entities, including measurement values. When the databinding of the plot extension element features a lot of characteristics
 	 * and measurements, the raw data fetching can have a large performance impact.
 	 * @param sources
+	 * @deprecated Use the property `raw_data_sources` in the [`package.json`](package.html#package-structure-extensions-raw-data-sources) instead.
 	 * @host
 	 */
 	export function setRawDataSources(sources: Iterable<RawDataEntity>): void;
@@ -2448,12 +2446,8 @@ declare module "piweb/data/volume" {
 	 * function getVolumeCollection() : VolumeCollection;
 	 * ```
 	 *
-	 * You can specify the entity from which you wish to get the volume, e.g. measured values or characteristics. The default behavior is to return no volumes.
+	 * You can specify the entity from which you wish to get the volume in the package definition.
 	 *
-	 * ```TypeScript
-	 * function setVolumeSources( Iterable<RawDataEntity> sources ) : void;
-	 * function getVolumeSources() : Iterable<RawDataEntity>;
-	 * ```
 	 * @version 1.1
 	 * @host
 	 */
@@ -2462,6 +2456,7 @@ declare module "piweb/data/volume" {
 	 * Sets the raw data entities from which the plot extension fetches the volumes.
 	 * @param sources
 	 * @version 1.1
+	 * @deprecated Use the property `volume_sources` in the [`package.json`](package.html#package-structure-extensions-volume-sources) instead.
 	 * @host
 	 */
 	export function setVolumeSources(sources: Iterable<RawDataEntity>): void;
@@ -2649,6 +2644,9 @@ declare module "piweb/data/wellknown_keys" {
 
 
 declare module "piweb/data/plot/geometry" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from "internal/buffer_reader";
 	import { Vector } from "piweb/data/plot/vector";
 	/**
@@ -2819,6 +2817,9 @@ declare module "piweb/data/plot/geometry" {
 
 
 declare module "piweb/data/plot/point" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from "internal/buffer_reader";
 	import { FormplotTypeId } from "piweb/data/plot";
 	import { PlotPropertyCollection } from "piweb/data/plot/property";
@@ -3043,6 +3044,9 @@ declare module "piweb/data/plot/point" {
 
 
 declare module "piweb/data/plot/property" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
 	import { Iter } from 'iter';
 	/**
@@ -3156,6 +3160,9 @@ declare module "piweb/data/plot/property" {
 
 
 declare module "piweb/data/plot/segment" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
 	import { Iter } from 'iter';
 	import { FormplotTypeId } from 'piweb/data/plot';
@@ -3214,6 +3221,9 @@ declare module "piweb/data/plot/segment" {
 
 
 declare module "piweb/data/plot/tolerance" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
 	/**
 	 * Known types of plot tolerances, usually used for different plot types.
@@ -3278,6 +3288,9 @@ declare module "piweb/data/plot/tolerance" {
 
 
 declare module "piweb/data/plot/vector" {
+	/**
+	 * @module data
+	 */ /** */
 	import { BufferReader } from 'internal/buffer_reader';
 	/**
 	* A vector is a tuple of three numbers that can act as position, size and direction.
