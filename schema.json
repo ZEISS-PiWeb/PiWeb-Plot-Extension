@@ -15,7 +15,7 @@
             ]
         },
         "color": {
-            "type": "string"
+            "type": "string"            
         },
         "brush": {
             "type": "object",
@@ -304,7 +304,7 @@
                                     "none",
                                     "measurements",
                                     "measurement_values"
-                                ]
+                                ]                                
                             },
                             "raw_data_sources": {
                                 "$ref": "#/$defs/raw_data_sources"
@@ -313,6 +313,9 @@
                                 "$ref": "#/$defs/raw_data_sources"
                             },
                             "fetch_defects": {
+                                "type": "boolean"
+                            },
+                            "fetch_formplots": {
                                 "type": "boolean"
                             },
                             "display": {
@@ -608,23 +611,7 @@
                                     "plot",
                                     "variable"
                                 ]
-                            },
-                            "measurement_data_type": {
-                                "enum": [
-                                    "none",
-                                    "measurements",
-                                    "measurement_values"
-                                ]
-                            },
-                            "raw_data_sources": {
-                                "$ref": "#/$defs/raw_data_sources"
-                            },
-                            "volume_sources": {
-                                "$ref": "#/$defs/raw_data_sources"
-                            },
-                            "fetch_defects": {
-                                "type": "boolean"
-                            },
+                            },                           
                             "categories": {
                                 "type": "object",
                                 "additionalProperties": {
@@ -648,8 +635,30 @@
                                         "title": {
                                             "$ref": "#/$defs/localization"
                                         },
+                                        "description": {
+                                            "$ref": "#/$defs/localization"
+                                        },
                                         "category": {
                                             "$ref": "#/$defs/variable_category"
+                                        },
+                                        "measurement_data_type": {
+                                            "enum": [
+                                                "none",
+                                                "measurements",
+                                                "measurement_values"
+                                            ]
+                                        },
+                                        "raw_data_sources": {
+                                            "$ref": "#/$defs/raw_data_sources"
+                                        },
+                                        "volume_sources": {
+                                            "$ref": "#/$defs/raw_data_sources"
+                                        },
+                                        "fetch_defects": {
+                                            "type": "boolean"
+                                        },
+                                        "fetch_formplots": {
+                                            "type": "boolean"
                                         },
                                         "parameters": {
                                             "type": "object",
