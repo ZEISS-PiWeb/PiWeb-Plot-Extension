@@ -24,15 +24,16 @@ The package structure looks like the following:
 
 | PiWeb Version         | Download                          |
 |-----------------------|-----------------------------------|
-| 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.0.zip ) |
-| 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.1.zip)|
-| 7.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.2.zip)|
-| 7.8 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.3.zip)|
-| 8.0 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.4.zip)|
+| 6.6 - 7.0 | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.0.zip ) |
+| 7.2 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.1.zip)|
+| 7.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.2.zip)|
+| 7.8 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.3.zip)|
+| 8.0 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.4.zip)|
+| 8.4 or later | [Download](https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.5.zip)|
 
-### 1. Create the folder `MyExtension` 
+### 1. Create the folder `MyPlot` 
 
-In case the `Extensions` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `MyExtension`.
+In case the `Extensions` folder doesn't exist, you must create it first. Now create your project folder in the extensions folder and name it `MyPlot`.
 
 ### 2. Create the file `package.json`
 
@@ -40,7 +41,8 @@ The package configuration contains static parameters of your extension, such as 
 
 ```json
 {
-    "name": "myextension",
+	"$schema":"https://zeiss-piweb.github.io/PiWeb-Plot-Extension/schema.json",
+    "name": "myplot",
     "version": "1.0.0",
     "main": "lib",
     "engines": {
@@ -51,7 +53,7 @@ The package configuration contains static parameters of your extension, such as 
     },
     "piweb_extension": {
         "type": "plot",		
-        "display": "MyExtension"		
+        "display": "MyPlot"		
     }
 }
 ```
