@@ -85,33 +85,38 @@
 					<tbody>
 						<tr>
 							<td>6.6 - 7.0</td>
-							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.0.zip">Download</a></td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.0.zip">Download</a></td>
 						</tr>
 						<tr>
 							<td>7.2 or later</td>
-							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.1.zip">Download</a></td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.1.zip">Download</a></td>
 						</tr>
 						<tr>
 							<td>7.4 or later</td>
-							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.2.zip">Download</a></td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.2.zip">Download</a></td>
 						</tr>
 						<tr>
 							<td>7.8 or later</td>
-							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.3.zip">Download</a></td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.3.zip">Download</a></td>
 						</tr>
 						<tr>
 							<td>8.0 or later</td>
-							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyExtension_1.4.zip">Download</a></td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.4.zip">Download</a></td>
+						</tr>
+						<tr>
+							<td>8.4 or later</td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/MyPlot_1.5.zip">Download</a></td>
 						</tr>
 					</tbody>
 				</table>
-				<h3 id="1-create-the-folder-myextension">1. Create the folder <code>MyExtension</code></h3>
-				<p>In case the <code>Extensions</code> folder doesn&#39;t exist, you must <strong>create</strong> it first. Place it in one of the folders listed above. Now <strong>create your project folder</strong> in the extensions folder and name it <code>MyExtension</code>.</p>
+				<h3 id="1-create-the-folder-myplot">1. Create the folder <code>MyPlot</code></h3>
+				<p>In case the <code>Extensions</code> folder doesn&#39;t exist, you must create it first. Now create your project folder in the extensions folder and name it <code>MyPlot</code>.</p>
 				<h3 id="2-create-the-file-package-json">2. Create the file <code>package.json</code></h3>
 				<p>The package configuration contains static parameters of your extension, such as its name, a description, the appearance of its entry in the PiWeb toolbox and the properties that are adjustable by the user. A complete reference of the options can be found in the chapter <a href="modules/package.html">package</a>. For now, use the minimum setup shown below.</p>
 				<pre><code class="lang-json">{
-    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"myextension"</span>,
-    <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.1.0"</span>,
+    <span class="hljs-attr">"$schema"</span>:<span class="hljs-string">"https://zeiss-piweb.github.io/PiWeb-Plot-Extension/schema.json"</span>,
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"myplot"</span>,
+    <span class="hljs-attr">"version"</span>: <span class="hljs-string">"1.0.0"</span>,
     <span class="hljs-attr">"main"</span>: <span class="hljs-string">"lib"</span>,
     <span class="hljs-attr">"engines"</span>: {
         <span class="hljs-attr">"piweb"</span>: <span class="hljs-string">"^1.0"</span>
@@ -120,8 +125,8 @@
         <span class="hljs-attr">"load"</span>: <span class="hljs-string">"compile_typescript"</span>
     },
     <span class="hljs-attr">"piweb_extension"</span>: {
-        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"plot"</span>,
-        <span class="hljs-attr">"display"</span>: <span class="hljs-string">"MyExtension"</span>
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"plot"</span>,        
+        <span class="hljs-attr">"display"</span>: <span class="hljs-string">"MyPlot"</span>        
     }
 }
 </code></pre>
@@ -142,8 +147,8 @@
 }
 </code></pre>
 				<h3 id="4-create-the-folder-types-and-copy-the-file-piweb-1-x-d-ts-into-it">4. Create the folder <code>@types</code> and copy the file <code>piweb-1-x.d.ts</code> into it</h3>
-				<p>These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file. You can downlod.</p>
-				<p><strong>Hint:</strong> You can download the result of the quickstart guide here:</p>
+				<p>These are the type definitions of the PiWeb plot extension interface. It will enable productivity features like syntax highlighting and auto completion in your IDE. The folder <code>@types</code> was defined as the type root in the <code>tsconfig.json</code> file. Please note, that versions above 1.0 only work with newer PiWeb versions.</p>
+				<p><strong>Hint:</strong> You can download the type definition file here:</p>
 				<table>
 					<thead>
 						<tr>
@@ -171,6 +176,10 @@
 						<tr>
 							<td>8.0 or later</td>
 							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-4.d.ts">Download</a></td>
+						</tr>
+						<tr>
+							<td>8.4 or later</td>
+							<td><a href="https://github.com/ZEISS-PiWeb/PiWeb-Plot-Extension/raw/master/piweb-1-5.d.ts">Download</a></td>
 						</tr>
 					</tbody>
 				</table>
