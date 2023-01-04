@@ -15,7 +15,7 @@
             ]
         },
         "color": {
-            "type": "string"            
+            "type": "string"
         },
         "brush": {
             "type": "object",
@@ -205,28 +205,6 @@
                 "pen",
                 "font"
             ]
-        },
-        "variable_categories": {
-            "enum": [
-                "Global",
-                "Math",
-                "String",
-                "TimeSpan",
-                "List",
-                "Comparison",
-                "TypeConversions",
-                "UserDefined"
-            ]
-        },
-        "variable_category": {
-            "anyOf": [
-                {
-                    "$ref": "#/$defs/variable_categories"
-                },
-                {
-                    "type": "string"
-                }
-            ]
         }
     },
     "properties": {
@@ -273,426 +251,305 @@
                 "type": {
                     "description": "Defines the type of the extension package",
                     "enum": [
-                        "plot",
-                        "variable"
+                        "plot"
                     ]
-                }               
+                },
+                "measurement_data_type": {
+                    "enum": [
+                        "none",
+                        "measurements",
+                        "measurement_values"
+                    ]
+                },
+                "raw_data_sources": {
+                    "$ref": "#/$defs/raw_data_sources"
+                },
+                "volume_sources": {
+                    "$ref": "#/$defs/raw_data_sources"
+                },
+                "fetch_defects": {
+                    "type": "boolean"
+                },
+                "fetch_formplots": {
+                    "type": "boolean"
+                },
+                "display": {
+                    "$ref": "#/$defs/localization"
+                },
+                "description": {
+                    "$ref": "#/$defs/localization"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "shared": {
+                    "type": "boolean"
+                },
+                "toolbox": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "categories": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "priority": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "description": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "icon": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "$ref": "#/$defs/toolbox_category"
+                                    },
+                                    "element_size": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "description": "Defines the initial size of the element.",
+                                        "properties": {
+                                            "width": {
+                                                "type": "number"
+                                            },
+                                            "height": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "propertygrid": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "categories": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "priority": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "entries": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "description": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "category": {
+                                        "$ref": "#/$defs/property_category"
+                                    },
+                                    "type": {
+                                        "$ref": "#/$defs/property_types"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "type"
+                                ],
+                                "allOf": [
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "string"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "integer"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "double"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "boolean"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "enum"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "required": [
+                                                "options"
+                                            ],
+                                            "properties": {
+                                                "options": {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "$ref": "#/$defs/localization"
+                                                            },
+                                                            "description": {
+                                                                "$ref": "#/$defs/localization"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "default_value": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "color"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/color"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "brush"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/brush"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "pen"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/pen"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "font"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/font"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
             },
             "required": [
                 "type"
-            ],
-            "allOf": [
-                {
-                    "if": {
-                        "properties": {
-                            "type": {
-                                "const": "plot"
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "type": {
-                                "description": "Defines the type of the extension package",
-                                "enum": [
-                                    "plot",
-                                    "variable"
-                                ]
-                            },
-                            "measurement_data_type": {
-                                "enum": [
-                                    "none",
-                                    "measurements",
-                                    "measurement_values"
-                                ]                                
-                            },
-                            "raw_data_sources": {
-                                "$ref": "#/$defs/raw_data_sources"
-                            },
-                            "volume_sources": {
-                                "$ref": "#/$defs/raw_data_sources"
-                            },
-                            "fetch_defects": {
-                                "type": "boolean"
-                            },
-                            "fetch_formplots": {
-                                "type": "boolean"
-                            },
-                            "display": {
-                                "$ref": "#/$defs/localization"
-                            },
-                            "description": {
-                                "$ref": "#/$defs/localization"
-                            },
-                            "icon": {
-                                "type": "string"
-                            },
-                            "shared": {
-                                "type": "boolean"
-                            },
-                            "toolbox": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "categories": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "object",
-                                            "properties": {
-                                                "name": {
-                                                    "$ref": "#/$defs/localization"
-                                                },
-                                                "priority": {
-                                                    "type": "integer"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "items": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "object",
-                                            "additionalProperties": false,
-                                            "properties": {
-                                                "name": {
-                                                    "$ref": "#/$defs/localization"
-                                                },
-                                                "description": {
-                                                    "$ref": "#/$defs/localization"
-                                                },
-                                                "icon": {
-                                                    "type": "string"
-                                                },
-                                                "category": {
-                                                    "$ref": "#/$defs/toolbox_category"
-                                                },
-                                                "element_size": {
-                                                    "type": "object",
-                                                    "additionalProperties": false,
-                                                    "description": "Defines the initial size of the element.",
-                                                    "properties": {
-                                                        "width": {
-                                                            "type": "number"
-                                                        },
-                                                        "height": {
-                                                            "type": "number"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "propertygrid": {
-                                "type": "object",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "categories": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "object",
-                                            "properties": {
-                                                "name": {
-                                                    "$ref": "#/$defs/localization"
-                                                },
-                                                "priority": {
-                                                    "type": "integer"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "entries": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "object",
-                                            "properties": {
-                                                "name": {
-                                                    "$ref": "#/$defs/localization"
-                                                },
-                                                "description": {
-                                                    "$ref": "#/$defs/localization"
-                                                },
-                                                "category": {
-                                                    "$ref": "#/$defs/property_category"
-                                                },
-                                                "type": {
-                                                    "$ref": "#/$defs/property_types"
-                                                }
-                                            },
-                                            "required": [
-                                                "name",
-                                                "type"
-                                            ],
-                                            "allOf": [
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "string"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "integer"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "type": "integer"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "double"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "type": "number"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "boolean"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "type": "boolean"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "enum"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "required": [
-                                                            "options"
-                                                        ],
-                                                        "properties": {
-                                                            "options": {
-                                                                "type": "object",
-                                                                "additionalProperties": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "name": {
-                                                                            "$ref": "#/$defs/localization"
-                                                                        },
-                                                                        "description": {
-                                                                            "$ref": "#/$defs/localization"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            "default_value": {
-                                                                "type": "string"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "color"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "$ref": "#/$defs/color"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "brush"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "$ref": "#/$defs/brush"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "pen"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "$ref": "#/$defs/pen"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "if": {
-                                                        "properties": {
-                                                            "type": {
-                                                                "const": "font"
-                                                            }
-                                                        }
-                                                    },
-                                                    "then": {
-                                                        "properties": {
-                                                            "default_value": {
-                                                                "$ref": "#/$defs/font"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                },
-                {
-                    "if": {
-                        "properties": {
-                            "type": {
-                                "const": "variable"
-                            }
-                        }
-                    },
-                    "then": {
-                        "properties": {
-                            "type": {
-                                "description": "Defines the type of the extension package",
-                                "enum": [
-                                    "plot",
-                                    "variable"
-                                ]
-                            },                           
-                            "categories": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "$ref": "#/$defs/localization"
-                                        },
-                                        "priority": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            },
-                            "variables": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "type": "object",
-                                    "properties": {
-                                        "title": {
-                                            "$ref": "#/$defs/localization"
-                                        },
-                                        "description": {
-                                            "$ref": "#/$defs/localization"
-                                        },
-                                        "category": {
-                                            "$ref": "#/$defs/variable_category"
-                                        },
-                                        "measurement_data_type": {
-                                            "enum": [
-                                                "none",
-                                                "measurements",
-                                                "measurement_values"
-                                            ]
-                                        },
-                                        "raw_data_sources": {
-                                            "$ref": "#/$defs/raw_data_sources"
-                                        },
-                                        "volume_sources": {
-                                            "$ref": "#/$defs/raw_data_sources"
-                                        },
-                                        "fetch_defects": {
-                                            "type": "boolean"
-                                        },
-                                        "fetch_formplots": {
-                                            "type": "boolean"
-                                        },
-                                        "parameters": {
-                                            "type": "object",
-                                            "additionalProperties": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "name": {
-                                                        "$ref": "#/$defs/localization"
-                                                    },
-                                                    "description": {
-                                                        "$ref": "#/$defs/localization"
-                                                    },
-                                                    "datatype": {
-                                                        "enum": [
-                                                            "integer",
-                                                            "double",
-                                                            "string",
-                                                            "datetime"
-                                                        ]
-                                                    }
-                                                },
-                                                "additionalProperties": false
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                }
             ]
-            
         },
         "additionalProperties": false
     }
