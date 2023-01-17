@@ -23,9 +23,9 @@
             "properties": {
                 "type": {
                     "enum": [
-                        "solid",
-                        "lineargradient",
-                        "radialgradient"
+                        "SolidColor",
+                        "LinearGradient",
+                        "RadialGradient"
                     ]
                 },
                 "color": {
@@ -71,8 +71,8 @@
                         "properties": {
                             "type": {
                                 "enum": [
-                                    "lineargradient",
-                                    "radialgradient"
+                                    "LinearGradient",
+                                    "RadialGradient"
                                 ]
                             }
                         }
