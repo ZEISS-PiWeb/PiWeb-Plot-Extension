@@ -130,7 +130,7 @@
                 "part",
                 "characteristic",
                 "measurement",
-                "measurement_values"
+                "measurement_value"
             ]
         },
         "raw_data_sources": {
