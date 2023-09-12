@@ -1,6 +1,7 @@
 # PiWeb Plot Extension
 
-<img style="display: block; margin: auto;" src="gfx/Logo.png" >
+| ![Zeiss IQS Logo](img/logo_128x128.png) | The PiWeb Plot Extensions allow you to write your own extensions with TypeScript for the quality data management system [ZEISS PiWeb](http://www.zeiss.com/industrial-metrology/en_de/products/software/piweb.html). |
+|-|:-|
 
 ## Reference Manual
 
@@ -18,7 +19,7 @@ PiWeb searches for extensions in several locations. Ordered by their priority, t
 
 The package structure looks like the following:
 
-<img class="framed" src="gfx/folder_structure.png"/>
+<img class="framed" src="img/folder_structure.png"/>
 
 **Hint:** You can download the result of the quickstart guide here:
 
@@ -111,7 +112,7 @@ function renderPlot(drawingContext: piweb.drawing.DrawingContext) {
 
 When we save all files and start the PiWeb Designer, we should find our extension in the **General** section of the toolbox:
 
-<img class="framed" src="gfx/toolbox_start.png">
+<img class="framed" src="img/toolbox_start.png">
 
 ### 6. Explore
 
