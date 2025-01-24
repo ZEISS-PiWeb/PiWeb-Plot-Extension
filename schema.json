@@ -1,0 +1,556 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$defs": {
+        "localization": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "color": {
+            "type": "string"
+        },
+        "brush": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "enum": [
+                        "SolidColor",
+                        "LinearGradient",
+                        "RadialGradient"
+                    ]
+                },
+                "color": {
+                    "$ref": "#/$defs/color"
+                },
+                "color2": {
+                    "$ref": "#/$defs/color"
+                },
+                "opacity": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "angle": {
+                    "type": "number"
+                },
+                "center": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "x": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        },
+                        "y": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                        }
+                    }
+                }
+            },
+            "required": [
+                "color"
+            ],
+            "allOf": [
+                {
+                    "if": {
+                        "required": [
+                            "type"
+                        ],
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "LinearGradient",
+                                    "RadialGradient"
+                                ]
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": [
+                            "color2"
+                        ]
+                    }
+                }
+            ]
+        },
+        "font": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "color": {
+                    "$ref": "#/$defs/color"
+                },
+                "family": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "number"
+                },
+                "bold": {
+                    "type": "boolean"
+                },
+                "italic": {
+                    "type": "boolean"
+                },
+                "underline": {
+                    "type": "boolean"
+                },
+                "strikethrough": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "pen": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "color": {
+                    "$ref": "#/$defs/color"
+                },
+                "thickness": {
+                    "type": "number"
+                }
+            }
+        },
+        "raw_data_source": {
+            "enum": [
+                "none",
+                "part",
+                "characteristic",
+                "measurement",
+                "measurement_value"
+            ]
+        },
+        "raw_data_sources": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/raw_data_source"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/raw_data_source"
+                    }
+                }
+            ]
+        },
+        "toolbox_categories": {
+            "enum": [
+                "Audit",
+                "AutoShapes",
+                "Container",
+                "PlotExtensions",
+                "Formplots",
+                "General",
+                "Formplots",
+                "Images",
+                "InteractiveElements",
+                "Statistics",
+                "TablesAndDirectories",
+                "Templates"
+            ]
+        },
+        "toolbox_category": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/toolbox_categories"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "property_categories": {
+            "enum": [
+                "General",
+                "Axis",
+                "Appearance",
+                "Layout",
+                "GaugeIntegration",
+                "Misc"
+            ]
+        },
+        "property_category": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/property_categories"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "property_types": {
+            "enum": [
+                "string",
+                "integer",
+                "double",
+                "boolean",
+                "enum",
+                "color",
+                "colorscheme",
+                "brush",
+                "pen",
+                "font"
+            ]
+        }
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Defines the package identificator of the extension package"
+        },
+        "version": {
+            "type": "string",
+            "description": "Defines the version of the extension package"
+        },
+        "main": {
+            "type": "string",
+            "description": "Defines the path to the folder inside the package that contains the `index.js` file."
+        },
+        "engines": {
+            "type:": "object",
+            "description": "Defines the supported engine versions of the extension package",
+            "properties": {
+                "piweb": {
+                    "type": "string",
+                    "description": "Defines the supported piweb engine versions of the extension package"
+                }
+            },
+            "additionalProperties": false
+        },
+        "piweb_actions": {
+            "type:": "object",
+            "description": "Defines additional actions",
+            "properties": {
+                "load": {
+                    "description": "Defines the actions to be executed when the package was loaded",
+                    "enum": [
+                        "compile_typescript"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "piweb_extension": {
+            "type:": "object",
+            "description": "Defines the content of the extension package",
+            "properties": {
+                "type": {
+                    "description": "Defines the type of the extension package",
+                    "enum": [
+                        "plot"
+                    ]
+                },
+                "measurement_data_type": {
+                    "enum": [
+                        "none",
+                        "measurements",
+                        "measurement_values"
+                    ]
+                },
+                "raw_data_sources": {
+                    "$ref": "#/$defs/raw_data_sources"
+                },
+                "volume_sources": {
+                    "$ref": "#/$defs/raw_data_sources"
+                },
+                "fetch_defects": {
+                    "type": "boolean"
+                },
+                "fetch_formplots": {
+                    "type": "boolean"
+                },
+                "display": {
+                    "$ref": "#/$defs/localization"
+                },
+                "description": {
+                    "$ref": "#/$defs/localization"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "shared": {
+                    "type": "boolean"
+                },
+                "toolbox": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "categories": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "priority": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "description": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "icon": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "$ref": "#/$defs/toolbox_category"
+                                    },
+                                    "element_size": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "description": "Defines the initial size of the element.",
+                                        "properties": {
+                                            "width": {
+                                                "type": "number"
+                                            },
+                                            "height": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "propertygrid": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "categories": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "priority": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        },
+                        "entries": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "description": {
+                                        "$ref": "#/$defs/localization"
+                                    },
+                                    "category": {
+                                        "$ref": "#/$defs/property_category"
+                                    },
+                                    "type": {
+                                        "$ref": "#/$defs/property_types"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "type"
+                                ],
+                                "allOf": [
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "string"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "integer"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "double"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "boolean"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "enum"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "required": [
+                                                "options"
+                                            ],
+                                            "properties": {
+                                                "options": {
+                                                    "type": "object",
+                                                    "additionalProperties": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "$ref": "#/$defs/localization"
+                                                            },
+                                                            "description": {
+                                                                "$ref": "#/$defs/localization"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "default_value": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "color"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/color"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "brush"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/brush"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "pen"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/pen"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "if": {
+                                            "properties": {
+                                                "type": {
+                                                    "const": "font"
+                                                }
+                                            }
+                                        },
+                                        "then": {
+                                            "properties": {
+                                                "default_value": {
+                                                    "$ref": "#/$defs/font"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "required": [
+                "type"
+            ]
+        },
+        "additionalProperties": false
+    }
+}
